@@ -1,0 +1,77 @@
+{
+  "welcome": "欢迎使用！",
+  "header": {
+    "appName": "诸葛神码"
+  },
+  "menu": {
+    "home": "首页",
+    "openSource": "开源",
+    "installGuide": "安装指引"
+  },
+  "home": {
+    "welcomeTitle": "欢迎使用诸葛神码",
+    "icon": "/images/zh/titleIcon.png",
+    "welcomeSubtitle": "诸葛智慧、神笔码良，开启AI Native时代",
+    "welcomeDesc": "开源、实用的AI程序员，您的工作重点从 “编” 转到 “问”、“审”",
+    "companyLabel": "/images/zh/company_label.svg",
+    "personLabel": "/images/zh/person_label.svg",
+    "case1": {
+      "title": "AI Agent：懂你所想，有问必答",
+      "desc": "通过自然语言描述，自主创建代码文件，直接在工作区生成代码并自动完成测试",
+      "titleImg": "/images/zh/case1_titleimg.png",
+      "pageImg": "/images/zh/case_page_img1.gif"
+    },
+    "case2": {
+      "title": "代码补全：神来之笔，码上续写",
+      "desc": "代码自动补全，提供精准上下文补全更准确，快速秒级出码",
+      "titleImg": "/images/zh/case2_titleimg.png",
+      "pageImg": "/images/zh/case_page_img2.gif"
+    },
+    "case3": {
+      "title": "企业级私有化部署：",
+      "desc": "支持企业级私有化部署，为安全和隐私而设计",
+      "titleImg": "/images/zh/case3_titleimg.png",
+      "pageImg": "/images/zh/case_page_img3.png"
+    },
+    "case4": {
+      "titleImg": "/images/zh/case4_titleimg.png",
+      "feature1": "/images/zh/feature01.webp",
+      "feature2": "/images/zh/feature02.webp",
+      "feature3": "/images/zh/feature03.webp",
+      "feature4": "/images/zh/feature04.webp",
+      "feature5": "/images/zh/feature05.webp"
+    },
+    "case5": {
+      "pageImg": "/images/zh/case_page_img5.png"
+    },
+    "ideSupport": {
+      "title": "支持多种IDE与语言，持续增加中…",
+      "desc": "支持多种主流IDE，率先支持VS Code（InteliJ IDEA、PyCharm即将支持）。 支持Python、Go、C++/C、JavaScript、 Java等多种主流语言。"
+    }
+  },
+  "footer": {
+    "openSource": {
+      "title": "开源开放",
+      "desc": "欢迎加入我们，让AI更高效！"
+    },
+    "contactUs": "联系我们",
+    "copyright": {
+      "company": "©2025 深信服科技股份有限公司版权所有",
+      "icp": "粤ICP备08126214号",
+      "gongan": "粤公网安备44030502002384号",
+      "license": "合字B1.B2-20220041"
+    }
+  },
+  "download": {
+    "title": "欢迎使用诸葛神码",
+    "desc": "诸葛神码是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
+    "vscodeTitle": "在 Visual Studio Code 中安装诸葛神码，要求版本为最新 或者 1.84.0 及以上版本",
+    "installSteps": "安装步骤如下：",
+    "step1": "Step 1",
+    "step2": "Step 2",
+    "pyCharmIcon": "/images/zh/dowload_pycharm.png",
+    "golandIcon": "/images/zh/dowload_goland.png",
+    "step1Img": "/images/zh/download_step1.webp",
+    "step2Img": "/images/zh/download_step2.webp"
+  }
+}

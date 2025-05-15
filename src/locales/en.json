@@ -1,0 +1,76 @@
+{
+  "welcome": "Welcome!",
+  "header": {
+    "appName": "ZHUGE SHENMA"
+  },
+  "menu": {
+    "home": "Homepage",
+    "openSource": "Open Source",
+    "installGuide": "Installation Guide"
+  },
+  "home": {
+    "welcomeTitle": "ZHUGE SHENMA",
+    "icon": "/images/en/titleIcon.png",
+    "welcomeSubtitle": "Ushering in the era of AI Native",
+    "welcomeDesc": "Open source, practical AI programmer, your main task changes from writing code to asking questions and viewing code",
+    "companyLabel": "/images/en/company_label.svg",
+    "personLabel": "/images/en/person_label.svg",
+    "case1": {
+      "title": "AI Agent: Understands your thoughts, answers every question",
+      "desc": "Describe in natural language, autonomously create code files, generate code directly in the workspace, and automatically complete tests.",
+      "titleImg": "/images/en/case1_titleimg.png",
+      "pageImg": "/images/en/case_page_img1.gif"
+    },
+    "case2": {
+      "title": "Code Completion: A stroke of genius, code continues instantly",
+      "desc": "Automatic code completion provides accurate contextual completion for more precision, generating code in seconds.",
+      "titleImg": "/images/en/case2_titleimg.png",
+      "pageImg": "/images/en/case_page_img2.gif"
+    },
+    "case3": {
+      "title": "Enterprise-level Private Deployment:",
+      "desc": "Supports enterprise-level private deployment, designed for security and privacy.",
+      "titleImg": "/images/en/case3_titleimg.png",
+      "pageImg": "/images/en/case_page_img3.png"
+    },
+    "case4": {
+      "titleImg": "/images/en/case4_titleimg.png",
+      "feature1": "/images/en/feature01.webp",
+      "feature2": "/images/en/feature02.webp",
+      "feature3": "/images/en/feature03.webp",
+      "feature4": "/images/en/feature04.webp"
+    },
+    "case5": {
+      "pageImg": "/images/en/case_page_img5.png"
+    },
+    "ideSupport": {
+      "title": "Supports multiple IDEs and languages, continuously increasing...",
+      "desc": "Supports multiple mainstream IDEs, with Visual Studio Code being the first to be supported (InteliJ IDEA and PyCharm will soon be supported). Supports multiple mainstream languages such as Python, Go, C++/C, JavaScript, Java, etc."
+    }
+  },
+  "footer": {
+    "openSource": {
+      "title": "Open Source and Free",
+      "desc": "Welcome to join us and make AI more efficient!"
+    },
+    "contactUs": "Contact Us",
+    "copyright": {
+      "company": "©2025 SANGFOR TECHNOLOGIES. ALL RIGHTS RESERVED.",
+      "icp": "粤ICP备08126214号",
+      "gongan": "粤公网安备44030502002384号",
+      "license": "合字B1.B2-20220041"
+    }
+  },
+  "download": {
+    "title": "SHENMA",
+    "desc": "Shenma is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
+    "vscodeTitle": "Install Shenma Code in Visual Studio Code, requiring the latest version or version 1.84.0 or above",
+    "installSteps": "The installation steps are as follows:",
+    "step1": "Step 1",
+    "step2": "Step 2",
+    "pyCharmIcon": "/images/en/dowload_pycharm.png",
+    "golandIcon": "/images/en/dowload_goland.png",
+    "step1Img": "/images/en/download_step1.webp",
+    "step2Img": "/images/en/download_step2.webp"
+  }
+}
