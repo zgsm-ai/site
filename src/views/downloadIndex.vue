@@ -1,9 +1,9 @@
 <template>
   <div class="login-container">
     <div class="container-header">
-      <p class="title">欢迎使用诸葛神码</p>
+      <p class="title">{{ t('download.title') }}</p>
       <p class="desc">
-        诸葛神码是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。
+        {{ t('download.desc') }}
       </p>
     </div>
     <div class="container-main">
@@ -20,26 +20,16 @@
       <div class="download-content">
         <p class="content-header">
           <img class="download-icon" src="@/assets/vscode_icon.png" alt="" />
-          <span>在 Visual Studio Code 中安装诸葛神码，要求版本为最新 或者 1.84.0 及以上版本</span>
+          <span>{{ t('download.vscodeTitle') }}</span>
         </p>
-        <!-- <div class="direct-methods download-methods">
-          <p class="tips">快速安装步骤如下：</p>
-          <div class="download-methods">
-            <span
-              >唤起 Visual Studio Code
-              插件市场直接安装，安装后请重启IDE，即可开启智能编码之旅。</span
-            >
-            <div class="handle-btn" @click="directDownload">立即安装</div>
-          </div>
-        </div> -->
         <div class="manual-methods download-methods">
-          <p class="tips">安装步骤如下：</p>
+          <p class="tips">{{ t('download.installSteps') }}</p>
           <div class="download-methods">
             <n-timeline :icon-size="20">
               <n-timeline-item
                 v-for="(step, index) in stepList"
                 :key="index"
-                :title="step.title"
+                :title="t(`download.step${index + 1}`)"
                 line-type="dashed"
                 color="#4083E8"
               >
@@ -57,43 +47,41 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { NTimeline, NTimelineItem } from 'naive-ui'
+import { useI18n } from 'vue-i18n'
 import vscodeImg from '@/assets/dowload_vscode.png'
-import pycharmImg from '@/assets/dowload_pycharm.png'
-import golandImg from '@/assets/dowload_goland.png'
-import stepImg1 from '@/assets/download_step1.webp'
-import stepImg2 from '@/assets/download_step2.webp'
 
-const tabList = [
-  {
-    key: 'vscode',
-    imgUrl: vscodeImg
-  },
-  {
-    key: 'pycharm',
-    imgUrl: pycharmImg
-  },
-  {
-    key: 'goland',
-    imgUrl: golandImg
-  }
-]
+const { t } = useI18n()
+
+const tabList = computed(() => {
+  return [
+    {
+      key: 'vscode',
+      imgUrl: vscodeImg,
+    },
+    {
+      key: 'pycharm',
+      imgUrl: t('download.pyCharmIcon'),
+    },
+    {
+      key: 'goland',
+      imgUrl: t('download.golandIcon'),
+    },
+  ]
+})
 const activeTab = 'vscode'
 
-const stepList = [
-  {
-    title: '步骤1',
-    imgUrl: stepImg1
-  },
-  {
-    title: '步骤2',
-    imgUrl: stepImg2
-  },
-]
-
-const directDownload = () => {
-  location.href = 'vscode:extension/zgsm-ai.zgsm'
-}
+const stepList = computed(() => {
+  return [
+    {
+      imgUrl: t('download.step1Img'),
+    },
+    {
+      imgUrl: t('download.step2Img'),
+    },
+  ]
+})
 </script>
 
 <style lang="less" scoped>
@@ -103,7 +91,7 @@ const directDownload = () => {
   padding-bottom: 150px;
   .container-header {
     padding-top: 50px;
-    margin-bottom: 60px;
+    margin-bottom: 26px;
     .title {
       font-size: 32px;
       font-weight: 600;
@@ -111,7 +99,7 @@ const directDownload = () => {
     }
     .desc {
       color: #c2c7d1;
-      margin-bottom: 20px;
+      // margin-bottom: 20px;
     }
   }
   .container-main {
@@ -141,7 +129,7 @@ const directDownload = () => {
         .tips {
           margin-top: 8px;
           margin-bottom: 12px;
-          color: #C2C7D1;
+          color: #c2c7d1;
         }
       }
       .direct-methods {
@@ -172,20 +160,20 @@ const directDownload = () => {
           border-radius: 10px;
           font-size: 12px;
           color: #fff;
-          background: #4083E8;
+          background: #4083e8;
         }
         :deep(.n-timeline-item) {
           .n-timeline-item-content__title {
-            color: #F4F8FF;
+            color: #f4f8ff;
             font-size: 16px;
             margin-top: -2px;
             margin-bottom: 8px;
           }
           .n-timeline-item-timeline__line {
-            --n-color-start: #4083E8;
+            --n-color-start: #4083e8;
           }
           .n-timeline-item-timeline__circle {
-            background: #4083E8;
+            background: #4083e8;
           }
         }
       }

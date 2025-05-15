@@ -1,9 +1,13 @@
 <template>
   <div class="container" :class="{ notIndex: !isIndex }">
     <div class="container-header">
-      <div class="header-logo" @click="showIndex">
+      <div
+        class="header-logo"
+        @click="showIndex"
+        :class="[locale === 'zh' ? 'logo-margin-zh' : 'logo-margin-en']"
+      >
         <img class="logo-icon" src="@/assets/logo.png" />
-        <p>诸葛神码</p>
+        <p>{{ t('header.appName') }}</p>
       </div>
       <ul class="header-menu">
         <li
@@ -16,23 +20,51 @@
           {{ item.label }}
         </li>
       </ul>
+      <div class="header-lang-switcher">
+        <n-popover
+          trigger="click"
+          :show="isPopoverOpen"
+          @update:show="isPopoverOpen = $event"
+          :show-arrow="false"
+          style="padding: 0"
+          placement="bottom-end"
+        >
+          <template #trigger>
+            <div class="lang-trigger">
+              {{ currentLangLabel }}
+              <span class="arrow" :class="{ 'arrow-up': isPopoverOpen }">▼</span>
+            </div>
+          </template>
+          <div class="lang-options">
+            <div
+              v-for="option in languageOptions"
+              :key="option.key"
+              class="lang-option"
+              :class="{ active: locale === option.key }"
+              @click="handleSelectLang(option.key)"
+            >
+              {{ option.label }}
+            </div>
+          </div>
+        </n-popover>
+      </div>
     </div>
     <template v-if="isIndex">
       <div class="container-main">
         <div class="index-page">
           <div class="page-header">
             <div class="page-header-container">
-              <p class="title">欢迎使用诸葛神码</p>
-              <img :src="titleIcon"  class="page-header-icon"/>
+              <p class="title">{{ t('home.welcomeTitle') }}</p>
+              <img :src="t('home.icon')" class="page-header-icon" />
             </div>
-            <p class="sub-title">诸葛智慧、神笔码良，开启AI Native时代</p>
+            <p class="sub-title">{{ t('home.welcomeSubtitle') }}</p>
             <p class="desc">
-              开源、实用的AI程序员，您的工作重点从 “编” 转到 “问”、“审”
+              {{ t('home.welcomeDesc') }}
             </p>
           </div>
           <div class="page-btns">
-            <div class="label-img"><img src="@/assets/company_label.svg"></div>
-            <div class="label-img"><img src="@/assets/person_label.svg"></div>
+            <div class="label-img"><img :src="t('home.companyLabel')" /></div>
+            <div class="label-img"><img :src="t('home.personLabel')" /></div>
           </div>
         </div>
         <div class="case-page">
@@ -42,25 +74,27 @@
               <span>{{ item.title }}</span>
             </p>
             <p class="item-desc">{{ item.desc }}</p>
-            <div class="item-img" :class="`img-${index + 1}`">
+            <div class="item-img" :class="`img-${index + 1} item-img-${locale}`">
               <img :src="item.imgUrl" />
             </div>
           </div>
           <div class="page-item">
-            <img :src="caseTitleImg4" />
-            <div class="feature-container">
-              <div v-for="(item,i) in featureList" :key="i" class="feature-item">
+            <img :src="t('home.case4.titleImg')" />
+            <div class="feature-container" :class="`feature-container-${locale}`">
+              <div v-for="(item, i) in featureList" :key="i" class="feature-item">
                 <img class="feature-item_img" :src="item.img" />
               </div>
             </div>
           </div>
           <div class="page-item">
             <p class="item-title">
-              <span>支持多种IDE与语言，持续增加中…</span>
+              <span>{{ t('home.ideSupport.title') }}</span>
             </p>
-            <p class="item-desc">支持多种主流IDE，率先支持VS Code（InteliJ IDEA、PyCharm即将支持）。 支持Python、Go、C++/C、JavaScript、 Java等多种主流语言。</p>
+            <p class="item-desc">
+              {{ t('home.ideSupport.desc') }}
+            </p>
             <div class="item-img">
-              <img :src="caseImg5" />
+              <img :src="t('home.case5.pageImg')" />
             </div>
           </div>
         </div>
@@ -68,26 +102,28 @@
       <div class="container-footer">
         <div class="community-page">
           <div class="page-item">
-            <p class="item-title">开源开放</p>
-            <p class="item-desc description">欢迎加入我们，让AI更高效！</p>
+            <p class="item-title">{{ t('footer.openSource.title') }}</p>
+            <p class="item-desc description">{{ t('footer.openSource.desc') }}</p>
             <p class="item-desc">
-              <span>联系我们</span>
+              <span>{{ t('footer.contactUs') }}</span>
               <span class="divider">|</span>
               <span class="contact">zgsm@sangfor.com.cn</span>
             </p>
           </div>
         </div>
         <div class="copyright">
-          <p>@ 2025 深信服科技股份有限公司版权所有</p>
-          <p>
-            <img src="@/assets/copyright_btn.png" />
-            <span>粤ICP备08126214号</span>
-          </p>
-          <p>
-            <img src="@/assets/copyright_btn.png" />
-            <span>粤公网安备44030502002384号</span>
-          </p>
-          <p>合字B1.B2-20220041</p>
+          <p>{{ t('footer.copyright.company') }}</p>
+          <template v-if="locale === 'zh'">
+            <p>
+              <img src="@/assets/copyright_btn.png" />
+              <span>{{ t('footer.copyright.icp') }}</span>
+            </p>
+            <p>
+              <img src="@/assets/copyright_btn.png" />
+              <span>{{ t('footer.copyright.gongan') }}</span>
+            </p>
+            <p>{{ t('footer.copyright.license') }}</p>
+          </template>
         </div>
       </div>
     </template>
@@ -97,81 +133,101 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import titleIcon from '@/assets/titleIcon.png'
-import caseImg1 from '@/assets/case_page_img1.gif'
-import caseImg2 from '@/assets/case_page_img2.gif'
+import { useI18n } from 'vue-i18n'
+import { NPopover } from 'naive-ui'
+
+const { t, locale } = useI18n()
 import caseImg3 from '@/assets/case_page_img3.png'
-import caseImg5 from '@/assets/case_page_img5.png'
-import caseTitleImg1 from '@/assets/case1_titleimg.png'
-import caseTitleImg2 from '@/assets/case2_titleimg.png'
-import caseTitleImg3 from '@/assets/case3_titleimg.png'
-import caseTitleImg4 from '@/assets/case4_titleimg.png'
-import feature01 from '@/assets/feature01.webp'
-import feature02 from '@/assets/feature02.webp'
-import feature03 from '@/assets/feature03.webp'
-import feature04 from '@/assets/feature04.webp'
-import feature05 from '@/assets/feature05.webp'
 import { useRouter } from 'vue-router'
 import { debounce } from '@/utils/common'
 
-const menuOptions = [
+interface MenuOption {
+  label: string // This will now hold the translated string
+  key: string
+}
+
+const menuOptions = computed<MenuOption[]>(() => [
   {
-    label: '首页',
-    key: 'home'
+    label: t('menu.home'),
+    key: 'home',
   },
   {
-    label: '开源',
-    key: 'blog'
+    label: t('menu.openSource'),
+    key: 'blog',
   },
   {
-    label: '安装指引',
-    key: 'download'
+    label: t('menu.installGuide'),
+    key: 'download',
+  },
+])
+
+const languageOptions = ref([
+  { label: '中文', key: 'zh' },
+  { label: 'English', key: 'en' },
+])
+
+const isPopoverOpen = ref(false)
+
+const currentLangLabel = computed(() => {
+  return (
+    languageOptions.value.find((item) => item.key === locale.value)?.label ||
+    languageOptions.value[0].label
+  )
+})
+
+interface CaseItem {
+  titleImg: string
+  title: string // This will now hold the translated string
+  desc: string // This will now hold the translated string
+  imgUrl: string
+}
+
+const caseList = computed<CaseItem[]>(() => {
+  return [
+    {
+      titleImg: t('home.case1.titleImg'),
+      title: t('home.case1.title'),
+      desc: t('home.case1.desc'),
+      imgUrl: t('home.case1.pageImg'),
+    },
+    {
+      titleImg: t('home.case2.titleImg'),
+      title: t('home.case2.title'),
+      desc: t('home.case2.desc'),
+      imgUrl: t('home.case2.pageImg'),
+    },
+    {
+      titleImg: t('home.case3.titleImg'),
+      title: t('home.case3.title'),
+      desc: t('home.case3.desc'),
+      imgUrl: caseImg3,
+    },
+  ]
+})
+
+const featureList = computed(() => {
+  const caseList = [
+    {
+      img: t('home.case4.feature1'),
+    },
+    {
+      img: t('home.case4.feature2'),
+    },
+    {
+      img: t('home.case4.feature3'),
+    },
+    {
+      img: t('home.case4.feature4'),
+    },
+    {
+      img: t('home.case4.feature5'),
+    },
+  ]
+  if (locale.value === 'en') {
+    caseList.pop()
   }
-]
-
-const caseList = [
-  {
-    titleImg: caseTitleImg1,
-    title: 'AI Agent：懂你所想，有问必答',
-    desc: '通过自然语言描述，自主创建代码文件，直接在工作区生成代码并自动完成测试',
-    imgUrl: caseImg1
-  },
-  {
-    titleImg: caseTitleImg2,
-    title: '代码补全：神来之笔，码上续写',
-    desc: '代码自动补全，提供精准上下文补全更准确，快速秒级出码',
-    imgUrl: caseImg2
-  },
-  {
-    titleImg: caseTitleImg3,
-    title: '企业级私有化部署：',
-    desc: '支持企业级私有化部署，为安全和隐私而设计',
-    imgUrl: caseImg3
-  },
-  // {
-  //   title: '支持多种IDE与语言，持续增加中…',
-  //   desc: '支持多种主流IDE，率先支持VS Code（InteliJ IDEA、PyCharm即将支持）。 支持Python、Go、C++/C、JavaScript、 Java等多种主流语言。',
-  //   imgUrl: caseImg5
-  // }
-]
-
-const featureList = [
-  {
-    img: feature01
-  },
-  {
-    img: feature02
-  },
-  {
-    img: feature03
-  },
-  {
-    img: feature04
-  },
-  {
-    img: feature05
-  },
-]
+  return caseList
+})
 
 const activeMenu = ref('home')
 
@@ -180,7 +236,7 @@ const isIndex = computed(() => {
   return router.currentRoute.value.path === '/'
 })
 
-const clickMenu = (item: any) => {
+const clickMenu = (item: MenuOption) => {
   activeMenu.value = item.key
   if (item.key === 'home') {
     showIndex()
@@ -202,6 +258,11 @@ const showIndex = () => {
 const showDownload = () => {
   activeMenu.value = 'download'
   router.push('/download')
+}
+
+const handleSelectLang = (key: string) => {
+  locale.value = key
+  isPopoverOpen.value = false
 }
 
 // 页面滚动到 1000 px 时，将container-header 固定到页面顶部, 添加防抖效果
@@ -242,7 +303,7 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
     .header-logo {
       display: flex;
       align-items: center;
-      margin-right: 70px;
+      // margin-right: 70px; // Removed fixed margin, will be handled by dynamic class
       font-size: 16px;
       font-weight: 600;
       cursor: pointer;
@@ -251,30 +312,63 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
         margin-right: 12px;
       }
     }
+    .logo-margin-zh {
+      margin-right: 80px;
+    }
+    .logo-margin-en {
+      margin-right: 40px;
+    }
     .header-menu {
       display: flex;
       align-items: center;
       .header-menu-item {
-        width: 68px;
+        //width: 68px; // Removed fixed width
+        padding: 0 20px; // Added padding for spacing
         color: #c3defa;
         cursor: pointer;
+        text-align: center; // Optional: ensure text is centered if needed
 
         &.active {
           color: #fff;
         }
       }
     }
-    .header-btns {
+    .header-lang-switcher {
+      margin-left: auto;
       display: flex;
       align-items: center;
-      margin-left: auto;
-      .n-button {
+      .lang-trigger {
+        padding: 4px 8px;
         color: #fff;
-        :deep(.n-button__border) {
-          border-color: #fff;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+        .arrow {
+          margin-left: 8px;
+          font-size: 12px;
+          transition: transform 0.2s ease;
+          &.arrow-up {
+            transform: rotate(180deg);
+          }
         }
       }
     }
+    // .header-btns { // Original styles, can be reused or removed if not needed elsewhere
+    //   display: flex;
+    //   align-items: center;
+    //   margin-left: auto;
+    //   .n-button {
+    //     color: #fff;
+    //     :deep(.n-button__border) {
+    //       border-color: #fff;
+    //     }
+    //   }
+    // }
   }
   .container-main {
     width: 1300px;
@@ -286,7 +380,6 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
         .page-header-container {
           display: flex;
           .page-header-icon {
-            width: 143.09px;
             height: 43.2px;
             margin-left: 16.9px;
           }
@@ -419,6 +512,7 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
       font-size: 14px;
       color: #c2c7d1;
       margin-bottom: 24px;
+      text-align: center;
       &.showTips {
         color: #687080;
       }
@@ -440,13 +534,19 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
       img {
         width: 1300px;
         border-radius: 20px;
-        
       }
       &.img-1 {
         background: url(@/assets/case_page_bg1.png) no-repeat;
       }
       &.img-2 {
         background: url(@/assets/case_page_bg2.png) no-repeat;
+      }
+      &-en {
+        &.img-1,
+        &.img-2 {
+          height: 706px;
+          background: url(@/assets/case_page_bg2_en.png) no-repeat;
+        }
       }
     }
     .feature-container {
@@ -455,7 +555,8 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
       column-gap: 28.52px; /* 设置列间距，即子元素之间的水平间距 */
       row-gap: 40px; /* 设置行间距，即行与行之间的垂直间距 */
       margin-top: 68px;
-      .feature-item{
+
+      .feature-item {
         width: 414px; /* 设置每个子元素的宽度 */
         height: 440px; /* 设置每个子元素的高度 */
         /* 以下为可选的示例样式，您可以根据需要修改 */
@@ -467,6 +568,13 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
         &_img {
           width: 100%;
           height: 100%;
+        }
+      }
+      &-en {
+        column-gap: 82.85px;
+        justify-content: center;
+        .feature-item {
+          width: 500px;
         }
       }
     }
@@ -497,6 +605,24 @@ window.addEventListener('scroll', debounce(handleScroll, 100))
       .is-hover {
         display: block;
       }
+    }
+  }
+}
+
+.lang-options {
+  width: 200px;
+
+  .lang-option {
+    padding: 10px 12px;
+    // padding: 8px 12px;
+    cursor: pointer;
+    color: #fff;
+    background: #004093;
+    &:hover {
+      background: #197dff;
+    }
+    &.active {
+      color: #fff;
     }
   }
 }
