@@ -234,13 +234,61 @@ export function useResourceCalculator() {
     }
   }
 
-  // 计算总GPU成本
-  const calculateTotalGpuCosts = () => {
+  // 计算GPU成本构成详情并更新总成本
+  const calculateGpuCostsAndBreakdown = () => {
     totalResources.gpuCosts = 0
+    const breakdown: Array<{
+      gpuType: string
+      servers: Record<string, number>
+      totalCards: number
+      cost: number
+      costPerServer: Record<string, number>
+    }> = []
+
     Object.entries(totalResources.gpuServers).forEach(([gpuType, gpuData]) => {
       const cost = calculateGpuCost(gpuType, gpuData.servers)
+      const costPerServer: Record<string, number> = {}
+
+      // 累加到总成本
       totalResources.gpuCosts += cost
+
+      if (gpuType === '4090') {
+        const config = MODEL_CONFIG.gpuServer[gpuType] as {
+          maxCardsPerServer: number
+          baseServerCost: number
+          cardCost: number
+        }
+        Object.entries(gpuData.servers).forEach(([cardConfig]) => {
+          const cardCount = parseInt(cardConfig.replace('卡', ''))
+          const serverCost = config.baseServerCost + cardCount * config.cardCost
+          costPerServer[cardConfig] = serverCost
+        })
+      } else if (gpuType === 'H20') {
+        const config = MODEL_CONFIG.gpuServer[gpuType] as {
+          maxCardsPerServer: number
+          serverPrices: Record<number, number>
+        }
+        Object.entries(gpuData.servers).forEach(([cardConfig]) => {
+          const cardCount = parseInt(cardConfig.replace('卡', ''))
+          if (config.serverPrices && config.serverPrices[cardCount]) {
+            costPerServer[cardConfig] = config.serverPrices[cardCount]
+          } else {
+            const basePrice = config.serverPrices?.[8] || 1300000
+            costPerServer[cardConfig] = (basePrice * cardCount) / 8
+          }
+        })
+      }
+
+      breakdown.push({
+        gpuType,
+        servers: gpuData.servers,
+        totalCards: gpuData.totalCards,
+        cost,
+        costPerServer,
+      })
     })
+
+    return breakdown
   }
 
   // 重置总资源
@@ -267,7 +315,7 @@ export function useResourceCalculator() {
     calculateCompletionResources(formData, concurrentDeveloperCount)
     calculateAIAgentResources(formData, concurrentDeveloperCount)
     calculateBackendResources(concurrentDeveloperCount)
-    calculateTotalGpuCosts()
+    calculateGpuCostsAndBreakdown()
   }
 
   // 初始化AI模型选择
@@ -292,5 +340,6 @@ export function useResourceCalculator() {
     totalResources,
     calculateResources,
     initializeAIModelSelection,
+    calculateGpuCostsAndBreakdown,
   }
 }

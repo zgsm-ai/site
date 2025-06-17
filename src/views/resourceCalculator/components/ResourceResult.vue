@@ -49,12 +49,24 @@
             title="GPU预估成本"
           >
             <div class="resource-content">
-              <div
-                v-if="totalResources.gpuCosts > 0"
-                class="text-lg font-bold"
-                style="color: #722ed1"
-              >
-                ¥{{ totalResources.gpuCosts.toLocaleString() }}
+              <div v-if="totalResources.gpuCosts > 0" class="gpu-cost-container">
+                <div class="text-lg font-bold" style="color: #722ed1">
+                  ¥{{ totalResources.gpuCosts.toLocaleString() }}
+                </div>
+                <n-popover
+                  trigger="hover"
+                  placement="bottom-start"
+                  :show-arrow="false"
+                  style="padding: 0; border-radius: 8px"
+                  :z-index="9999"
+                >
+                  <template #trigger>
+                    <div class="cost-info-icon">
+                      <span class="info-icon">i</span>
+                    </div>
+                  </template>
+                  <GpuCostBreakdown :cost-breakdown="gpuCostBreakdown" />
+                </n-popover>
               </div>
               <div v-else class="text-sm text-gray-500">无GPU硬件需求</div>
             </div>
@@ -115,9 +127,8 @@
                   :key="config"
                   class="completion-gpu-item"
                 >
-                  <span class="completion-gpu-count">{{ count }}</span>
-                  <span class="completion-gpu-unit">台</span>
-                  <span class="completion-gpu-detail"
+                  <span class="gpu-count">{{ count }} 台</span>
+                  <span class="gpu-detail"
                     >{{ results.completion.gpuServers.type }} ({{ config }})</span
                   >
                 </div>
@@ -223,17 +234,54 @@
 </template>
 
 <script lang="ts" setup>
-import { NCard, NDivider, NGrid, NGridItem, NSpace, NCollapse, NCollapseItem } from 'naive-ui'
+import {
+  NCard,
+  NDivider,
+  NGrid,
+  NGridItem,
+  NSpace,
+  NCollapse,
+  NCollapseItem,
+  NPopover,
+} from 'naive-ui'
 import type { FormData, Results, TotalResources } from '../types'
+import GpuCostBreakdown from './GpuCostBreakdown.vue'
+import { watch, ref } from 'vue'
 
 defineOptions({
   name: 'ResourceResult',
 })
-defineProps<{
+const props = defineProps<{
   formData: FormData
   results: Results
   totalResources: TotalResources
+  getGpuCostBreakdown: () => Array<{
+    gpuType: string
+    servers: Record<string, number>
+    totalCards: number
+    cost: number
+    costPerServer: Record<string, number>
+  }>
 }>()
+const gpuCostBreakdown = ref<
+  Array<{
+    gpuType: string
+    servers: Record<string, number>
+    totalCards: number
+    cost: number
+    costPerServer: Record<string, number>
+  }>
+>([])
+watch(
+  () => props.formData,
+  () => {
+    gpuCostBreakdown.value = props.getGpuCostBreakdown()
+  },
+  {
+    immediate: true,
+    deep: true,
+  },
+)
 </script>
 <style lang="less" scoped>
 .resource-card {
@@ -490,28 +538,10 @@ defineProps<{
   background: #e9ecef;
 }
 
-.completion-gpu-count {
-  background: #1890ff;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 14px;
-  min-width: 30px;
-  text-align: center;
-}
-
 .completion-gpu-unit {
   font-size: 12px;
   color: #666;
   margin-right: 4px;
-}
-
-.completion-gpu-detail {
-  color: #2c3e50;
-  font-size: 13px;
-  font-weight: 500;
-  flex: 1;
 }
 
 /* 后台服务资源样式 */
@@ -611,5 +641,34 @@ defineProps<{
   font-size: 12px;
   color: #666;
   font-weight: 500;
+}
+
+/* GPU成本信息样式 */
+.gpu-cost-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cost-info-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #e6f7ff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cost-info-icon:hover {
+  background-color: #bae7ff;
+}
+
+.info-icon {
+  font-size: 12px;
+  color: #1890ff;
+  font-weight: bold;
 }
 </style>

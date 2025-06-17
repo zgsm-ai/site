@@ -46,7 +46,7 @@ const columns = computed(() => [
     key: 'effect',
     width: 100,
     render(row: TableRow) {
-      const type = row.effect === '良' ? 'success' : row.effect === '中' ? 'warning' : 'error'
+      const type = row.effect === '良' ? 'info' : row.effect === '中' ? 'warning' : 'error'
       return h(
         NTag,
         {

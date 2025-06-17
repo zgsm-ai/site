@@ -105,7 +105,7 @@
               </n-form-item>
             </n-grid-item>
             <n-grid-item>
-              <n-form-item label="并发连接数">
+              <n-form-item label="每分钟并发连接数">
                 <n-input-number
                   v-model:value="formData.concurrentDeveloperCount"
                   :show-button="false"
@@ -135,6 +135,7 @@
         <n-select
           v-model:value="formData.selectedCompletionModel"
           :options="completionModelOptions"
+          :show-checkmark="false"
         />
       </n-form-item>
 
@@ -155,13 +156,29 @@
                   :key="modelName"
                   class="model-item"
                 >
-                  <n-checkbox
-                    v-model:checked="formData.selectedAIModels[modelName]"
-                    @update:checked="handleModelSelectionChange"
-                  >
-                    {{ modelName }}
-                  </n-checkbox>
-                  <div v-if="formData.selectedAIModels[modelName]" class="mt-2">
+                  <div class="model-header">
+                    <div class="model-checkbox-section">
+                      <n-checkbox
+                        v-model:checked="formData.selectedAIModels[modelName]"
+                        @update:checked="handleModelSelectionChange"
+                      >
+                        <span class="model-name">{{ modelName }}</span>
+                      </n-checkbox>
+                    </div>
+                    <div class="model-tags">
+                      <n-tag :type="getCostTagType(config.cost)" size="small" class="cost-tag">
+                        成本{{ Cost[config.cost] }}
+                      </n-tag>
+                      <n-tag
+                        :type="getEffectTagType(config.effect)"
+                        size="small"
+                        class="effect-tag"
+                      >
+                        效果{{ Effect[config.effect] }}
+                      </n-tag>
+                    </div>
+                  </div>
+                  <div v-if="formData.selectedAIModels[modelName]" class="ratio-section">
                     <n-input-group>
                       <n-input-group-label>分摊比例</n-input-group-label>
                       <n-input-number
@@ -183,13 +200,29 @@
               <n-h6 class="mb-2">在线服务模型</n-h6>
               <n-space vertical>
                 <div v-for="(config, modelName) in apiModels" :key="modelName" class="model-item">
-                  <n-checkbox
-                    v-model:checked="formData.selectedAIModels[modelName]"
-                    @update:checked="handleModelSelectionChange"
-                  >
-                    {{ modelName }}
-                  </n-checkbox>
-                  <div v-if="formData.selectedAIModels[modelName]" class="mt-2">
+                  <div class="model-header">
+                    <div class="model-checkbox-section">
+                      <n-checkbox
+                        v-model:checked="formData.selectedAIModels[modelName]"
+                        @update:checked="handleModelSelectionChange"
+                      >
+                        <span class="model-name">{{ modelName }}</span>
+                      </n-checkbox>
+                    </div>
+                    <div class="model-tags">
+                      <n-tag :type="getCostTagType(config.cost)" size="small" class="cost-tag">
+                        成本{{ Cost[config.cost] }}
+                      </n-tag>
+                      <n-tag
+                        :type="getEffectTagType(config.effect)"
+                        size="small"
+                        class="effect-tag"
+                      >
+                        效果{{ Effect[config.effect] }}
+                      </n-tag>
+                    </div>
+                  </div>
+                  <div v-if="formData.selectedAIModels[modelName]" class="ratio-section">
                     <n-input-group>
                       <n-input-group-label>分摊比例</n-input-group-label>
                       <n-input-number
@@ -213,7 +246,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import {
   NCard,
   NForm,
@@ -232,7 +265,7 @@ import {
   NH6,
   NTag,
 } from 'naive-ui'
-
+import { CostType, EffectType, Cost, Effect } from '../types'
 import { MODEL_CONFIG } from '../constants'
 import type { DeploymentModel, ApiModel, FormData } from '../types'
 
@@ -345,18 +378,90 @@ const validateAndAdjustRatios = () => {
   }
 }
 
-// 初始化
-onMounted(() => {
-  // 初始化逻辑已移到父组件，此处不再需要
-})
+// 获取成本标签类型
+const getCostTagType = (cost: string) => {
+  switch (cost) {
+    case CostType.low:
+      return 'success'
+    case CostType.medium:
+      return 'warning'
+    case CostType.high:
+      return 'error'
+    default:
+      return 'default'
+  }
+}
+
+// 获取效果标签类型
+const getEffectTagType = (effect: string) => {
+  switch (effect) {
+    case EffectType.excellent:
+      return 'success'
+    case EffectType.good:
+      return 'info'
+    case EffectType.medium:
+      return 'warning'
+    case EffectType.bad:
+      return 'error'
+    default:
+      return 'default'
+  }
+}
 </script>
 
 <style scoped>
 .model-item {
-  padding: 8px;
+  padding: 16px;
   border: 1px solid #e8e8e8;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #fafafa;
+  transition: all 0.3s ease;
+}
+
+.model-item:hover {
+  background: #f0f4ff;
+  border-color: #409eff;
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.1);
+}
+
+.model-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.model-checkbox-section {
+  flex: 1;
+  min-width: 0;
+}
+
+.model-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.model-tags {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.cost-tag,
+.effect-tag {
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ratio-section {
+  background: white;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid #e8e8e8;
+  margin-top: 8px;
 }
 
 .font-medium {

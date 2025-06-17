@@ -16,6 +16,7 @@
               :form-data="formData"
               :results="results"
               :total-resources="totalResources"
+              :get-gpu-cost-breakdown="calculateGpuCostsAndBreakdown"
             />
           </n-grid-item>
         </n-grid>
@@ -43,8 +44,13 @@ defineOptions({
 })
 
 // 使用资源计算器 hooks
-const { results, totalResources, calculateResources, initializeAIModelSelection } =
-  useResourceCalculator()
+const {
+  results,
+  totalResources,
+  calculateResources,
+  initializeAIModelSelection,
+  calculateGpuCostsAndBreakdown,
+} = useResourceCalculator()
 
 // 表单数据
 const formData = reactive<FormData>({

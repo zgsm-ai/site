@@ -1,14 +1,42 @@
 // 类型定义
+
+export enum CostType {
+  low = 'low',
+  medium = 'medium',
+  high = 'high',
+}
+export const Cost = {
+  [CostType.low]: '低',
+  [CostType.medium]: '中',
+  [CostType.high]: '高',
+} as const
+
+export enum EffectType {
+  excellent = 'excellent',
+  good = 'good',
+  medium = 'medium',
+  bad = 'bad',
+}
+export const Effect = {
+  [EffectType.excellent]: '优',
+  [EffectType.good]: '良',
+  [EffectType.medium]: '中',
+  [EffectType.bad]: '差',
+} as const
 export interface DeploymentModel {
   type: 'deployment'
   supportedUsers: number
   gpuType: string
   gpuCardsPerInstance: number
+  cost: keyof typeof Cost // 成本标签：'低', '中', '高'
+  effect: keyof typeof Effect // 效果标签：'优', '良', '中', '差'
 }
 
 export interface ApiModel {
   type: 'api'
   costPerUserPerMonth: number
+  cost: keyof typeof Cost // 成本标签：'低', '中', '高'
+  effect: keyof typeof Effect // 效果标签：'优', '良', '中', '差'
 }
 
 export interface GpuServers {

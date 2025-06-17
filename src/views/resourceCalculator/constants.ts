@@ -1,3 +1,4 @@
+import { Effect, CostType, EffectType } from './types'
 export interface TableRow {
   modelName: string
   scenario: string // 场景
@@ -16,7 +17,7 @@ export const tableData: TableRow[] = [
   {
     modelName: 'Deepseek-v3-0324',
     scenario: '问答',
-    effect: '良',
+    effect: Effect[EffectType.good],
     modelSizeMoESize: '671B/37B',
     contextWindow: '128K',
     optimalMinDeploymentHardware: '8张H20',
@@ -29,7 +30,7 @@ export const tableData: TableRow[] = [
   {
     modelName: 'Qwen3-235B-A22B',
     scenario: '问答',
-    effect: '中',
+    effect: Effect[EffectType.medium],
     modelSizeMoESize: '235B/22B',
     contextWindow: '32K',
     optimalMinDeploymentHardware: '4张H20',
@@ -42,7 +43,7 @@ export const tableData: TableRow[] = [
   {
     modelName: 'Qwen2.5-Coder-32B-Instruct',
     scenario: '问答',
-    effect: '差',
+    effect: Effect[EffectType.bad],
     modelSizeMoESize: '32B',
     contextWindow: '128K',
     optimalMinDeploymentHardware: '4张4090',
@@ -55,7 +56,7 @@ export const tableData: TableRow[] = [
   {
     modelName: 'DeepSeek-Coder-V2-Lite-Base',
     scenario: '补全',
-    effect: '良',
+    effect: Effect[EffectType.good],
     modelSizeMoESize: '16B/2.4B',
     contextWindow: '128K',
     optimalMinDeploymentHardware: '2张4090',
@@ -81,32 +82,42 @@ export const MODEL_CONFIG = {
   // AI程序员/AI Agent模型配置
   aiAgentModels: {
     // 模型部署类型
-    'DeepSeek-V3-0324（满血尊享版）': {
+    'DeepSeek-V3-0324': {
       type: 'deployment',
       supportedUsers: 50,
       gpuType: 'H20',
       gpuCardsPerInstance: 8,
+      cost: CostType.high, // 成本标签
+      effect: EffectType.good, // 效果标签
     },
-    'Qwen3-235B（基础版）': {
+    'Qwen3-235B': {
       type: 'deployment',
       supportedUsers: 28,
       gpuType: 'H20',
       gpuCardsPerInstance: 4,
+      cost: CostType.medium, // 成本标签
+      effect: EffectType.good, // 效果标签
     },
-    'Qwen2.5-Coder-32B-Instruct（性价比最优）': {
+    'Qwen2.5-Coder-32B-Instruct': {
       type: 'deployment',
       supportedUsers: 12,
       gpuType: '4090',
       gpuCardsPerInstance: 4,
+      cost: CostType.low, // 成本标签
+      effect: EffectType.bad, // 效果标签
     },
     // API服务购买类型
-    'API-Claude4(尊享版)': {
+    Claude4: {
       type: 'api',
       costPerUserPerMonth: 100, // 每人每月平均成本预估（元）
+      cost: CostType.high, // 成本标签
+      effect: EffectType.excellent, // 效果标签
     },
-    'API-GPT4.1-MINI(性价比最优)': {
+    'GPT4.1-Mini': {
       type: 'api',
       costPerUserPerMonth: 10, // 每人每月平均成本预估（元）
+      cost: CostType.low, // 成本标签
+      effect: EffectType.good, // 效果标签
     },
   },
 
