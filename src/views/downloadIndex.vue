@@ -1,44 +1,46 @@
 <template>
-  <div class="login-container">
-    <div class="container-header">
-      <p class="title">{{ t('download.title') }}</p>
-      <p class="desc">
-        {{ t('download.desc') }}
-      </p>
-    </div>
-    <div class="container-main">
-      <div class="tab-list">
-        <div
-          class="tab-item"
-          :class="{ active: activeTab === tab.key }"
-          v-for="tab in tabList"
-          :key="tab.key"
-        >
-          <img :src="tab.imgUrl" :alt="tab.key" />
-        </div>
-      </div>
-      <div class="download-content">
-        <p class="content-header">
-          <img class="download-icon" src="@/assets/vscode_icon.png" alt="" />
-          <span>{{ t('download.vscodeTitle') }}</span>
+  <div class="w-full bg-black">
+    <div class="login-container">
+      <div class="container-header">
+        <p class="title">{{ t('download.title') }}</p>
+        <p class="desc">
+          {{ t('download.desc') }}
         </p>
-        <div class="manual-methods download-methods">
-          <p class="tips">{{ t('download.installSteps') }}</p>
-          <div class="download-methods">
-            <n-timeline :icon-size="20">
-              <n-timeline-item
-                v-for="(step, index) in stepList"
-                :key="index"
-                :title="t(`download.step${index + 1}`)"
-                line-type="dashed"
-                color="#4083E8"
-              >
-                <template #icon>
-                  <div class="timeline-icon">{{ index + 1 }}</div>
-                </template>
-                <img :src="step.imgUrl" alt="" />
-              </n-timeline-item>
-            </n-timeline>
+      </div>
+      <div class="container-main">
+        <div class="tab-list">
+          <div
+            class="tab-item"
+            :class="{ active: activeTab === tab.key }"
+            v-for="tab in tabList"
+            :key="tab.key"
+          >
+            <img :src="tab.imgUrl" :alt="tab.key" />
+          </div>
+        </div>
+        <div class="download-content">
+          <p class="content-header">
+            <img class="download-icon" src="@/assets/vscode_icon.png" alt="" />
+            <span>{{ t('download.vscodeTitle') }}</span>
+          </p>
+          <div class="manual-methods download-methods">
+            <p class="tips">{{ t('download.installSteps') }}</p>
+            <div class="download-methods">
+              <n-timeline :icon-size="20">
+                <n-timeline-item
+                  v-for="(step, index) in stepList"
+                  :key="index"
+                  :title="t(`download.step${index + 1}`)"
+                  line-type="dashed"
+                  color="#4083E8"
+                >
+                  <template #icon>
+                    <div class="timeline-icon">{{ index + 1 }}</div>
+                  </template>
+                  <img :src="step.imgUrl" alt="" />
+                </n-timeline-item>
+              </n-timeline>
+            </div>
           </div>
         </div>
       </div>
@@ -140,14 +142,6 @@ const stepList = computed(() => {
           height: 72px;
           padding: 0 24px;
           background: url(@/assets/download_bg.png) no-repeat;
-        }
-        .handle-btn {
-          margin-left: 24px;
-          &:hover {
-            background: #fff;
-            color: #458fff;
-            transition: all 0.3s;
-          }
         }
       }
       .manual-methods {

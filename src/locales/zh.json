@@ -44,9 +44,53 @@
     "case5": {
       "pageImg": "/images/zh/case_page_img5.png"
     },
+    "slogan": {
+      "title": "诸葛神码",
+      "subTitle": "企业严肃编程的最佳选择",
+      "enterpriseButton": "企业私有化部署",
+      "personalButton": "个人免费使用",
+      "ossButton": "开源免费"
+    },
+    "codeReview": {
+      "title": "/images/zh/codereview_title.svg",
+      "subTitle": "代码审查能够进行全量代码仓库的索引解析、公司级编码知识库RAG，支持用户对函数、选中代码行、代码文件和整个工程文件进行代码检查， 在发现问题和确认问题上采用“多专家模型专项检查”+“多模型交叉确认”策略",
+      "feature01": "/images/zh/codereview_feature01.webp",
+      "feature02": "/images/zh/codereview_feature02.webp",
+      "feature03": "/images/zh/codereview_feature03.webp",
+      "feature04": "/images/zh/codereview_feature04.webp"
+    },
+    "agent": {
+      "title": "智能体 (AI Agent)",
+      "demo": "/images/zh/agent.gif",
+      "subTitle": "智能Agent能够根据开发者的需求端到端完成任务，具备：自主决策、全仓库上下文检索、调用工具、错误修复、运行终端等能力",
+      "feature01": "/images/zh/agent_feature01.webp",
+      "feature02": "/images/zh/agent_feature02.webp",
+      "feature03": "/images/zh/agent_feature03.webp"
+    },
+    "completion": {
+      "title": "代码补全（Code Completion)",
+      "subTitle": "代码自动补全，根据光标的上下文代码，自动生成后续代码，快速秒级出码"
+    },
+    "moreTool": {
+      "title": "更多工具",
+      "subTitle": "诸葛神码支持多种外接工具，例如：MCP、自定义API/模型服务、多模式/自定义模式选择 和图片上下文等功能",
+      "feature01": "/images/zh/tool_feature01.webp",
+      "feature02": "/images/zh/tool_feature02.webp",
+      "feature03": "/images/zh/tool_feature03.webp",
+      "feature04": "/images/zh/tool_feature04.webp"
+    },
+    "enterprise": {
+      "title": "企业级私有化部署",
+      "subTitle": "为确保数据安全和更好的服务更低的成本，我们提供了专业完整的私有化部署方案",
+      "feature01": "/images/zh/enterprise_feature01.webp",
+      "feature02": "/images/zh/enterprise_feature02.webp",
+      "feature03": "/images/zh/enterprise_feature03.webp",
+      "check": "/images/zh/enterprise_check.png"
+    },
     "ideSupport": {
-      "title": "支持多种IDE与语言，持续增加中…",
-      "desc": "支持多种主流IDE，率先支持VS Code（InteliJ IDEA、PyCharm即将支持）。 支持Python、Go、C++/C、JavaScript、 Java等多种主流语言。"
+      "title": "多编程语言支持，VSCode编辑器支持 ",
+      "moreLanguage": "/images/zh/ideSupport_morelanguage.svg",
+      "vscode": "/images/zh/vscode.svg"
     }
   },
   "footer": {

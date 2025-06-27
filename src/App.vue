@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { NMessageProvider } from 'naive-ui'
-import Home from './views/homeIndex.vue'
+import navbar from './components/NavBar.vue'
 </script>
 
 <template>
   <n-message-provider>
-    <Home />
+    <navbar />
+    <router-view class="mt-[68px]" />
   </n-message-provider>
 </template>
 
