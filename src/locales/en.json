@@ -63,7 +63,9 @@
       "subTitle": "Intelligent agents can perform tasks end-to-end based on developer requirements, equipped with capabilities including: autonomous decision-making, full repository context retrieval, tool invocation, error debugging, and terminal command execution.",
       "feature01": "/images/en/agent_feature01.webp",
       "feature02": "/images/en/agent_feature02.webp",
-      "feature03": "/images/en/agent_feature03.webp"
+      "feature03": "/images/en/agent_feature03.webp",
+      "feature04": "/images/en/agent_feature04.webp",
+      "guide": "/images/en/guide.webp"
     },
     "completion": {
       "title": "Code Completion",

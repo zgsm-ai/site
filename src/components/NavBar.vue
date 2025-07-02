@@ -1,5 +1,6 @@
 <template>
-  <div class="navbar fixed top-0 left-0 right-0 z-50 flex h-[68px] px-[52px]">
+  <div class="navbar fixed top-0 left-0 right-0 z-50 flex h-[68px] px-[52px]"
+    :class="{ 'not-homepage': notHomePage }">
     <div class="flex items-center h-[68px]" :class="marginRightClass">
       <img class="w-[28px] mr-3" src="@/assets/logo.png" />
       <div class="text-[#F4F8FF] text-base">{{ t('header.appName') }}</div>
@@ -106,6 +107,10 @@ const handleSelectLang = (key: string) => {
   locale.value = key
   isPopoverOpen.value = false
 }
+
+const notHomePage = computed(() => {
+  return router.currentRoute.value.name !== 'home'
+})
 </script>
 
 <style lang="less" scoped>
@@ -123,5 +128,8 @@ const handleSelectLang = (key: string) => {
   &.arrow-up {
     transform: rotate(180deg);
   }
+}
+.not-homepage {
+  background: #000;
 }
 </style>
