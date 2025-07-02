@@ -65,7 +65,9 @@
       "subTitle": "智能Agent能够根据开发者的需求端到端完成任务，具备：自主决策、全仓库上下文检索、调用工具、错误修复、运行终端等能力",
       "feature01": "/images/zh/agent_feature01.webp",
       "feature02": "/images/zh/agent_feature02.webp",
-      "feature03": "/images/zh/agent_feature03.webp"
+      "feature03": "/images/zh/agent_feature03.webp",
+      "feature04": "/images/zh/agent_feature04.webp",
+      "guide": "/images/zh/guide.webp"
     },
     "completion": {
       "title": "代码补全（Code Completion)",
