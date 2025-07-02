@@ -1,5 +1,4 @@
 {
-  "welcome": "Welcome!",
   "header": {
     "appName": "ZHUGE SHENMA"
   },
@@ -43,9 +42,53 @@
     "case5": {
       "pageImg": "/images/en/case_page_img5.png"
     },
+    "slogan": {
+      "title": "Shenma",
+      "subTitle": "The Ultimate Choice for Serious Enterprise Programming",
+      "enterpriseButton": "Enterprise Private Deployment",
+      "personalButton": "Free for Personal Use",
+      "ossButton": "Open Source & Free"
+    },
+    "codeReview": {
+      "title": "/images/en/codereview_title.svg",
+      "subTitle": "Code review can perform full repository indexing, as well as company-level coding knowledge base RAG. It supports users in conducting code checks on functions, selected code lines, code files, and entire project files. In identifying and confirming issues, it adopts the strategy of \"specialized checks by a multi-expert model\" + \"cross-confirmation by multiple models.\"",
+      "feature01": "/images/en/codereview_feature01.webp",
+      "feature02": "/images/en/codereview_feature02.webp",
+      "feature03": "/images/en/codereview_feature03.webp",
+      "feature04": "/images/en/codereview_feature04.webp"
+    },
+    "agent": {
+      "title": "AI Agent",
+      "demo": "/images/en/agent.gif",
+      "subTitle": "Intelligent agents can perform tasks end-to-end based on developer requirements, equipped with capabilities including: autonomous decision-making, full repository context retrieval, tool invocation, error debugging, and terminal command execution.",
+      "feature01": "/images/en/agent_feature01.webp",
+      "feature02": "/images/en/agent_feature02.webp",
+      "feature03": "/images/en/agent_feature03.webp"
+    },
+    "completion": {
+      "title": "Code Completion",
+      "subTitle": "Code auto-completion, automatically generates subsequent code based on the cursor's context code, quickly outputs code in seconds"
+    },
+    "moreTool": {
+      "title": "More Features",
+      "subTitle": "Shenma supports various external tools, such as: MCP, custom API/model services, multi-mode selection/custom mode and image context features etc",
+      "feature01": "/images/en/tool_feature01.webp",
+      "feature02": "/images/en/tool_feature02.webp",
+      "feature03": "/images/en/tool_feature03.webp",
+      "feature04": "/images/en/tool_feature04.webp"
+    },
+    "enterprise": {
+      "title": "Enterprise Private Deployment",
+      "subTitle": "To ensure data security, superior service, and reduced costs, we offer comprehensive professional on-premises deployment solutions",
+      "feature01": "/images/en/enterprise_feature01.webp",
+      "feature02": "/images/en/enterprise_feature02.webp",
+      "feature03": "/images/en/enterprise_feature03.webp",
+      "check": "/images/en/enterprise_check.png"
+    },
     "ideSupport": {
-      "title": "Supports multiple IDEs and languages, continuously increasing...",
-      "desc": "Supports multiple mainstream IDEs, with Visual Studio Code being the first to be supported (InteliJ IDEA and PyCharm will soon be supported). Supports multiple mainstream languages such as Python, Go, C++/C, JavaScript, Java, etc."
+      "title": "Multi-Language & VS Code Support",
+      "moreLanguage": "/images/en/ideSupport_morelanguage.svg",
+      "vscode": "/images/en/vscode.svg"
     }
   },
   "footer": {
