@@ -2,11 +2,8 @@
   <div class="mt-45">
     <PageTitle :title="t('home.moreTool.title')" :subtitle="t('home.moreTool.subTitle')" />
     <div class="flex gap-6 flex-wrap mt-10">
-      <div v-for="(item, i) in featureList" :key="i">
-        <div class="w-[638px] h-[420px]">
-          <img :src="item" />
-        </div>
-      </div>
+      <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
+        :content="item.content" :height="cardHeight" />
     </div>
   </div>
 </template>
@@ -14,11 +11,33 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
-const { t } = useI18n()
+import ItemCard from './ItemCard.vue'
+
+const { t, locale } = useI18n()
+const isZh = computed(() => locale.value === 'zh')
+
+const cardHeight = computed(() => (isZh.value ? '420px' : '440px'))
+
 const featureList = computed(() => [
-  t('home.moreTool.feature01'),
-  t('home.moreTool.feature02'),
-  t('home.moreTool.feature03'),
-  t('home.moreTool.feature04'),
+  {
+    title: t('home.moreTool.feature01Title'),
+    content: t('home.moreTool.feature01Content'),
+    img: t('home.moreTool.feature01'),
+  },
+  {
+    title: t('home.moreTool.feature02Title'),
+    content: t('home.moreTool.feature02Content'),
+    img: t('home.moreTool.feature02'),
+  },
+  {
+    title: t('home.moreTool.feature03Title'),
+    content: t('home.moreTool.feature03Content'),
+    img: t('home.moreTool.feature03'),
+  },
+  {
+    title: t('home.moreTool.feature04Title'),
+    content: t('home.moreTool.feature04Content'),
+    img: t('home.moreTool.feature04'),
+  },
 ])
 </script>
