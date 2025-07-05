@@ -13,6 +13,11 @@ const router = createRouter({
       name: 'download',
       component: () => import('@/views/downloadIndex.vue'),
     },
+    {
+      path: '/preview',
+      name: 'preview',
+      component: () => import('@/views/preview/FilePreview.vue'),
+    },
   ],
 })
 

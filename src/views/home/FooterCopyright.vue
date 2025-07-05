@@ -1,7 +1,7 @@
 <template>
   <div class="footer-copyright w-full flex flex-col items-center mt-[150px]">
     <div class="w-full flex flex-col items-center pb-20 pt-[82px]">
-      <div class="flex items-center mb-3 text-[28px] text-white">
+      <div class="flex items-center mb-3 text-[28px] text-white footer-title">
         {{ t('footer.openSource.title') }}
       </div>
       <div class="text-[#C2C7D1]">{{ t('footer.openSource.desc') }}</div>
@@ -35,5 +35,17 @@ const { t, locale } = useI18n()
 <style lang="less" scoped>
 .footer-copyright {
   background: url('@/assets/footer_bg.svg') no-repeat top center #0c1c34;
+}
+
+.footer-title {
+  font-size: 28px;
+  line-height: 38px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  background: linear-gradient(98deg, #00FFB7 1%, #FFFFFF 68%, #C5DBFF 101%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
 }
 </style>
