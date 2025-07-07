@@ -18,6 +18,11 @@ const router = createRouter({
       name: 'preview',
       component: () => import('@/views/preview/FilePreview.vue'),
     },
+    {
+      path: '/md-preview',
+      name: 'md-preview',
+      component: () => import('@/views/preview/MarkdownPreview.vue'),
+    },
   ],
 })
 

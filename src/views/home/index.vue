@@ -10,6 +10,8 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
+    <img src="../../assets/left_port.png" class="absolute left-0 top-[1538px]">
+    <img src="../../assets/right_port.png" class="absolute right-0 top-[1347px]">
   </div>
 </template>
 <script lang="ts" setup>

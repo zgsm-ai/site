@@ -2,12 +2,14 @@
   <div class="w-full flex flex-col items-center mt-45">
     <div class="icon-lock w-[420px] h-[420px]"></div>
     <PageTitle :title="t('home.enterprise.title')" :subtitle="t('home.enterprise.subTitle')" />
-    <div class="scroll-animation-wrapper icon-check mt-10" :class="`icon-check-${locale}`" ref="animatedElement">
-      <img :src="checkIcon" />
+    <div class="scroll-animation-wrapper wrapper icon-check mt-10" :class="`icon-check-${locale}`"
+      ref="animatedElement">
+      <span class="text-white wrapper-content" :class="`wrapper-content-${locale}`">{{
+        t('home.enterprise.enterprisePrivateDeployment') }}</span>
     </div>
     <div class="flex gap-6 mt-[90px]">
       <ItemCard v-for="item in featureList" :key="item.content" :content="item.content" :renderTitle="item.renderTitle"
-        width="417px" :height="cardHeight" padding="16px 16px 16px 32px" />
+        width="417px" :height="cardHeight" padding="32px 16px 16px 32px" />
     </div>
   </div>
 </template>
@@ -100,15 +102,12 @@ const featureList = computed(() => [
     )
   },
 ])
-const checkIcon = computed(() => {
-  return t('home.enterprise.check')
-})
 
-const { animatedElement } = useAnimation(true)
+const { animatedElement } = useAnimation(true, locale)
 </script>
 <style lang="less" scoped>
 .icon-lock {
-  background-image: url('@/assets/enterprise_lock.webp');
+  background-image: url('@/assets/enterprise_lock.png');
   background-size: contain;
 }
 
@@ -117,7 +116,7 @@ const { animatedElement } = useAnimation(true)
   height: 60px;
 
   &-en {
-    width: 346px;
+    width: 396px;
   }
 }
 
@@ -137,5 +136,26 @@ const { animatedElement } = useAnimation(true)
   &__content {
     max-width: 354px;
   }
+}
+
+.wrapper-content {
+  font-size: 22px;
+  line-height: 20px;
+  letter-spacing: 2px;
+}
+
+.wrapper-content-en {
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #0066FF 10%, #008FD7 61%, #00D196 100%);
+  box-sizing: border-box;
+  border: 1px solid;
 }
 </style>

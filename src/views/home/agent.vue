@@ -1,8 +1,11 @@
 <template>
   <div class="w-full mt-45">
     <PageTitle :title="t('home.agent.title')" :subtitle="t('home.agent.subTitle')" />
-    <div class="w-full h-[702px] rounded-[20px] mt-10 gradient-border">
-      <img class="rounded-[20px]" :src="demo" />
+    <div class="w-full  rounded-[20px] mt-10 gradient-border">
+      <video class="rounded-[20px] w-full" src="../../assets/video/agent_zh.mp4" preload="none" loop muted autoplay playsinline
+        style="object-fit: cover;">
+        Your browser does not support the video tag.
+      </video>
     </div>
     <div class="flex gap-6 flex-wrap mt-6">
       <ItemCard

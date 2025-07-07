@@ -15,13 +15,13 @@
         ]">
           {{ t('home.slogan.ossButton') }}
         </div>
-        <div class="mt-[36px] text-[48px] text-white slogan-title">
+        <div :class="['mt-[36px]', 'text-[48px]', 'text-white', isEn ? '' : 'slogan-title']">
           {{ t('home.slogan.title') }}
         </div>
       </div>
     </div>
     <div class="flex flex-col items-center mt-[-80px] pb-[150px]">
-      <div :class="['text-white', 'slogan-subTitle', subTitleFontSize]">
+      <div :class="['text-white', isEn ? '' : 'slogan-subTitle', subTitleFontSize]">
         {{ t('home.slogan.subTitle') }}
       </div>
       <div class="button-group flex gap-4 mt-[30px] text-[24px] text-white">
@@ -31,7 +31,8 @@
           'flex',
           'items-center',
           'justify-center',
-        ]">
+          'cursor-pointer',
+        ]" @click="toDeployment">
           {{ t('home.slogan.enterpriseButton') }}
         </div>
         <div :class="[
@@ -40,7 +41,8 @@
           'flex',
           'items-center',
           'justify-center',
-        ]">
+          'cursor-pointer',
+        ]" @click="toDownload">
           {{ t('home.slogan.personalButton') }}
         </div>
       </div>
@@ -56,16 +58,36 @@ export default defineComponent({
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 const { t, locale } = useI18n()
 
+const isEn = computed(() => locale.value === 'en')
+
 const ossButtonWidth = computed(() => {
-  return locale.value === 'en' ? 'w-[280px]' : 'w-[143px]'
+  return isEn.value ? 'w-[280px]' : 'w-[143px]'
 })
 
 const subTitleFontSize = computed(() => {
-  return locale.value === 'en' ? 'text-[48px]' : 'text-[56px]'
+  return isEn.value ? 'text-[48px]' : 'text-[56px]'
 })
+
+const router = useRouter()
+
+const toDownload = () => {
+  router.push({
+    name: 'download',
+  })
+}
+
+const toDeployment = () => {
+  router.push({
+    name: 'md-preview',
+    query: {
+      file: 'installation/README.md'
+    },
+  })
+}
 </script>
 
 <style lang="less" scoped>
@@ -80,7 +102,7 @@ const subTitleFontSize = computed(() => {
   width: 143px;
   height: 40px;
   box-sizing: border-box;
-  font-size: 24px;
+  font-size: 22px;
   text-align: center;
   letter-spacing: normal;
   background: linear-gradient(99deg, #00FFB7 2%, #FFFFFF 68%, #C5DBFF 101%);
@@ -94,7 +116,6 @@ const subTitleFontSize = computed(() => {
   &-en {
     width: 280px;
     height: 40px;
-    background-image: url('@/assets/oss_button_en.svg');
   }
 }
 
@@ -117,13 +138,14 @@ const subTitleFontSize = computed(() => {
 .personal-button {
   width: 200px;
   height: 48px;
-  background-image: url('@/assets/grey_button.svg');
+  // background-image: url('@/assets/grey_button.svg');
   font-size: 22px;
-
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
 
   &-en {
     width: 281px;
-    background-image: url('@/assets/grey_button_en.svg');
+    // background-image: url('@/assets/grey_button_en.svg');
   }
 
   &:hover {

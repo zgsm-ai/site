@@ -1,5 +1,5 @@
 <template>
-  <n-spin :show="isLoading">
+  <n-spin :show="isLoading" stroke="#1876F2">
     <div class="preview-page">
       <div :key="`${route.query.file}-${locale}`" ref="docxContainer" class="docx-container" />
     </div>
@@ -64,7 +64,7 @@ watchEffect(async () => {
     }
     const blob = await response.blob()
 
-    await renderAsync(blob, docxContainer.value, null, {
+    await renderAsync(blob, docxContainer.value, undefined, {
       inWrapper: true,
       useBase64URL: true,
       experimental: true,
@@ -85,8 +85,9 @@ watchEffect(async () => {
 
 <style lang="less" scoped>
 .preview-page {
-  height: 100vh;
+  height: calc(100vh - 68px);
 }
+
 .preview-area {
   display: flex;
   justify-content: center;
@@ -111,6 +112,7 @@ watchEffect(async () => {
 .docx-container {
   background: gray;
   padding: 0.5in 0;
+  min-height: calc(100vh - 68px);
 }
 
 :deep(.docx) {

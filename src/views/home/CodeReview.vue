@@ -8,8 +8,11 @@
         t('home.codeReview.subTitle')
         }}</span>
     </div>
-    <div class="w-full h-[702px] rounded-[20px] mt-10 gradient-border">
-      <img class="rounded-[19px]" src="@/assets/codereview.gif" />
+    <div class="w-full  rounded-[20px] mt-10 gradient-border">
+      <video class="rounded-[20px] w-full" src="../../assets/video/code_review_zh.mp4" preload="none" loop muted
+        autoplay playsinline style="object-fit: cover;">
+        Your browser does not support the video tag.
+      </video>
     </div>
     <div class="flex gap-6 flex-wrap mt-6">
       <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"

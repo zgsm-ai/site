@@ -1,14 +1,14 @@
 /**
  * @file use_animation
  */
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch, type Ref } from 'vue'
 
-export const useAnimation = (needAnimation: boolean) => {
+export const useAnimation = (needAnimation: boolean, watchProps?: Ref<unknown>) => {
   const animatedElement = ref<HTMLElement | null>(null)
 
   let observer: IntersectionObserver | null = null
 
-  onMounted(() => {
+  const observeAction = () => {
     if (!animatedElement.value || !needAnimation) {
       return
     }
@@ -28,7 +28,15 @@ export const useAnimation = (needAnimation: boolean) => {
     )
 
     observer.observe(animatedElement.value)
-  })
+  }
+
+  watch(
+    () => watchProps,
+    observeAction,
+    { deep: true },
+  )
+
+  onMounted(observeAction)
 
   onUnmounted(() => {
     if (observer) {

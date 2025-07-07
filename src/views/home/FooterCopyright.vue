@@ -34,7 +34,7 @@ const { t, locale } = useI18n()
 </script>
 <style lang="less" scoped>
 .footer-copyright {
-  background: url('@/assets/footer_bg.svg') no-repeat top center #0c1c34;
+  background: url('@/assets/footer_bg.png') no-repeat top center;
 }
 
 .footer-title {

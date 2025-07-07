@@ -70,4 +70,9 @@ const style = computed(() => {
         color: rgba(255, 255, 255, 0.7);
     }
 }
+
+.item-card:hover {
+    transform: scale(1.02);
+    transition: all 0.4s ease-in-out;
+}
 </style>

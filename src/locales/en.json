@@ -109,12 +109,13 @@
       "title": "Enterprise Private Deployment",
       "subTitle": "To ensure data security, superior service, and reduced costs, we offer comprehensive professional on-premises deployment solutions",
       "check": "/images/en/enterprise_check.png",
-      "feature01Title": "Code Security & Control:",
+      "feature01Title": "Code Security & Control",
       "feature02Title": "Open Source Customizability",
       "feature03Title": "AI-Driven Development Excellence",
       "feature01Content": "On-premises deployment ensures full lifecycle security for enterprise code through physical isolation and end-to-end encryption. Code never traverses external networks - sensitive assets like proprietary algorithms and API keys remain entirely within your infrastructure",
       "feature02Content": "Our open-source codebase enables extensive customization through APIs, allowing seamless integration with workflows and business systems. By deeply contextualizing enterprise knowledge, it powers AI-assisted decision making and task automation – driving transformative business efficiency gains",
-      "feature03Content": "Leveraging AI-powered generation, automated testing, and deep inspection, development cycles are dramatically shortened while resource allocation becomes significantly more efficient. Our AI Quality Guardian supercharges development, delivering exceptionally reliable and superior software products"
+      "feature03Content": "Leveraging AI-powered generation, automated testing, and deep inspection, development cycles are dramatically shortened while resource allocation becomes significantly more efficient. Our AI Quality Guardian supercharges development, delivering exceptionally reliable and superior software products",
+      "enterprisePrivateDeployment": "Explore Enterprise Solutions >"
     },
     "ideSupport": {
       "title": "Multi-Language & VS Code Support",
@@ -144,6 +145,11 @@
     "pyCharmIcon": "/images/en/dowload_pycharm.png",
     "golandIcon": "/images/en/dowload_goland.png",
     "step1Img": "/images/en/download_step1.webp",
-    "step2Img": "/images/en/download_step2.webp"
+    "step2Img": "/images/en/download_step2.webp",
+    "step1Title": "Open the Extentions Market, Search for ' Shenma' and install it",
+    "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"Shenma\", and then click on the Install button",
+    "step2Title": "Install Shenma",
+    "step2Content": "After restarting Visual Studio Code, click on the Shenma icon, use the default Base Url to click \"Login to Shenma\".",
+    "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button."
   }
 }

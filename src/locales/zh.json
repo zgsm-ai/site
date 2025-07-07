@@ -62,7 +62,7 @@
       "feature02Title": "企业级编码知识库RAG",
       "feature03Title": "多专家模型专项检查",
       "feature04Title": "多模型交叉确认",
-      "feature01Content": "对全量代码仓库深度索引与语义分析，构建跨仓库库关联网，确保审查无死角、漏洞零遗漏，为企业代码筑牢安全防线",
+      "feature01Content": "对全量代码仓库深度索引与语义分析，构建跨仓库关联网，确保审查无死角、漏洞零遗漏，为企业代码筑牢安全防线",
       "feature02Content": "集成企业编码知识库，依托大模型与检索增强生成（RAG）技术精准审查每行代码，让Code Review完美贴合企业业务场景",
       "feature03Content": "模拟架构师、安全专家、测试工程师等角色，能充分发现代码中的通用问题、内存问题、安全漏洞、性能瓶颈等专项问题。让每一行代码都经过 “多专家联合会诊”，尽可能多的发现潜在风险",
       "feature04Content": "独创多模型交叉验证引擎，针对每个代码问题自动启动多模型交叉分析验证，做到每一处问题都经过 “三重专家会诊”，减少误报率，真正实现 “发现即问题”",
@@ -116,7 +116,8 @@
       "feature03Title": "AI赋能研发提质增效",
       "feature01Content": "私有化部署通过物理隔离和端到端加密，确保企业代码的全生命周期安全。代码无需上传至第三方云服务，敏感信息（如商业算法、API 密钥）不出外网",
       "feature02Content": "开放源码支持二次开发，提供API与嵌入式接口，无缝集成公司现有流程与业务系统，深度理解企业知识，决策辅助与自动化任务，驱动业务效率升级",
-      "feature03Content": "借助AI智能生成、自动化测试与深度审查，开发周期大幅缩短，资源投入更高效。AI化身“质效守护者”，赋能开发，创造更可靠、更卓越的软件产品"
+      "feature03Content": "借助AI智能生成、自动化测试与深度审查，开发周期大幅缩短，资源投入更高效。AI化身“质效守护者”，赋能开发，创造更可靠、更卓越的软件产品",
+      "enterprisePrivateDeployment": "企业方案查看 >"
     },
     "ideSupport": {
       "title": "多编程语言支持，VSCode编辑器支持 ",
@@ -141,11 +142,16 @@
     "desc": "诸葛神码是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
     "vscodeTitle": "在 Visual Studio Code 中安装诸葛神码，要求版本为最新 或者 1.84.0 及以上版本",
     "installSteps": "安装步骤如下：",
-    "step1": "Step 1",
-    "step2": "Step 2",
+    "step1": "步骤1",
+    "step2": "步骤2",
     "pyCharmIcon": "/images/zh/dowload_pycharm.png",
     "golandIcon": "/images/zh/dowload_goland.png",
     "step1Img": "/images/zh/download_step1.webp",
-    "step2Img": "/images/zh/download_step2.webp"
+    "step2Img": "/images/zh/download_step2.webp",
+    "step1Title": "打开插件市场, 搜索“shenma”并安装",
+    "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索“shenma”后点击安装",
+    "step2Title": "登录诸葛神码",
+    "step2Content": "重启 Visual Studio Code 后，单击诸葛神码图标，使用默认Base Url 点击“登录诸葛神码” 若为本地化部署则需要填写Url 后再点击登录按钮",
+    "step2Tips": "Url填写若不清楚请联系公司管理员"
   }
 }
