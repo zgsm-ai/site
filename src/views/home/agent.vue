@@ -5,27 +5,25 @@
       <img class="rounded-[20px]" :src="demo" />
     </div>
     <div class="flex gap-6 flex-wrap mt-6">
-      <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
-        :content="item.content" :renderTitle="item.renderTitle" />
+      <ItemCard
+        v-for="item in featureList"
+        :key="item.title"
+        :img="item.img"
+        :title="item.title"
+        :content="item.content"
+        :renderTitle="item.renderTitle"
+      />
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-import EnGuidePdf from '@/assets/guide_en.pdf'
-import ZhGuidePdf from '@/assets/guide_zh.pdf'
-import ItemCard from './ItemCard.vue'
-
-export default defineComponent({
-  name: 'AgentView',
-})
-</script>
 <script lang="ts" setup>
 import { computed, h } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
+import ItemCard from './ItemCard.vue'
+import { useRouter } from 'vue-router'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 
 const featureList = computed(() => [
   {
@@ -41,33 +39,27 @@ const featureList = computed(() => [
   {
     content: t('home.agent.feature03Content'),
     img: t('home.agent.feature03'),
-    renderTitle: () => (
-      h('span',
+    renderTitle: () =>
+      h(
+        'span',
         {
           style: {
             display: 'flex',
             alignItems: 'center',
-          }
+          },
         },
         [
-          h(
-            'span',
-            t('home.agent.feature03Title'),
-          ),
+          h('span', t('home.agent.feature03Title')),
           h(
             'div',
             {
               class: 'guide-container',
-              onClick: openWordPreview
+              onClick: openWordPreview,
             },
-            h(
-              'span',
-              { class: 'guide-link' },
-              t('home.agent.userGuide'),
-            )
-          )
-        ]
-      )),
+            h('span', { class: 'guide-link' }, t('home.agent.userGuide')),
+          ),
+        ],
+      ),
   },
   {
     title: t('home.agent.feature04Title'),
@@ -77,20 +69,15 @@ const featureList = computed(() => [
 ])
 const demo = computed(() => t('home.agent.demo'))
 
-const isZh = computed(() => locale.value === 'zh')
+const router = useRouter()
 
 const openWordPreview = () => {
-  const link = document.createElement('a')
+  const routeData = router.resolve({
+    name: 'preview',
+    query: { file: 'guide' },
+  })
 
-  link.href = isZh.value ? ZhGuidePdf : EnGuidePdf
-  link.target = '_blank'
-  link.rel = 'noopener noreferrer'
-
-  document.body.appendChild(link)
-
-  link.click()
-
-  document.body.removeChild(link)
+  window.open(routeData.href, '_blank')
 }
 </script>
 <style lang="less" scoped>
@@ -109,7 +96,7 @@ const openWordPreview = () => {
 :deep(.guide-link) {
   font-size: 16px;
   line-height: 24px;
-  background: linear-gradient(99deg, #00FFB7 1%, #FFFFFF 68%, #C5DBFF 101%);
+  background: linear-gradient(99deg, #00ffb7 1%, #ffffff 68%, #c5dbff 101%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
