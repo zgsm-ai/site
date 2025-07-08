@@ -1,45 +1,28 @@
 <template>
-  <div class="navbar fixed top-0 left-0 right-0 z-50 flex h-[68px] px-[52px]"
-    :class="{ 'not-homepage': notHomePage }">
-    <div class="flex items-center h-[68px]" :class="marginRightClass">
+  <div class="navbar fixed top-0 left-0 right-0 z-50 flex h-[68px] px-[52px]" :class="{ 'not-homepage': notHomePage }">
+    <div class="flex items-center h-[68px]">
       <img class="w-[28px] mr-3" src="@/assets/logo.png" />
       <div class="text-[#F4F8FF] text-base">{{ t('header.appName') }}</div>
     </div>
-    <div class="flex items-center">
-      <div
-        class="px-5 text-[#c3defa] cursor-pointer text-center hover:text-white"
-        v-for="item in menuOptions"
-        :key="item.key"
-        @click="handleMenuItemClick(item.key)"
-      >
+    <div class="flex items-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 navbar-menu">
+      <div class="px-5 text-[#c3defa] cursor-pointer text-center hover:text-white" v-for="item in menuOptions"
+        :key="item.key" @click="handleMenuItemClick(item.key)">
         {{ item.label }}
       </div>
     </div>
-    <div class="ml-auto flex items-center">
-      <n-popover
-        trigger="click"
-        :show="isPopoverOpen"
-        @update:show="isPopoverOpen = $event"
-        :show-arrow="false"
-        style="padding: 0"
-        placement="bottom-end"
-      >
+    <div class="flex items-center ml-auto">
+      <n-popover trigger="click" :show="isPopoverOpen" @update:show="isPopoverOpen = $event" :show-arrow="false"
+        style="padding: 0" placement="bottom-end">
         <template #trigger>
-          <div
-            class="px-2 py-1 text-white cursor-pointer text-sm flex items-center hover:bg-white/10 hover:rounded"
-          >
+          <div class="px-2 py-1 text-white cursor-pointer text-sm flex items-center hover:bg-white/10 hover:rounded">
             {{ currentLangLabel }}
             <span class="arrow ml-2" :class="{ 'arrow-up': isPopoverOpen }">▼</span>
           </div>
         </template>
         <div class="w-[200px]">
-          <div
-            v-for="option in languageOptions"
-            :key="option.key"
+          <div v-for="option in languageOptions" :key="option.key"
             class="px-3 py-[10px] cursor-pointer text-white bg-[#004093] hover:bg-[#197dff]"
-            :class="{ 'lang-active': locale === option.key }"
-            @click="handleSelectLang(option.key)"
-          >
+            :class="{ 'lang-active': locale === option.key }" @click="handleSelectLang(option.key)">
             {{ option.label }}
           </div>
         </div>
@@ -59,10 +42,6 @@ defineOptions({
 })
 const { t, locale } = useI18n()
 const router = useRouter()
-// 使用 computed 动态计算 margin-right 类名
-const marginRightClass = computed(() => {
-  return locale.value === 'zh' ? 'mr-[80px]' : 'mr-[40px]'
-})
 
 interface MenuOption {
   label: string // This will now hold the translated string
@@ -114,22 +93,26 @@ const notHomePage = computed(() => {
 </script>
 
 <style lang="less" scoped>
-.navbar {
-  background-image: url('@/assets/navbar.svg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
 .lang-active {
   color: #fff;
 }
+
 .arrow {
   transition: transform 0.2s ease;
+
   &.arrow-up {
     transform: rotate(180deg);
   }
 }
+
 .not-homepage {
   background: #000;
+}
+
+.navbar-menu {
+  border-radius: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(50px);
+  height: 48px;
 }
 </style>

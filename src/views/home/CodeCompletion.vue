@@ -4,7 +4,7 @@
     <!-- gif 区域待补充 -->
     <div class="w-full  rounded-[20px] mt-10 gradient-border">
       <video class="rounded-[20px] w-full" src="../../assets/video/code_completion.mp4" preload="none" loop muted autoplay playsinline
-        style="object-fit: cover;">
+        style="object-fit: cover;" poster="../../assets/compeletion_buffer.webp">
         Your browser does not support the video tag.
       </video>
     </div>
