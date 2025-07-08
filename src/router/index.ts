@@ -23,6 +23,11 @@ const router = createRouter({
       name: 'md-preview',
       component: () => import('@/views/preview/MarkdownPreview.vue'),
     },
+    {
+      path: '/resource',
+      name: 'resource',
+      component: () => import('@/views/resourceCalculator/index.vue'),
+    },
   ],
 })
 
