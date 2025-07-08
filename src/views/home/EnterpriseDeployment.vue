@@ -18,9 +18,9 @@ import { computed, h } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
 import ItemCard from './ItemCard.vue'
-import enterpriseFeature1 from '@/assets/enterprise_feature01.webp'
-import enterpriseFeature2 from '@/assets/enterprise_feature02.webp'
-import enterpriseFeature3 from '@/assets/enterprise_feature03.webp'
+import enterpriseFeature1 from '@/assets/enterprise_feature01.svg'
+import enterpriseFeature2 from '@/assets/enterprise_feature02.svg'
+import enterpriseFeature3 from '@/assets/enterprise_feature03.svg'
 import { useAnimation } from '@/hooks/use_animation'
 
 const { t, locale } = useI18n()

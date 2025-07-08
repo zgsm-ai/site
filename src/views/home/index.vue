@@ -12,6 +12,7 @@
     <FooterCopyright />
     <img src="../../assets/left_port.png" class="absolute left-0 top-[1538px]">
     <img src="../../assets/right_port.png" class="absolute right-0 top-[1347px]">
+    <div class="absolute left-0 top-0 h-[496px] w-full top-bg"></div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -29,3 +30,11 @@ defineOptions({
   name: 'HomeIndex',
 })
 </script>
+<style scoped lang="less">
+.top-bg {
+  background-image: url('@/assets/top.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+</style>

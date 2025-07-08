@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-black">
+  <div class="w-full relative z-50">
     <div class="slogan-container flex w-full h-[431px] justify-center">
       <div class="w-full flex flex-col items-center">
         <div :class="[
@@ -91,13 +91,6 @@ const toDeployment = () => {
 </script>
 
 <style lang="less" scoped>
-.slogan-container {
-  background-image: url('@/assets/slogan_bg.svg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
 .oss-btn {
   width: 143px;
   height: 40px;
