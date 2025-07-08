@@ -1,21 +1,30 @@
 <template>
-  <div class="text-center">
-    <div class="text-4xl font-semibold leading-normal text-center text-white mb-2">
-      {{ title }}
-    </div>
-    <div v-if="subtitle" class="text-base font-normal leading-6 text-center text-white/70">
-      {{ subtitle }}
+  <div ref="animatedElement" class="scroll-animation-wrapper">
+    <div class="text-center">
+      <div class="text-4xl font-semibold leading-normal text-center text-white mb-2">
+        {{ title }}
+      </div>
+      <div v-if="subtitle" class="text-base font-normal leading-6 text-center text-white/70">
+        {{ subtitle }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { useAnimation } from '@/hooks/use_animation'
+
 interface Props {
   title: string
   subtitle?: string
+  needAnimation?: boolean
 }
 
-defineProps<Props>()
+const props = withDefaults(defineProps<Props>(), {
+  needAnimation: true,
+})
+
+const { animatedElement } = useAnimation(props.needAnimation)
 </script>
 
 <style scoped>

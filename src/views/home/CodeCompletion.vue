@@ -2,8 +2,11 @@
   <div class="mt-45">
     <PageTitle :title="t('home.completion.title')" :subtitle="t('home.completion.subTitle')" />
     <!-- gif 区域待补充 -->
-    <div class="w-full h-[701px] rounded-[20px] mt-10 gradient-border">
-      <img class="rounded-[20px]" src="@/assets/completion.gif" />
+    <div class="w-full  rounded-[20px] mt-10 gradient-border">
+      <video class="rounded-[20px] w-full" src="../../assets/video/code_completion.mp4" preload="none" loop muted autoplay playsinline
+        style="object-fit: cover;">
+        Your browser does not support the video tag.
+      </video>
     </div>
   </div>
 </template>

@@ -57,7 +57,16 @@
       "feature01": "/images/zh/codereview_feature01.webp",
       "feature02": "/images/zh/codereview_feature02.webp",
       "feature03": "/images/zh/codereview_feature03.webp",
-      "feature04": "/images/zh/codereview_feature04.webp"
+      "feature04": "/images/zh/codereview_feature04.webp",
+      "feature01Title": "全量代码仓库索引",
+      "feature02Title": "企业级编码知识库RAG",
+      "feature03Title": "多专家模型专项检查",
+      "feature04Title": "多模型交叉确认",
+      "feature01Content": "对全量代码仓库深度索引与语义分析，构建跨仓库关联网，确保审查无死角、漏洞零遗漏，为企业代码筑牢安全防线",
+      "feature02Content": "集成企业编码知识库，依托大模型与检索增强生成（RAG）技术精准审查每行代码，让Code Review完美贴合企业业务场景",
+      "feature03Content": "模拟架构师、安全专家、测试工程师等角色，能充分发现代码中的通用问题、内存问题、安全漏洞、性能瓶颈等专项问题。让每一行代码都经过 “多专家联合会诊”，尽可能多的发现潜在风险",
+      "feature04Content": "独创多模型交叉验证引擎，针对每个代码问题自动启动多模型交叉分析验证，做到每一处问题都经过 “三重专家会诊”，减少误报率，真正实现 “发现即问题”",
+      "pendingRelease": "待上线"
     },
     "agent": {
       "title": "智能体 (AI Agent)",
@@ -67,7 +76,16 @@
       "feature02": "/images/zh/agent_feature02.webp",
       "feature03": "/images/zh/agent_feature03.webp",
       "feature04": "/images/zh/agent_feature04.webp",
-      "guide": "/images/zh/guide.webp"
+      "guide": "/images/zh/guide.webp",
+      "feature01Title": "大文件全仓库上下文",
+      "feature02Title": "成本领先优势",
+      "feature03Title": "Gemini CLI 集成",
+      "feature04Title": "错误自行修复（Loops on Errors）",
+      "feature01Content": "毫秒级加载全量代码数据，构建知识网络，无论是追溯代码逻辑，还是分析函数调用链，都能精准定位，提升代码效率与全局把控力",
+      "feature02Content": "AI 成本实现量级突破，相较其它开源厂商，在效果相同的情况下，我们的Token消耗成本数直降 50%以上",
+      "feature03Content": "诸葛神码成为国内首家集成Google Gemini CLI的开源编码工具，免费的Gemini 2.5 Pro模型，支持100万token上下文窗口，轻松吞下整个代码山",
+      "feature04Content": "诸葛神码能够自行检查代码，并对问题代码进行修复，减少人工调试",
+      "userGuide": "使用指南>>"
     },
     "completion": {
       "title": "代码补全（Code Completion)",
@@ -79,20 +97,31 @@
       "feature01": "/images/zh/tool_feature01.webp",
       "feature02": "/images/zh/tool_feature02.webp",
       "feature03": "/images/zh/tool_feature03.webp",
-      "feature04": "/images/zh/tool_feature04.webp"
+      "feature04": "/images/zh/tool_feature04.webp",
+      "feature01Title": "MCP服务",
+      "feature02Title": "可接入第三方AI API",
+      "feature03Title": "多模式 & 自定义模式",
+      "feature04Title": "图片上下文",
+      "feature01Content": "MCP 是通过连接到外部工具和服务来扩展诸葛神码功能边界。MCP服务器提供额外的工具和资源，帮助诸葛神码完成超出其内置功能的任务，例如访问数据库、自定义API和专门功能",
+      "feature02Content": "支持接入多种 API 服务商，如： Anthropic, OpenAI 等。您可以配置任何与OpenAl兼容的API，或通过LM Studio/Ollama接入本地模型。如果您使用默认的诸葛神码，还有多种高级模型可使用，例如：claude-sonnet-4、Gemini等",
+      "feature03Content": "多模式对应多个专业角色，可以根据您当前的任务智能调整诸葛神码的行为。你也可以根据需求自定义模式及Prompt",
+      "feature04Content": "点击对话框下方的图像按钮，或者shift+拖拽图像到输入框，可以在聊天中加入视觉上下文"
     },
     "enterprise": {
       "title": "企业级私有化部署",
       "subTitle": "为确保数据安全和更好的服务更低的成本，我们提供了专业完整的私有化部署方案",
-      "feature01": "/images/zh/enterprise_feature01.webp",
-      "feature02": "/images/zh/enterprise_feature02.webp",
-      "feature03": "/images/zh/enterprise_feature03.webp",
-      "check": "/images/zh/enterprise_check.png"
+      "check": "/images/zh/enterprise_check.png",
+      "feature01Title": "代码安全可控",
+      "feature02Title": "开放源码可二次开发",
+      "feature03Title": "AI赋能研发提质增效",
+      "feature01Content": "私有化部署通过物理隔离和端到端加密，确保企业代码的全生命周期安全。代码无需上传至第三方云服务，敏感信息（如商业算法、API 密钥）不出外网",
+      "feature02Content": "开放源码支持二次开发，提供API与嵌入式接口，无缝集成公司现有流程与业务系统，深度理解企业知识，决策辅助与自动化任务，驱动业务效率升级",
+      "feature03Content": "借助AI智能生成、自动化测试与深度审查，开发周期大幅缩短，资源投入更高效。AI化身“质效守护者”，赋能开发，创造更可靠、更卓越的软件产品",
+      "enterprisePrivateDeployment": "企业方案查看 >"
     },
     "ideSupport": {
       "title": "多编程语言支持，VSCode编辑器支持 ",
-      "moreLanguage": "/images/zh/ideSupport_morelanguage.svg",
-      "vscode": "/images/zh/vscode.svg"
+      "SupportedInVSCode": "Visual Studio Code 已支持"
     }
   },
   "footer": {
@@ -113,11 +142,16 @@
     "desc": "诸葛神码是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
     "vscodeTitle": "在 Visual Studio Code 中安装诸葛神码，要求版本为最新 或者 1.84.0 及以上版本",
     "installSteps": "安装步骤如下：",
-    "step1": "Step 1",
-    "step2": "Step 2",
+    "step1": "步骤1",
+    "step2": "步骤2",
     "pyCharmIcon": "/images/zh/dowload_pycharm.png",
     "golandIcon": "/images/zh/dowload_goland.png",
     "step1Img": "/images/zh/download_step1.webp",
-    "step2Img": "/images/zh/download_step2.webp"
+    "step2Img": "/images/zh/download_step2.webp",
+    "step1Title": "打开插件市场, 搜索“shenma”并安装",
+    "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索“shenma”后点击安装",
+    "step2Title": "登录诸葛神码",
+    "step2Content": "重启 Visual Studio Code 后，单击诸葛神码图标，使用默认Base Url 点击“登录诸葛神码” 若为本地化部署则需要填写Url 后再点击登录按钮",
+    "step2Tips": "Url填写若不清楚请联系公司管理员"
   }
 }

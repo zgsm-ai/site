@@ -1,1 +1,16 @@
 @import 'tailwindcss';
+@import 'highlight.js/styles/github.css';
+@import 'github-markdown-css/github-markdown.css';
+
+.scroll-animation-wrapper {
+  transform: translateY(50px);
+  opacity: 0;
+  transition:
+    transform 1s ease-out,
+    opacity 1s ease-out;
+}
+
+.scroll-animation-wrapper.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
