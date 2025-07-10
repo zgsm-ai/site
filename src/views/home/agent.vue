@@ -2,20 +2,14 @@
   <div class="w-full mt-45">
     <PageTitle :title="t('home.agent.title')" :subtitle="t('home.agent.subTitle')" />
     <div class="w-full  rounded-[20px] mt-10 gradient-border">
-      <video class="rounded-[20px] w-full" src="../../assets/video/agent_zh.mp4" preload="none" loop muted autoplay playsinline
+      <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
         style="object-fit: cover;" poster="../../assets/agent_buffer.webp">
         Your browser does not support the video tag.
       </video>
     </div>
     <div class="flex gap-6 flex-wrap mt-6">
-      <ItemCard
-        v-for="item in featureList"
-        :key="item.title"
-        :img="item.img"
-        :title="item.title"
-        :content="item.content"
-        :renderTitle="item.renderTitle"
-      />
+      <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
+        :content="item.content" :renderTitle="item.renderTitle" />
     </div>
   </div>
 </template>
@@ -25,8 +19,10 @@ import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
 import ItemCard from './ItemCard.vue'
 import { useRouter } from 'vue-router'
+import AgentZhVideo from '@/assets/video/agent_zh.mp4'
+import AgentEnVideo from '@/assets/video/agent_en.mp4'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const featureList = computed(() => [
   {
@@ -82,6 +78,9 @@ const openWordPreview = () => {
 
   window.open(routeData.href, '_blank')
 }
+
+const video = computed(() => locale.value === 'zh' ? AgentZhVideo : AgentEnVideo)
+
 </script>
 <style lang="less" scoped>
 .gradient-border {
