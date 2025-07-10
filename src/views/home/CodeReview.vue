@@ -9,8 +9,8 @@
         }}</span>
     </div>
     <div class="w-full  rounded-[20px] mt-10 gradient-border">
-      <video class="rounded-[20px] w-full" src="../../assets/video/code_review_zh.mp4" preload="none" loop muted
-        autoplay playsinline style="object-fit: cover;" poster="../../assets/codereview_buffer.webp">
+      <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
+        style="object-fit: cover;" poster="../../assets/codereview_buffer.webp">
         Your browser does not support the video tag.
       </video>
     </div>
@@ -24,6 +24,8 @@
 import { computed, h } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ItemCard from './ItemCard.vue'
+import CodeReviewZhVideo from '@/assets/video/code_review_zh.mp4'
+import CodeReviewEnVideo from '@/assets/video/code_review_en.mp4'
 
 const { t, locale } = useI18n()
 
@@ -76,6 +78,8 @@ const featureList = computed(() => [
     img: t('home.codeReview.feature04'),
   },
 ])
+
+const video = computed(() => isZh.value ? CodeReviewZhVideo : CodeReviewEnVideo)
 </script>
 
 <style lang="less" scoped>
