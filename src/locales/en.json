@@ -1,6 +1,6 @@
 {
   "header": {
-    "appName": "ZHUGE SHENMA"
+    "appName": "Costrict"
   },
   "menu": {
     "home": "Homepage",
@@ -8,7 +8,7 @@
     "installGuide": "Installation Guide"
   },
   "home": {
-    "welcomeTitle": "ZHUGE SHENMA",
+    "welcomeTitle": "Costrict",
     "icon": "/images/en/titleIcon.png",
     "welcomeSubtitle": "Ushering in the era of AI Native",
     "welcomeDesc": "Open source, practical AI programmer, your main task changes from writing code to asking questions and viewing code",
@@ -43,11 +43,13 @@
       "pageImg": "/images/en/case_page_img5.png"
     },
     "slogan": {
-      "title": "Shenma",
+      "title": "COSTRICT",
       "subTitle": "The Ultimate Choice for Serious Enterprise Programming",
       "enterpriseButton": "Enterprise Private Deployment",
       "personalButton": "Free for Personal Use",
-      "ossButton": "Open Source & Free"
+      "ossButton": "Open Source & Free",
+      "zhugeCode": "({iTag}Zhuge Shenma)",
+      "original": "original"
     },
     "codeReview": {
       "title": "/images/en/codereview_title.svg",
@@ -81,8 +83,8 @@
       "feature04Title": "Loops on Errors",
       "feature01Content": "Millisecond-level loading of full code data, building a knowledge network, whether it is to trace code logic or analyze the function call chain, it can accurately locate and improve code efficiency and overall control",
       "feature02Content": "We achieves an order-of-magnitude cost breakthrough delivering equivalent performance with 50%+ fewer tokens compared to other open-source providers",
-      "feature03Content": "Shenma has become the first open-source coding tool in China to integrate Google Gemini CLI, offering the free Gemini 2.5 Pro model, which supports a 1 million token context, easily digesting the entire code repository",
-      "feature04Content": "Shenma can autonomously inspects code, repairs problematic segments, and reduces manual debugging efforts",
+      "feature03Content": "Costrict has become the first open-source coding tool in China to integrate Google Gemini CLI, offering the free Gemini 2.5 Pro model, which supports a 1 million token context, easily digesting the entire code repository",
+      "feature04Content": "Costrict can autonomously inspects code, repairs problematic segments, and reduces manual debugging efforts",
       "userGuide": "User Guide >>"
     },
     "completion": {
@@ -91,7 +93,7 @@
     },
     "moreTool": {
       "title": "More Features",
-      "subTitle": "Shenma supports various external tools, such as: MCP, custom API/model services, multi-mode selection/custom mode and image context features etc",
+      "subTitle": "Costrict supports various external tools, such as: MCP, custom API/model services, multi-mode selection/custom mode and image context features etc",
       "feature01": "/images/en/tool_feature01.svg",
       "feature02": "/images/en/tool_feature02.svg",
       "feature03": "/images/en/tool_feature03.svg",
@@ -100,9 +102,9 @@
       "feature02Title": "Accessible to third-party API",
       "feature03Title": "Multi-Mode & Custom Mode",
       "feature04Title": "Image Context",
-      "feature01Content": "The MCP server provides additional tools and resources to assist Shenma in completing tasks beyond its built-in functionalities, such as accessing databases, customizing APIs, and specialized features",
-      "feature02Content": "Supports access to various API service providers, such as Anthropic, OpenAI, etc. You can configure any API compatible with OpenAI, or access local models through LM Studio/Ollama. If you use the default Shenma, there are also various advanced models available, such as claude-sonnet-4，etc",
-      "feature03Content": "Multiple modes correspond to multiple professional roles, and Shenma's behavior can be intelligently adjusted according to your current task. You can also customize modes and Prompts according to your needs",
+      "feature01Content": "The MCP server provides additional tools and resources to assist Costrict in completing tasks beyond its built-in functionalities, such as accessing databases, customizing APIs, and specialized features",
+      "feature02Content": "Supports access to various API service providers, such as Anthropic, OpenAI, etc. You can configure any API compatible with OpenAI, or access local models through LM Studio/Ollama. If you use the default Costrict, there are also various advanced models available, such as claude-sonnet-4，etc",
+      "feature03Content": "Multiple modes correspond to multiple professional roles, and Costrict's behavior can be intelligently adjusted according to your current task. You can also customize modes and Prompts according to your needs",
       "feature04Content": "Click the image button below the dialog box, or shift + drag the image into the input box to add visual context to the chat"
     },
     "enterprise": {
@@ -119,7 +121,8 @@
     },
     "ideSupport": {
       "title": "Multi-Language & VS Code Support",
-      "SupportedInVSCode": "Visual Studio Code"
+      "SupportedInVSCode": "Visual Studio Code",
+      "allLanguages": "All Programming Languages"
     }
   },
   "footer": {
@@ -136,9 +139,9 @@
     }
   },
   "download": {
-    "title": "SHENMA",
-    "desc": "Shenma is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
-    "vscodeTitle": "Install Shenma Code in Visual Studio Code, requiring the latest version or version 1.84.0 or above",
+    "title": "Costrict",
+    "desc": "Costrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
+    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.84.0 or above",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
     "step2": "Step 2",
@@ -146,10 +149,10 @@
     "golandIcon": "/images/en/dowload_goland.png",
     "step1Img": "/images/en/download_step1.svg",
     "step2Img": "/images/en/download_step2.svg",
-    "step1Title": "Open the Extentions Market, Search for ' Shenma' and install it",
-    "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"Shenma\", and then click on the Install button",
-    "step2Title": "Install Shenma",
-    "step2Content": "After restarting Visual Studio Code, click on the Shenma icon, use the default Base Url to click \"Login to Shenma\".",
+    "step1Title": "Open the Extentions Market, Search for ' Costrict' and install it",
+    "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"Costrict\", and then click on the Install button",
+    "step2Title": "Install Costrict",
+    "step2Content": "After restarting Visual Studio Code, click on the Costrict icon, use the default Base Url to click \"Login to Costrict\".",
     "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button."
   }
 }

@@ -1,2 +1,2 @@
 # site
-The official website of zgsm
+The official website of costrict

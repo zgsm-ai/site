@@ -15,8 +15,15 @@
         ]">
           {{ t('home.slogan.ossButton') }}
         </div>
-        <div :class="['mt-[36px]', 'text-[48px]', 'text-white', isEn ? '' : 'slogan-title']">
-          {{ t('home.slogan.title') }}
+        <div class="flex items-center mt-[36px]">
+          <div :class="['text-[48px]', 'text-white', isEn ? '' : 'slogan-title']">
+            {{ t('home.slogan.title') }}
+          </div>
+          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-[24px] ml-[12px]">
+            <template #iTag>
+              <span class="italic text-xs mx-1 ">{{ t('home.slogan.original') }}</span>
+            </template>
+          </i18n-t>
         </div>
       </div>
     </div>
