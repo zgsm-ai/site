@@ -4,7 +4,7 @@
     <div class="flex gap-6 h-10 mt-20">
       <div :src="item" :key="item.type" v-for="item in programLanguage" class="flex items-center lang-container">
         <img v-if="item.icon" :src="item.icon" class="w-6 h-6 mr-2" />
-        <span class="text-white leading-6 text-base">{{ item.type }}</span>
+        <span class="text-white leading-6 text-base whitespace-nowrap">{{ item.type }}</span>
       </div>
     </div>
     <div class="w-[520px] h-16 mt-20 vscode-container flex items-center justify-center">
@@ -53,7 +53,7 @@ const programLanguage = computed(() => [
     icon: cIcon,
   },
   {
-    type: '... 全部开发语言'
+    type: `... ${t('home.ideSupport.allLanguages')}`
   }
 ])
 

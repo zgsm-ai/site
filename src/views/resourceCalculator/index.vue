@@ -2,7 +2,7 @@
   <div class="resource-calculator">
     <n-layout class="min-h-screen" style="padding: 20px">
       <div class="calculator-container">
-        <!-- <n-h1 class="text-center mb-6">诸葛神码资源预估器</n-h1> -->
+        <!-- <n-h1 class="text-center mb-6">Costrict资源预估器</n-h1> -->
 
         <n-grid :cols="24" :x-gap="24">
           <!-- 左侧：参数设置 -->

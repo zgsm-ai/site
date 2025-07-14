@@ -64,7 +64,7 @@ const menuOptions = computed<MenuOption[]>(() => [
 ])
 const handleMenuItemClick = (key: string) => {
   if (key === 'oss') {
-    window.open('https://github.com/zgsm-ai/zgsm')
+    window.open('https://github.com/zgsm-ai/costrict')
     return
   }
   router.push({ name: key })
