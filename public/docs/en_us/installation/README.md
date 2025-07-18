@@ -16,9 +16,7 @@ To help you deploy Costrict more efficiently, this document provides a clear ins
 ### Prerequisites
 
 1. Client has internet access.
-2. Client: VS Code (version > v1.70.2).
-
-> Currently, the Costrict extension is only available for VS Code. Support for JetBrains IDEs will be added later.
+2. Client: VS Code (version >= v1.86.0).
 
 ### Installation Steps
 
