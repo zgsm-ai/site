@@ -3,7 +3,7 @@
     <PageTitle :title="t('home.agent.title')" :subtitle="t('home.agent.subTitle')" />
     <div class="w-full  rounded-[20px] mt-10 gradient-border">
       <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
-        style="object-fit: cover;" poster="../../assets/agent_buffer.webp">
+        style="object-fit: cover;" poster="../../assets/agent_buffer.png">
         Your browser does not support the video tag.
       </video>
     </div>
