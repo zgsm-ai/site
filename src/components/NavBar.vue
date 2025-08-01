@@ -59,6 +59,10 @@ const menuOptions = computed<MenuOption[]>(() => [
     key: 'oss',
   },
   {
+    label: t('menu.docs'),
+    key: 'docs'
+  },
+  {
     label: t('menu.installGuide'),
     key: 'download',
   },
@@ -66,6 +70,9 @@ const menuOptions = computed<MenuOption[]>(() => [
 const handleMenuItemClick = (key: string) => {
   if (key === 'oss') {
     window.open('https://github.com/zgsm-ai/costrict')
+    return
+  } else if (key === 'docs') {
+    window.open('https://docs.costrict.ai')
     return
   }
   router.push({ name: key })

@@ -5,6 +5,7 @@
   "menu": {
     "home": "Homepage",
     "openSource": "Open Source",
+    "docs": "Documentation",
     "installGuide": "Installation Guide"
   },
   "home": {
@@ -153,6 +154,7 @@
     "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"Costrict\", and then click on the Install button",
     "step2Title": "Install Costrict",
     "step2Content": "After restarting Visual Studio Code, click on the Costrict icon, use the default Base Url to click \"Login to Costrict\".",
-    "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button."
+    "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button.",
+    "manualPluginDownload": "Manual download"
   }
 }

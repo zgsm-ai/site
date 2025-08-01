@@ -6,6 +6,7 @@
   "menu": {
     "home": "首页",
     "openSource": "开源",
+    "docs": "文档",
     "installGuide": "安装指引"
   },
   "home": {
@@ -46,7 +47,7 @@
     },
     "slogan": {
       "title": "COSTRICT",
-      "subTitle": "企业严肃开发的AI智能体",
+      "subTitle": "企业严肃开发的AI智能伙伴",
       "enterpriseButton": "企业私有化部署",
       "personalButton": "个人免费使用",
       "ossButton": "开源免费",
@@ -155,6 +156,7 @@
     "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索“Costrict”后点击安装",
     "step2Title": "登录Costrict",
     "step2Content": "重启 Visual Studio Code 后，单击Costrict图标，使用默认Base Url 点击“登录Costrict” 若为本地化部署则需要填写Url 后再点击登录按钮",
-    "step2Tips": "Url填写若不清楚请联系公司管理员"
+    "step2Tips": "Url填写若不清楚请联系公司管理员",
+    "manualPluginDownload": "手动获取插件"
   }
 }
