@@ -15,7 +15,7 @@
         ]">
           {{ t('home.slogan.ossButton') }}
         </div>
-        <div class="flex items-center mt-[36px]">
+        <div class="flex items-center mt-[26px]">
           <div :class="['text-[48px]', 'text-white', isEn ? '' : 'slogan-title']">
             {{ t('home.slogan.title') }}
           </div>

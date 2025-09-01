@@ -1,6 +1,6 @@
 <template>
   <div class="model-table">
-    <n-card title="选型对比" :bordered="true" size="small">
+    <n-card title="模型对比" :bordered="true" size="small">
       <n-data-table :columns="columns" :data="tableData" :bordered="true" :single-line="false" />
     </n-card>
   </div>
@@ -8,61 +8,46 @@
 
 <script setup lang="ts">
 import { computed, h } from 'vue'
-import { NCard, NDataTable, NTag } from 'naive-ui'
-import { tableData, type TableRow } from '../constants'
+import { NCard, NDataTable } from 'naive-ui'
+import { type TableRow, getModelDataByVersion } from '../constants'
 
 // 定义组件名
 defineOptions({
   name: 'ModelTable',
 })
 
+// 定义 props
+interface Props {
+  version: 'standard' | 'basic'
+}
+
+const props = defineProps<Props>()
+
+// 根据版本获取表格数据
+const tableData = computed(() => getModelDataByVersion(props.version))
+
 // 定义列配置
 const columns = computed(() => [
   {
-    title: '模型名称',
-    key: 'modelName',
-    width: 200,
+    title: '模型类型',
+    key: 'modelType',
+    width: 120,
     fixed: 'left' as const,
   },
   {
-    title: '场景',
-    key: 'scenario',
+    title: '占用卡数',
+    key: 'cardCount',
     width: 100,
-    render(row: TableRow) {
-      return h(
-        NTag,
-        {
-          type: row.scenario === '问答' ? 'info' : 'success',
-          bordered: false,
-        },
-        {
-          default: () => row.scenario,
-        },
-      )
-    },
   },
   {
-    title: '效果',
-    key: 'effect',
-    width: 100,
-    render(row: TableRow) {
-      const type = row.effect === '良' ? 'info' : row.effect === '中' ? 'warning' : 'error'
-      return h(
-        NTag,
-        {
-          type,
-          bordered: false,
-        },
-        {
-          default: () => row.effect,
-        },
-      )
-    },
+    title: '模型全称',
+    key: 'fullName',
+    width: 250,
   },
   {
     title: '模型大小/MoE大小',
-    key: 'modelSizeMoESize',
-    width: 180,
+    key: 'parameters',
+    width: 160,
   },
   {
     title: '上下文窗口',
@@ -70,47 +55,38 @@ const columns = computed(() => [
     width: 120,
   },
   {
-    title: '最佳最小部署硬件',
-    key: 'optimalMinDeploymentHardware',
-    width: 180,
-  },
-  {
-    title: '最佳最小部署成本',
-    key: 'optimalMinDeploymentCost',
-    width: 180,
-  },
-  {
     title: '问答25K(补全1K)上下文 每分钟并发数',
-    key: 'qa25k_1k_context_concurrent_rpm',
-    width: 240,
+    key: 'concurrentRpm',
+    width: 280,
     render(row: TableRow) {
-      return `${row.qa25k_1k_context_concurrent_rpm} RPM`
+      return `${row.concurrentRpm}${typeof row.concurrentRpm === 'number' ? ' RPM' : ''}`
     },
   },
   {
     title: '问答25K(补全1K)上下文 最高吞吐(token/s)',
-    key: 'qa25k_1k_context_max_throughput_tok_s',
-    width: 260,
+    key: 'maxThroughput',
+    width: 320,
     render(row: TableRow) {
-      return `${row.qa25k_1k_context_max_throughput_tok_s}`
+      return `${row.maxThroughput}${typeof row.maxThroughput === 'number' ? ' tokens/s' : ''}`
     },
   },
   {
-    title: '问答12K上下文 每分钟并发数',
-    key: 'qa12k_context_concurrent_rpm',
-    width: 200,
+    title: '并发性能',
+    key: 'performance',
+    width: 400,
     render(row: TableRow) {
-      return typeof row.qa12k_context_concurrent_rpm === 'string'
-        ? row.qa12k_context_concurrent_rpm
-        : `${row.qa12k_context_concurrent_rpm} RPM`
-    },
-  },
-  {
-    title: '问答12K上下文最高吞吐(token/s)',
-    key: 'qa12k_context_max_throughput_tok_s',
-    width: 260,
-    render(row: TableRow) {
-      return `${row.qa12k_context_max_throughput_tok_s}`
+      return h(
+        'div',
+        {
+          style: {
+            whiteSpace: 'pre-wrap',
+            lineHeight: '1.5',
+          },
+        },
+        {
+          default: () => row.performance || '-',
+        },
+      )
     },
   },
 ])

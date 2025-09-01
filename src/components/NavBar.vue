@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar fixed top-0 left-0 right-0 z-1000 flex h-[68px] px-[52px]"
+  <div class="navbar sticky top-0 left-0 right-0 z-1000 flex h-[68px] px-[52px]"
     :class="{ 'not-homepage': notHomePage }">
     <div class="flex items-center h-[68px] cursor-pointer" @click="toHome">
       <img class="w-[28px] mr-3" src="@/assets/logo.png" />

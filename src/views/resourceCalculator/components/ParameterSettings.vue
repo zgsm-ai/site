@@ -1,273 +1,143 @@
 <template>
   <n-card title="参数设置" :bordered="true" size="small">
     <n-form :model="formData" label-placement="top">
+      <!-- 版本选择 -->
+      <div class="version-mode-section mb-4 parameter-card">
+        <n-form-item label="版本选择">
+          <n-radio-group v-model:value="formData.versionMode" name="versionMode" @update:value="handleVersionChange">
+            <n-space>
+              <n-radio value="standard">标准版</n-radio>
+              <n-radio value="basic">入门版</n-radio>
+            </n-space>
+          </n-radio-group>
+        </n-form-item>
+
+        <!-- 版本描述 -->
+        <div class="version-description">
+          <n-alert :type="formData.versionMode === 'basic' ? 'info' : 'success'" :show-icon="false">
+            <div class="version-desc-content">
+              <div class="version-desc-title">{{ VERSION_CONFIG[formData.versionMode].name }}</div>
+              <div class="version-desc-text">{{ VERSION_CONFIG[formData.versionMode].description }}</div>
+            </div>
+          </n-alert>
+        </div>
+      </div>
       <!-- 基础参数配置区域 -->
-      <n-card size="small" embedded class="mb-4" style="background: #f8fafc">
+      <n-card size="small" embedded class="mb-4 parameter-card" style="background: #f8fafc">
         <template #header>
-          <n-space align="center">
+          <div class="header-with-info">
             <span class="font-medium">基础参数与计算关系</span>
-          </n-space>
+            <n-popover :width="500" trigger="hover" :show-arrow="false" placement="bottom">
+              <template #trigger>
+                <n-icon size="16" color="#1890ff" style="cursor: pointer; margin-left: 6px; vertical-align: middle;">
+                  <svg viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,4A8,8 0 0,1 20,12A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4M11,16.5L11,7L13,7V16.5H11M11,5.5V3.5H13V5.5H11Z" />
+                  </svg>
+                </n-icon>
+              </template>
+              <div class="calculation-flow-info">
+                <!-- 第一步计算 -->
+                <div class="calculation-step-info">
+                  <div class="calculation-formula-info">
+                    <n-space align="center" justify="center" :size="8">
+                      <n-tag type="info" size="small">{{ formData.developerCount }}</n-tag>
+                      <span class="operator">×</span>
+                      <n-tag type="warning" size="small">{{ formData.vscodeActiveRatio }}%</n-tag>
+                      <span class="operator">=</span>
+                      <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
+                    </n-space>
+                  </div>
+                  <div class="calculation-description-info">
+                    <n-text depth="3" class="text-xs">企业编码人员 × VSCode 日活比例 = VSCode 日活用户数</n-text>
+                  </div>
+                </div>
+
+                <!-- 箭头指示 -->
+                <div class="arrow-down-info">
+                  <n-icon size="16" color="#1890ff">
+                    <svg viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+                    </svg>
+                  </n-icon>
+                </div>
+
+                <!-- 第二步计算 -->
+                <div class="calculation-step-info">
+                  <div class="calculation-formula-info">
+                    <n-space align="center" justify="center" :size="8">
+                      <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
+                      <span class="operator">×</span>
+                      <n-tag type="warning" size="small">{{ formData.concurrentCoefficient }}</n-tag>
+                      <span class="operator">=</span>
+                      <n-tag type="error" size="small">{{ formData.concurrentDeveloperCount }}</n-tag>
+                    </n-space>
+                  </div>
+                  <div class="calculation-description-info">
+                    <n-text depth="3" class="text-xs">VSCode 日活用户数 × 并发系数 = 每分钟并发连接数</n-text>
+                  </div>
+                </div>
+              </div>
+            </n-popover>
+          </div>
         </template>
 
         <n-space vertical>
-          <!-- 企业编码人员数量和VSCode插件日活比例 -->
-          <n-grid :cols="2" :x-gap="16">
-            <n-grid-item>
-              <n-form-item label="企业编码人员">
-                <n-input-number
-                  v-model:value="formData.developerCount"
-                  :min="1"
-                  :show-button="false"
-                  style="width: 100%"
-                  @update:value="handleDeveloperCountChange"
-                >
-                  <template #suffix>人</template>
-                </n-input-number>
-              </n-form-item>
-            </n-grid-item>
-            <n-grid-item>
-              <n-form-item label="VSCode 插件日活比例">
-                <n-input-number
-                  v-model:value="formData.vscodeActiveRatio"
-                  :min="1"
-                  :max="100"
-                  :show-button="false"
-                  style="width: 100%"
-                  @update:value="handleDeveloperCountChange"
-                >
-                  <template #suffix>%</template>
-                </n-input-number>
-              </n-form-item>
-            </n-grid-item>
-          </n-grid>
-
-          <!-- 计算流程展示 -->
-          <div class="calculation-flow">
-            <!-- 第一步计算 -->
-            <div class="calculation-step">
-              <div class="calculation-formula">
-                <n-space align="center" justify="center" :size="8">
-                  <n-tag type="info" size="small">{{ formData.developerCount }}</n-tag>
-                  <span class="operator">×</span>
-                  <n-tag type="warning" size="small">{{ formData.vscodeActiveRatio }}%</n-tag>
-                  <span class="operator">=</span>
-                  <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
-                </n-space>
-              </div>
-              <div class="calculation-description">
-                <n-text depth="3" class="text-xs"
-                  >企业编码人员 × VSCode 日活比例 = VSCode 日活用户数</n-text
-                >
-              </div>
+          <!-- 企业编码人员数量、VSCode插件日活比例和并发系数 -->
+          <div class="parameter-inputs">
+            <div class="input-row flex items-center">
+              <div class="input-label w-45">企业编码人员：</div>
+              <n-input-number v-model:value="formData.developerCount" :min="1" :show-button="false"
+                style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="请输入企业编码人员总数">
+                <template #suffix>人</template>
+              </n-input-number>
             </div>
-
-            <!-- 箭头指示 -->
-            <div class="arrow-down">
-              <n-icon size="16" color="#1890ff">
-                <svg viewBox="0 0 24 24">
-                  <path
-                    fill="currentColor"
-                    d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                  />
-                </svg>
-              </n-icon>
+            <div class="input-row flex items-center">
+              <div class="input-label w-45">VSCode 插件日活比例：</div>
+              <n-input-number v-model:value="formData.vscodeActiveRatio" :min="1" :max="100" :show-button="false"
+                style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="请输入日活比例">
+                <template #suffix>%</template>
+              </n-input-number>
             </div>
-
-            <!-- 第二步计算 -->
-            <div class="calculation-step">
-              <div class="calculation-formula">
-                <n-space align="center" justify="center" :size="8">
-                  <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
-                  <span class="operator">×</span>
-                  <n-tag type="warning" size="small">0.125</n-tag>
-                  <span class="operator">=</span>
-                  <n-tag type="error" size="small">{{ formData.concurrentDeveloperCount }}</n-tag>
-                </n-space>
-              </div>
-              <div class="calculation-description">
-                <n-text depth="3" class="text-xs">VSCode 日活用户数 × 并发系数 = 并发连接数</n-text>
-              </div>
+            <div class="input-row flex items-center">
+              <div class="input-label w-45">并发系数：</div>
+              <n-input-number v-model:value="formData.concurrentCoefficient" :min="0.01" :max="1" :step="0.01"
+                :precision="3" :show-button="false" style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="默认0.125">
+              </n-input-number>
             </div>
           </div>
 
           <!-- 计算结果 -->
-          <n-grid :cols="2" :x-gap="16">
-            <n-grid-item>
-              <n-form-item label="VSCode 插件日活用户数">
-                <n-input-number
-                  v-model:value="formData.vscodeActiveUsers"
-                  :show-button="false"
-                  style="width: 100%"
-                  readonly
-                >
-                  <template #suffix>人</template>
-                </n-input-number>
-              </n-form-item>
-            </n-grid-item>
-            <n-grid-item>
-              <n-form-item label="每分钟并发连接数">
-                <n-input-number
-                  v-model:value="formData.concurrentDeveloperCount"
-                  :show-button="false"
-                  style="width: 100%"
-                  readonly
-                >
-                  <template #suffix>人</template>
-                </n-input-number>
-              </n-form-item>
-            </n-grid-item>
-          </n-grid>
+          <div class="calculation-results mt-4">
+            <div class="result-content">
+              <div class="result-item">
+                每分钟并发连接数： {{ formData.concurrentDeveloperCount }}人
+              </div>
+            </div>
+          </div>
         </n-space>
       </n-card>
 
-      <n-divider />
 
-      <!-- 代码补全配置 -->
-      <n-form-item>
-        <n-checkbox v-model:checked="formData.enableCodeCompletion"> 代码补全 </n-checkbox>
-      </n-form-item>
-
-      <n-form-item
-        v-if="formData.enableCodeCompletion"
-        label="选择代码补全模型"
-        style="margin-left: 24px"
-      >
-        <n-select
-          v-model:value="formData.selectedCompletionModel"
-          :options="completionModelOptions"
-          :show-checkmark="false"
-        />
-      </n-form-item>
-
-      <!-- AI程序员配置 -->
-      <n-form-item>
-        <n-checkbox v-model:checked="formData.enableAIAgent"> AI程序员/AI Agent </n-checkbox>
-      </n-form-item>
-
-      <div v-if="formData.enableAIAgent" style="margin-left: 24px">
-        <n-form-item label="选择AI程序员模型（可多选）">
-          <n-space vertical :size="16">
-            <!-- 本地部署模型 -->
-            <div>
-              <n-h6 class="mb-2">本地部署模型</n-h6>
-              <n-space vertical>
-                <div
-                  v-for="(config, modelName) in deploymentModels"
-                  :key="modelName"
-                  class="model-item"
-                >
-                  <div class="model-header">
-                    <div class="model-checkbox-section">
-                      <n-checkbox
-                        v-model:checked="formData.selectedAIModels[modelName]"
-                        @update:checked="handleModelSelectionChange"
-                      >
-                        <span class="model-name">{{ modelName }}</span>
-                      </n-checkbox>
-                    </div>
-                    <div class="model-tags">
-                      <n-tag :type="getCostTagType(config.cost)" size="small" class="cost-tag">
-                        成本{{ Cost[config.cost] }}
-                      </n-tag>
-                      <n-tag
-                        :type="getEffectTagType(config.effect)"
-                        size="small"
-                        class="effect-tag"
-                      >
-                        效果{{ Effect[config.effect] }}
-                      </n-tag>
-                    </div>
-                  </div>
-                  <div v-if="formData.selectedAIModels[modelName]" class="ratio-section">
-                    <n-input-group>
-                      <n-input-group-label>分摊比例</n-input-group-label>
-                      <n-input-number
-                        v-model:value="formData.modelRatios[modelName]"
-                        :min="1"
-                        :max="100"
-                        :show-button="false"
-                        @update:value="handleRatioChange"
-                      />
-                      <n-input-group-label>%</n-input-group-label>
-                    </n-input-group>
-                  </div>
-                </div>
-              </n-space>
-            </div>
-
-            <!-- 在线服务模型 -->
-            <div>
-              <n-h6 class="mb-2">在线服务模型</n-h6>
-              <n-space vertical>
-                <div v-for="(config, modelName) in apiModels" :key="modelName" class="model-item">
-                  <div class="model-header">
-                    <div class="model-checkbox-section">
-                      <n-checkbox
-                        v-model:checked="formData.selectedAIModels[modelName]"
-                        @update:checked="handleModelSelectionChange"
-                      >
-                        <span class="model-name">{{ modelName }}</span>
-                      </n-checkbox>
-                    </div>
-                    <div class="model-tags">
-                      <n-tag :type="getCostTagType(config.cost)" size="small" class="cost-tag">
-                        成本{{ Cost[config.cost] }}
-                      </n-tag>
-                      <n-tag
-                        :type="getEffectTagType(config.effect)"
-                        size="small"
-                        class="effect-tag"
-                      >
-                        效果{{ Effect[config.effect] }}
-                      </n-tag>
-                    </div>
-                  </div>
-                  <div v-if="formData.selectedAIModels[modelName]" class="ratio-section">
-                    <n-input-group>
-                      <n-input-group-label>分摊比例</n-input-group-label>
-                      <n-input-number
-                        v-model:value="formData.modelRatios[modelName]"
-                        :min="1"
-                        :max="100"
-                        :show-button="false"
-                        @update:value="handleRatioChange"
-                      />
-                      <n-input-group-label>%</n-input-group-label>
-                    </n-input-group>
-                  </div>
-                </div>
-              </n-space>
-            </div>
-          </n-space>
-        </n-form-item>
-      </div>
     </n-form>
   </n-card>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import {
   NCard,
   NForm,
-  NFormItem,
   NInputNumber,
-  NCheckbox,
-  NSelect,
-  NDivider,
   NSpace,
   NIcon,
-  NText,
-  NInputGroup,
-  NInputGroupLabel,
-  NGrid,
-  NGridItem,
-  NH6,
+  NPopover,
   NTag,
+  NRadioGroup,
+  NRadio,
+  NAlert,
 } from 'naive-ui'
-import { CostType, EffectType, Cost, Effect } from '../types'
-import { MODEL_CONFIG } from '../constants'
-import type { DeploymentModel, ApiModel, FormData } from '../types'
+import { VERSION_CONFIG } from '../constants'
+import type { FormData } from '../types'
 
 // 定义组件名
 defineOptions({
@@ -277,35 +147,7 @@ defineOptions({
 // 使用 defineModel 简化双向绑定
 const formData = defineModel<FormData>({ required: true })
 
-// 代码补全模型选项
-const completionModelOptions = computed(() => {
-  return Object.keys(MODEL_CONFIG.completionModels).map((modelName) => ({
-    label: modelName,
-    value: modelName,
-  }))
-})
 
-// 部署模型
-const deploymentModels = computed(() => {
-  const models: Record<string, DeploymentModel> = {}
-  Object.entries(MODEL_CONFIG.aiAgentModels).forEach(([name, config]) => {
-    if (config.type === 'deployment') {
-      models[name] = config as DeploymentModel
-    }
-  })
-  return models
-})
-
-// API模型
-const apiModels = computed(() => {
-  const models: Record<string, ApiModel> = {}
-  Object.entries(MODEL_CONFIG.aiAgentModels).forEach(([name, config]) => {
-    if (config.type === 'api') {
-      models[name] = config as ApiModel
-    }
-  })
-  return models
-})
 
 // 处理开发人员数量变化
 const handleDeveloperCountChange = () => {
@@ -315,193 +157,102 @@ const handleDeveloperCountChange = () => {
   )
 
   // 第二步：VSCode插件日活用户数 → 并发链接数
-  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * 0.125)
+  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * (formData.value.concurrentCoefficient || 0.125))
 
   // 数据变化会自动通过 watch 同步到父组件，父组件会通过 handleFormDataUpdate 重新计算
 }
 
-// 处理模型选择变化
-const handleModelSelectionChange = () => {
-  updateModelRatios()
-}
 
-// 处理比例变化
-const handleRatioChange = () => {
-  validateAndAdjustRatios()
-}
-
-// 更新模型分摊比例
-const updateModelRatios = () => {
-  const selectedModels = Object.keys(formData.value.selectedAIModels).filter(
-    (model) => formData.value.selectedAIModels[model],
-  )
-
-  // 如果只选择了一个模型，则比例为100%
-  if (selectedModels.length === 1) {
-    formData.value.modelRatios[selectedModels[0]] = 100
-    return
+// 处理版本切换
+const handleVersionChange = (newVersion: 'basic' | 'standard') => {
+  // 保存当前的基础参数
+  const preservedParams = {
+    developerCount: formData.value.developerCount,
+    vscodeActiveRatio: formData.value.vscodeActiveRatio,
+    vscodeActiveUsers: formData.value.vscodeActiveUsers,
+    concurrentDeveloperCount: formData.value.concurrentDeveloperCount,
   }
 
-  // 如果选择了多个模型，则平均分配比例
-  if (selectedModels.length > 1) {
-    const baseRatio = Math.floor(100 / selectedModels.length)
-    const remainder = 100 % selectedModels.length
+  // 获取新版本的配置
+  const versionConfig = VERSION_CONFIG[newVersion]
 
-    selectedModels.forEach((model, index) => {
-      formData.value.modelRatios[model] = baseRatio + (index < remainder ? 1 : 0)
-    })
-  }
+  // 更新模型选择
+  formData.value.selectedCompletionModel = versionConfig.models.completion
+  formData.value.selectedCodeReviewModel = versionConfig.models.codeReview
+  formData.value.selectedRAGEmbeddingModel = versionConfig.models.rag.embedding
+  formData.value.selectedRAGRerankModel = versionConfig.models.rag.rerank
+
+  // 更新AI Agent模型选择
+  formData.value.selectedAIModels = {}
+  formData.value.modelRatios = {}
+  formData.value.selectedAIModels[versionConfig.models.aiAgent] = true
+  formData.value.modelRatios[versionConfig.models.aiAgent] = 100
+
+  // 确保所有功能模块都启用（强制设置为true）
+  formData.value.enableCodeCompletion = true
+  formData.value.enableAIAgent = true
+  formData.value.enableCodeReview = true
+  formData.value.enableRAG = true
+
+  // 恢复基础参数
+  formData.value.developerCount = preservedParams.developerCount
+  formData.value.vscodeActiveRatio = preservedParams.vscodeActiveRatio
+  formData.value.vscodeActiveUsers = preservedParams.vscodeActiveUsers
+  formData.value.concurrentDeveloperCount = preservedParams.concurrentDeveloperCount
 }
 
-// 验证并调整分摊比例
-const validateAndAdjustRatios = () => {
-  const selectedModels = Object.keys(formData.value.selectedAIModels).filter(
-    (model) => formData.value.selectedAIModels[model],
-  )
-
-  if (selectedModels.length <= 1) return
-
-  // 计算当前总比例
-  let totalRatio = 0
-  selectedModels.forEach((model) => {
-    totalRatio += formData.value.modelRatios[model] || 0
-  })
-
-  // 如果总比例不等于100%，调整比例
-  if (totalRatio !== 100) {
-    const difference = 100 - totalRatio
-    if (selectedModels.length > 0) {
-      const lastModel = selectedModels[selectedModels.length - 1]
-      formData.value.modelRatios[lastModel] =
-        (formData.value.modelRatios[lastModel] || 0) + difference
-    }
-  }
-}
-
-// 获取成本标签类型
-const getCostTagType = (cost: string) => {
-  switch (cost) {
-    case CostType.low:
-      return 'success'
-    case CostType.medium:
-      return 'warning'
-    case CostType.high:
-      return 'error'
-    default:
-      return 'default'
-  }
-}
-
-// 获取效果标签类型
-const getEffectTagType = (effect: string) => {
-  switch (effect) {
-    case EffectType.excellent:
-      return 'success'
-    case EffectType.good:
-      return 'info'
-    case EffectType.medium:
-      return 'warning'
-    case EffectType.bad:
-      return 'error'
-    default:
-      return 'default'
-  }
-}
 </script>
 
 <style scoped>
-.model-item {
-  padding: 16px;
-  border: 1px solid #e8e8e8;
-  border-radius: 8px;
-  background: #fafafa;
-  transition: all 0.3s ease;
-}
-
-.model-item:hover {
-  background: #f0f4ff;
-  border-color: #409eff;
-  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.1);
-}
-
-.model-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-  gap: 12px;
-}
-
-.model-checkbox-section {
-  flex: 1;
-  min-width: 0;
-}
-
-.model-name {
-  font-weight: 500;
-  font-size: 14px;
-  color: #333;
-}
-
-.model-tags {
-  display: flex;
-  gap: 6px;
-  flex-shrink: 0;
-}
-
-.cost-tag,
-.effect-tag {
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.ratio-section {
-  background: white;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid #e8e8e8;
-  margin-top: 8px;
-}
-
 .font-medium {
   font-weight: 500;
 }
 
 .mb-2 {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .mb-4 {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .mt-2 {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
-/* 计算流程样式 */
-.calculation-flow {
+/* 头部信息样式 */
+.header-with-info {
+  display: flex;
+  align-items: center;
+}
+
+/* 计算流程信息样式 */
+.calculation-flow-info {
   background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
   border-radius: 12px;
   padding: 16px;
-  margin: 16px 0;
   border: 1px solid #e0e6ed;
 }
 
-.calculation-step {
+.calculation-step-info {
   background: white;
   border-radius: 8px;
   padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.calculation-formula {
   margin-bottom: 8px;
 }
 
-.calculation-description {
+.calculation-formula-info {
+  margin-bottom: 8px;
+}
+
+.calculation-description-info {
   text-align: center;
+}
+
+.arrow-down-info {
+  text-align: center;
+  margin: 8px 0;
 }
 
 .operator {
@@ -511,12 +262,155 @@ const getEffectTagType = (effect: string) => {
   margin: 0 4px;
 }
 
-.arrow-down {
-  text-align: center;
-  margin: 8px 0;
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.result-content {
+  display: block;
+}
+
+.result-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.result-item {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  display: block;
+}
+
+/* 参数输入区域样式 */
+.parameter-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.parameter-inputs .n-form-item {
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 字段描述样式 */
+.field-description {
+  margin-top: 4px;
+  line-height: 1.2;
+  margin-left: 132px; /* label-width + gap */
 }
 
 .text-xs {
   font-size: 0.75rem;
+}
+
+/* 版本选择样式 */
+.version-mode-section {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.version-mode-section .n-radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.version-mode-section .n-radio {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.version-mode-section .n-radio:hover {
+  border-color: #409eff;
+  background: #f0f7ff;
+}
+
+.version-mode-section .n-radio.n-radio--checked {
+  border-color: #409eff;
+  color: white;
+}
+
+.version-description {
+  margin-top: 12px;
+}
+
+.version-desc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.version-desc-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.version-desc-text {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+
+/* RAG模型内容样式 */
+.rag-models-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rag-model-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rag-model-label {
+  font-weight: 500;
+  font-size: 14px;
+  color: #666;
+  min-width: 80px;
+}
+
+.rag-model-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: #1890ff;
+  background: #e6f7ff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #91d5ff;
+}
+
+/* 功能模块标题样式 */
+.section-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* 参数设置卡片hover效果 */
+.parameter-card {
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.parameter-card:hover {
+  border-color: #1890ff;
 }
 </style>
