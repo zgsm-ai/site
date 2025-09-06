@@ -90,8 +90,8 @@ const defaultFormData: FormData = {
   developerCount: 1000,
   vscodeActiveRatio: 80,
   vscodeActiveUsers: 800,
-  concurrentDeveloperCount: 100,
-  concurrentCoefficient: 0.125, // 默认并发系数
+  concurrentDeveloperCount: 21,
+  concurrentCoefficient: 0.026, // 默认并发系数
   enableCodeCompletion: true,
   selectedCompletionModel: 'DeepSeek-Coder-V2-Lite-Base',
   enableAIAgent: true,

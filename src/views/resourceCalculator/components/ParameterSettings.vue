@@ -74,7 +74,7 @@
                     </n-space>
                   </div>
                   <div class="calculation-description-info">
-                    <n-text depth="3" class="text-xs">VSCode 日活用户数 × 并发系数 = 每分钟并发连接数</n-text>
+                    <n-text depth="3" class="text-xs">VSCode 日活用户数 × 每人每天使用次数 = 每分钟并发连接数</n-text>
                   </div>
                 </div>
               </div>
@@ -100,9 +100,9 @@
               </n-input-number>
             </div>
             <div class="input-row flex items-center">
-              <div class="input-label w-45">并发系数：</div>
+              <div class="input-label w-45">每人每天使用次数：</div>
               <n-input-number v-model:value="formData.concurrentCoefficient" :min="0.01" :max="1" :step="0.01"
-                :precision="3" :show-button="false" style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="默认0.125">
+                :precision="3" :show-button="false" style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="默认0.026">
               </n-input-number>
             </div>
           </div>
@@ -157,7 +157,7 @@ const handleDeveloperCountChange = () => {
   )
 
   // 第二步：VSCode插件日活用户数 → 并发链接数
-  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * (formData.value.concurrentCoefficient || 0.125))
+  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * (formData.value.concurrentCoefficient || 0.026))
 
   // 数据变化会自动通过 watch 同步到父组件，父组件会通过 handleFormDataUpdate 重新计算
 }
