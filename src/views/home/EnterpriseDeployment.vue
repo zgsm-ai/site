@@ -4,8 +4,9 @@
     <PageTitle :title="t('home.enterprise.title')" :subtitle="t('home.enterprise.subTitle')" />
     <div class="scroll-animation-wrapper wrapper icon-check mt-10" :class="`icon-check-${locale}`"
       ref="animatedElement">
-      <span class="text-white wrapper-content" :class="`wrapper-content-${locale}`">{{
-        t('home.enterprise.enterprisePrivateDeployment') }}</span>
+      <span class="text-white wrapper-content cursor-pointer" :class="`wrapper-content-${locale}`"
+        @click="toDeployment">{{
+          t('home.enterprise.enterprisePrivateDeployment') }}</span>
     </div>
     <div class="flex gap-6 mt-[90px]">
       <ItemCard v-for="item in featureList" :key="item.content" :content="item.content" :renderTitle="item.renderTitle"
@@ -104,6 +105,10 @@ const featureList = computed(() => [
 ])
 
 const { animatedElement } = useAnimation(true, locale)
+
+const toDeployment = () => {
+  window.open('https://docs.costrict.ai/deploy/introduction')
+}
 </script>
 <style lang="less" scoped>
 .icon-lock {

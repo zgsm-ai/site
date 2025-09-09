@@ -88,12 +88,7 @@ const toDownload = () => {
 }
 
 const toDeployment = () => {
-  router.push({
-    name: 'md-preview',
-    query: {
-      file: 'installation/README.md'
-    },
-  })
+  window.open('https://docs.costrict.ai/deploy/introduction')
 }
 </script>
 
