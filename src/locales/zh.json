@@ -7,7 +7,7 @@
     "home": "首页",
     "openSource": "开源",
     "docs": "文档",
-    "installGuide": "安装指引"
+    "installGuide": "本地部署"
   },
   "home": {
     "welcomeTitle": "欢迎使用Costrict",
