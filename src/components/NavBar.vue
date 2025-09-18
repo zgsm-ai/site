@@ -75,7 +75,7 @@ const handleMenuItemClick = (key: string) => {
     window.open('https://docs.costrict.ai')
     return
   } else if (key === 'download') {
-    window.open('https://docs.costrict.ai/guide/installation')
+    window.open('https://docs.costrict.ai/introduction')
     return
   }
   router.push({ name: key })

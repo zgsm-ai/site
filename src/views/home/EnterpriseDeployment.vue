@@ -107,7 +107,7 @@ const featureList = computed(() => [
 const { animatedElement } = useAnimation(true, locale)
 
 const toDeployment = () => {
-  window.open('https://docs.costrict.ai/deploy/introduction')
+  window.open('https://docs.costrict.ai/introduction')
 }
 </script>
 <style lang="less" scoped>
