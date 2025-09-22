@@ -88,10 +88,10 @@ const saveFormDataToStorage = (data: FormData) => {
 // 默认表单数据
 const defaultFormData: FormData = {
   developerCount: 1200,
-  vscodeActiveRatio: 83.3,
-  vscodeActiveUsers: 1000,
-  concurrentDeveloperCount: 52,
-  concurrentCoefficient: 52, // 默认并发系数
+  vscodeActiveRatio: 50,
+  vscodeActiveUsers: 600,
+  concurrentDeveloperCount: 60,
+  concurrentCoefficient: 60, // 默认并发系数
   enableCodeCompletion: true,
   selectedCompletionModel: 'DeepSeek-Coder-V2-Lite-Base',
   enableAIAgent: true,
@@ -136,7 +136,7 @@ onMounted(() => {
 
   // 确保所有必要字段都有值
   if (!formData.concurrentDeveloperCount || formData.concurrentDeveloperCount === 0) {
-    formData.concurrentDeveloperCount = 37
+    formData.concurrentDeveloperCount = 60
   }
 
   // 确保所有功能模块都启用
