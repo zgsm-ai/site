@@ -73,25 +73,25 @@ const saveFormDataToStorage = (data: FormData) => {
 }
 
 // 从localStorage恢复表单数据
-const loadFormDataFromStorage = (): Partial<FormData> | null => {
-  try {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored) {
-      return JSON.parse(stored)
-    }
-  } catch (error) {
-    console.error('从localStorage恢复表单数据失败:', error)
-  }
-  return null
-}
+// const loadFormDataFromStorage = (): Partial<FormData> | null => {
+//   try {
+//     const stored = localStorage.getItem(STORAGE_KEY)
+//     if (stored) {
+//       return JSON.parse(stored)
+//     }
+//   } catch (error) {
+//     console.error('从localStorage恢复表单数据失败:', error)
+//   }
+//   return null
+// }
 
 // 默认表单数据
 const defaultFormData: FormData = {
-  developerCount: 1000,
-  vscodeActiveRatio: 80,
-  vscodeActiveUsers: 800,
-  concurrentDeveloperCount: 21,
-  concurrentCoefficient: 0.026, // 默认并发系数
+  developerCount: 1200,
+  vscodeActiveRatio: 83.3,
+  vscodeActiveUsers: 1000,
+  concurrentDeveloperCount: 52,
+  concurrentCoefficient: 52, // 默认并发系数
   enableCodeCompletion: true,
   selectedCompletionModel: 'DeepSeek-Coder-V2-Lite-Base',
   enableAIAgent: true,
@@ -116,18 +116,18 @@ const formData = reactive<FormData>({ ...defaultFormData })
 // 初始化
 onMounted(() => {
   // 从localStorage恢复表单数据
-  const storedData = loadFormDataFromStorage()
-  if (storedData) {
-    // 清空当前formData
-    Object.keys(formData).forEach(key => {
-      delete formData[key as keyof FormData]
-    })
-    // 恢复存储的数据
-    Object.assign(formData, storedData)
-  } else {
-    // 如果没有存储的数据，使用默认值
-    Object.assign(formData, defaultFormData)
-  }
+  // const storedData = loadFormDataFromStorage()
+  // if (storedData) {
+  //   // 清空当前formData
+  //   Object.keys(formData).forEach(key => {
+  //     delete formData[key as keyof FormData]
+  //   })
+  //   // 恢复存储的数据
+  //   Object.assign(formData, storedData)
+  // } else {
+  //   // 如果没有存储的数据，使用默认值
+  Object.assign(formData, defaultFormData)
+  // }
 
   // 确保版本模式有值
   if (!formData.versionMode) {

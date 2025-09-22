@@ -68,7 +68,7 @@
                     <n-space align="center" justify="center" :size="8">
                       <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
                       <span class="operator">×</span>
-                      <n-tag type="warning" size="small">{{ formData.concurrentCoefficient }}</n-tag>
+                      <n-tag type="warning" size="small">{{ formData.concurrentCoefficient / formData.vscodeActiveUsers }}</n-tag>
                       <span class="operator">=</span>
                       <n-tag type="error" size="small">{{ formData.concurrentDeveloperCount }}</n-tag>
                     </n-space>
@@ -87,8 +87,8 @@
           <div class="parameter-inputs">
             <div class="input-row flex items-center">
               <div class="input-label w-45">企业编码人员：</div>
-              <n-input-number v-model:value="formData.developerCount" :min="1" :show-button="false"
-                style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="请输入企业编码人员总数">
+              <n-input-number v-model:value="formData.developerCount" :min="1" :show-button="false" style="width: 200px"
+                @update:value="handleDeveloperCountChange" placeholder="请输入企业编码人员总数">
                 <template #suffix>人</template>
               </n-input-number>
             </div>
@@ -100,21 +100,21 @@
               </n-input-number>
             </div>
             <div class="input-row flex items-center">
-              <div class="input-label w-45">每人每天使用次数：</div>
-              <n-input-number v-model:value="formData.concurrentCoefficient" :min="0.01" :max="1" :step="0.01"
-                :precision="3" :show-button="false" style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="默认0.026">
+              <div class="input-label w-45">高峰期每分钟请求：</div>
+              <n-input-number v-model:value="formData.concurrentCoefficient" :min="1" :show-button="false"
+                style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="默认52">
               </n-input-number>
             </div>
           </div>
 
           <!-- 计算结果 -->
-          <div class="calculation-results mt-4">
+          <!-- <div class="calculation-results mt-4">
             <div class="result-content">
               <div class="result-item">
                 每分钟并发连接数： {{ formData.concurrentDeveloperCount }}人
               </div>
             </div>
-          </div>
+          </div> -->
         </n-space>
       </n-card>
 
@@ -157,7 +157,7 @@ const handleDeveloperCountChange = () => {
   )
 
   // 第二步：VSCode插件日活用户数 → 并发链接数
-  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * (formData.value.concurrentCoefficient || 0.026))
+  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.concurrentCoefficient || 52)
 
   // 数据变化会自动通过 watch 同步到父组件，父组件会通过 handleFormDataUpdate 重新计算
 }
@@ -301,7 +301,8 @@ const handleVersionChange = (newVersion: 'basic' | 'standard') => {
 .field-description {
   margin-top: 4px;
   line-height: 1.2;
-  margin-left: 132px; /* label-width + gap */
+  margin-left: 132px;
+  /* label-width + gap */
 }
 
 .text-xs {
