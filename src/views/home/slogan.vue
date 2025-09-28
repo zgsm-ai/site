@@ -1,25 +1,27 @@
 <template>
   <div class="w-full relative z-50">
-    <div class="slogan-container flex w-full h-[431px] justify-center">
+    <div class="slogan-container flex w-full h-108 justify-center">
       <div class="w-full flex flex-col items-center">
         <div :class="[
           'oss-btn',
           `oss-btn-${locale}`,
-          'mt-[199px]',
+          'mt-68',
           'flex',
           'items-center',
           'justify-center',
-          'text-[24px]',
+          'text-2xl',
           'text-white',
+          'h-10',
+          'w-36',
           ossButtonWidth,
         ]">
           {{ t('home.slogan.ossButton') }}
         </div>
-        <div class="flex items-center mt-[26px]">
-          <div :class="['text-[48px]', 'text-white', isEn ? '' : 'slogan-title']">
+        <div class="flex items-center mt-8">
+          <div :class="['text-5xl', 'text-white', isEn ? '' : 'slogan-title']">
             {{ t('home.slogan.title') }}
           </div>
-          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-[24px] ml-[12px]">
+          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-2xl ml-[12px]">
             <template #iTag>
               <span class="italic text-xs mx-1 ">{{ t('home.slogan.original') }}</span>
             </template>
@@ -27,11 +29,11 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col items-center mt-[-80px] pb-[150px]">
+    <div class="flex flex-col items-center pb-[150px]">
       <div :class="['text-white', isEn ? '' : 'slogan-subTitle', subTitleFontSize]">
         {{ t('home.slogan.subTitle') }}
       </div>
-      <div class="button-group flex gap-4 mt-[30px] text-[24px] text-white">
+      <div class="button-group flex gap-4 mt-7.5 text-2xl text-white">
         <div :class="[
           'enterprise-button',
           `enterprise-button-${locale}`,
@@ -39,6 +41,8 @@
           'items-center',
           'justify-center',
           'cursor-pointer',
+          'w-50',
+          'h-12'
         ]" @click="toDeployment">
           {{ t('home.slogan.enterpriseButton') }}
         </div>
@@ -49,6 +53,8 @@
           'items-center',
           'justify-center',
           'cursor-pointer',
+          'w-50',
+          'h-12'
         ]" @click="toDownload">
           {{ t('home.slogan.personalButton') }}
         </div>
@@ -76,15 +82,10 @@ const ossButtonWidth = computed(() => {
 })
 
 const subTitleFontSize = computed(() => {
-  return isEn.value ? 'text-[48px]' : 'text-[56px]'
+  return isEn.value ? 'text-5xl' : 'text-6xl'
 })
 
-// const router = useRouter()
-
 const toDownload = () => {
-  // router.push({
-  //   name: 'download',
-  // })
   window.open('https://docs.costrict.ai/guide/installation')
 }
 
@@ -95,10 +96,7 @@ const toDeployment = () => {
 
 <style lang="less" scoped>
 .oss-btn {
-  width: 143px;
-  height: 40px;
   box-sizing: border-box;
-  font-size: 22px;
   text-align: center;
   letter-spacing: normal;
   background: linear-gradient(99deg, #00FFB7 2%, #FFFFFF 68%, #C5DBFF 101%);
@@ -116,10 +114,7 @@ const toDeployment = () => {
 }
 
 .enterprise-button {
-  width: 200px;
-  height: 48px;
   background-image: url('@/assets/blue_button.svg');
-  font-size: 22px;
 
   &-en {
     width: 378px;
@@ -132,10 +127,6 @@ const toDeployment = () => {
 }
 
 .personal-button {
-  width: 200px;
-  height: 48px;
-  // background-image: url('@/assets/grey_button.svg');
-  font-size: 22px;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 6px;
 

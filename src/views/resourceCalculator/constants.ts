@@ -14,7 +14,7 @@ export const VERSION_CONFIG = {
     },
     // 版本配置
     config: {
-      supportedUsers: 235, // 每实例支持的用户数
+      supportedUsers: 5, // 每实例支持的用户数
       gpuType: 'H20', // GPU类型
       gpuCardsPerInstance: 1, // 每实例需要的GPU卡数
       maxCardsPerServer: 8, // 每台服务器最大卡数
@@ -34,7 +34,7 @@ export const VERSION_CONFIG = {
     },
     // 版本配置
     config: {
-      supportedUsers: 135, // 每实例支持的用户数
+      supportedUsers: 4, // 每实例支持的用户数
       gpuType: '4090', //
       gpuCardsPerInstance: 1, // 每实例需要GPU类型的GPU卡数
       maxCardsPerServer: 8, // 每台服务器最大卡数

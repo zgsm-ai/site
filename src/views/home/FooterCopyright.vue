@@ -1,6 +1,6 @@
 <template>
-  <div class="footer-copyright w-full flex flex-col items-center mt-[150px]">
-    <div class="w-full flex flex-col items-center pb-20 pt-[82px]">
+  <div class="footer-copyright w-full flex flex-col items-center mt-[150px] pb-6">
+    <div class="w-full flex flex-col items-center pt-11">
       <div class="flex items-center mb-3 text-[28px] text-white footer-title">
         {{ t('footer.openSource.title') }}
       </div>
@@ -11,7 +11,18 @@
         <span class="text-[#F4F8FF]">zgsm@sangfor.com.cn</span>
       </div>
     </div>
-    <div class="flex items-center text-[#a1a7b3] mb-5">
+    <div class="contract flex items-center mt-7">
+      <div class="flex flex-col items-center">
+        <img class="w-25 h-25" src="../../assets/qrcode/official_account.png" alt="" />
+        <span class="mt-3 text-white">{{ t('footer.officialAccount') }}</span>
+      </div>
+
+      <div class="flex flex-col ml-20 items-center">
+        <img class="w-25 h-25" src="../../assets/qrcode/communication_group.png" alt="" />
+        <span class="mt-3 text-white">{{ t('footer.joinGroup') }}</span>
+      </div>
+    </div>
+    <div class="flex items-center text-[#a1a7b3] mt-18.5">
       <span class="mx-3">{{ t('footer.copyright.company') }}</span>
       <template v-if="locale === 'zh'">
         <div class="flex items-center mx-3">
@@ -34,7 +45,8 @@ const { t, locale } = useI18n()
 </script>
 <style lang="less" scoped>
 .footer-copyright {
-  background: url('@/assets/footer_bg.png') no-repeat top center;
+  background: url('@/assets/footer_bg.png') no-repeat;
+  background-size: 100% 100%;
 }
 
 .footer-title {

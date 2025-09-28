@@ -7,7 +7,8 @@
     "home": "首页",
     "openSource": "开源",
     "docs": "文档",
-    "installGuide": "本地部署"
+    "installGuide": "本地部署",
+    "operation": "运营活动"
   },
   "home": {
     "welcomeTitle": "欢迎使用Costrict",
@@ -134,6 +135,8 @@
       "desc": "欢迎加入我们，让AI更高效！"
     },
     "contactUs": "联系我们",
+    "officialAccount": "扫码关注公众号",
+    "joinGroup": "扫码加入交流群",
     "copyright": {
       "company": "©2025 深信服科技股份有限公司版权所有",
       "icp": "粤ICP备08126214号",

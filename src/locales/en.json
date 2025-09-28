@@ -6,7 +6,8 @@
     "home": "Homepage",
     "openSource": "Open Source",
     "docs": "Documentation",
-    "installGuide": "Local Deployment"
+    "installGuide": "Local Deployment",
+    "operation": "Operational activities"
   },
   "home": {
     "welcomeTitle": "Costrict",
@@ -132,6 +133,8 @@
       "desc": "Welcome to join us and make AI more efficient!"
     },
     "contactUs": "Contact Us",
+    "officialAccount": "Scan to follow official account",
+    "joinGroup": "Scan to join communication group",
     "copyright": {
       "company": "©2025 SANGFOR TECHNOLOGIES. ALL RIGHTS RESERVED.",
       "icp": "粤ICP备08126214号",
