@@ -1,6 +1,6 @@
 <template>
-  <div class="navbar sticky top-0 left-0 right-0 z-1000 flex h-[68px] px-[52px]"
-    :class="{ 'not-homepage': notHomePage }">
+  <div class="navbar fixed w-full z-1000 flex h-[68px] px-[52px]" :class="{ 'not-homepage': notHomePage }">
+    <!-- Logo 和应用名称 -->
     <div class="flex items-center h-[68px] cursor-pointer" @click="toHome">
       <img class="w-[28px] mr-3" src="@/assets/logo.png" />
       <div class="text-[#F4F8FF] text-base">{{ t('header.appName') }}</div>
@@ -66,6 +66,10 @@ const menuOptions = computed<MenuOption[]>(() => [
     label: t('menu.installGuide'),
     key: 'download',
   },
+  {
+    label: t('menu.operation'),
+    key: 'operation',
+  },
 ])
 const handleMenuItemClick = (key: string) => {
   if (key === 'oss') {
@@ -77,6 +81,8 @@ const handleMenuItemClick = (key: string) => {
   } else if (key === 'download') {
     window.open('https://docs.costrict.ai/introduction')
     return
+  } else if (key === 'operation') {
+    window.open('https://zgsm.sangfor.com/credit/manager/')
   }
   router.push({ name: key })
 }

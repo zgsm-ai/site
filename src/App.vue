@@ -14,10 +14,10 @@ useScalePage({
 </script>
 
 <template>
+  <navbar />
   <div ref="appRef" id="app-wrapper">
     <n-message-provider>
-      <navbar />
-      <router-view/>
+      <router-view />
     </n-message-provider>
   </div>
 </template>
