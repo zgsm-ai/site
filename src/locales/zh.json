@@ -6,9 +6,10 @@
   "menu": {
     "home": "首页",
     "openSource": "开源",
-    "docs": "文档",
-    "installGuide": "本地部署",
-    "operation": "运营活动"
+    "docs": "帮助文档",
+    "installGuide": "私有化部署",
+    "operation": "运营活动",
+    "download": "下载安装"
   },
   "home": {
     "welcomeTitle": "欢迎使用Costrict",
@@ -147,7 +148,8 @@
   "download": {
     "title": "欢迎使用Costrict",
     "desc": "Costrict是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
-    "vscodeTitle": "在 Visual Studio Code 中安装Costrict，要求版本为最新 或者 1.86.0 及以上版本",
+    "vscodeTitle": "在 Visual Studio Code 中安装Costrict，要求版本为最新 或者 1.86.3 及以上版本",
+    "jetbrainsTitle": "为了获得最佳兼容性，需要 JetBrains IDE 版本 2023.1 或更高版本",
     "installSteps": "安装步骤如下：",
     "step1": "步骤1",
     "step2": "步骤2",
@@ -155,11 +157,14 @@
     "golandIcon": "/images/zh/dowload_goland.png",
     "step1Img": "/images/zh/download_step1.svg",
     "step2Img": "/images/zh/download_step2.svg",
-    "step1Title": "打开插件市场, 搜索“Costrict”并安装",
-    "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索“Costrict”后点击安装",
+    "step1Title": "打开插件市场, 搜索\"Costrict\"并安装",
+    "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索\"Costrict\"后点击安装",
     "step2Title": "登录Costrict",
-    "step2Content": "重启 Visual Studio Code 后，单击Costrict图标，使用默认Base Url 点击“登录Costrict” 若为本地化部署则需要填写Url 后再点击登录按钮",
+    "step2Content": "重启 Visual Studio Code 后，单击Costrict图标，使用默认Base Url 点击\"登录Costrict\" 若为本地化部署则需要填写Url 后再点击登录按钮",
     "step2Tips": "Url填写若不清楚请联系公司管理员",
+    "jetbrainsStep1Title": "下载离线包安装",
+    "jetbrainsStep1Content1": "1. 下载 JetBrains IDEs 的 zip 安装包；",
+    "jetbrainsStep1Content2": "2. 点击导航-插件，点击设置图标，下拉菜单中单击从本地安装插件，选择下载的 zip 文件后安装",
     "manualPluginDownload": "手动获取插件"
   }
 }

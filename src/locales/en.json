@@ -5,9 +5,10 @@
   "menu": {
     "home": "Homepage",
     "openSource": "Open Source",
-    "docs": "Documentation",
-    "installGuide": "Local Deployment",
-    "operation": "Operational activities"
+    "docs": "Help Documentation",
+    "installGuide": "Private Deployment",
+    "operation": "Operational activities",
+    "download": "Download"
   },
   "home": {
     "welcomeTitle": "Costrict",
@@ -145,7 +146,8 @@
   "download": {
     "title": "Costrict",
     "desc": "Costrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
-    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.86.0 or above",
+    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.86.3 or above",
+    "jetbrainsTitle": "For best compatibility, JetBrains IDE version 2023.1 or higher is required",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
     "step2": "Step 2",
@@ -158,6 +160,9 @@
     "step2Title": "Install Costrict",
     "step2Content": "After restarting Visual Studio Code, click on the Costrict icon, use the default Base Url to click \"Login to Costrict\".",
     "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button.",
+    "jetbrainsStep1Title": "Download offline package for installation",
+    "jetbrainsStep1Content1": "1. Download the zip installation package of JetBrains IDEs;",
+    "jetbrainsStep1Content2": "2. Click Navigation - Plugins, click the settings icon, click Install Plugin from Local in the dropdown menu, and select the downloaded zip file to install",
     "manualPluginDownload": "Manual download"
   }
 }
