@@ -71,9 +71,11 @@ export default defineComponent({
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
-// import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const { t, locale } = useI18n()
+
+const router = useRouter()
 
 const isEn = computed(() => locale.value === 'en')
 
@@ -86,7 +88,8 @@ const subTitleFontSize = computed(() => {
 })
 
 const toDownload = () => {
-  window.open('https://docs.costrict.ai/guide/installation')
+  // window.open('https://docs.costrict.ai/guide/installation')
+  router.push('/download')
 }
 
 const toDeployment = () => {

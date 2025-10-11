@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-black">
+  <div class="w-full bg-black pt-17">
     <div class="login-container">
       <div class="container-header">
         <p class="title text-white">{{ t('download.title') }}</p>
@@ -9,16 +9,17 @@
       </div>
       <div class="container-main">
         <div class="tab-list">
-          <div class="tab-item" :class="{ active: activeTab === tab.key }" v-for="tab in tabList" :key="tab.key">
+          <div class="tab-item" :class="{ active: activeTab === tab.key }" v-for="tab in tabList" :key="tab.key"
+            @click="handleTabClick(tab.key)">
             <img :src="tab.imgUrl" :alt="tab.key" />
           </div>
         </div>
         <div class="download-content">
 
           <div class="content-header">
-            <img class="download-icon" src="@/assets/vscode_icon.png" alt="" />
-            <span class="text-white">{{ t('download.vscodeTitle') }}</span>
-            <div class="flex cursor-pointer ml-4" @click="downloadPlugin">
+            <img class="download-icon" :src="headerIcon" alt="" />
+            <span class="text-white">{{ headerTitle }}</span>
+            <div class="flex cursor-pointer ml-4" @click="download">
               <span style="color: #4083e8;">{{
                 t('download.manualPluginDownload') }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
@@ -43,10 +44,13 @@
                   <div class="flex step-wrapper">
                     <div class="step-left">
                       <div class="step-title">{{ step.title }}</div>
-                      <div class="step-content">{{ step.content }}</div>
+                      <div class="step-content">
+                        <component :is="step.render" v-if="step.render" />
+                        <template v-else>{{ step.content }}</template>
+                      </div>
                       <div v-if="step.tips" class="step-tips">{{ step.tips }}</div>
                     </div>
-                    <img :src="step.imgUrl" alt="" />
+                    <img :src="step.imgUrl" alt="" class="w-150 h-65" />
                   </div>
                 </n-timeline-item>
               </n-timeline>
@@ -59,49 +63,119 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, h } from 'vue'
 import { NTimeline, NTimelineItem } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
-import vscodeImg from '@/assets/dowload_vscode.png'
+import type { VNode } from 'vue'
+import vscodeImg from '@/assets/vscode.svg'
+import jetbrainsImg from '@/assets/jetbrains.svg'
+import vscodeDisableImg from '@/assets/vscode_disable.svg'
+import jetbrainsDisableImg from '@/assets/jetbrains_disable.svg'
+import jetbrainsContent from '@/assets/jetbrains_download.png'
+import vscodeIcon from '@/assets/vscode_icon.png'
+import jetbrainsIcon from '@/assets/jetbrains_icon.png'
+
+interface StepItem {
+  imgUrl: string
+  title: string
+  content?: string
+  tips?: string
+  render?: () => VNode
+}
 
 const { t } = useI18n()
+
+const activeTab = ref('vscode')
+
+const headerTitle = computed(() => {
+  return activeTab.value === 'vscode'
+    ? t('download.vscodeTitle')
+    : t('download.jetbrainsTitle')
+})
+
+const headerIcon = computed(() => {
+  return activeTab.value === 'vscode' ? vscodeIcon : jetbrainsIcon
+})
 
 const tabList = computed(() => {
   return [
     {
       key: 'vscode',
-      imgUrl: vscodeImg,
+      imgUrl: activeTab.value === 'vscode' ? vscodeImg : vscodeDisableImg,
     },
     {
-      key: 'pycharm',
-      imgUrl: t('download.pyCharmIcon'),
-    },
-    {
-      key: 'goland',
-      imgUrl: t('download.golandIcon'),
-    },
+      key: 'jetbrains',
+      imgUrl: activeTab.value === 'jetbrains' ? jetbrainsImg : jetbrainsDisableImg,
+    }
   ]
 })
-const activeTab = 'vscode'
 
-const stepList = computed(() => {
-  return [
-    {
-      imgUrl: t('download.step1Img'),
-      title: t('download.step1Title'),
-      content: t('download.step1Content'),
-    },
-    {
-      imgUrl: t('download.step2Img'),
-      title: t('download.step2Title'),
-      content: t('download.step2Content'),
-      tips: t('download.step2Tips'),
-    },
-  ]
+const stepList = computed<StepItem[]>(() => {
+  if (activeTab.value === 'vscode') {
+    return [
+      {
+        imgUrl: t('download.step1Img'),
+        title: t('download.step1Title'),
+        content: t('download.step1Content'),
+      },
+      {
+        imgUrl: t('download.step2Img'),
+        title: t('download.step2Title'),
+        content: t('download.step2Content'),
+        tips: t('download.step2Tips'),
+      },
+    ]
+  } else if (activeTab.value === 'jetbrains') {
+    return [
+      {
+        imgUrl: jetbrainsContent,
+        title: t('download.jetbrainsStep1Title'),
+        render: () => h('div', { class: 'jetbrains-content' }, [
+          h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content1')),
+          h('div', { class: 'flex cursor-pointer ml-4 mt-2 mb-2', onClick: downloadJetbrainsPlugin }, [
+            h('span', { style: 'color: #4083e8;' }, t('download.manualPluginDownload')),
+            h('svg', {
+              xmlns: 'http://www.w3.org/2000/svg',
+              'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+              viewBox: '0 0 20 20',
+              width: '18',
+              color: '#fff'
+            }, [
+              h('g', { fill: 'none' }, [
+                h('path', {
+                  d: 'M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z',
+                  fill: 'currentColor'
+                })
+              ])
+            ])
+          ]),
+          h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content2')),
+        ])
+      },
+    ]
+  }
+  return []
 })
+
+const handleTabClick = (tabKey: string) => {
+  activeTab.value = tabKey
+}
+
+const download = () => {
+  if (activeTab.value === 'vscode') {
+    downloadPlugin()
+  } else {
+    downloadJetbrainsPlugin()
+  }
+}
 
 const downloadPlugin = () => {
   window.open('https://costrict.ai/plugin/download/', '_blank')
+}
+
+const downloadJetbrainsPlugin = () => {
+    window.open('https://costrict.ai/plugin/jetbrain/', '_blank')
+
 }
 </script>
 
@@ -110,6 +184,7 @@ const downloadPlugin = () => {
   width: 1200px;
   margin: 0 auto;
   padding-bottom: 150px;
+  min-height: calc(100vh - 68px);
 
   .container-header {
     padding-top: 50px;
@@ -135,10 +210,9 @@ const downloadPlugin = () => {
       .tab-item {
         margin-right: 12px;
         cursor: pointer;
-
-        &:not(:first-of-type) {
-          cursor: not-allowed;
-        }
+        border-radius: 8px;
+        padding: 8px;
+        transition: all 0.3s ease;
       }
     }
 
@@ -256,3 +330,4 @@ const downloadPlugin = () => {
   }
 }
 </style>
+

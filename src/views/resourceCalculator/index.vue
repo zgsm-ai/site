@@ -1,5 +1,5 @@
 <template>
-  <div class="resource-calculator">
+  <div class="resource-calculator pt-17">
     <n-layout class="min-h-screen" style="padding: 20px">
       <div class="calculator-container">
         <div class="single-column-container">

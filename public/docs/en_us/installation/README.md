@@ -16,7 +16,7 @@ To help you deploy Costrict more efficiently, this document provides a clear ins
 ### Prerequisites
 
 1. Client has internet access.
-2. Client: VS Code (version >= v1.86.0).
+2. Client: VS Code (version >= v1.86.3).
 
 ### Installation Steps
 
