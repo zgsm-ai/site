@@ -93,7 +93,7 @@ const toDownload = () => {
 }
 
 const toDeployment = () => {
-  window.open('https://docs.costrict.ai/introduction')
+  window.open('https://docs.costrict.ai/deployment/introduction/')
 }
 </script>
 
