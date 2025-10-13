@@ -87,7 +87,7 @@ const handleMenuItemClick = (key: string) => {
     window.open('https://docs.costrict.ai')
     return
   } else if (key === 'install') {
-    window.open('https://docs.costrict.ai/introduction')
+    window.open('https://docs.costrict.ai/deployment/introduction/')
     return
   } else if (key === 'operation') {
     window.open('https://zgsm.sangfor.com/credit/manager/')
