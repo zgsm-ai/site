@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar fixed w-full z-1000 flex h-[68px] px-[52px]" :class="{ 'not-homepage': notHomePage }">
+  <div class="navbar fixed w-full z-1000 flex h-17 px-13 top-0" :class="{ 'not-homepage': notHomePage }">
     <!-- Logo 和应用名称 -->
     <div class="flex items-center h-[68px] cursor-pointer" @click="toHome">
       <img class="w-[28px] mr-3" src="@/assets/logo.png" />

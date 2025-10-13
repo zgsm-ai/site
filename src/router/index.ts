@@ -29,6 +29,9 @@ const router = createRouter({
       component: () => import('@/views/resourceCalculator/index.vue'),
     },
   ],
+  scrollBehavior() {
+    return { top: 0 }
+  },
 })
 
 export default router

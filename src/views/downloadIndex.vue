@@ -198,7 +198,6 @@ const downloadJetbrainsPlugin = () => {
 
     .desc {
       color: #c2c7d1;
-      // margin-bottom: 20px;
     }
   }
 
