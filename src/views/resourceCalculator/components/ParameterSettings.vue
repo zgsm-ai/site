@@ -1,6 +1,28 @@
 <template>
   <n-card title="参数设置" :bordered="true" size="small">
     <n-form :model="formData" label-placement="top">
+      <!-- 部署方式选择 -->
+      <div class="deployment-mode-section mb-4 parameter-card">
+        <n-form-item label="部署方式">
+          <n-radio-group v-model:value="formData.deploymentMode" name="deploymentMode" @update:value="handleDeploymentChange">
+            <n-space>
+              <n-radio value="custom">自定义安装</n-radio>
+              <n-radio value="aicp">AICP</n-radio>
+            </n-space>
+          </n-radio-group>
+        </n-form-item>
+
+        <!-- 部署方式描述 -->
+        <div class="deployment-description">
+          <n-alert type="info" :show-icon="false">
+            <div class="deployment-desc-content">
+              <div class="deployment-desc-title">{{ DEPLOYMENT_CONFIG[formData.deploymentMode].name }}</div>
+              <div class="deployment-desc-text">{{ DEPLOYMENT_CONFIG[formData.deploymentMode].description }}</div>
+            </div>
+          </n-alert>
+        </div>
+      </div>
+
       <!-- 版本选择 -->
       <div class="version-mode-section mb-4 parameter-card">
         <n-form-item label="版本选择">
@@ -147,7 +169,7 @@ import {
   NRadio,
   NAlert,
 } from 'naive-ui'
-import { VERSION_CONFIG } from '../constants'
+import { VERSION_CONFIG, DEPLOYMENT_CONFIG } from '../constants'
 import type { FormData } from '../types'
 
 // 定义组件名
@@ -173,6 +195,12 @@ const handleDeveloperCountChange = () => {
   // 数据变化会自动通过 watch 同步到父组件，父组件会通过 handleFormDataUpdate 重新计算
 }
 
+
+// 处理部署方式切换
+const handleDeploymentChange = () => {
+  // 部署方式切换时，保持当前版本选择不变，但会触发重新计算
+  // 数据变化会自动通过 watch 同步到父组件
+}
 
 // 处理版本切换
 const handleVersionChange = (newVersion: 'basic' | 'standard') => {
@@ -320,6 +348,39 @@ const handleVersionChange = (newVersion: 'basic' | 'standard') => {
   font-size: 0.75rem;
 }
 
+/* 部署方式选择样式 */
+.deployment-mode-section {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.deployment-mode-section .n-radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.deployment-mode-section .n-radio {
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.deployment-mode-section .n-radio:hover {
+  border-color: #409eff;
+  background: #f0f7ff;
+}
+
+.deployment-mode-section .n-radio.n-radio--checked {
+  border-color: #409eff;
+  color: white;
+}
+
 /* 版本选择样式 */
 .version-mode-section {
   background: #f8fafc;
@@ -351,6 +412,28 @@ const handleVersionChange = (newVersion: 'basic' | 'standard') => {
 .version-mode-section .n-radio.n-radio--checked {
   border-color: #409eff;
   color: white;
+}
+
+.deployment-description {
+  margin-top: 12px;
+}
+
+.deployment-desc-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.deployment-desc-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #2c3e50;
+}
+
+.deployment-desc-text {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
 }
 
 .version-description {
