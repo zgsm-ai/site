@@ -1,5 +1,8 @@
 // 类型定义
 
+// 部署方式类型
+export type DeploymentMode = 'custom' | 'aicp'
+
 // 版本模式类型
 export type VersionMode = 'basic' | 'standard'
 
@@ -135,7 +138,8 @@ export interface FormData {
   selectedRAGEmbeddingModel: string
   selectedRAGRerankModel: string
   presetMode: PresetMode
-  versionMode: VersionMode  // 新增版本模式字段
+  versionMode: VersionMode  // 版本模式字段
+  deploymentMode: DeploymentMode  // 部署方式字段
 }
 
 // AICP服务类型定义

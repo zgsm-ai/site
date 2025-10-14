@@ -1,3 +1,15 @@
+// 部署方式配置
+export const DEPLOYMENT_CONFIG = {
+  custom: {
+    name: '自定义安装',
+    description: '灵活配置模型和资源，满足个性化需求，适合有特殊要求的企业用户！',
+  },
+  aicp: {
+    name: 'AICP',
+    description: 'AICP平台集成方案，提供云端部署服务，简化运维管理！',
+  },
+}
+
 // 版本配置
 export const VERSION_CONFIG = {
   standard: {
@@ -50,6 +62,7 @@ export interface TableRow {
   contextWindow: string // 上下文窗口
   concurrentRpm: number | string // 问答25K(补全1K)上下文 每分钟并发数
   maxThroughput: number | string // 问答25K(补全1K)上下文 最高吞吐(token/s)
+  concurrency?: number // 并发数（仅在自定义安装和AICP版本显示）
 }
 
 // 标准版模型对比数据
@@ -157,6 +170,124 @@ export const basicModelData: TableRow[] = [
     contextWindow: '-',
     concurrentRpm: '-',
     maxThroughput: '-'
+  }
+]
+
+// 自定义安装版本模型对比数据
+export const customModelData: TableRow[] = [
+  {
+    modelType: '问答模型',
+    cardCount: '4 卡',
+    fullName: 'GLM-4.5-355B-A32B-FP8',
+    parameters: '355B/32B',
+    performance: '支持200人编程人员，日活60人，每分钟8个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    contextWindow: '128K',
+    concurrentRpm: 8,
+    maxThroughput: 25,
+    concurrency: 150
+  },
+  {
+    modelType: '审查模型',
+    cardCount: '2 卡',
+    fullName: 'Qwen3-Coder-30B-A3B',
+    parameters: '30B/3B',
+    performance: '',
+    contextWindow: '262K',
+    concurrentRpm: 45,
+    maxThroughput: 35,
+    concurrency: 80
+  },
+  {
+    modelType: '补全模型',
+    cardCount: '1 卡',
+    fullName: 'DeepSeek-Coder-V2-Lite-Base',
+    parameters: '16B',
+    performance: '全程耗时小于1.0秒',
+    contextWindow: '128K',
+    concurrentRpm: 180,
+    maxThroughput: 100,
+    concurrency: 300
+  },
+  {
+    modelType: '嵌入模型',
+    cardCount: '0.5 卡',
+    fullName: 'all-MiniLM-L6-v2',
+    parameters: '23M',
+    performance: '',
+    contextWindow: '-',
+    concurrentRpm: '-',
+    maxThroughput: '-',
+    concurrency: 500
+  },
+  {
+    modelType: '召回模型',
+    cardCount: '0.5 卡',
+    fullName: 'ms-marco-MiniLM-L-6-v2',
+    parameters: '23M',
+    performance: '',
+    contextWindow: '-',
+    concurrentRpm: '-',
+    maxThroughput: '-',
+    concurrency: 500
+  }
+]
+
+// AICP版本模型对比数据
+export const aicpModelData: TableRow[] = [
+  {
+    modelType: '问答模型',
+    cardCount: '4 卡',
+    fullName: 'GLM-4.5-355B-A32B-FP8',
+    parameters: '355B/32B',
+    performance: '支持400人编程人员，日活120人，每分钟16个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    contextWindow: '128K',
+    concurrentRpm: 16,
+    maxThroughput: 30,
+    concurrency: 250
+  },
+  {
+    modelType: '审查模型',
+    cardCount: '2 卡',
+    fullName: 'Qwen3-Coder-30B-A3B',
+    parameters: '30B/3B',
+    performance: '',
+    contextWindow: '262K',
+    concurrentRpm: 70,
+    maxThroughput: 40,
+    concurrency: 120
+  },
+  {
+    modelType: '补全模型',
+    cardCount: '1 卡',
+    fullName: 'DeepSeek-Coder-V2-Lite-Base',
+    parameters: '16B',
+    performance: '全程耗时小于0.8秒',
+    contextWindow: '128K',
+    concurrentRpm: 250,
+    maxThroughput: 120,
+    concurrency: 450
+  },
+  {
+    modelType: '嵌入模型',
+    cardCount: '0.5 卡',
+    fullName: 'all-MiniLM-L6-v2',
+    parameters: '23M',
+    performance: '',
+    contextWindow: '-',
+    concurrentRpm: '-',
+    maxThroughput: '-',
+    concurrency: 800
+  },
+  {
+    modelType: '召回模型',
+    cardCount: '0.5 卡',
+    fullName: 'ms-marco-MiniLM-L-6-v2',
+    parameters: '23M',
+    performance: '',
+    contextWindow: '-',
+    concurrentRpm: '-',
+    maxThroughput: '-',
+    concurrency: 800
   }
 ]
 

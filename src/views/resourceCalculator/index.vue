@@ -16,7 +16,7 @@
         </div>
 
         <!-- 模型对比表 -->
-        <ModelTable :version="formData.versionMode" />
+        <ModelTable :version="formData.versionMode" :deployment="formData.deploymentMode" />
 
         <!-- AICP服务模块 -->
         <div v-if="showAicpModule" class="aicp-section">
@@ -108,6 +108,7 @@ const defaultFormData: FormData = {
   selectedRAGRerankModel: 'gte-reranker-modernbert-base',
   presetMode: 'standard',
   versionMode: 'standard', // 默认使用标准版
+  deploymentMode: 'custom', // 默认使用自定义安装
 }
 
 // 表单数据 - 初始化为空，等待从localStorage恢复
@@ -132,6 +133,11 @@ onMounted(() => {
   // 确保版本模式有值
   if (!formData.versionMode) {
     formData.versionMode = 'standard'
+  }
+
+  // 确保部署方式有值
+  if (!formData.deploymentMode) {
+    formData.deploymentMode = 'custom'
   }
 
   // 确保所有必要字段都有值
