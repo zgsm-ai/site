@@ -9,98 +9,53 @@
           t('home.enterprise.enterprisePrivateDeployment') }}</span>
     </div>
     <div class="flex gap-6 mt-[90px]">
-      <ItemCard v-for="item in featureList" :key="item.content" :content="item.content" :renderTitle="item.renderTitle"
-        width="417px" :height="cardHeight" padding="32px 16px 16px 32px" />
+      <div class="flex flex-col items-center card-item pt-12.5 rounded-[20px]"
+        :class="isZh ? 'pb-13.5 px-6' : 'pb-8.5 px-4.5'" v-for="item in featureList" :key="item.title">
+        <img :src="item.img" class="w-17.5 h-17.5" alt="">
+        <span class="text-white mt-6 text-2xl" :class="isZh ? '' : 'text-center'">{{ item.title }}</span>
+        <p class="text-white mt-6 text-base opacity-70 font-light" :class="isZh ? 'text-base' : 'text-sm text-center leading-5.5'">
+          {{
+            item.content }}</p>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, h } from 'vue'
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
-import ItemCard from './ItemCard.vue'
 import enterpriseFeature1 from '@/assets/enterprise_feature01.svg'
 import enterpriseFeature2 from '@/assets/enterprise_feature02.svg'
 import enterpriseFeature3 from '@/assets/enterprise_feature03.svg'
+import enterpriseFeature4 from '@/assets/enterprise_feature04.svg'
 import { useAnimation } from '@/hooks/use_animation'
 
 const { t, locale } = useI18n()
 
 const isZh = computed(() => locale.value === 'zh')
 
-const cardHeight = computed(() => (isZh.value ? '240px' : '340px'))
+// const cardHeight = computed(() => (isZh.value ? '240px' : '340px'))
 
 const featureList = computed(() => [
   {
     content: t('home.enterprise.feature01Content'),
-    renderTitle: () => (
-      h(
-        'div',
-        { class: 'deployent-icon' },
-        [
-          h(
-            'span',
-            {
-              ...isZh.value ? {} : {
-                style: {
-                  maxWidth: '215px',
-                }
-              },
-            },
-            t('home.enterprise.feature01Title'),
-          ),
-          h(
-            'img',
-            { src: enterpriseFeature1 },
-          )
-        ]
-      )
-    )
+    title: t('home.enterprise.feature01Title'),
+    img: enterpriseFeature1,
   },
   {
     content: t('home.enterprise.feature02Content'),
-    renderTitle: () => (
-      h(
-        'div',
-        { class: 'deployent-icon' },
-        [
-          h(
-            'span',
-            {
-              ...isZh.value ? {} : {
-                style: {
-                  maxWidth: '215px',
-                }
-              },
-            },
-            t('home.enterprise.feature02Title'),
-          ),
-          h(
-            'img',
-            { src: enterpriseFeature2 },
-          )
-        ]
-      )
-    )
+    title: t('home.enterprise.feature02Title'),
+    img: enterpriseFeature2,
   },
   {
     content: t('home.enterprise.feature03Content'),
-    renderTitle: () => (
-      h(
-        'div',
-        { class: 'deployent-icon' },
-        [
-          h(
-            'span',
-            t('home.enterprise.feature03Title'),
-          ),
-          h(
-            'img',
-            { src: enterpriseFeature3 },
-          )
-        ]
-      )
-    )
+    title: t('home.enterprise.feature03Title'),
+    img: enterpriseFeature3,
+  },
+  {
+    content: t('home.enterprise.feature04Content'),
+    title: t('home.enterprise.feature04Title'),
+    img: enterpriseFeature4,
   },
 ])
 
@@ -125,23 +80,6 @@ const toDeployment = () => {
   }
 }
 
-:deep(.deployent-icon) {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-
-  img {
-    margin-left: auto;
-  }
-}
-
-:deep(.item-card) {
-  justify-content: normal;
-
-  &__content {
-    max-width: 354px;
-  }
-}
 
 .wrapper-content {
   font-size: 22px;
@@ -162,5 +100,12 @@ const toDeployment = () => {
   background: linear-gradient(90deg, #0066FF 10%, #008FD7 61%, #00D196 100%);
   box-sizing: border-box;
   border: 1px solid;
+}
+
+.card-item {
+  background: rgba(255, 255, 255, 0.1);
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
 }
 </style>

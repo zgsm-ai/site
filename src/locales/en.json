@@ -71,6 +71,19 @@
       "feature04Content": "An original multi-model cross-validation engine, which automatically initiates multi-model cross-analysis verification for each code issue, ensuring that every problem is subject to \"triple expert consultation,\" reducing the false alarm rate and truly achieving \"Finding the problem is solving it\"",
       "pendingRelease": "Coming Soon"
     },
+    "strictMode": {
+      "title": "/images/en/strictMode_title.svg",
+      "subTitle": "Strict Mode standardizes the process of AI-generated code, making it more aligned with enterprise development scenarios. It systematically breaks down a single requirement into steps such as：Requirements Analysis, Architecture Design, Task Planning and Test Generation etc. acting as a standardized procedure for AI to ensure high-quality and highly controllable output.",
+      "feature01": "/images/en/strictMode_feature01.svg",
+      "feature02": "/images/en/strictMode_feature02.svg",
+      "feature03": "/images/en/strictMode_feature03.svg",
+      "feature01Title": "Understanding the Business",
+      "feature02Title": "Structured Workflow & Task Breakdown",
+      "feature03Title": "Test-Driven Development",
+      "feature01Content": "The project documentation function supports organizing information such as the structure, interfaces, and specifications of historical code, ensuring that subsequently generated code maintains consistency with the existing architectural style, achieves seamless integration, and remains high-quality.",
+      "feature02Content": "Costrict systematically deconstructs user requirements into multiple modules, including requirement clarification, design, and task breakdown. Each module is customizable, ensuring highly controllable and superior quality outcomes.",
+      "feature03Content": "Code Quality, Built-In from the Start. Costrict creates tests before writing any code. Its automated test-first cycle ensures every line must meet strict quality checks, guaranteeing solid and reliable code from the ground up."
+    },
     "agent": {
       "title": "AI Agent",
       "demo": "/images/en/agent.gif",
@@ -101,14 +114,20 @@
       "feature02": "/images/en/tool_feature02.svg",
       "feature03": "/images/en/tool_feature03.svg",
       "feature04": "/images/en/tool_feature04.svg",
+      "feature05": "/images/en/tool_feature05.svg",
+      "feature06": "/images/en/tool_feature06.svg",
       "feature01Title": "MCP Server",
       "feature02Title": "Accessible to third-party API",
       "feature03Title": "Multi-Mode & Custom Mode",
       "feature04Title": "Image Context",
+      "feature05Title": "Code Completion",
+      "feature06Title": "Vibe Mode",
       "feature01Content": "The MCP server provides additional tools and resources to assist Costrict in completing tasks beyond its built-in functionalities, such as accessing databases, customizing APIs, and specialized features",
       "feature02Content": "Supports access to various API service providers, such as Anthropic, OpenAI, etc. You can configure any API compatible with OpenAI, or access local models through LM Studio/Ollama. If you use the default Costrict, there are also various advanced models available, such as claude-sonnet-4，etc",
       "feature03Content": "Multiple modes correspond to multiple professional roles, and Costrict's behavior can be intelligently adjusted according to your current task. You can also customize modes and Prompts according to your needs",
-      "feature04Content": "Click the image button below the dialog box, or shift + drag the image into the input box to add visual context to the chat"
+      "feature04Content": "Click the image button below the dialog box, or shift + drag the image into the input box to add visual context to the chat",
+      "feature05Content": "Code auto-completion, automatically generates subsequent code based on the cursor's context code, quickly outputs code in seconds",
+      "feature06Content": "Vibe Mode is designed for rapid development and simple tasks. It supports multi-turn natural language dialogue, allowing for real-time refinement and precise code generation. "
     },
     "enterprise": {
       "title": "Enterprise Private Deployment",
@@ -117,14 +136,17 @@
       "feature01Title": "Code Security & Control",
       "feature02Title": "Open Source Customizability",
       "feature03Title": "AI-Driven Development Excellence",
+      "feature04Title": "Cost Leadership Advantage",
       "feature01Content": "On-premises deployment ensures full lifecycle security for enterprise code through physical isolation and end-to-end encryption. Code never traverses external networks - sensitive assets like proprietary algorithms and API keys remain entirely within your infrastructure",
       "feature02Content": "Our open-source codebase enables extensive customization through APIs, allowing seamless integration with workflows and business systems. By deeply contextualizing enterprise knowledge, it powers AI-assisted decision making and task automation – driving transformative business efficiency gains",
       "feature03Content": "Leveraging AI-powered generation, automated testing, and deep inspection, development cycles are dramatically shortened while resource allocation becomes significantly more efficient. Our AI Quality Guardian supercharges development, delivering exceptionally reliable and superior software products",
+      "feature04Content": "For large teams, a one-time investment offers greater cost advantages compared to long-term SaaS subscriptions. Moreover, Costrict significantly reduces computational resource and token consumption through engineered capabilities such as prompt optimization, precise contextual retrieval, and adaptive model matching.",
       "enterprisePrivateDeployment": "Explore Enterprise Solutions >"
     },
     "ideSupport": {
       "title": "Multi-Language & VS Code Support",
       "SupportedInVSCode": "Visual Studio Code",
+      "SupportedInJetBrains": "JetBrains IDEs",
       "allLanguages": "All Programming Languages"
     }
   },

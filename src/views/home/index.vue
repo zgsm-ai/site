@@ -2,9 +2,10 @@
   <div class="w-full bg-black">
     <Slogan />
     <div class="w-[1300px] mx-auto">
+      <StrictMode />
       <CodeReview />
-      <AgentView />
-      <CodeCompletion />
+      <!-- <AgentView /> -->
+      <!-- <CodeCompletion /> -->
       <MoreTool />
       <EnterpriseDeployment />
       <LanguageSupport />
@@ -17,9 +18,10 @@
 </template>
 <script lang="ts" setup>
 import Slogan from './slogan.vue'
+import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'
-import AgentView from './agent.vue'
-import CodeCompletion from './CodeCompletion.vue'
+// import AgentView from './agent.vue'
+// import CodeCompletion from './CodeCompletion.vue'
 import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'

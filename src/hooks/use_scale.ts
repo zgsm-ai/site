@@ -1,100 +1,99 @@
-import { onMounted, onUnmounted, ref, type Ref } from 'vue'
+import { ref, onMounted, onUnmounted, nextTick, type Ref } from 'vue'
 import { debounce } from 'lodash-es'
 
 interface UseScalePageOptions {
   target: Ref<HTMLElement | null>
   width?: number
   height?: number | 'auto'
+  fillScreen?: boolean
 }
 
-/**
- * 页面自适应缩放的组合式函数 (完整版)
- * @param {object} options 配置选项
- * @param {Ref<HTMLElement | null>} options.target - 缩放目标元素的 Ref
- * @param {number} [options.width=1920] - 设计稿宽度
- * @param {number | 'auto'} [options.height='auto'] - 设计稿高度。'auto' 表示高度自适应内容。
- */
 export function useScalePage(options: UseScalePageOptions) {
-  const { target, width = 1920, height = 'auto' } = options
-
+  const { target, width = 1920, height = 'auto', fillScreen = true } = options
   const observer = ref<ResizeObserver | null>(null)
 
   const setScale = () => {
     if (!target.value) return
+    const el = target.value as HTMLElement
+    const style = el.style
+    const deviceWidth = window.innerWidth
+    const deviceHeight = window.innerHeight
 
-    const style = target.value.style
-    const deviceWidth = document.documentElement.clientWidth
-    const deviceHeight = document.documentElement.clientHeight
+    const scaleX = deviceWidth / width
+    const scaleY = typeof height === 'number' ? deviceHeight / height : scaleX
+    const scale = fillScreen ? Math.min(scaleX, scaleY) : scaleX
 
-    // 固定高度模式
-    if (typeof height === 'number') {
-      const scaleX = deviceWidth / width
-      const scaleY = deviceHeight / height
-      const scale = Math.min(scaleX, scaleY)
-      const scaledWidth = width * scale
-      const scaledHeight = height * scale
-      const offsetX = (deviceWidth - scaledWidth) / 2
-      const offsetY = (deviceHeight - scaledHeight) / 2
-
-      style.width = `${width}px`
-      style.height = `${height}px`
-      style.position = 'absolute'
-      style.left = `${offsetX}px`
-      style.top = `${offsetY}px`
-      style.transform = `scale(${scale})`
-      style.transformOrigin = '0 0'
-    } else {
-      // 高度自适应模式
-      const scale = deviceWidth / width
-      style.width = `${width}px`
+    // 计算实际高度
+    let realHeight = typeof height === 'number' ? height : 0
+    if (height === 'auto') {
+      // 临时重置样式以获取准确的 scrollHeight
+      const originalTransform = style.transform
+      const originalHeight = style.height
+      const originalWidth = style.width
+      
+      // 临时移除缩放以获取真实内容高度
+      style.transform = 'none'
+      style.width = 'auto'
       style.height = 'auto'
-      style.position = 'relative'
-      style.transform = `scale(${scale})`
-      style.transformOrigin = '0 0'
+      
+      // 强制重排以获取准确的尺寸
+      void el.offsetHeight
+      
+      // 获取真实内容高度
+      const contentHeight = el.scrollHeight
+      
+      // 恢复缩放样式
+      style.transform = originalTransform
+      style.width = originalWidth
+      style.height = originalHeight
+      
+      // 计算实际高度，确保不小于设备高度
+      realHeight = Math.max(contentHeight, deviceHeight / scale)
     }
-  }
 
-  const updateBodyHeight = () => {
-    if (target.value && height === 'auto') {
-      const scale = document.documentElement.clientWidth / width
-      const scaledHeight = target.value.offsetHeight * scale
-      document.body.style.height = `${scaledHeight}px`
-    }
+    // 应用缩放
+    style.width = `${width}px`
+    style.height = `${realHeight}px`
+    style.position = 'absolute'
+    style.left = '0'
+    style.top = '0'
+    style.transformOrigin = 'top left'
+    style.transform = `scale(${scale})`
+
+    // 更新 body
+    const scaledHeight = Math.max(realHeight * scale, deviceHeight)
+    document.body.style.height = `${scaledHeight}px`
+    document.body.style.minHeight = `${deviceHeight}px`
+    document.body.style.overflow = 'hidden' // ✅ 避免产生滚动条
   }
 
   const debouncedUpdate = debounce(() => {
     setScale()
-    updateBodyHeight()
+    // ✅ 等布局稳定后再重新计算一次
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        setScale()
+      })
+    })
   }, 100)
 
   onMounted(() => {
     setScale()
-    updateBodyHeight()
-
     window.addEventListener('resize', debouncedUpdate)
 
-    if (target.value && height === 'auto') {
-      observer.value = new ResizeObserver(() => {
-        // 当尺寸变化时，仅更新body高度以获得最佳性能
-        updateBodyHeight()
-      })
+    if (target.value) {
+      observer.value = new ResizeObserver(() => setScale())
       observer.value.observe(target.value)
     }
   })
 
   onUnmounted(() => {
     window.removeEventListener('resize', debouncedUpdate)
+    observer.value?.disconnect()
     document.body.style.height = 'auto'
-
-    if (observer.value) {
-      observer.value.disconnect()
-    }
+    document.body.style.minHeight = 'auto'
+    document.body.style.overflow = 'auto'
   })
 
-  return {
-    update: () => {
-      setScale()
-      updateBodyHeight()
-    },
-  }
+  return { update: setScale }
 }
