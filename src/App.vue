@@ -21,7 +21,7 @@ useNavbarScale({
 
 <template>
   <navbar ref="navbarRef" />
-  <div ref="appRef" id="app-wrapper">
+  <div ref="appRef" id="app-wrapper" class="bg-black">
     <n-message-provider>
       <router-view />
     </n-message-provider>

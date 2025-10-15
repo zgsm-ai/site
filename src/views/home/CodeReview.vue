@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full flex flex-col items-center">
+  <div class="w-full flex flex-col items-center mt-45">
     <div class="flex flex-col items-center">
       <div>
         <img :src="t('home.codeReview.title')" />
       </div>
-      <span class="mt-4 text-base font-normal leading-6 text-center text-white/70">{{
+      <span class="mt-4 text-base font-normal leading-6 text-center text-white/70 max-w-256">{{
         t('home.codeReview.subTitle')
-        }}</span>
+      }}</span>
     </div>
     <div class="w-full  rounded-[20px] mt-10 gradient-border">
       <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline

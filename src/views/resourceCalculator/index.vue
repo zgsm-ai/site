@@ -201,8 +201,9 @@ watch(
 
 <style scoped>
 .resource-calculator {
-  background-color: #f0f2f5;
-  min-height: 100vh;
+  background-color: #fff;
+  /* min-height: 100vh; */
+  height: 100%;
 }
 
 .calculator-container {

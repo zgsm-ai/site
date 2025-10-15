@@ -20,6 +20,16 @@ const cardHeight = computed(() => (isZh.value ? '420px' : '440px'))
 
 const featureList = computed(() => [
   {
+    title: t('home.moreTool.feature05Title'),
+    content: t('home.moreTool.feature05Content'),
+    img: t('home.moreTool.feature05'),
+  },
+  {
+    title: t('home.moreTool.feature06Title'),
+    content: t('home.moreTool.feature06Content'),
+    img: t('home.moreTool.feature06'),
+  },
+  {
     title: t('home.moreTool.feature01Title'),
     content: t('home.moreTool.feature01Content'),
     img: t('home.moreTool.feature01'),

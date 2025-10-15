@@ -7,9 +7,16 @@
         <span class="text-white leading-6 text-base whitespace-nowrap">{{ item.type }}</span>
       </div>
     </div>
-    <div class="w-[520px] h-16 mt-20 vscode-container flex items-center justify-center">
-      <img :src="vscodeIcon" />
-      <span class="text-white ml-3 text-base">{{ t('home.ideSupport.SupportedInVSCode') }}</span>
+    <div class="flex">
+      <div class="w-90 h-16 mt-20 vscode-container flex items-center justify-center">
+        <img :src="vscodeIcon" />
+        <span class="text-white ml-3 text-base">{{ t('home.ideSupport.SupportedInVSCode') }}</span>
+      </div>
+      <div class="w-85 h-16 mt-20 vscode-container flex items-center justify-center">
+        <img :src="jetbrainsIcon" />
+        <span class="text-white ml-3">{{
+          t('home.ideSupport.SupportedInJetBrains') }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -25,8 +32,10 @@ import jsIcon from '@/assets/js.webp'
 import tsIcon from '@/assets/ts.webp'
 import cIcon from '@/assets/c.webp'
 import vscodeIcon from '@/assets/vscode.webp'
+import jetbrainsIcon from '@/assets/jetbrains.webp'
 
 const { t } = useI18n()
+
 const programLanguage = computed(() => [
   {
     type: 'Python',
