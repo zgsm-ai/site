@@ -1,22 +1,24 @@
 <template>
     <div class="w-full flex flex-col items-center">
         <div class="flex flex-col items-center">
-            <div>
+            <div class="strict-mode__title" :class="{ 'strict-mode__title-en': !isZh }">
                 <img :src="t('home.strictMode.title')" />
             </div>
-            <span class="mt-4 text-base font-normal leading-6 text-center text-white/70 max-w-270">{{
+            <span class="mt-4 text-base font-normal leading-6 text-center text-white/70 max-w-270 strict-mode__desc">{{
                 t('home.strictMode.subTitle')
-            }}</span>
+                }}</span>
         </div>
-        <div class="w-full  rounded-[20px] mt-10 gradient-border">
+        <div class="w-full rounded-[20px] mt-10 gradient-border">
             <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
                 style="object-fit: cover;" :poster="poster">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class="flex gap-6 flex-wrap mt-6 z-100">
-            <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
-                :content="item.content" :height="cardHeight" />
+        <div class="flex gap-6 flex-wrap mt-6 z-100 justify-between">
+            <div class="strict-mode__item" :class="{ 'strict-mode__item-en': !isZh }" v-for="item in featureList"
+                :key="item.title">
+                <ItemCard :img="item.img" :title="item.title" :content="item.content" />
+            </div>
         </div>
     </div>
 </template>
@@ -32,8 +34,6 @@ import StrictModeEnPoster from '@/assets/strict_mode_en_buffer.png'
 const { t, locale } = useI18n()
 
 const isZh = computed(() => locale.value === 'zh')
-
-const cardHeight = computed(() => (isZh.value ? '400px' : '440px'))
 
 const featureList = computed(() => [
     {
@@ -80,5 +80,49 @@ const poster = computed(() => isZh.value ? StrictModeZhPoster : StrictModeEnPost
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+}
+
+.strict-mode__item {
+    flex: 0 1 calc(50% - 12px);
+    height: 400px;
+
+    @media (max-width: 1024px) {
+        flex: 0 1 calc(50% - 12px);
+    }
+
+    @media (max-width: 768px) {
+        flex: 0 1 100%;
+    }
+
+    @media (max-width: 480px) {
+        height: auto;
+    }
+}
+
+.strict-mode__item-en {
+    height: 440px;
+
+    @media (max-width: 480px) {
+        height: auto;
+    }
+}
+
+.strict-mode__title {
+    @media (max-width: 480px) {
+        width: 70%;
+    }
+}
+
+.strict-mode__title-en {
+    @media (max-width: 480px) {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.strict-mode__desc {
+    @media (max-width: 480px) {
+        font-size: 14px;
+    }
 }
 </style>

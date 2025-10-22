@@ -171,7 +171,7 @@
     "title": "欢迎使用Costrict",
     "desc": "Costrict是一款开源、实用的研发编程工具，基于代码大模型，实现代码补全、智能问答、代码审查、代码优化、单测编写、注释生成等功能。",
     "vscodeTitle": "在 Visual Studio Code 中安装Costrict，要求版本为最新 或者 1.86.3 及以上版本",
-    "jetbrainsTitle": "为了获得最佳兼容性，需要 JetBrains IDE 版本 2023.1 或更高版本",
+    "jetbrainsTitle": "为了获得最佳兼容性，需要 JetBrains IDE 版本 2023.3 或更高版本",
     "installSteps": "安装步骤如下：",
     "step1": "步骤1",
     "step2": "步骤2",

@@ -1,5 +1,5 @@
 <template>
-    <div class="item-card" :style="style">
+    <div class="item-card">
         <div class="item-card__title">
             <component v-if="renderTitle" :is="renderTitle()" />
             <slot v-else name="title">{{ title }}</slot>
@@ -16,37 +16,25 @@
 </template>
 
 <script setup lang="ts">
-import { computed, type VNode } from 'vue';
+import { type VNode } from 'vue';
 
-const props = withDefaults(defineProps<{
+withDefaults(defineProps<{
     title?: string
     content?: string
     img?: string
     renderTitle?: () => VNode,
-    width?: string
-    height?: string,
-    padding?: string,
-    a?: string
 }>(), {
     title: '',
     content: '',
     img: '',
-    width: '638px',
-    height: '400px',
-    padding: '32px 32px 22px',
 })
 
-const style = computed(() => {
-    return {
-        padding: props.padding,
-        height: props.height,
-        width: props.width,
-    }
-})
 </script>
 
 <style lang="less" scoped>
 .item-card {
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
     box-sizing: border-box;
@@ -56,11 +44,20 @@ const style = computed(() => {
     flex-direction: column;
     box-sizing: border-box;
     justify-content: space-between;
+    padding: 32px 32px 22px;
+
+    @media (max-width: 480px) {
+        padding: 24px 24px 22px;
+    }
 
     &__title {
         font-size: 22px;
         font-weight: 500;
         color: #FFFFFF;
+
+        @media (max-width: 480px) {
+            font-size: 18px;
+        }
     }
 
     &__content {
@@ -68,6 +65,12 @@ const style = computed(() => {
         line-height: 24px;
         font-weight: 300;
         color: rgba(255, 255, 255, 0.7);
+
+        @media (max-width: 480px) {
+            font-size: 12px;
+            margin: 12px 0;
+            line-height: 20px;
+        }
     }
 }
 

@@ -16,10 +16,10 @@
         </div>
         <div class="download-content">
 
-          <div class="content-header">
+          <div class="content-header flex flex-wrap">
             <img class="download-icon" :src="headerIcon" alt="" />
-            <span class="text-white">{{ headerTitle }}</span>
-            <div class="flex cursor-pointer ml-4" @click="download">
+            <span class="text-white mr-4">{{ headerTitle }}</span>
+            <div class="flex cursor-pointer" @click="download">
               <span style="color: #4083e8;">{{
                 t('download.manualPluginDownload') }}</span>
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
@@ -42,7 +42,7 @@
                     <div class="timeline-icon">{{ index + 1 }}</div>
                   </template>
                   <div class="flex step-wrapper">
-                    <div class="step-left">
+                    <div class="step-left mr-1">
                       <div class="step-title">{{ step.title }}</div>
                       <div class="step-content">
                         <component :is="step.render" v-if="step.render" />
@@ -50,7 +50,7 @@
                       </div>
                       <div v-if="step.tips" class="step-tips">{{ step.tips }}</div>
                     </div>
-                    <img :src="step.imgUrl" alt="" class="w-150 h-65" />
+                    <img :src="step.imgUrl" alt="" class="w-150" />
                   </div>
                 </n-timeline-item>
               </n-timeline>
@@ -132,7 +132,7 @@ const stepList = computed<StepItem[]>(() => {
         title: t('download.jetbrainsStep1Title'),
         render: () => h('div', { class: 'jetbrains-content' }, [
           h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content1')),
-          h('div', { class: 'flex cursor-pointer ml-4 mt-2 mb-2', onClick: downloadJetbrainsPlugin }, [
+          h('div', { class: 'flex cursor-pointer ml-4 mt-2 mb-2 download-link', onClick: downloadJetbrainsPlugin }, [
             h('span', { style: 'color: #4083e8;' }, t('download.manualPluginDownload')),
             h('svg', {
               xmlns: 'http://www.w3.org/2000/svg',
@@ -174,7 +174,7 @@ const downloadPlugin = () => {
 }
 
 const downloadJetbrainsPlugin = () => {
-    window.open('https://costrict.ai/plugin/jetbrain/', '_blank')
+  window.open('https://costrict.ai/plugin/jetbrain/', '_blank')
 
 }
 </script>
@@ -184,7 +184,18 @@ const downloadJetbrainsPlugin = () => {
   width: 1200px;
   margin: 0 auto;
   padding-bottom: 150px;
-  min-height: calc(100vh - 68px);
+
+  @media (max-width: 1280px) {
+    width: 90%;
+  }
+
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
 
   .container-header {
     padding-top: 50px;
@@ -227,6 +238,26 @@ const downloadJetbrainsPlugin = () => {
           width: 32px;
           margin-right: 12px;
         }
+
+        @media (max-width: 968px) {
+          flex-wrap: wrap;
+
+          img {
+            display: none;
+          }
+
+          span {
+            flex: 0 1 auto;
+            word-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
+          }
+
+          div {
+            flex: 1 1 100%;
+            margin-top: 8px;
+          }
+        }
       }
 
       .download-methods {
@@ -237,7 +268,7 @@ const downloadJetbrainsPlugin = () => {
         }
 
         .step-wrapper {
-          padding: 16px 16px 16px 40px;
+          padding: 16px 16px 16px 32px;
           box-sizing: border-box;
           border: 2px solid transparent;
           background-image: linear-gradient(103deg, rgba(32, 204, 148, 0.24) 4%, #20CC94 20%, #A8A8A8 36%, #D4D4D4 50%, #1C6EFF 67%, rgba(149, 149, 149, 0.55) 99%);
@@ -248,12 +279,32 @@ const downloadJetbrainsPlugin = () => {
           background-clip: padding-box, border-box;
           border-radius: 12px;
 
+          @media (max-width:1024px) {
+            flex-direction: column;
+            padding: 16px;
+          }
+
+          .step-left {
+            @media (max-width:1024px) {
+              align-self: flex-start;
+            }
+          }
+
           .step-title {
             margin-top: 28px;
             font-size: 16px;
             color: #F4F8FF;
             line-height: 24px;
             max-width: 400px;
+
+            @media (max-width:1024px) {
+              margin-top: 0;
+              max-width: 100%;
+            }
+
+            @media (max-width:480px) {
+              font-size: 14px;
+            }
           }
 
           .step-content {
@@ -262,6 +313,18 @@ const downloadJetbrainsPlugin = () => {
             line-height: 20px;
             color: #A1A7B3;
             max-width: 400px;
+
+            @media (max-width:1024px) {
+              max-width: 100%;
+            }
+
+            @media (max-width:640px) {
+              font-size: 13px;
+            }
+
+            @media (max-width:480px) {
+              font-size: 12px;
+            }
           }
 
           .step-tips {
@@ -270,6 +333,18 @@ const downloadJetbrainsPlugin = () => {
             line-height: 20px;
             color: #A1A7B3;
             max-width: 400px;
+
+            @media (max-width:1024px) {
+              max-width: 100%;
+            }
+
+            @media (max-width:640px) {
+              font-size: 13px;
+            }
+
+            @media (max-width:480px) {
+              font-size: 12px;
+            }
           }
 
           .step-tips::before {
@@ -279,6 +354,12 @@ const downloadJetbrainsPlugin = () => {
 
           img {
             margin-left: auto;
+
+            @media (max-width:1024px) {
+              height: auto;
+              margin-top: 10px;
+              margin-left: 0;
+            }
           }
         }
       }
@@ -314,6 +395,10 @@ const downloadJetbrainsPlugin = () => {
             font-size: 16px;
             margin-top: -2px;
             margin-bottom: 8px;
+
+            @media (max-width:480px) {
+              font-size: 14px;
+            }
           }
 
           .n-timeline-item-timeline__line {
@@ -328,5 +413,12 @@ const downloadJetbrainsPlugin = () => {
     }
   }
 }
-</style>
 
+/deep/.jetbrains-content {
+  .download-link {
+    @media (max-width:1024px) {
+      margin-left: 0;
+    }
+  }
+}
+</style>

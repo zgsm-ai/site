@@ -1,10 +1,10 @@
 <template>
   <div ref="animatedElement" class="scroll-animation-wrapper">
     <div class="text-center">
-      <div class="text-4xl font-semibold leading-normal text-center text-white mb-2">
+      <div class="text-4xl font-semibold leading-normal text-center text-white mb-2 page-title">
         {{ title }}
       </div>
-      <div v-if="subtitle" class="text-base font-normal leading-6 text-center text-white/70">
+      <div v-if="subtitle" class="text-base font-normal leading-6 text-center text-white/70 page-subtitle">
         {{ subtitle }}
       </div>
     </div>
@@ -27,35 +27,16 @@ const props = withDefaults(defineProps<Props>(), {
 const { animatedElement } = useAnimation(props.needAnimation)
 </script>
 
-<style scoped>
-.title-component {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #333;
-  margin: 0 0 10px 0;
-  line-height: 1.2;
-}
-
-.subtitle {
-  font-size: 1.25rem;
-  font-weight: normal;
-  color: #666;
-  margin: 0;
-  line-height: 1.4;
-}
-
-@media (max-width: 768px) {
-  .title {
-    font-size: 2rem;
+<style lang="less" scoped>
+.page-title {
+  @media (max-width: 480px) {
+    font-size: 20px;
   }
+}
 
-  .subtitle {
-    font-size: 1.1rem;
+.page-subtitle {
+  @media (max-width: 480px) {
+    font-size: 14px;
   }
 }
 </style>

@@ -1,15 +1,13 @@
 <template>
   <div class="w-full relative z-50">
-    <div class="slogan-container flex w-full h-108 justify-center">
+    <div class="slogan-container flex w-full h-72 sm:h-92 md:h-102 xl:h-108 justify-center">
       <div class="w-full flex flex-col items-center">
-        <div :class="[
+        <div class="mt-48 xl:mt-68 lg:mt-68 md:mt-68 sm:mt-62 text-xl sm:text-2xl" :class="[
           'oss-btn',
           `oss-btn-${locale}`,
-          'mt-68',
           'flex',
           'items-center',
           'justify-center',
-          'text-2xl',
           'text-white',
           'h-10',
           'w-36',
@@ -17,11 +15,12 @@
         ]">
           {{ t('home.slogan.ossButton') }}
         </div>
-        <div class="flex items-center mt-8">
-          <div :class="['text-5xl', 'text-white', isEn ? '' : 'slogan-title']">
+        <div class="flex items-center mt-5 sm:mt-8">
+          <div class="text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl"
+            :class="['text-white', isEn ? '' : 'slogan-title']">
             {{ t('home.slogan.title') }}
           </div>
-          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-2xl ml-[12px]">
+          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-base sm:text-2xl ml-[12px]">
             <template #iTag>
               <span class="italic text-xs mx-1 ">{{ t('home.slogan.original') }}</span>
             </template>
@@ -29,34 +28,18 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-col items-center pb-[150px]">
-      <div :class="['text-white', isEn ? '' : 'slogan-subTitle', subTitleFontSize]">
+    <div class="flex flex-col items-center pb-7.5 sm:pb-10 md:pb-12 lg:pb-16 xl:pb-37.5">
+      <div class="text-xl lg:text-6xl md:text-5xl sm:text-4xl"
+        :class="['text-white', isEn ? 'max-w-[90%]' : 'slogan-subTitle']">
         {{ t('home.slogan.subTitle') }}
       </div>
-      <div class="button-group flex gap-4 mt-7.5 text-2xl text-white">
-        <div :class="[
-          'enterprise-button',
-          `enterprise-button-${locale}`,
-          'flex',
-          'items-center',
-          'justify-center',
-          'cursor-pointer',
-          'w-50',
-          'h-12'
-        ]" @click="toDeployment">
-          {{ t('home.slogan.enterpriseButton') }}
-        </div>
-        <div :class="[
-          'personal-button',
-          `personal-button-${locale}`,
-          'flex',
-          'items-center',
-          'justify-center',
-          'cursor-pointer',
-          'w-50',
-          'h-12'
-        ]" @click="toDownload">
-          {{ t('home.slogan.personalButton') }}
+      <div
+        class="button-group flex gap-4 mt-5 sm:mt-7.5 text-xs xl:text-2xl lg:text-xl md:text-base sm:text-sm text-white"
+        :class="{ 'button-group-en': isEn }">
+        <div v-for="(button, index) in buttons" :key="index"
+          class="flex items-center justify-center cursor-pointer h-8 md:h-10 lg:h-12 px-3"
+          :class="button.specificClasses" @click="button.action">
+          {{ t(button.textKey) }}
         </div>
       </div>
     </div>
@@ -83,9 +66,28 @@ const ossButtonWidth = computed(() => {
   return isEn.value ? 'w-[280px]' : 'w-[143px]'
 })
 
-const subTitleFontSize = computed(() => {
-  return isEn.value ? 'text-5xl' : 'text-6xl'
-})
+// const subTitleFontSize = computed(() => {
+//   return isEn.value ? 'text-5xl' : 'text-6xl'
+// })
+
+const buttons = computed(() => [
+  {
+    specificClasses: [
+      'enterprise-button',
+      `enterprise-button-${locale.value}`
+    ],
+    textKey: 'home.slogan.enterpriseButton',
+    action: toDeployment
+  },
+  {
+    specificClasses: [
+      'personal-button',
+      `personal-button-${locale.value}`,
+    ],
+    textKey: 'home.slogan.personalButton',
+    action: toDownload
+  }
+])
 
 const toDownload = () => {
   // window.open('https://docs.costrict.ai/guide/installation')
@@ -114,14 +116,22 @@ const toDeployment = () => {
     width: 280px;
     height: 40px;
   }
+
+  @media (max-width: 480px) {
+    margin-top: 152px;
+  }
+
+  @media (max-width: 375px) {
+    margin-top: 142px;
+  }
 }
 
 .enterprise-button {
-  background-image: url('@/assets/blue_button.svg');
+  background: url('@/assets/blue_button.svg') 50% 50%;
+  border-radius: 6px;
 
   &-en {
-    width: 378px;
-    background-image: url('@/assets/blue_button_en.svg');
+    background: url('@/assets/blue_button_en.svg') 50% 50%;
   }
 
   &:hover {
@@ -134,12 +144,17 @@ const toDeployment = () => {
   border-radius: 6px;
 
   &-en {
-    width: 281px;
-    // background-image: url('@/assets/grey_button_en.svg');
+    background: url('@/assets/grey_button_en.svg') 50% 50%;
   }
 
   &:hover {
     opacity: 0.7;
+  }
+}
+
+.button-group-en {
+  @media (max-width: 375px) {
+    flex-direction: column;
   }
 }
 
@@ -149,5 +164,15 @@ const toDeployment = () => {
 
 .slogan-subTitle {
   letter-spacing: 0.05em;
+}
+
+.slogan-container {
+  @media (max-width: 480px) {
+    height: 258px;
+  }
+
+  @media (max-width: 375px) {
+    height: 238px;
+  }
 }
 </style>

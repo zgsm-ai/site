@@ -1,11 +1,9 @@
 <template>
   <div class="w-full bg-black">
     <Slogan />
-    <div class="w-[1300px] mx-auto">
+    <div class="responsive-container mx-auto">
       <StrictMode />
       <CodeReview />
-      <!-- <AgentView /> -->
-      <!-- <CodeCompletion /> -->
       <MoreTool />
       <EnterpriseDeployment />
       <LanguageSupport />
@@ -13,7 +11,7 @@
     <FooterCopyright />
     <img src="../../assets/left_port.png" class="absolute left-0 top-[1538px]">
     <img src="../../assets/right_port.png" class="absolute right-0 top-[1347px]">
-    <div class="absolute left-0 top-0 h-124 w-full top-bg"></div>
+    <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
   </div>
 </template>
 <script lang="ts" setup>
@@ -38,5 +36,26 @@ defineOptions({
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  @media (max-width: 480px) {
+    height: 288px;
+  }
+
+  @media (max-width: 375px) {
+    height: 268px;
+  }
+}
+
+.responsive-container {
+  width: 70%;
+
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
 }
 </style>
