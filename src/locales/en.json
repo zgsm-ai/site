@@ -147,7 +147,7 @@
       "title": "Multi-Language & VS Code Support",
       "SupportedInVSCode": "Visual Studio Code",
       "SupportedInJetBrains": "JetBrains IDEs",
-      "allLanguages": "All Programming Languages"
+      "allLanguages": ""
     }
   },
   "footer": {
@@ -169,7 +169,7 @@
     "title": "Costrict",
     "desc": "Costrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
     "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.86.3 or above",
-    "jetbrainsTitle": "For best compatibility, JetBrains IDE version 2023.1 or higher is required",
+    "jetbrainsTitle": "For best compatibility, JetBrains IDE version 2023.3 or higher is required",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
     "step2": "Step 2",

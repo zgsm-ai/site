@@ -1,9 +1,11 @@
 <template>
-  <div class="mt-45">
+  <div class="mt-9 sm:mt-18 md:mt-26 lg:mt-36 xl:mt-45">
     <PageTitle :title="t('home.moreTool.title')" :subtitle="t('home.moreTool.subTitle')" />
-    <div class="flex gap-6 flex-wrap mt-10">
-      <ItemCard v-for="item in featureList" :key="item.title" :img="item.img" :title="item.title"
-        :content="item.content" :height="cardHeight" />
+    <div class="flex gap-6 flex-wrap mt-10 justify-between">
+      <div class="more-tool__item" :class="{ 'more-tool__item-en': !isZh }" v-for="item in featureList"
+        :key="item.title">
+        <ItemCard :img="item.img" :title="item.title" :content="item.content" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,9 +16,8 @@ import PageTitle from '@/components/PageTitle.vue'
 import ItemCard from './ItemCard.vue'
 
 const { t, locale } = useI18n()
-const isZh = computed(() => locale.value === 'zh')
 
-const cardHeight = computed(() => (isZh.value ? '420px' : '440px'))
+const isZh = computed(() => locale.value === 'zh')
 
 const featureList = computed(() => [
   {
@@ -51,3 +52,29 @@ const featureList = computed(() => [
   },
 ])
 </script>
+<style lang="less" scoped>
+.more-tool__item {
+  flex: 0 1 calc(50% - 12px);
+  height: 400px;
+
+  @media (max-width: 1024px) {
+    flex: 0 1 calc(50% - 12px);
+  }
+
+  @media (max-width: 768px) {
+    flex: 0 1 100%;
+  }
+
+  @media (max-width: 480px) {
+    height: auto;
+  }
+}
+
+.more-tool__item-en {
+  height: 400px;
+
+  @media (max-width: 480px) {
+    height: auto;
+  }
+}
+</style>

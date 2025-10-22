@@ -77,16 +77,16 @@ const columns = computed(() => {
       title: 'P90',
       key: 'p90',
       width: 100,
-      render() {
-        return '-'
+      render(row: TableRow) {
+        return row.p90 !== undefined ? row.p90 : '-'
       },
     } as DataTableColumn<TableRow>,
     {
       title: 'TTFT',
       key: 'ttft',
       width: 100,
-      render() {
-        return '-'
+      render(row: TableRow) {
+        return row.ttft !== undefined ? row.ttft : '-'
       },
     } as DataTableColumn<TableRow>
   )

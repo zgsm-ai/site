@@ -63,6 +63,8 @@ export interface TableRow {
   concurrentRpm: number | string // 问答25K(补全1K)上下文 每分钟并发数
   maxThroughput: number | string // 问答25K(补全1K)上下文 最高吞吐(token/s)
   concurrency?: number // 并发数（仅在自定义安装和AICP版本显示）
+  p90?: number | string
+  ttft?: number | string
 }
 
 // 标准版模型对比数据
@@ -72,10 +74,13 @@ export const standardModelData: TableRow[] = [
     cardCount: '4 卡',
     fullName: 'GLM-4.5-355B-A32B-FP8',
     parameters: '355B/32B',
-    performance: '支持150人编程人员，日活45人，每分钟5.4个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    performance:
+      '支持150人编程人员，日活45人，每分钟5.4个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
     contextWindow: '128K',
     concurrentRpm: 5,
-    maxThroughput: 22
+    maxThroughput: 22,
+    p90: 14.34,
+    ttft: 10.573,
   },
   {
     modelType: '审查模型',
@@ -85,7 +90,7 @@ export const standardModelData: TableRow[] = [
     performance: '',
     contextWindow: '262K',
     concurrentRpm: 58,
-    maxThroughput: 42
+    maxThroughput: 42,
   },
   {
     modelType: '补全模型',
@@ -95,7 +100,7 @@ export const standardModelData: TableRow[] = [
     performance: '全程耗时小于1.2秒',
     contextWindow: '128K',
     concurrentRpm: 235,
-    maxThroughput: 114
+    maxThroughput: 114,
   },
   {
     modelType: '嵌入模型',
@@ -105,7 +110,7 @@ export const standardModelData: TableRow[] = [
     performance: '',
     contextWindow: '-',
     concurrentRpm: '-',
-    maxThroughput: '-'
+    maxThroughput: '-',
   },
   {
     modelType: '召回模型',
@@ -115,8 +120,8 @@ export const standardModelData: TableRow[] = [
     performance: '',
     contextWindow: '-',
     concurrentRpm: '-',
-    maxThroughput: '-'
-  }
+    maxThroughput: '-',
+  },
 ]
 
 // 入门版模型对比数据
@@ -126,10 +131,13 @@ export const basicModelData: TableRow[] = [
     cardCount: '4 卡',
     fullName: 'GLM-4.5-106B-A12B-FP8',
     parameters: '106B/12B',
-    performance: '支持300人编程人员，日活90人，每分钟11.4个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    performance:
+      '支持300人编程人员，日活90人，每分钟11.4个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
     contextWindow: '128K',
     concurrentRpm: 11,
-    maxThroughput: 44
+    maxThroughput: 44,
+    p90: 11.71,
+    ttft: 4.82,
   },
   {
     modelType: '审查模型',
@@ -139,7 +147,7 @@ export const basicModelData: TableRow[] = [
     performance: '',
     contextWindow: '262K',
     concurrentRpm: 17,
-    maxThroughput: 30
+    maxThroughput: 30,
   },
   {
     modelType: '补全模型',
@@ -149,7 +157,7 @@ export const basicModelData: TableRow[] = [
     performance: '全程耗时小于1.5秒',
     contextWindow: '128K',
     concurrentRpm: 135,
-    maxThroughput: 73
+    maxThroughput: 73,
   },
   {
     modelType: '嵌入模型',
@@ -159,7 +167,7 @@ export const basicModelData: TableRow[] = [
     performance: '',
     contextWindow: '-',
     concurrentRpm: '-',
-    maxThroughput: '-'
+    maxThroughput: '-',
   },
   {
     modelType: '召回模型',
@@ -169,8 +177,8 @@ export const basicModelData: TableRow[] = [
     performance: '',
     contextWindow: '-',
     concurrentRpm: '-',
-    maxThroughput: '-'
-  }
+    maxThroughput: '-',
+  },
 ]
 
 // 自定义安装版本模型对比数据
@@ -180,11 +188,12 @@ export const customModelData: TableRow[] = [
     cardCount: '4 卡',
     fullName: 'GLM-4.5-355B-A32B-FP8',
     parameters: '355B/32B',
-    performance: '支持200人编程人员，日活60人，每分钟8个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    performance:
+      '支持200人编程人员，日活60人，每分钟8个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
     contextWindow: '128K',
     concurrentRpm: 8,
     maxThroughput: 25,
-    concurrency: 150
+    concurrency: 150,
   },
   {
     modelType: '审查模型',
@@ -195,7 +204,7 @@ export const customModelData: TableRow[] = [
     contextWindow: '262K',
     concurrentRpm: 45,
     maxThroughput: 35,
-    concurrency: 80
+    concurrency: 80,
   },
   {
     modelType: '补全模型',
@@ -206,7 +215,7 @@ export const customModelData: TableRow[] = [
     contextWindow: '128K',
     concurrentRpm: 180,
     maxThroughput: 100,
-    concurrency: 300
+    concurrency: 300,
   },
   {
     modelType: '嵌入模型',
@@ -217,7 +226,7 @@ export const customModelData: TableRow[] = [
     contextWindow: '-',
     concurrentRpm: '-',
     maxThroughput: '-',
-    concurrency: 500
+    concurrency: 500,
   },
   {
     modelType: '召回模型',
@@ -228,8 +237,8 @@ export const customModelData: TableRow[] = [
     contextWindow: '-',
     concurrentRpm: '-',
     maxThroughput: '-',
-    concurrency: 500
-  }
+    concurrency: 500,
+  },
 ]
 
 // AICP版本模型对比数据
@@ -239,11 +248,12 @@ export const aicpModelData: TableRow[] = [
     cardCount: '4 卡',
     fullName: 'GLM-4.5-355B-A32B-FP8',
     parameters: '355B/32B',
-    performance: '支持400人编程人员，日活120人，每分钟16个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
+    performance:
+      '支持400人编程人员，日活120人，每分钟16个并发请求。首Token相应延迟小于10秒，生成速率大于30 tokens/s',
     contextWindow: '128K',
     concurrentRpm: 16,
     maxThroughput: 30,
-    concurrency: 250
+    concurrency: 250,
   },
   {
     modelType: '审查模型',
@@ -254,7 +264,7 @@ export const aicpModelData: TableRow[] = [
     contextWindow: '262K',
     concurrentRpm: 70,
     maxThroughput: 40,
-    concurrency: 120
+    concurrency: 120,
   },
   {
     modelType: '补全模型',
@@ -265,7 +275,7 @@ export const aicpModelData: TableRow[] = [
     contextWindow: '128K',
     concurrentRpm: 250,
     maxThroughput: 120,
-    concurrency: 450
+    concurrency: 450,
   },
   {
     modelType: '嵌入模型',
@@ -276,7 +286,7 @@ export const aicpModelData: TableRow[] = [
     contextWindow: '-',
     concurrentRpm: '-',
     maxThroughput: '-',
-    concurrency: 800
+    concurrency: 800,
   },
   {
     modelType: '召回模型',
@@ -287,8 +297,8 @@ export const aicpModelData: TableRow[] = [
     contextWindow: '-',
     concurrentRpm: '-',
     maxThroughput: '-',
-    concurrency: 800
-  }
+    concurrency: 800,
+  },
 ]
 
 // 根据版本获取模型数据
