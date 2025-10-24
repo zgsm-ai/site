@@ -28,6 +28,11 @@ const router = createRouter({
       name: 'resource',
       component: () => import('@/views/resourceCalculator/index.vue'),
     },
+    {
+      path: '/operation',
+      name: 'operation',
+      component: () => import('@/views/operation/OperationPage.vue'),
+    },
   ],
   scrollBehavior() {
     return { top: 0 }

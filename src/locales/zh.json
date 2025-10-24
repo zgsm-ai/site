@@ -188,5 +188,25 @@
     "jetbrainsStep1Content1": "1. 下载 JetBrains IDEs 的 zip 安装包；",
     "jetbrainsStep1Content2": "2. 点击导航-插件，点击设置图标，下拉菜单中单击从本地安装插件，选择下载的 zip 文件后安装",
     "manualPluginDownload": "手动获取插件"
+  },
+  "operation": {
+    "activityTitle": "活动",
+    "creditPlan": "Credits 奖励计划",
+    "planDesc": "如果您的 Credits 告急，无法继续使用高级模型，快来完成以下任务获取更多额度吧!"
+  },
+  "activityCard": {
+    "githubStar": "GitHub Star 一下",
+    "githubStarDesc": "首次在 GitHub 上点击 star 收藏 Costrict 开源项目，可获赠 100 Credits（10分钟内自动生效）",
+    "gitStarNow": "git star 一下 >",
+    "inviteNewUser": "邀请新用户",
+    "inviteNewUserDesc": "邀请新用户注册，邀请者获200 Credits，新用户获250 Credits。",
+    "goInvite": "去邀请 >",
+    "inviteRules": {
+      "rule1": "每邀请1位新用户注册 Costrict 账号，新用户立得100 Credits，邀请者可获50 Credits；",
+      "rule2": "新用户下载Costrict插件，并通过GitHub Star一下：",
+      "rule2a": "a. 新用户再获150 Credits（累计250 Credits）。",
+      "rule2b": "b. 邀请人再获150 Credits（累计200 Credits）。",
+      "rule3": "奖励可叠加，邀请新用户越多，Credits越多。"
+    }
   }
 }

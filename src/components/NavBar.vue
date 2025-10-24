@@ -233,8 +233,6 @@ const handleMenuItemClick = (key: string) => {
   } else if (key === 'install') {
     window.open('https://docs.costrict.ai/deployment/introduction/')
     return
-  } else if (key === 'operation') {
-    window.open('https://zgsm.sangfor.com/credit/manager/')
   }
   router.push({ name: key })
 }
