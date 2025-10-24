@@ -186,5 +186,25 @@
     "jetbrainsStep1Content1": "1. Download the zip installation package of JetBrains IDEs;",
     "jetbrainsStep1Content2": "2. Click Navigation - Plugins, click the settings icon, click Install Plugin from Local in the dropdown menu, and select the downloaded zip file to install",
     "manualPluginDownload": "Manual download"
+  },
+  "operation": {
+    "activityTitle": "ActivityTitle",
+    "creditPlan": "Credits Reward Plan",
+    "planDesc": "If your credits are running low and you can't continue using the premium model, complete the following tasks to get more credits!"
+  },
+  "activityCard": {
+    "githubStar": "GitHub Star",
+    "githubStarDesc": "First time clicking star on Costrict open source project on GitHub, get 100 Credits (automatically effective within 10 minutes)",
+    "gitStarNow": "git star now >",
+    "inviteNewUser": "Invite New User",
+    "inviteNewUserDesc": "Invite new users to register, inviter gets 200 Credits, new user gets 250 Credits.",
+    "goInvite": "Go Invite >",
+    "inviteRules": {
+      "rule1": "For each new user invited to register Costrict account, new user immediately gets 100 Credits, inviter gets 50 Credits;",
+      "rule2": "New user downloads Costrict plugin and stars on GitHub:",
+      "rule2a": "a. New user gets additional 150 Credits (total 250 Credits).",
+      "rule2b": "b. Inviter gets additional 150 Credits (total 200 Credits).",
+      "rule3": "Rewards can be stacked, the more new users invited, the more Credits."
+    }
   }
 }
