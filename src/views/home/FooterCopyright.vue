@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="flex items-center text-[#a1a7b3] mt-3.75 sm:mt-7.5 md:mt-11 lg:mt-15 xl:mt-18.5 copyright-content">
-      <span class="mx-3">{{ t('footer.copyright.company') }}</span>
+      <!-- <span class="mx-3">{{ t('footer.copyright.company') }}</span>
       <template v-if="locale === 'zh'">
         <div class="flex items-center mx-3">
           <img class="w-4 h-4" src="@/assets/copyright_btn.png" />
@@ -34,14 +34,14 @@
           <span>{{ t('footer.copyright.gongan') }}</span>
         </div>
         <span class="mx-3">{{ t('footer.copyright.license') }}</span>
-      </template>
+      </template> -->
     </div>
   </div>
 </template>
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 </script>
 <style lang="less" scoped>
 .footer-copyright {
