@@ -273,7 +273,36 @@ const openGithub = () => {
   window.open('https://github.com/zgsm-ai/costrict')
 }
 
-// 获取 GitHub star 数量
+// GitHub star 缓存配置
+const GITHUB_STARS_CACHE_KEY = 'github_stars_cache'
+
+// 获取缓存的 GitHub star 数量
+const getCachedGithubStars = (): number | null => {
+  try {
+    const cached = localStorage.getItem(GITHUB_STARS_CACHE_KEY)
+    if (cached) {
+      const { stars } = JSON.parse(cached)
+      return stars
+    }
+  } catch (error) {
+    console.error('读取 GitHub star 缓存失败:', error)
+  }
+  return null
+}
+
+// 设置 GitHub star 缓存
+const setCachedGithubStars = (stars: number) => {
+  try {
+    const cacheData = {
+      stars
+    }
+    localStorage.setItem(GITHUB_STARS_CACHE_KEY, JSON.stringify(cacheData))
+  } catch (error) {
+    console.error('设置 GitHub star 缓存失败:', error)
+  }
+}
+
+// 获取 GitHub star 数量（带缓存）
 const fetchGithubStars = async () => {
   try {
     const response = await fetch('https://api.github.com/repos/zgsm-ai/costrict', {
@@ -283,10 +312,24 @@ const fetchGithubStars = async () => {
     })
     if (response.ok) {
       const data = await response.json()
-      githubStars.value = data.stargazers_count || 0
+      const stars = data.stargazers_count || 0
+      githubStars.value = stars
+      // 设置缓存
+      setCachedGithubStars(stars)
+    } else {
+      // 获取失败时使用缓存
+      const cachedStars = getCachedGithubStars()
+      if (cachedStars !== null) {
+        githubStars.value = cachedStars
+      }
     }
   } catch (error) {
     console.error('获取 GitHub star 数量失败:', error)
+    // 发生错误时使用缓存
+    const cachedStars = getCachedGithubStars()
+    if (cachedStars !== null) {
+      githubStars.value = cachedStars
+    }
   }
 }
 
