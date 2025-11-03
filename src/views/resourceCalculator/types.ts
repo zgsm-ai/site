@@ -213,7 +213,7 @@ export const AICP_SERVICES: AicpService = {
 export const COSTRICT_SERVICES: CostrictService = {
   deployment: {
     name: '部署服务',
-    description: '部署对接Costrict————一套Costrict',
+    description: '部署对接CoStrict————一套CoStrict',
     price: 10000
   },
   technicalSupport: {
