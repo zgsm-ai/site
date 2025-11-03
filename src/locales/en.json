@@ -1,6 +1,6 @@
 {
   "header": {
-    "appName": "Costrict"
+    "appName": "CoStrict"
   },
   "menu": {
     "home": "Homepage",
@@ -8,10 +8,11 @@
     "docs": "Help Documentation",
     "installGuide": "Private Deployment",
     "operation": "Operational activities",
-    "download": "Download"
+    "download": "Download",
+    "pricing": "Pricing"
   },
   "home": {
-    "welcomeTitle": "Costrict",
+    "welcomeTitle": "CoStrict",
     "icon": "/images/en/titleIcon.png",
     "welcomeSubtitle": "Ushering in the era of AI Native",
     "welcomeDesc": "Open source, practical AI programmer, your main task changes from writing code to asking questions and viewing code",
@@ -81,8 +82,8 @@
       "feature02Title": "Structured Workflow & Task Breakdown",
       "feature03Title": "Test-Driven Development",
       "feature01Content": "The project documentation function supports organizing information such as the structure, interfaces, and specifications of historical code, ensuring that subsequently generated code maintains consistency with the existing architectural style, achieves seamless integration, and remains high-quality.",
-      "feature02Content": "Costrict systematically deconstructs user requirements into multiple modules, including requirement clarification, design, and task breakdown. Each module is customizable, ensuring highly controllable and superior quality outcomes.",
-      "feature03Content": "Code Quality, Built-In from the Start. Costrict creates tests before writing any code. Its automated test-first cycle ensures every line must meet strict quality checks, guaranteeing solid and reliable code from the ground up."
+      "feature02Content": "CoStrict systematically deconstructs user requirements into multiple modules, including requirement clarification, design, and task breakdown. Each module is customizable, ensuring highly controllable and superior quality outcomes.",
+      "feature03Content": "Code Quality, Built-In from the Start.CoStrict creates tests before writing any code. Its automated test-first cycle ensures every line must meet strict quality checks, guaranteeing solid and reliable code from the ground up."
     },
     "agent": {
       "title": "AI Agent",
@@ -99,8 +100,8 @@
       "feature04Title": "Loops on Errors",
       "feature01Content": "Millisecond-level loading of full code data, building a knowledge network, whether it is to trace code logic or analyze the function call chain, it can accurately locate and improve code efficiency and overall control",
       "feature02Content": "We achieves an order-of-magnitude cost breakthrough delivering equivalent performance with 50%+ fewer tokens compared to other open-source providers",
-      "feature03Content": "Costrict has become the first open-source coding tool in China to integrate Google Gemini CLI, offering the free Gemini 2.5 Pro model, which supports a 1 million token context, easily digesting the entire code repository",
-      "feature04Content": "Costrict can autonomously inspects code, repairs problematic segments, and reduces manual debugging efforts",
+      "feature03Content": "CoStrict has become the first open-source coding tool in China to integrate Google Gemini CLI, offering the free Gemini 2.5 Pro model, which supports a 1 million token context, easily digesting the entire code repository",
+      "feature04Content": "CoStrict can autonomously inspects code, repairs problematic segments, and reduces manual debugging efforts",
       "userGuide": "User Guide >>"
     },
     "completion": {
@@ -109,7 +110,7 @@
     },
     "moreTool": {
       "title": "More Features",
-      "subTitle": "Costrict supports various external tools, such as: MCP, custom API/model services, multi-mode selection/custom mode and image context features etc",
+      "subTitle": "CoStrict supports various external tools, such as: MCP, custom API/model services, multi-mode selection/custom mode and image context features etc",
       "feature01": "/images/en/tool_feature01.svg",
       "feature02": "/images/en/tool_feature02.svg",
       "feature03": "/images/en/tool_feature03.svg",
@@ -122,9 +123,9 @@
       "feature04Title": "Image Context",
       "feature05Title": "Code Completion",
       "feature06Title": "Vibe Mode",
-      "feature01Content": "The MCP server provides additional tools and resources to assist Costrict in completing tasks beyond its built-in functionalities, such as accessing databases, customizing APIs, and specialized features",
-      "feature02Content": "Supports access to various API service providers, such as Anthropic, OpenAI, etc. You can configure any API compatible with OpenAI, or access local models through LM Studio/Ollama. If you use the default Costrict, there are also various advanced models available, such as claude-sonnet-4，etc",
-      "feature03Content": "Multiple modes correspond to multiple professional roles, and Costrict's behavior can be intelligently adjusted according to your current task. You can also customize modes and Prompts according to your needs",
+      "feature01Content": "The MCP server provides additional tools and resources to assist CoStrict in completing tasks beyond its built-in functionalities, such as accessing databases, customizing APIs, and specialized features",
+      "feature02Content": "Supports access to various API service providers, such as Anthropic, OpenAI, etc. You can configure any API compatible with OpenAI, or access local models through LM Studio/Ollama. If you use the default CoStrict, there are also various advanced models available, such as claude-sonnet-4，etc",
+      "feature03Content": "Multiple modes correspond to multiple professional roles, and CoStrict's behavior can be intelligently adjusted according to your current task. You can also customize modes and Prompts according to your needs",
       "feature04Content": "Click the image button below the dialog box, or shift + drag the image into the input box to add visual context to the chat",
       "feature05Content": "Code auto-completion, automatically generates subsequent code based on the cursor's context code, quickly outputs code in seconds",
       "feature06Content": "Vibe Mode is designed for rapid development and simple tasks. It supports multi-turn natural language dialogue, allowing for real-time refinement and precise code generation. "
@@ -140,7 +141,7 @@
       "feature01Content": "On-premises deployment ensures full lifecycle security for enterprise code through physical isolation and end-to-end encryption. Code never traverses external networks - sensitive assets like proprietary algorithms and API keys remain entirely within your infrastructure",
       "feature02Content": "Our open-source codebase enables extensive customization through APIs, allowing seamless integration with workflows and business systems. By deeply contextualizing enterprise knowledge, it powers AI-assisted decision making and task automation – driving transformative business efficiency gains",
       "feature03Content": "Leveraging AI-powered generation, automated testing, and deep inspection, development cycles are dramatically shortened while resource allocation becomes significantly more efficient. Our AI Quality Guardian supercharges development, delivering exceptionally reliable and superior software products",
-      "feature04Content": "For large teams, a one-time investment offers greater cost advantages compared to long-term SaaS subscriptions. Moreover, Costrict significantly reduces computational resource and token consumption through engineered capabilities such as prompt optimization, precise contextual retrieval, and adaptive model matching.",
+      "feature04Content": "For large teams, a one-time investment offers greater cost advantages compared to long-term SaaS subscriptions. Moreover, CoStrict significantly reduces computational resource and token consumption through engineered capabilities such as prompt optimization, precise contextual retrieval, and adaptive model matching.",
       "enterprisePrivateDeployment": "Explore Enterprise Solutions >"
     },
     "ideSupport": {
@@ -166,9 +167,9 @@
     }
   },
   "download": {
-    "title": "Costrict",
-    "desc": "Costrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
-    "vscodeTitle": "Install Costrict Code in Visual Studio Code, requiring the latest version or version 1.86.3 or above",
+    "title": "CoStrict",
+    "desc": "CoStrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
+    "vscodeTitle": "Install CoStrict Code in Visual Studio Code, requiring the latest version or version 1.86.3 or above",
     "jetbrainsTitle": "For best compatibility, JetBrains IDE version 2023.3 or higher is required",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
@@ -177,10 +178,10 @@
     "golandIcon": "/images/en/dowload_goland.png",
     "step1Img": "/images/en/download_step1.svg",
     "step2Img": "/images/en/download_step2.svg",
-    "step1Title": "Open the Extentions Market, Search for ' Costrict' and install it",
-    "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"Costrict\", and then click on the Install button",
-    "step2Title": "Install Costrict",
-    "step2Content": "After restarting Visual Studio Code, click on the Costrict icon, use the default Base Url to click \"Login to Costrict\".",
+    "step1Title": "Open the Extentions Market, Search for ' CoStrict' and install it",
+    "step1Content": "When Visual Studio Code is already installed, click on the extension on the left navigation, search for \"CoStrict\", and then click on the Install button",
+    "step2Title": "Install CoStrict",
+    "step2Content": "After restarting Visual Studio Code, click on the CoStrict icon, use the default Base Url to click \"Login to CoStrict\".",
     "step2Tips": "If it is a localized deployment, you need to fill in the URL before clicking Login button.",
     "jetbrainsStep1Title": "Download offline package for installation",
     "jetbrainsStep1Content1": "1. Download the zip installation package of JetBrains IDEs;",
@@ -194,14 +195,14 @@
   },
   "activityCard": {
     "githubStar": "GitHub Star",
-    "githubStarDesc": "First time clicking star on Costrict open source project on GitHub, get 100 Credits (automatically effective within 10 minutes)",
+    "githubStarDesc": "First time clicking star on CoStrict open source project on GitHub, get 100 Credits (automatically effective within 10 minutes)",
     "gitStarNow": "git star now >",
     "inviteNewUser": "Invite New User",
     "inviteNewUserDesc": "Invite new users to register, inviter gets 200 Credits, new user gets 250 Credits.",
     "goInvite": "Go Invite >",
     "inviteRules": {
-      "rule1": "For each new user invited to register Costrict account, new user immediately gets 100 Credits, inviter gets 50 Credits;",
-      "rule2": "New user downloads Costrict plugin and stars on GitHub:",
+      "rule1": "For each new user invited to register CoStrict account, new user immediately gets 100 Credits, inviter gets 50 Credits;",
+      "rule2": "New user downloads CoStrict plugin and stars on GitHub:",
       "rule2a": "a. New user gets additional 150 Credits (total 250 Credits).",
       "rule2b": "b. Inviter gets additional 150 Credits (total 200 Credits).",
       "rule3": "Rewards can be stacked, the more new users invited, the more Credits."

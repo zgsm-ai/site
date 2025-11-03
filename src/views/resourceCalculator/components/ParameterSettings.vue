@@ -71,7 +71,7 @@
                     </n-space>
                   </div>
                   <div class="calculation-description-info">
-                    <n-text depth="3" class="text-xs">企业安装Costrict人数 × Costrict 插件日活比例 = Costrict 日活用户数</n-text>
+                    <n-text depth="3" class="text-xs">企业安装 CoStrict 人数 × CoStrict 插件日活比例 = CoStrict 日活用户数</n-text>
                   </div>
                 </div>
 
@@ -106,7 +106,7 @@
                     </n-space>
                   </div>
                   <div class="calculation-description-info">
-                    <n-text depth="3" class="text-xs">Costrict 日活用户数 x 使用者每天平均对话次数(15) x 每次对话API调用次数(4) / 每天活跃小时数(10) / 每小时分钟数(60) = 每分钟并发连接数</n-text>
+                    <n-text depth="3" class="text-xs">CoStrict 日活用户数 x 使用者每天平均对话次数(15) x 每次对话API调用次数(4) / 每天活跃小时数(10) / 每小时分钟数(60) = 每分钟并发连接数</n-text>
                   </div>
                 </div>
               </div>
@@ -118,14 +118,14 @@
           <!-- 企业编码人员数量、VSCode插件日活比例和并发系数 -->
           <div class="parameter-inputs">
             <div class="input-row flex items-center">
-              <div class="input-label w-45">企业安装Costrict人数：</div>
+              <div class="input-label w-45">企业安装 CoStrict 人数：</div>
               <n-input-number v-model:value="formData.developerCount" :min="1" :show-button="false" style="width: 200px"
-                @update:value="handleDeveloperCountChange" placeholder="请输入企业安装Costrict人数">
+                @update:value="handleDeveloperCountChange" placeholder="请输入企业安装CoStrict人数">
                 <template #suffix>人</template>
               </n-input-number>
             </div>
             <div class="input-row flex items-center">
-              <div class="input-label w-45">Costrict 插件日活比例：</div>
+              <div class="input-label w-45">CoStrict 插件日活比例：</div>
               <n-input-number v-model:value="formData.vscodeActiveRatio" :min="1" :max="100" :show-button="false"
                 style="width: 200px" @update:value="handleDeveloperCountChange" placeholder="请输入插件日活比例">
                 <template #suffix>%</template>
