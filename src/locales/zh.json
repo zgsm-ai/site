@@ -188,7 +188,8 @@
     "jetbrainsStep1Title": "下载离线包安装",
     "jetbrainsStep1Content1": "1. 下载 JetBrains IDEs 的 zip 安装包；",
     "jetbrainsStep1Content2": "2. 点击导航-插件，点击设置图标，下拉菜单中单击从本地安装插件，选择下载的 zip 文件后安装",
-    "manualPluginDownload": "手动获取插件"
+    "manualPluginDownload": "手动获取插件",
+    "jetbrainsSupportIdes": "支持的 JetBrains IDEs 系列 IDEs："
   },
   "operation": {
     "activityTitle": "活动",

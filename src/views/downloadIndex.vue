@@ -31,8 +31,23 @@
                 </g>
               </svg>
             </div>
-          </div>
-          <div class="manual-methods download-methods">
+            </div>
+            <div v-if="activeTab === 'jetbrains'" class="supported-ides mt-5">
+              <p class="text-white mb-2">{{ t('download.jetbrainsSupportIdes') }}</p>
+              <ul class="list-disc ml-4">
+                <li>IntelliJ IDEA (Ultimate & Community)</li>
+                <li>WebStorm - JavaScript and TypeScript development</li>
+                <li>PyCharm (Professional & Community) - Python development</li>
+                <li>PhpStorm - PHP development</li>
+                <li>RubyMine - Ruby development</li>
+                <li>CLion - C/C++ development</li>
+                <li>GoLand - Go development</li>
+                <li>DataGrip - Database development</li>
+                <li>Rider - .NET development</li>
+                <li>Android Studio - Android development</li>
+              </ul>
+            </div>
+            <div class="manual-methods download-methods">
             <p class="tips">{{ t('download.installSteps') }}</p>
             <div class="download-methods">
               <n-timeline :icon-size="20">
@@ -418,6 +433,29 @@ const downloadJetbrainsPlugin = () => {
   .download-link {
     @media (max-width:1024px) {
       margin-left: 0;
+    }
+  }
+}
+
+.supported-ides {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  
+  p {
+    font-weight: 600;
+    color: #f4f8ff;
+    margin-bottom: 0.5rem;
+  }
+  
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0;
+    
+    li {
+      margin-bottom: 0.5rem;
+      color: #a1a7b3;
+      line-height: 1.5;
     }
   }
 }
