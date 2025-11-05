@@ -33,6 +33,11 @@ const router = createRouter({
       name: 'operation',
       component: () => import('@/views/operation/OperationPage.vue'),
     },
+    {
+      path: '/pricing',
+      name: 'pricing',
+      component: () => import('@/views/pricing/PricingPage.vue'),
+    },
   ],
   scrollBehavior() {
     return { top: 0 }

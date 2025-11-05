@@ -38,7 +38,7 @@
         <span v-if="githubStars > 0" class="ml-2 text-sm text-white opacity-80">{{ formatStarCount(githubStars)
           }}</span>
       </div>
-      <n-popover trigger="click" :show="isPopoverOpen" @update:show="isPopoverOpen = $event" :show-arrow="false"
+      <n-popover v-if="!isPricingPage" trigger="click" :show="isPopoverOpen" @update:show="isPopoverOpen = $event" :show-arrow="false"
         style="padding: 0" placement="bottom-end">
         <template #trigger>
           <div class="px-2 py-1 text-white cursor-pointer text-sm flex items-center hover:bg-white/10 hover:rounded">
@@ -70,13 +70,13 @@
         </div>
 
         <!-- 语言切换选项 -->
-        <div class="mobile-menu-item lang-item" @click="toggleLangMenu">
+        <div v-if="!isPricingPage" class="mobile-menu-item lang-item" @click="toggleLangMenu">
           {{ currentLangLabel }}
           <span class="lang-arrow" :class="{ 'lang-arrow-up': isLangMenuOpen }">▼</span>
         </div>
 
         <!-- 语言切换子菜单 -->
-        <div v-if="isLangMenuOpen" class="mobile-lang-submenu">
+        <div v-if="!isPricingPage && isLangMenuOpen" class="mobile-lang-submenu">
           <div v-for="option in languageOptions" :key="option.key" class="mobile-lang-subitem"
             :class="{ 'lang-active': locale === option.key }" @click="handleSelectLangMobile(option.key)">
             {{ option.label }}
@@ -211,6 +211,10 @@ const menuOptions = computed<MenuOption[]>(() => [
     key: 'download',
   },
   {
+    label: t('menu.pricing'),
+    key: 'pricing',
+  },
+  {
     label: t('menu.installGuide'),
     key: 'install',
   },
@@ -263,6 +267,10 @@ const handleSelectLang = (key: string) => {
 
 const notHomePage = computed(() => {
   return router.currentRoute.value.name !== 'home'
+})
+
+const isPricingPage = computed(() => {
+  return router.currentRoute.value.name === 'pricing'
 })
 
 const toHome = () => {
