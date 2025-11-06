@@ -3,6 +3,8 @@ import type { GuideStep, PricingPlan } from './interface'
 import guideStep3Img1 from '../../assets/price/guide_step3_1.png'
 import guideStep3Img2 from '../../assets/price/guide_step3_2.png'
 import qrCode from '../../assets/price/qr_code.png'
+import jdService1Img from '../../assets/price/jd_service1.png'
+import jdService2Img from '../../assets/price/jd_service2.png'
 
 export const pricingPlans: PricingPlan[] = [
   {
@@ -146,9 +148,37 @@ export const guideSteps: GuideStep[] = [
       ]),
   },
   {
-    title:
-      '登录个人京东账号，查看 CoStrict 京东旗舰店商品详情，选择套餐和份数，填写用户本人的 CoStrict 的用户ID以便官方能顺利发放 Credits',
+    title: '登录个人京东账号，查看 CoStrict 京东旗舰店商品详情，选择套餐和份数并支付。',
+  },
+  {
+    title: () =>
+      h('div', { class: 'flex' }, [
+        h('div', '支付完成后请联系客服，告知客服本人的 CoStrict 的'),
+        h('div', { class: 'text-[#00FFC8] ml-1' }, '用户ID'),
+        h('div', '（这是 Credits 能正常到账的关键）。'),
+      ]),
     imageTextPairs: [
+      {
+        imgUrl: () =>
+          h('div', { class: 'flex mb-7 jd-step' }, [
+            h('img', { src: jdService1Img, class: 'h-100' }),
+            h('img', { src: jdService2Img, class: 'h-100 ml-2.5' }),
+          ]),
+        text: () =>
+          h('div', { class: 'text-white text-xs' }, [
+            h('span', '用户ID查看：登录 CoStrict 后台管理页面（链接地址：'),
+            h(
+              'a',
+              {
+                href: 'https://zgsm.sangfor.com/credit/manager/',
+                target: '_blank',
+                style: 'color: #2A7FFF; text-decoration: none;',
+              },
+              'https://zgsm.sangfor.com/credit/manager/',
+            ),
+            h('span', '），复制用户ID。'),
+          ]),
+      },
       {
         imgUrl: guideStep3Img1,
       },
@@ -156,40 +186,35 @@ export const guideSteps: GuideStep[] = [
   },
   {
     title: () =>
-      h('div', [
-        h('span', '用户ID查看：登录 CoStrict 后台管理页面（链接地址：'),
+      h('div', { class: 'custom-text' }, [
         h(
-          'a',
+          'p',
           {
-            href: 'https://zgsm.sangfor.com/credit/manager/',
-            target: '_blank',
-            style: 'color: #2A7FFF; text-decoration: none;',
+            class: 'text-white text-xs leading-5 flex flex-wrap',
           },
-          'https://zgsm.sangfor.com/credit/manager/',
+          [
+            h('p', {}, '充值完成后，用户可返回 CoStrict 官方后台查看 Credits 到账情况（链接地址：'),
+            h(
+              'a',
+              {
+                href: 'https://zgsm.sangfor.com/credit/manager/?tab=usage',
+                target: '_blank',
+                style: 'color: #2A7FFF; text-decoration: none;',
+              },
+              'https://zgsm.sangfor.com/credit/manager/?tab=usage',
+            ),
+            h('span', '）'),
+          ],
         ),
-        h('span', '），复制用户ID。'),
+        h(
+          'p',
+          {
+            class: 'text-white text-xs mt-1 leading-5 opacity-70',
+          },
+          '工作日周一 至 周五的 9:30-20:30 工作时间保证半小时内充值到账，非工作日时间有所延长，用户可通过企微号联系客服迅速添加',
+        ),
       ]),
     imageTextPairs: [
-      {
-        imgUrl: guideStep3Img1,
-        text: () =>
-          h('div', { class: 'custom-text' }, [
-            h(
-              'p',
-              {
-                class: 'text-white text-xs leading-5',
-              },
-              '完成付费之后，返回 CoStrict 官方后台查看Credits到账情况（链接地址：链接到用量统计页面）',
-            ),
-            h(
-              'p',
-              {
-                class: 'text-white text-xs mt-1 leading-5',
-              },
-              '工作日周一 至 周五的 9:30-20:30 工作时间保证半小时内充值到账，非工作日时间有所延长，用户可通过企微号联系客服迅速添加',
-            ),
-          ]),
-      },
       {
         imgUrl: guideStep3Img2,
         text: () =>
@@ -197,7 +222,7 @@ export const guideSteps: GuideStep[] = [
             h(
               'p',
               {
-                class: 'text-white text-xs leading-5',
+                class: 'text-white text-xs leading-5 opacity-70',
               },
               '微信扫码可快速联系官方客服（手机端可长按识别二维码）',
             ),
