@@ -63,7 +63,8 @@
               </div>
               <div v-if="step.imageTextPairs && step.imageTextPairs.length > 0" class="image-text-pairs">
                 <div v-for="(pair, pairIndex) in step.imageTextPairs" :key="pairIndex" class="image-text-item">
-                  <img v-if="pair.imgUrl" :src="pair.imgUrl"
+                  <component v-if="pair.imgUrl" :is="typeof pair.imgUrl === 'function' ? pair.imgUrl : 'img'"
+                    :src="typeof pair.imgUrl === 'string' ? pair.imgUrl : undefined"
                     :alt="typeof pair.text === 'function' ? undefined : pair.text" class="step-image" />
                   <div class="image-text">
                     <component v-if="typeof pair.text === 'function'" :is="pair.text" />
@@ -236,6 +237,27 @@ defineOptions({
           background: #4083e8;
         }
       }
+    }
+  }
+}
+
+/deep/.jd-step {
+  @media (max-width: 968px) {
+    flex-direction: column;
+
+    img {
+      align-self: start;
+    }
+
+    img:last-of-type {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    img {
+      height: 300px;
     }
   }
 }
