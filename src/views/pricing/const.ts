@@ -98,8 +98,8 @@ export const pricingPlans: PricingPlan[] = [
   },
   {
     title: '流量套餐3',
-    price: 500,
-    originalPrice: 248,
+    price: 248,
+    originalPrice: 500,
     description: '按实际使用用量扣除 Credit，有效期1年',
     buttonText: '立即购买',
     buttonType: 'purchase',
@@ -152,7 +152,7 @@ export const guideSteps: GuideStep[] = [
   },
   {
     title: () =>
-      h('div', { class: 'flex' }, [
+      h('div', { class: 'flex flex-wrap' }, [
         h('div', '支付完成后请联系客服，告知客服本人的 CoStrict 的'),
         h('div', { class: 'text-[#00FFC8] ml-1' }, '用户ID'),
         h('div', '（这是 Credits 能正常到账的关键）。'),
