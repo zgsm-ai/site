@@ -208,5 +208,83 @@
       "rule2b": "b. Inviter gets additional 150 Credits (total 200 Credits).",
       "rule3": "Rewards can be stacked, the more new users invited, the more Credits."
     }
+  },
+  "pricing": {
+    "title": "Pricing Plans",
+    "subtitle": "Choose the right package according to your actual needs",
+    "operationGuide": "Operation Guide:",
+    "tips": "🎯 Some models are half price at night and on weekends, and can be combined with a 10% discount in auto mode.",
+    "plans": {
+      "free": {
+        "title": "Personal Free Edition",
+        "description": "Officially gifted Credits, validity period depends on situation",
+        "buttonText": "Download and Use",
+        "features": {
+          "newUserCredits": "New users get 200 Credits (approximately 200 requests)",
+          "freeCodeCompletion": "Free code completion with limited usage",
+          "freeCodeReview": "Free CodeReview with limited usage",
+          "noAdvancedModels": "Advanced models not available"
+        }
+      },
+      "package1": {
+        "title": "Traffic Package 1",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
+        "buttonText": "Buy Now",
+        "features": {
+          "credits": "500 Credits (approximately 500 requests)",
+          "freeCodeCompletion": "Free code completion with limited usage",
+          "freeCodeReview": "Free code review with limited usage",
+          "advancedModels": "Advanced models available"
+        }
+      },
+      "package2": {
+        "title": "Traffic Package 2",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
+        "buttonText": "Buy Now",
+        "features": {
+          "credits": "2000+ additional 100 Credits (equals 2100 requests)",
+          "freeCodeCompletion": "Free code completion with unlimited usage",
+          "freeCodeReview": "Free code review with unlimited usage",
+          "advancedModels": "Advanced models available"
+        }
+      },
+      "package3": {
+        "title": "Traffic Package 3",
+        "description": "Deduct Credits based on actual usage, valid for 1 year",
+        "buttonText": "Buy Now",
+        "features": {
+          "credits": "5000+ additional 400 Credits (equals 5400 requests)",
+          "freeCodeCompletion": "Free code completion with unlimited usage",
+          "freeCodeReview": "Free code review with unlimited usage",
+          "advancedModels": "Advanced models available"
+        }
+      }
+    },
+    "guide": {
+      "step1": {
+        "title": "Select a suitable package and click \"Buy Now\". Redirect to CoStrict's official JD flagship store. For more package details, please check",
+        "billingLink": "Package & Billing Instructions >>"
+      },
+      "step2": {
+        "title": "Log in to your personal JD account, view the product details of CoStrict's JD flagship store, select the package and quantity and pay."
+      },
+      "step3": {
+        "title": "After payment is completed, please contact customer service and inform them of your CoStrict",
+        "userId": "User ID",
+        "keyPoint": "(This is the key for Credits to be credited to your account correctly).",
+        "userIdDesc": "How to view User ID: Log in to the CoStrict backend management page (link: ",
+        "copyUserId": "), copy the User ID."
+      },
+      "step4": {
+        "title": "After recharge is completed, users can return to CoStrict's official backend to check Credits arrival status (link: ",
+        "usageLink": ")",
+        "workingHours": "Working hours are Monday to Friday 9:30-20:30. Recharge will be processed within half an hour during working hours, and may be extended during non-working hours. Users can contact customer service through the enterprise WeChat account for quick processing",
+        "wechatScan": "Scan the WeChat QR code to quickly contact official customer service (mobile users can long press to recognize the QR code)",
+        "tips": "🎯 Bonus benefits! After placing your order, immediately add CoStrict assistant - Coco - to enjoy an extra 10% credits! VIP customer-exclusive technical services are also waiting for you to unlock."
+      }
+    },
+    "tag": {
+      "trafficPackage": "Traffic"
+    }
   }
 }
