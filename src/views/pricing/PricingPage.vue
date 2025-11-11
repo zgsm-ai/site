@@ -5,14 +5,14 @@
     <img src="../../assets/price/bg_3.png" alt="" class="absolute left-155 top-81 w-28.5 pricing-page__bg">
     <img src="../../assets/price/bg_4.png" alt="" class="absolute left-233.5 top-104 w-55 pricing-page__bg">
     <img src="../../assets/price/bg_5.png" alt="" class="absolute left-265 top-81 w-28.5 pricing-page__bg">
-    <div class="pricing-page__title text-3xl text-center">价格套餐</div>
-    <div class="pricing-page__subTitle text-center mt-7.5">根据实际需求选择合适套餐方案</div>
+    <div class="pricing-page__title text-3xl text-center">{{ t('pricing.title') }}</div>
+    <div class="pricing-page__subTitle text-center mt-7.5">{{ t('pricing.subtitle') }}</div>
     <div class="pricing-page__content mt-12.5">
       <div class="content-version grid grid-cols-4 gap-5">
-        <div v-for="(plan, index) in pricingPlans" :key="index" class="content-version__item h-88 px-5 py-6 relative">
+        <div v-for="(plan, index) in pricingPlans" :key="index" class="content-version__item min-88 px-5 py-6 relative">
           <div v-if="plan.showTrafficLabel" class="absolute right-0 top-[-4px]">
             <img src="../../assets/label-bg.webp" alt="">
-            <span class="absolute top-1 left-7 label-text">流量包</span>
+            <span class="absolute top-1 left-7 label-text">{{ t('pricing.tag.trafficPackage') }}</span>
           </div>
           <div class="content-version__item-title text-base">{{ plan.title }}</div>
           <div class="content-version__item-price flex items-center text-3xl mt-3">
@@ -28,21 +28,22 @@
           }" @click="plan.clickEvent">{{ plan.buttonText }}</div>
           <ul class="content-version__item-features text-xs mt-4">
             <li v-for="(feature, featureIndex) in plan.features" :key="featureIndex"
-              class="flex items-center leading-8">
-              <img v-if="feature.available" src="../../assets/y.svg" alt="available">
+              class="flex items-start mb-4 last-of-type:mb-0">
+              <img class="mt-0.5" v-if="feature.available" src="../../assets/y.svg" alt="available">
               <img v-else src="../../assets/x.svg" alt="unavailable">
-              <p class="ml-2 whitespace-nowrap">{{ feature.text }}</p>
+              <p class="ml-2">{{ feature.text }}</p>
             </li>
           </ul>
         </div>
       </div>
+      <div class="mt-2">{{ t('pricing.tips') }}</div>
     </div>
 
     <!-- 操作指引步骤条 -->
     <div class="pricing-guide mt-8.5">
       <div class="guide-label flex items-center">
         <img src="../../assets/light.svg" alt="">
-        <span class="ml-1">操作指引：</span>
+        <span class="ml-1">{{ t('pricing.operationGuide') }}</span>
       </div>
       <div class="guide-content ml-6.5 mt-5">
         <n-timeline :icon-size="20">
@@ -82,7 +83,15 @@
 
 <script lang="ts" setup>
 import { NTimeline, NTimelineItem } from 'naive-ui'
-import { pricingPlans, guideSteps } from './const'
+import { useI18n } from 'vue-i18n'
+import { createPricingPlans, createGuideSteps } from './const'
+import { computed } from 'vue'
+
+const { t } = useI18n()
+
+// 使用国际化函数创建价格套餐和指南步骤
+const pricingPlans = computed(() => createPricingPlans(t))
+const guideSteps = computed(() => createGuideSteps(t))
 
 defineOptions({
   name: 'PricingPage',
@@ -100,7 +109,7 @@ defineOptions({
   }
 
   @media (max-width: 768px) {
-    padding-top: 60px;
+    padding-top: 90px;
     padding-bottom: 40px;
   }
 
