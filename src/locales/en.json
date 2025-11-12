@@ -187,6 +187,7 @@
     "jetbrainsStep1Content1": "1. Download the zip installation package of JetBrains IDEs;",
     "jetbrainsStep1Content2": "2. Click Navigation - Plugins, click the settings icon, click Install Plugin from Local in the dropdown menu, and select the downloaded zip file to install",
     "manualPluginDownload": "Manual download",
+    "manualPluginDownload2": "Plugin download speed slow? Switch to a faster download source",
     "jetbrainsSupportIdes": "supports the following JetBrains series IDEs:"
   },
   "operation": {

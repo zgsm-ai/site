@@ -9,50 +9,64 @@
       </div>
       <div class="container-main">
         <div class="tab-list">
-          <div class="tab-item" :class="{ active: activeTab === tab.key }" v-for="tab in tabList" :key="tab.key"
-            @click="handleTabClick(tab.key)">
+          <div
+            class="tab-item"
+            :class="{ active: activeTab === tab.key }"
+            v-for="tab in tabList"
+            :key="tab.key"
+            @click="handleTabClick(tab.key)"
+          >
             <img :src="tab.imgUrl" :alt="tab.key" />
           </div>
         </div>
         <div class="download-content">
-
           <div class="content-header flex flex-wrap">
             <img class="download-icon" :src="headerIcon" alt="" />
             <span class="text-white mr-4">{{ headerTitle }}</span>
             <div class="flex cursor-pointer" @click="download">
-              <span style="color: #4083e8;">{{
-                t('download.manualPluginDownload') }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
-                width="18" color="#fff">
+              <span style="color: #4083e8">{{ t('download.manualPluginDownload') }}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 20 20"
+                width="18"
+                color="#fff"
+              >
                 <g fill="none">
                   <path
                     d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-                    fill="currentColor"></path>
+                    fill="currentColor"
+                  ></path>
                 </g>
               </svg>
             </div>
-            </div>
-            <div v-if="activeTab === 'jetbrains'" class="supported-ides mt-5">
-              <p class="text-white mb-2">{{ t('download.jetbrainsSupportIdes') }}</p>
-              <ul class="list-disc ml-4">
-                <li>IntelliJ IDEA (Ultimate & Community)</li>
-                <li>WebStorm - JavaScript and TypeScript development</li>
-                <li>PyCharm (Professional & Community) - Python development</li>
-                <li>PhpStorm - PHP development</li>
-                <li>RubyMine - Ruby development</li>
-                <li>CLion - C/C++ development</li>
-                <li>GoLand - Go development</li>
-                <li>DataGrip - Database development</li>
-                <li>Rider - .NET development</li>
-                <li>Android Studio - Android development</li>
-              </ul>
-            </div>
-            <div class="manual-methods download-methods">
+          </div>
+          <div v-if="activeTab === 'jetbrains'" class="supported-ides mt-5">
+            <p class="text-white mb-2">{{ t('download.jetbrainsSupportIdes') }}</p>
+            <ul class="list-disc ml-4">
+              <li>IntelliJ IDEA (Ultimate & Community)</li>
+              <li>WebStorm - JavaScript and TypeScript development</li>
+              <li>PyCharm (Professional & Community) - Python development</li>
+              <li>PhpStorm - PHP development</li>
+              <li>RubyMine - Ruby development</li>
+              <li>CLion - C/C++ development</li>
+              <li>GoLand - Go development</li>
+              <li>DataGrip - Database development</li>
+              <li>Rider - .NET development</li>
+              <li>Android Studio - Android development</li>
+            </ul>
+          </div>
+          <div class="manual-methods download-methods">
             <p class="tips">{{ t('download.installSteps') }}</p>
             <div class="download-methods">
               <n-timeline :icon-size="20">
-                <n-timeline-item v-for="(step, index) in stepList" :key="index" :title="t(`download.step${index + 1}`)"
-                  line-type="dashed" color="#4083E8">
+                <n-timeline-item
+                  v-for="(step, index) in stepList"
+                  :key="index"
+                  :title="t(`download.step${index + 1}`)"
+                  line-type="dashed"
+                  color="#4083E8"
+                >
                   <template #icon>
                     <div class="timeline-icon">{{ index + 1 }}</div>
                   </template>
@@ -103,9 +117,7 @@ const { t } = useI18n()
 const activeTab = ref('vscode')
 
 const headerTitle = computed(() => {
-  return activeTab.value === 'vscode'
-    ? t('download.vscodeTitle')
-    : t('download.jetbrainsTitle')
+  return activeTab.value === 'vscode' ? t('download.vscodeTitle') : t('download.jetbrainsTitle')
 })
 
 const headerIcon = computed(() => {
@@ -121,7 +133,7 @@ const tabList = computed(() => {
     {
       key: 'jetbrains',
       imgUrl: activeTab.value === 'jetbrains' ? jetbrainsImg : jetbrainsDisableImg,
-    }
+    },
   ]
 })
 
@@ -145,27 +157,67 @@ const stepList = computed<StepItem[]>(() => {
       {
         imgUrl: jetbrainsContent,
         title: t('download.jetbrainsStep1Title'),
-        render: () => h('div', { class: 'jetbrains-content' }, [
-          h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content1')),
-          h('div', { class: 'flex cursor-pointer ml-4 mt-2 mb-2 download-link', onClick: downloadJetbrainsPlugin }, [
-            h('span', { style: 'color: #4083e8;' }, t('download.manualPluginDownload')),
-            h('svg', {
-              xmlns: 'http://www.w3.org/2000/svg',
-              'xmlns:xlink': 'http://www.w3.org/1999/xlink',
-              viewBox: '0 0 20 20',
-              width: '18',
-              color: '#fff'
-            }, [
-              h('g', { fill: 'none' }, [
-                h('path', {
-                  d: 'M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z',
-                  fill: 'currentColor'
-                })
-              ])
-            ])
+        render: () =>
+          h('div', { class: 'jetbrains-content' }, [
+            h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content1')),
+            h(
+              'div',
+              {
+                class: 'flex cursor-pointer ml-4 mt-2 mb-2 download-link',
+                onClick: downloadJetbrainsPlugin,
+              },
+              [
+                h('span', { style: 'color: #4083e8;' }, t('download.manualPluginDownload')),
+                h(
+                  'svg',
+                  {
+                    xmlns: 'http://www.w3.org/2000/svg',
+                    'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+                    viewBox: '0 0 20 20',
+                    width: '18',
+                    color: '#fff',
+                  },
+                  [
+                    h('g', { fill: 'none' }, [
+                      h('path', {
+                        d: 'M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z',
+                        fill: 'currentColor',
+                      }),
+                    ]),
+                  ],
+                ),
+              ],
+            ),
+            h(
+              'div',
+              {
+                class: 'flex cursor-pointer ml-4 mt-2 mb-2 download-link',
+                onClick: downloadJetbrainsPlugin2,
+              },
+              [
+                h('span', { style: 'color: #4083e8;' }, t('download.manualPluginDownload2')),
+                h(
+                  'svg',
+                  {
+                    xmlns: 'http://www.w3.org/2000/svg',
+                    'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+                    viewBox: '0 0 20 20',
+                    width: '18',
+                    color: '#fff',
+                  },
+                  [
+                    h('g', { fill: 'none' }, [
+                      h('path', {
+                        d: 'M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z',
+                        fill: 'currentColor',
+                      }),
+                    ]),
+                  ],
+                ),
+              ],
+            ),
+            h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content2')),
           ]),
-          h('p', { class: 'content-text' }, t('download.jetbrainsStep1Content2')),
-        ])
       },
     ]
   }
@@ -190,7 +242,10 @@ const downloadPlugin = () => {
 
 const downloadJetbrainsPlugin = () => {
   window.open('https://costrict.ai/plugin/jetbrain/', '_blank')
+}
 
+const downloadJetbrainsPlugin2 = () => {
+  window.open('https://zgsm.sangfor.com/costrict/jebrains-plugin/index.html', '_blank')
 }
 </script>
 
@@ -286,21 +341,37 @@ const downloadJetbrainsPlugin = () => {
           padding: 16px 16px 16px 32px;
           box-sizing: border-box;
           border: 2px solid transparent;
-          background-image: linear-gradient(103deg, rgba(32, 204, 148, 0.24) 4%, #20CC94 20%, #A8A8A8 36%, #D4D4D4 50%, #1C6EFF 67%, rgba(149, 149, 149, 0.55) 99%);
+          background-image: linear-gradient(
+            103deg,
+            rgba(32, 204, 148, 0.24) 4%,
+            #20cc94 20%,
+            #a8a8a8 36%,
+            #d4d4d4 50%,
+            #1c6eff 67%,
+            rgba(149, 149, 149, 0.55) 99%
+          );
           background-image:
             linear-gradient(black, black),
-            linear-gradient(103deg, rgba(32, 204, 148, 0.24) 4%, #20CC94 20%, #A8A8A8 36%, #D4D4D4 50%, #1C6EFF 67%, rgba(149, 149, 149, 0.55) 99%);
+            linear-gradient(
+              103deg,
+              rgba(32, 204, 148, 0.24) 4%,
+              #20cc94 20%,
+              #a8a8a8 36%,
+              #d4d4d4 50%,
+              #1c6eff 67%,
+              rgba(149, 149, 149, 0.55) 99%
+            );
           background-origin: border-box;
           background-clip: padding-box, border-box;
           border-radius: 12px;
 
-          @media (max-width:1024px) {
+          @media (max-width: 1024px) {
             flex-direction: column;
             padding: 16px;
           }
 
           .step-left {
-            @media (max-width:1024px) {
+            @media (max-width: 1024px) {
               align-self: flex-start;
             }
           }
@@ -308,16 +379,16 @@ const downloadJetbrainsPlugin = () => {
           .step-title {
             margin-top: 28px;
             font-size: 16px;
-            color: #F4F8FF;
+            color: #f4f8ff;
             line-height: 24px;
             max-width: 400px;
 
-            @media (max-width:1024px) {
+            @media (max-width: 1024px) {
               margin-top: 0;
               max-width: 100%;
             }
 
-            @media (max-width:480px) {
+            @media (max-width: 480px) {
               font-size: 14px;
             }
           }
@@ -326,18 +397,18 @@ const downloadJetbrainsPlugin = () => {
             margin-top: 12px;
             font-size: 14px;
             line-height: 20px;
-            color: #A1A7B3;
+            color: #a1a7b3;
             max-width: 400px;
 
-            @media (max-width:1024px) {
+            @media (max-width: 1024px) {
               max-width: 100%;
             }
 
-            @media (max-width:640px) {
+            @media (max-width: 640px) {
               font-size: 13px;
             }
 
-            @media (max-width:480px) {
+            @media (max-width: 480px) {
               font-size: 12px;
             }
           }
@@ -346,31 +417,31 @@ const downloadJetbrainsPlugin = () => {
             margin-top: 12px;
             font-size: 14px;
             line-height: 20px;
-            color: #A1A7B3;
+            color: #a1a7b3;
             max-width: 400px;
 
-            @media (max-width:1024px) {
+            @media (max-width: 1024px) {
               max-width: 100%;
             }
 
-            @media (max-width:640px) {
+            @media (max-width: 640px) {
               font-size: 13px;
             }
 
-            @media (max-width:480px) {
+            @media (max-width: 480px) {
               font-size: 12px;
             }
           }
 
           .step-tips::before {
             content: '* ';
-            color: #FF0000;
+            color: #ff0000;
           }
 
           img {
             margin-left: auto;
 
-            @media (max-width:1024px) {
+            @media (max-width: 1024px) {
               height: auto;
               margin-top: 10px;
               margin-left: 0;
@@ -411,7 +482,7 @@ const downloadJetbrainsPlugin = () => {
             margin-top: -2px;
             margin-bottom: 8px;
 
-            @media (max-width:480px) {
+            @media (max-width: 480px) {
               font-size: 14px;
             }
           }
@@ -431,7 +502,7 @@ const downloadJetbrainsPlugin = () => {
 
 /deep/.jetbrains-content {
   .download-link {
-    @media (max-width:1024px) {
+    @media (max-width: 1024px) {
       margin-left: 0;
     }
   }
@@ -440,18 +511,18 @@ const downloadJetbrainsPlugin = () => {
 .supported-ides {
   margin-top: 2rem;
   margin-bottom: 1rem;
-  
+
   p {
     font-weight: 600;
     color: #f4f8ff;
     margin-bottom: 0.5rem;
   }
-  
+
   ul {
     list-style-type: disc;
     padding-left: 1.5rem;
     margin: 0;
-    
+
     li {
       margin-bottom: 0.5rem;
       color: #a1a7b3;
