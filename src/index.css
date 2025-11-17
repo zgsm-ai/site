@@ -19,6 +19,7 @@
 html {
   min-height: 100vh;
   background: #000;
+  overflow-x: hidden;
 }
 
 /* 自定义滚动条样式 */

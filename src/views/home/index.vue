@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full bg-black">
+  <div class="w-full bg-black overflow-x-hidden">
     <Slogan />
     <div class="responsive-container mx-auto">
       <StrictMode />
@@ -12,9 +12,12 @@
     <img src="../../assets/left_port.png" class="absolute left-0 top-[1538px]">
     <img src="../../assets/right_port.png" class="absolute right-0 top-[1347px]">
     <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
+    <img src="../../assets/competition.svg"
+      class="absolute right-[-15px] top-[98px] cursor-pointer z-1000 competition-icon" alt="" @click="toCompetition" v-if="!isEnglish">
   </div>
 </template>
 <script lang="ts" setup>
+import { useI18n } from 'vue-i18n'
 import Slogan from './slogan.vue'
 import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'
@@ -24,11 +27,20 @@ import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
 import FooterCopyright from './FooterCopyright.vue'
+import { computed } from 'vue'
 
 // 组件名称通过文件名定义为 HomeIndex
 defineOptions({
   name: 'HomeIndex',
 })
+
+const { locale } = useI18n()
+
+const isEnglish = computed(() => locale.value === 'en')
+
+const toCompetition = () => {
+  window.open('https://competition.costrict.ai/')
+}
 </script>
 <style scoped lang="less">
 .top-bg {
@@ -43,6 +55,31 @@ defineOptions({
 
   @media (max-width: 375px) {
     height: 268px;
+  }
+}
+
+.competition-icon:hover {
+  transform: translateX(-15px);
+
+}
+
+.competition-icon {
+  transition: all ease-in 0.3s;
+}
+
+/* 在移动设备上禁用动画 */
+@media (max-width: 768px) {
+  .competition-icon:hover {
+    transform: none !important;
+  }
+  
+  .competition-icon:active {
+    transform: none !important;
+  }
+  
+  .competition-icon {
+    transition: none !important;
+    cursor: pointer;
   }
 }
 
