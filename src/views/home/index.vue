@@ -80,6 +80,8 @@ const toCompetition = () => {
   .competition-icon {
     transition: none !important;
     cursor: pointer;
+    width: 140px;
+    top: 68px;
   }
 }
 
