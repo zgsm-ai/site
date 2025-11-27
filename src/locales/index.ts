@@ -1,10 +1,14 @@
 import { createI18n } from 'vue-i18n'
 import zh from './zh.json'
 import en from './en.json'
+import { initializeLanguage } from '@/utils/language'
+
+// 初始化语言设置
+const initialLanguage = initializeLanguage()
 
 const i18n = createI18n({
   legacy: false, // 我们将使用 Composition API 模式
-  locale: 'zh', // 设置默认语言环境
+  locale: initialLanguage, // 从缓存或浏览器语言设置初始化
   fallbackLocale: 'en', // 设置备用语言环境
   messages: {
     zh,
