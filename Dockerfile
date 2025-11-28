@@ -1,9 +1,9 @@
 FROM --platform=$BUILDPLATFORM node:18.19.0 AS builder
 
 WORKDIR /workshop
-COPY package.json pnpm-lock.json ./
+COPY package.json pnpm-lock.yaml ./
 RUN npm config set registry https://registry.npmmirror.com/
-RUN npm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 COPY . .
 RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
 FROM --platform=$BUILDPLATFORM nginx:stable-alpine AS runner
