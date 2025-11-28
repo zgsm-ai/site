@@ -28,8 +28,8 @@ import { useI18n } from 'vue-i18n'
 import ItemCard from './ItemCard.vue'
 import StrictModeZhVideo from '@/assets/video/strict_mode_zh.mp4'
 import StrictModeEnVideo from '@/assets/video/strict_mode_en.mp4'
-import StrictModeZhPoster from '@/assets/strict_mode_zh_buffer.png'
-import StrictModeEnPoster from '@/assets/strict_mode_en_buffer.png'
+import StrictModeZhPoster from '@/assets/strictMode/strict_mode_zh_buffer.webp'
+import StrictModeEnPoster from '@/assets/strictMode/strict_mode_en_buffer.webp'
 
 const { t, locale } = useI18n()
 
