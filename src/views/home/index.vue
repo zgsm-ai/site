@@ -9,10 +9,10 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
-    <img src="../../assets/left_port.png" class="absolute left-0 top-[1538px]">
-    <img src="../../assets/right_port.png" class="absolute right-0 top-[1347px]">
+    <img src="../../assets/home/left_port.webp" class="absolute left-0 top-[1538px]">
+    <img src="../../assets/home/right_port.webp" class="absolute right-0 top-[1347px]">
     <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
-    <img src="../../assets/competition.svg"
+    <img src="../../assets/home/competition.webp"
       class="absolute right-[-15px] top-[98px] cursor-pointer z-1000 competition-icon" alt="" @click="toCompetition" v-if="!isEnglish">
   </div>
 </template>
@@ -21,8 +21,6 @@ import { useI18n } from 'vue-i18n'
 import Slogan from './slogan.vue'
 import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'
-// import AgentView from './agent.vue'
-// import CodeCompletion from './CodeCompletion.vue'
 import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
@@ -44,7 +42,7 @@ const toCompetition = () => {
 </script>
 <style scoped lang="less">
 .top-bg {
-  background-image: url('@/assets/top.svg');
+  background-image: url('@/assets/home/top.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -82,6 +80,7 @@ const toCompetition = () => {
     cursor: pointer;
     width: 140px;
     top: 68px;
+    right: 0;
   }
 }
 
