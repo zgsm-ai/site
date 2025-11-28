@@ -27,14 +27,14 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
 // 导入静态资源
-import pyIcon from '@/assets/py.webp'
-import goIcon from '@/assets/go.webp'
-import javaIcon from '@/assets/java.webp'
-import jsIcon from '@/assets/js.webp'
-import tsIcon from '@/assets/ts.webp'
-import cIcon from '@/assets/c.webp'
-import vscodeIcon from '@/assets/vscode.webp'
-import jetbrainsIcon from '@/assets/jetbrains.webp'
+import pyIcon from '@/assets/supportLang/py.webp'
+import goIcon from '@/assets/supportLang/go.webp'
+import javaIcon from '@/assets/supportLang/java.webp'
+import jsIcon from '@/assets/supportLang/js.webp'
+import tsIcon from '@/assets/supportLang/ts.webp'
+import cIcon from '@/assets/supportLang/c.webp'
+import vscodeIcon from '@/assets/supportLang/vscode.webp'
+import jetbrainsIcon from '@/assets/supportLang/jetbrains.webp'
 
 const { t } = useI18n()
 

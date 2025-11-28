@@ -27,10 +27,10 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
-import enterpriseFeature1 from '@/assets/enterprise_feature01.svg'
-import enterpriseFeature2 from '@/assets/enterprise_feature02.svg'
-import enterpriseFeature3 from '@/assets/enterprise_feature03.svg'
-import enterpriseFeature4 from '@/assets/enterprise_feature04.svg'
+import enterpriseFeature1 from '@/assets/enterprise/enterprise_feature01.webp'
+import enterpriseFeature2 from '@/assets/enterprise/enterprise_feature02.webp'
+import enterpriseFeature3 from '@/assets/enterprise/enterprise_feature03.webp'
+import enterpriseFeature4 from '@/assets/enterprise/enterprise_feature04.webp'
 import { useAnimation } from '@/hooks/use_animation'
 
 const { t, locale } = useI18n()
@@ -70,7 +70,7 @@ const toDeployment = () => {
 </script>
 <style lang="less" scoped>
 .icon-lock {
-  background-image: url('@/assets/enterprise_lock.png');
+  background-image: url('@/assets/enterprise/enterprise_lock.webp');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: 50% 50%;
