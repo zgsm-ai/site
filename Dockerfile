@@ -1,7 +1,7 @@
 FROM --platform=$BUILDPLATFORM node:18.19.0 AS builder
 
 WORKDIR /workshop
-COPY package.json package-lock.json ./
+COPY package.json pnpm-lock.json ./
 RUN npm config set registry https://registry.npmmirror.com/
 RUN npm install --frozen-lockfile
 COPY . .
