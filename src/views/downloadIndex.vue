@@ -96,13 +96,13 @@ import { computed, ref, h } from 'vue'
 import { NTimeline, NTimelineItem } from 'naive-ui'
 import { useI18n } from 'vue-i18n'
 import type { VNode } from 'vue'
-import vscodeImg from '@/assets/vscode.svg'
-import jetbrainsImg from '@/assets/jetbrains.svg'
-import vscodeDisableImg from '@/assets/vscode_disable.svg'
-import jetbrainsDisableImg from '@/assets/jetbrains_disable.svg'
-import jetbrainsContent from '@/assets/jetbrains_download.png'
-import vscodeIcon from '@/assets/vscode_icon.png'
-import jetbrainsIcon from '@/assets/jetbrains_icon.png'
+import vscodeImg from '@/assets/download/vscode.webp'
+import jetbrainsImg from '@/assets/download/jetbrains.webp'
+import vscodeDisableImg from '@/assets/download/vscode_disable.webp'
+import jetbrainsDisableImg from '@/assets/download/jetbrains_disable.webp'
+import jetbrainsContent from '@/assets/download/jetbrains_download.webp'
+import vscodeIcon from '@/assets/download/vscode_icon.webp'
+import jetbrainsIcon from '@/assets/download/jetbrains_icon.webp'
 
 interface StepItem {
   imgUrl: string
@@ -458,7 +458,7 @@ const downloadJetbrainsPlugin2 = () => {
           align-items: center;
           height: 72px;
           padding: 0 24px;
-          background: url(@/assets/download_bg.png) no-repeat;
+          background: url(@/assets/download/download_bg.webp) no-repeat;
         }
       }
 

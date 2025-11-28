@@ -45,7 +45,7 @@ const { t } = useI18n()
 </script>
 <style lang="less" scoped>
 .footer-copyright {
-  background: url('@/assets/footer_bg.png') no-repeat;
+  background: url('@/assets/home/footer_bg.webp') no-repeat;
   background-size: 100% 100%;
 }
 
