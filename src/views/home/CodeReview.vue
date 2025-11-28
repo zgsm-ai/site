@@ -10,7 +10,7 @@
     </div>
     <div class="w-full rounded-[20px] mt-10 gradient-border">
       <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
-        style="object-fit: cover;" poster="../../assets/codereview/codereview_buffer.webp">
+        style="object-fit: cover;" poster="../../assets/codereview/codeReview_buffer.webp">
         Your browser does not support the video tag.
       </video>
     </div>
