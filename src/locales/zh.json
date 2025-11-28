@@ -87,25 +87,6 @@
       "feature02Content": "CoStrict 会根据用户需求，将需求系统性地拆解为多个模块：需求澄清、设计、任务拆解等，且均支持用户修改，最大限度保证输出结果的高质量、高可控",
       "feature03Content": "质量始于测试，CoStrict 在生成代码之前，会先构建测试案例。它通过自动化的“生成-测试-修复”闭环，使编码必须通过预设的质量关卡，从起点保障代码的正确性与健壮性"
     },
-    "agent": {
-      "title": "智能体 (AI Agent)",
-      "demo": "/images/zh/agent.gif",
-      "subTitle": "智能Agent能够根据开发者的需求端到端完成任务，具备：自主决策、全仓库上下文检索、调用工具、错误修复、运行终端等能力",
-      "feature01": "/images/zh/agent_feature01.svg",
-      "feature02": "/images/zh/agent_feature02.svg",
-      "feature03": "/images/zh/agent_feature03.svg",
-      "feature04": "/images/zh/agent_feature04.svg",
-      "guide": "/images/zh/guide.webp",
-      "feature01Title": "大文件全仓库上下文",
-      "feature02Title": "成本领先优势",
-      "feature03Title": "Gemini CLI 集成",
-      "feature04Title": "错误自行修复（Loops on Errors）",
-      "feature01Content": "毫秒级加载全量代码数据，构建知识网络，无论是追溯代码逻辑，还是分析函数调用链，都能精准定位，提升代码效率与全局把控力",
-      "feature02Content": "AI 成本实现量级突破，相较其它开源厂商，在效果相同的情况下，我们的Token消耗成本数直降 50%以上",
-      "feature03Content": "CoStrict 成为国内首家集成Google Gemini CLI的开源编码工具，免费的Gemini 2.5 Pro模型，支持100万token上下文窗口，轻松吞下整个代码山",
-      "feature04Content": "CoStrict 能够自行检查代码，并对问题代码进行修复，减少人工调试",
-      "userGuide": "使用指南>>"
-    },
     "completion": {
       "title": "代码补全（Code Completion)",
       "subTitle": "代码自动补全，根据光标的上下文代码，自动生成后续代码，快速秒级出码"

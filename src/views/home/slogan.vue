@@ -143,10 +143,6 @@ const toDeployment = () => {
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 6px;
 
-  &-en {
-    background: url('@/assets/grey_button_en.svg') 50% 50%;
-  }
-
   &:hover {
     opacity: 0.7;
   }
