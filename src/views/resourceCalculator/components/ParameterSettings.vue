@@ -91,7 +91,7 @@
                       <n-tag type="success" size="small">{{ formData.vscodeActiveUsers }}</n-tag>
                       <span class="operator">×</span>
                       <!-- <n-tag type="warning" size="small">{{ formData.concurrentCoefficient / formData.vscodeActiveUsers }}</n-tag> -->
-                      <n-tag type="warning" size="small">15</n-tag>
+                      <n-tag type="warning" size="small">50</n-tag>
 
                       <span class="operator">×</span>
                       <n-tag type="warning" size="small">4</n-tag>
@@ -106,7 +106,7 @@
                     </n-space>
                   </div>
                   <div class="calculation-description-info">
-                    <n-text depth="3" class="text-xs">CoStrict 日活用户数 x 使用者每天平均对话次数(15) x 每次对话API调用次数(4) / 每天活跃小时数(10) / 每小时分钟数(60) = 每分钟并发连接数</n-text>
+                    <n-text depth="3" class="text-xs">CoStrict 日活用户数 x 使用者每天平均对话次数(50) x 每次对话API调用次数(4) / 每天活跃小时数(10) / 每小时分钟数(60) = 每分钟并发连接数</n-text>
                   </div>
                 </div>
               </div>
