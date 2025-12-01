@@ -87,10 +87,10 @@ const saveFormDataToStorage = (data: FormData) => {
 
 // 默认表单数据
 const defaultFormData: FormData = {
-  developerCount: 1200,
-  vscodeActiveRatio: 50,
-  vscodeActiveUsers: 600,
-  concurrentDeveloperCount: 60,
+  developerCount: 1000,
+  vscodeActiveRatio: 35,
+  vscodeActiveUsers: 350,
+  concurrentDeveloperCount: 117,
   concurrentCoefficient: 60, // 默认并发系数
   enableCodeCompletion: true,
   selectedCompletionModel: 'DeepSeek-Coder-V2-Lite-Base',
