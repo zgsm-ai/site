@@ -28,7 +28,7 @@ FROM --platform=$BUILDPLATFORM nginx:stable-alpine AS runner
 COPY nginx.conf /etc/nginx/conf.d/
 
 # 拷贝编译产物到 nginx
-COPY --from=builder /workshop/build /usr/share/nginx/html
+COPY --from=builder /workshop/dist /usr/share/nginx/html
 
 EXPOSE 80
 
