@@ -14,16 +14,6 @@ const baseRoutes = [
     component: () => import('@/views/downloadIndex.vue'),
   },
   {
-    path: '/preview',
-    name: 'preview',
-    component: () => import('@/views/preview/FilePreview.vue'),
-  },
-  {
-    path: '/md-preview',
-    name: 'md-preview',
-    component: () => import('@/views/preview/MarkdownPreview.vue'),
-  },
-  {
     path: '/resource',
     name: 'resource',
     component: () => import('@/views/resourceCalculator/index.vue'),
