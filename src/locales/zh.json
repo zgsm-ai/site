@@ -193,14 +193,14 @@
     "title": "价格套餐",
     "subtitle": "根据实际需求选择合适套餐方案",
     "operationGuide": "操作指引：",
-    "tips": "🎯 部分模型夜间和周末半价，可以和auto模式九折叠加",
+    "tips": " 部分模型夜间（每日 20:00 - 次日 09:00）和周末全天半价，可以和auto模式九折叠加",
     "plans": {
       "free": {
         "title": "个人免费版",
         "description": "官方赠送的 Credit，有效期视情况而定",
         "buttonText": "下载使用",
         "features": {
-          "newUserCredits": "新用户获赠 200 Credits（约等于200次请求）",
+          "newUserCredits": "新用户获赠 400 Credits（约等于400次请求）",
           "freeCodeCompletion": "免费代码补全，有限使用次数",
           "freeCodeReview": "免费 CodeReview，有限使用次数",
           "noAdvancedModels": "高级模型不可用"
@@ -208,10 +208,10 @@
       },
       "package1": {
         "title": "流量套餐1",
-        "description": "按实际使用用量扣除 Credit，有效期1年",
+        "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
         "features": {
-          "credits": "500 Credits（约等于500次请求）",
+          "credits": "1000 Credits（约等于1000次请求）",
           "freeCodeCompletion": "免费代码补全，有限使用",
           "freeCodeReview": "免费代码审查，有限使用",
           "advancedModels": "高级模型可用"
@@ -219,10 +219,10 @@
       },
       "package2": {
         "title": "流量套餐2",
-        "description": "按实际使用用量扣除 Credit，有效期1年",
+        "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
         "features": {
-          "credits": "2000+额外赠送 100Credits（等于2100次请求）",
+          "credits": "4000+额外赠送 200Credits（等于4200次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
           "freeCodeReview": "免费代码审查，无限使用",
           "advancedModels": "高级模型可用"
@@ -230,41 +230,21 @@
       },
       "package3": {
         "title": "流量套餐3",
-        "description": "按实际使用用量扣除 Credit，有效期1年",
+        "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
         "features": {
-          "credits": "5000+额外赠送 400Credits（等于5400次请求）",
+          "credits": "10000+额外赠送 800Credits（等于10800次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
           "freeCodeReview": "免费代码审查，无限使用",
           "advancedModels": "高级模型可用"
         }
       }
     },
-    "guide": {
-      "step1": {
-        "title": "选择合适套餐，点击\"立即购买\"。跳转至 CoStrict 官方京东旗舰店。了解更多套餐详情可查看",
-        "billingLink": "套餐&计费说明 >>"
-      },
-      "step2": {
-        "title": "登录个人京东账号，查看 CoStrict 京东旗舰店商品详情，选择套餐和份数并支付。"
-      },
-      "step3": {
-        "title": "支付完成后请联系客服，告知客服本人的 CoStrict 的",
-        "userId": "用户ID",
-        "keyPoint": "（这是 Credits 能正常到账的关键）。",
-        "userIdDesc": "用户ID查看：登录 CoStrict 后台管理页面（链接地址：",
-        "copyUserId": "），复制用户ID。"
-      },
-      "step4": {
-        "title": "充值完成后，用户可返回 CoStrict 官方后台查看 Credits 到账情况（链接地址：",
-        "usageLink": "）",
-        "workingHours": "工作日周一 至 周五的 9:30-20:30 工作时间保证半小时内充值到账，非工作日时间有所延长，用户可通过企微号联系客服迅速添加",
-        "wechatScan": "微信扫码可快速联系官方客服（手机端可长按识别二维码）",
-        "tips": "🎯 福利加码! 下单后，立即添加 CoStrict 小助手-蔻蔻，即可尊享【10% Credits 额外赠送】！更有 VIP 客户群专享技术服务等您解锁。"
-      }
-    },
     "tag": {
       "trafficPackage": "流量包"
-    }
+    },
+    "firstRechargeDiscount": "首次充值优惠",
+    "learnMore": "了解更多套餐详情可查看",
+    "billingDescription": "套餐&计费说明"
   }
 }
