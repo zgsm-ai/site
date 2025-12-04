@@ -21,7 +21,8 @@
           <div class="content-version__item-price flex items-center text-3xl mt-3">
             <span class="price-unit ml-[-8px]">￥</span>
             <span class="price">{{ plan.price }}</span>
-            <span v-if="index === 1" class="text-xs ml-2 mt-2 original-price__tips">{{ t('pricing.firstRechargeDiscount') }}</span>
+            <span v-if="index === 1" class="text-xs ml-2 mt-2 original-price__tips">{{
+              t('pricing.firstRechargeDiscount') }}</span>
             <span v-if="plan.originalPrice" class="original-price text-line-through text-base mt-2"
               :class="index === 1 ? 'ml-1' : 'ml-2.5'">
               ￥{{ plan.originalPrice }}
@@ -171,7 +172,9 @@ const toDetail = () => {
             #0066FF -7%,
             #00FFB7 16%,
             rgba(247, 255, 253, 0.51) 51%,
-            rgba(0, 94, 255, 0.09) 99%);
+            rgba(0, 94, 255, 0.3) 85%,
+            rgba(0, 94, 255, 0.6) 100%
+          );
         -webkit-mask:
           linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);

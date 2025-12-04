@@ -2,11 +2,12 @@
     <div class="w-full flex flex-col items-center">
         <div class="flex flex-col items-center">
             <div class="strict-mode__title" :class="{ 'strict-mode__title-en': !isZh }">
-                <img :src="t('home.strictMode.title')" />
+                <img v-if="isZh" :src="ZhStrictModeTitle" alt="strict mode" />
+                <img v-else :src="EnStrictModeTitle" alt="strict mode">
             </div>
             <span class="mt-4 text-base font-normal leading-6 text-center text-white/70 max-w-270 strict-mode__desc">{{
                 t('home.strictMode.subTitle')
-                }}</span>
+            }}</span>
         </div>
         <div class="w-full rounded-[20px] mt-10 gradient-border">
             <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
@@ -30,6 +31,14 @@ import StrictModeZhVideo from '@/assets/video/strict_mode_zh.mp4'
 import StrictModeEnVideo from '@/assets/video/strict_mode_en.mp4'
 import StrictModeZhPoster from '@/assets/strictMode/strict_mode_zh_buffer.webp'
 import StrictModeEnPoster from '@/assets/strictMode/strict_mode_en_buffer.webp'
+import ZhStrictModeFeature1 from '@/assets/strictMode/zh/strictMode_feature01.webp';
+import ZhStrictModeFeature2 from '@/assets/strictMode/zh/strictMode_feature02.webp';
+import ZhStrictModeFeature3 from '@/assets/strictMode/zh/strictMode_feature03.webp';
+import EnStrictModeFeature1 from '@/assets/strictMode/en/strictMode_feature01.webp';
+import EnStrictModeFeature2 from '@/assets/strictMode/en/strictMode_feature02.webp';
+import EnStrictModeFeature3 from '@/assets/strictMode/en/strictMode_feature03.webp';
+import EnStrictModeTitle from '@/assets/strictMode/en/strictMode_title.webp';
+import ZhStrictModeTitle from '@/assets/strictMode/zh/strictMode_title.webp';
 
 const { t, locale } = useI18n()
 
@@ -39,17 +48,17 @@ const featureList = computed(() => [
     {
         title: t('home.strictMode.feature01Title'),
         content: t('home.strictMode.feature01Content'),
-        img: t('home.strictMode.feature01'),
+        img: isZh.value ? ZhStrictModeFeature1 : EnStrictModeFeature1,
     },
     {
         title: t('home.strictMode.feature02Title'),
         content: t('home.strictMode.feature02Content'),
-        img: t('home.strictMode.feature02'),
+        img: isZh.value ? ZhStrictModeFeature2 : EnStrictModeFeature2,
     },
     {
         title: t('home.strictMode.feature03Title'),
         content: t('home.strictMode.feature03Content'),
-        img: t('home.strictMode.feature03'),
+        img: isZh.value ? ZhStrictModeFeature3 : EnStrictModeFeature3,
     },
 ])
 

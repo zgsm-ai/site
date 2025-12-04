@@ -103,6 +103,10 @@ import jetbrainsDisableImg from '@/assets/download/jetbrains_disable.webp'
 import jetbrainsContent from '@/assets/download/jetbrains_download.webp'
 import vscodeIcon from '@/assets/download/vscode_icon.webp'
 import jetbrainsIcon from '@/assets/download/jetbrains_icon.webp'
+import ZhDownloadStep1 from '@/assets/download/zh/download_step1.webp'
+import ZhDownloadStep2 from '@/assets/download/zh/download_step2.webp'
+import EnDownloadStep1 from '@/assets/download/en/download_step1.webp'
+import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
 interface StepItem {
   imgUrl: string
@@ -112,9 +116,11 @@ interface StepItem {
   render?: () => VNode
 }
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
 const activeTab = ref('vscode')
+
+const isZh = computed(() => locale.value === 'zh')
 
 const headerTitle = computed(() => {
   return activeTab.value === 'vscode' ? t('download.vscodeTitle') : t('download.jetbrainsTitle')
@@ -141,12 +147,12 @@ const stepList = computed<StepItem[]>(() => {
   if (activeTab.value === 'vscode') {
     return [
       {
-        imgUrl: t('download.step1Img'),
+        imgUrl: isZh.value ? ZhDownloadStep1 : EnDownloadStep1,
         title: t('download.step1Title'),
         content: t('download.step1Content'),
       },
       {
-        imgUrl: t('download.step2Img'),
+        imgUrl: isZh.value ? ZhDownloadStep2 : EnDownloadStep2,
         title: t('download.step2Title'),
         content: t('download.step2Content'),
         tips: t('download.step2Tips'),

@@ -56,12 +56,7 @@
       "original": "原"
     },
     "codeReview": {
-      "title": "/images/zh/codereview_title.webp",
       "subTitle": "代码审查能够进行全量代码仓库的索引解析、公司级编码知识库RAG，支持用户对函数、选中代码行、代码文件和整个工程文件进行代码检查， 在发现问题和确认问题上采用“多专家模型专项检查”+“多模型交叉确认”策略",
-      "feature01": "/images/zh/codereview_feature01.webp",
-      "feature02": "/images/zh/codereview_feature02.webp",
-      "feature03": "/images/zh/codereview_feature03.webp",
-      "feature04": "/images/zh/codereview_feature04.webp",
       "feature01Title": "全量代码仓库索引",
       "feature02Title": "企业级编码知识库RAG",
       "feature03Title": "多专家模型专项检查",
@@ -73,11 +68,7 @@
       "pendingRelease": "待上线"
     },
     "strictMode": {
-      "title": "/images/zh/strictMode_title.webp",
       "subTitle": "严肃编程规范了AI生成代码的流程，使其更符合企业开发场景。它将一句话的需求，系统性地拆解为需求设计、架构设计、测试设计、代码设计等步骤，如同为AI设定了标准工序，确保输出结果高质量、高可控。",
-      "feature01": "/images/zh/strictMode_feature01.webp",
-      "feature02": "/images/zh/strictMode_feature02.webp",
-      "feature03": "/images/zh/strictMode_feature03.webp",
       "feature01Title": "理解业务",
       "feature02Title": "规范流程&任务拆解",
       "feature03Title": "测试驱动开发",
@@ -92,12 +83,6 @@
     "moreTool": {
       "title": "更多工具",
       "subTitle": "CoStrict 支持多种外接工具，例如：MCP、自定义API/模型服务、多模式/自定义模式选择 和图片上下文等功能",
-      "feature01": "/images/zh/tool_feature01.webp",
-      "feature02": "/images/zh/tool_feature02.webp",
-      "feature03": "/images/zh/tool_feature03.webp",
-      "feature04": "/images/zh/tool_feature04.webp",
-      "feature05": "/images/zh/tool_feature05.webp",
-      "feature06": "/images/zh/tool_feature06.webp",
       "feature01Title": "MCP服务",
       "feature02Title": "可接入第三方AI API",
       "feature03Title": "多模式 & 自定义模式",
@@ -155,8 +140,6 @@
     "installSteps": "安装步骤如下：",
     "step1": "步骤1",
     "step2": "步骤2",
-    "step1Img": "/images/zh/download_step1.webp",
-    "step2Img": "/images/zh/download_step2.webp",
     "step1Title": "打开插件市场, 搜索\"CoStrict\"并安装",
     "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索\"CoStrict\"后点击安装",
     "step2Title": "登录 CoStrict",
