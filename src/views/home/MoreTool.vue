@@ -14,6 +14,18 @@ import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import PageTitle from '@/components/PageTitle.vue'
 import ItemCard from './ItemCard.vue'
+import ZhToolFeature1 from '@/assets/tool/zh/tool_feature01.webp'
+import ZhToolFeature2 from '@/assets/tool/zh/tool_feature02.webp'
+import ZhToolFeature3 from '@/assets/tool/zh/tool_feature03.webp'
+import ZhToolFeature4 from '@/assets/tool/zh/tool_feature04.webp'
+import ZhToolFeature5 from '@/assets/tool/zh/tool_feature05.webp'
+import ZhToolFeature6 from '@/assets/tool/zh/tool_feature06.webp'
+import EnToolFeature1 from '@/assets/tool/en/tool_feature01.webp'
+import EnToolFeature2 from '@/assets/tool/en/tool_feature02.webp'
+import EnToolFeature3 from '@/assets/tool/en/tool_feature03.webp'
+import EnToolFeature4 from '@/assets/tool/en/tool_feature04.webp'
+import EnToolFeature5 from '@/assets/tool/en/tool_feature05.webp'
+import EnToolFeature6 from '@/assets/tool/en/tool_feature06.webp'
 
 const { t, locale } = useI18n()
 
@@ -23,32 +35,32 @@ const featureList = computed(() => [
   {
     title: t('home.moreTool.feature05Title'),
     content: t('home.moreTool.feature05Content'),
-    img: t('home.moreTool.feature05'),
+    img: isZh.value ? ZhToolFeature5 : EnToolFeature5,
   },
   {
     title: t('home.moreTool.feature06Title'),
     content: t('home.moreTool.feature06Content'),
-    img: t('home.moreTool.feature06'),
+    img: isZh.value ? ZhToolFeature6 : EnToolFeature6,
   },
   {
     title: t('home.moreTool.feature01Title'),
     content: t('home.moreTool.feature01Content'),
-    img: t('home.moreTool.feature01'),
+    img: isZh.value ? ZhToolFeature1 : EnToolFeature1,
   },
   {
     title: t('home.moreTool.feature02Title'),
     content: t('home.moreTool.feature02Content'),
-    img: t('home.moreTool.feature02'),
+    img: isZh.value ? ZhToolFeature2 : EnToolFeature2,
   },
   {
     title: t('home.moreTool.feature03Title'),
     content: t('home.moreTool.feature03Content'),
-    img: t('home.moreTool.feature03'),
+    img: isZh.value ? ZhToolFeature3 : EnToolFeature3,
   },
   {
     title: t('home.moreTool.feature04Title'),
     content: t('home.moreTool.feature04Content'),
-    img: t('home.moreTool.feature04'),
+    img: isZh.value ? ZhToolFeature4 : EnToolFeature4,
   },
 ])
 </script>

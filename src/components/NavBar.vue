@@ -10,6 +10,7 @@
     <div v-if="!isMobile"
       class="flex items-center absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 navbar-menu">
       <div class="px-5 text-[#c3defa] cursor-pointer text-center hover:text-white text-nowrap"
+        :class="{ 'menu-active': router.currentRoute.value.name === item.key }"
         v-for="item in menuOptions" :key="item.key" @click="handleMenuItemClick(item.key)">
         {{ item.label }}
       </div>
@@ -397,6 +398,10 @@ onUnmounted(() => {
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(50px);
   height: 48px;
+  
+  .menu-active {
+    color: #fff;
+  }
 }
 
 .github-icon {
