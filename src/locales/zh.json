@@ -1,5 +1,4 @@
 {
-  "welcome": "欢迎使用！",
   "header": {
     "appName": "CoStrict"
   },
@@ -13,39 +12,6 @@
     "pricing": "价格"
   },
   "home": {
-    "welcomeTitle": "欢迎使用 CoStrict",
-    "icon": "/images/zh/titleIcon.png",
-    "welcomeSubtitle": "诸葛智慧、神笔码良，开启AI Native时代",
-    "welcomeDesc": "开源、实用的AI程序员，您的工作重点从 “编” 转到 “问”、“审”",
-    "case1": {
-      "title": "AI Agent：懂你所想，有问必答",
-      "desc": "通过自然语言描述，自主创建代码文件，直接在工作区生成代码并自动完成测试",
-      "titleImg": "/images/zh/case1_titleimg.png",
-      "pageImg": "/images/zh/case_page_img1.gif"
-    },
-    "case2": {
-      "title": "代码补全：神来之笔，码上续写",
-      "desc": "代码自动补全，提供精准上下文补全更准确，快速秒级出码",
-      "titleImg": "/images/zh/case2_titleimg.png",
-      "pageImg": "/images/zh/case_page_img2.gif"
-    },
-    "case3": {
-      "title": "企业级私有化部署：",
-      "desc": "支持企业级私有化部署，为安全和隐私而设计",
-      "titleImg": "/images/zh/case3_titleimg.png",
-      "pageImg": "/images/zh/case_page_img3.png"
-    },
-    "case4": {
-      "titleImg": "/images/zh/case4_titleimg.png",
-      "feature1": "/images/zh/feature01.webp",
-      "feature2": "/images/zh/feature02.webp",
-      "feature3": "/images/zh/feature03.webp",
-      "feature4": "/images/zh/feature04.webp",
-      "feature5": "/images/zh/feature05.webp"
-    },
-    "case5": {
-      "pageImg": "/images/zh/case_page_img5.png"
-    },
     "slogan": {
       "title": "CoStrict",
       "subTitle": "企业严肃开发的AI智能伙伴",
@@ -124,13 +90,7 @@
     },
     "contactUs": "联系我们",
     "officialAccount": "扫码关注公众号",
-    "joinGroup": "扫码加入交流群",
-    "copyright": {
-      "company": "©2025 深信服科技股份有限公司版权所有",
-      "icp": "粤ICP备08126214号",
-      "gongan": "粤公网安备44030502002384号",
-      "license": "合字B1.B2-20220041"
-    }
+    "joinGroup": "扫码加入交流群"
   },
   "download": {
     "title": "欢迎使用 CoStrict",
