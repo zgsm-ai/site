@@ -12,38 +12,6 @@
     "pricing": "Pricing"
   },
   "home": {
-    "welcomeTitle": "CoStrict",
-    "icon": "/images/en/titleIcon.png",
-    "welcomeSubtitle": "Ushering in the era of AI Native",
-    "welcomeDesc": "Open source, practical AI programmer, your main task changes from writing code to asking questions and viewing code",
-    "case1": {
-      "title": "AI Agent: Understands your thoughts, answers every question",
-      "desc": "Describe in natural language, autonomously create code files, generate code directly in the workspace, and automatically complete tests.",
-      "titleImg": "/images/en/case1_titleimg.png",
-      "pageImg": "/images/en/case_page_img1.gif"
-    },
-    "case2": {
-      "title": "Code Completion: A stroke of genius, code continues instantly",
-      "desc": "Automatic code completion provides accurate contextual completion for more precision, generating code in seconds.",
-      "titleImg": "/images/en/case2_titleimg.png",
-      "pageImg": "/images/en/case_page_img2.gif"
-    },
-    "case3": {
-      "title": "Enterprise-level Private Deployment:",
-      "desc": "Supports enterprise-level private deployment, designed for security and privacy.",
-      "titleImg": "/images/en/case3_titleimg.png",
-      "pageImg": "/images/en/case_page_img3.png"
-    },
-    "case4": {
-      "titleImg": "/images/en/case4_titleimg.png",
-      "feature1": "/images/en/feature01.webp",
-      "feature2": "/images/en/feature02.webp",
-      "feature3": "/images/en/feature03.webp",
-      "feature4": "/images/en/feature04.webp"
-    },
-    "case5": {
-      "pageImg": "/images/en/case_page_img5.png"
-    },
     "slogan": {
       "title": "CoStrict",
       "subTitle": "An enterprise-grade AI agent built for serious development",
@@ -122,13 +90,7 @@
     },
     "contactUs": "Contact Us",
     "officialAccount": "Scan to follow official account",
-    "joinGroup": "Scan to join communication group",
-    "copyright": {
-      "company": "©2025 SANGFOR TECHNOLOGIES. ALL RIGHTS RESERVED.",
-      "icp": "粤ICP备08126214号",
-      "gongan": "粤公网安备44030502002384号",
-      "license": "合字B1.B2-20220041"
-    }
+    "joinGroup": "Scan to join communication group"
   },
   "download": {
     "title": "CoStrict",
