@@ -12,7 +12,7 @@
     <div class="flex gap-6 mt-4.5 sm:mt-9 md:mt-13 lg:mt-18 xl:mt-22.5 flex-wrap justify-between">
       <div class="flex flex-col items-center card-item pt-12.5 rounded-[20px] deployment-card__wrapper"
         :class="isZh ? 'pb-13.5 px-6' : 'pb-8.5 px-4.5'" v-for="item in featureList" :key="item.title">
-        <img :src="item.img" class="w-17.5 h-17.5" alt="">
+        <img :src="item.img" class="w-17.5 h-17.5" alt="CoStrict Feature">
         <span class="text-white mt-6 text-2xl deployment-card__title" :class="isZh ? '' : 'text-center'">{{ item.title
         }}</span>
         <p class="text-white mt-6 text-base opacity-70 font-light deployment-card__item"

@@ -21,7 +21,7 @@
         </div>
         <div class="download-content">
           <div class="content-header flex flex-wrap">
-            <img class="download-icon" :src="headerIcon" alt="" />
+            <img class="download-icon" :src="headerIcon" alt="CoStrict Download" />
             <span class="text-white mr-4">{{ headerTitle }}</span>
             <div class="flex cursor-pointer" @click="download">
               <span style="color: #4083e8">{{ t('download.manualPluginDownload') }}</span>
@@ -79,7 +79,7 @@
                       </div>
                       <div v-if="step.tips" class="step-tips">{{ step.tips }}</div>
                     </div>
-                    <img :src="step.imgUrl" alt="" class="w-150" />
+                    <img :src="step.imgUrl" alt="CoStrict Download" class="w-150" />
                   </div>
                 </n-timeline-item>
               </n-timeline>

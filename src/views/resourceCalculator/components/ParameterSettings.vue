@@ -190,7 +190,7 @@ const handleDeveloperCountChange = () => {
   )
 
   // 第二步：VSCode插件日活用户数 → 并发链接数
-  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * 0.1)
+  formData.value.concurrentDeveloperCount = Math.ceil(formData.value.vscodeActiveUsers * 0.33)
 
   // 数据变化会自动通过 watch 同步到父组件，父组件会通过 handleFormDataUpdate 重新计算
 }

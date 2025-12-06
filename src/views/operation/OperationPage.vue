@@ -3,7 +3,7 @@
         <div class="operation-page__wrapper">
             <div class="activity-title">
                 <span>{{ t('operation.activityTitle') }}</span>
-                <img src="../../assets/activity.svg" alt="" />
+                <img src="../../assets/activity.svg" alt="CoStrict Activity" />
             </div>
             <div class="activity-content mt-6">
                 <div class="content-title text-white">{{ t('operation.creditPlan') }}</div>
@@ -12,7 +12,7 @@
             <div class="mt-3 relative wrapper">
                 <div class="activity-github-star">
                     <div class="activity-github-star__header flex items-center">
-                        <img src="../../assets/star.svg" alt="" />
+                        <img src="../../assets/star.svg" alt="github star" />
                         <span class="text-white ml-3 text-sm">{{
                             t('activityCard.githubStar')
                             }}</span>
@@ -29,7 +29,7 @@
             <div class="mt-3 relative wrapper">
                 <div class="activity-invite-user">
                     <div class="activity-invite-user__header flex items-center">
-                        <img src="../../assets/user.svg" alt="" />
+                        <img src="../../assets/user.svg" alt="CoStrict Invite" />
                         <span class="text-white ml-3 text-sm">{{
                             t('activityCard.inviteNewUser')
                             }}</span>

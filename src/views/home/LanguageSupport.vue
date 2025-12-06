@@ -5,17 +5,17 @@
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-4 mt-5 sm:mt-9 md:mt-12 lg:mt-18 xl:mt-20">
       <div :src="item" :key="item.type" v-for="item in programLanguage"
         class="flex items-center justify-center lang-container">
-        <img v-if="item.icon" :src="item.icon" class="w-6 h-6 mr-2" />
+        <img v-if="item.icon" :src="item.icon" class="w-6 h-6 mr-2" :alt="item.type" />
         <span class="text-white leading-6 text-sm xl:text-base whitespace-nowrap">{{ item.type }}</span>
       </div>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-10 xl:mt-20">
       <div class="vscode-container flex items-center justify-center">
-        <img :src="vscodeIcon" />
+        <img :src="vscodeIcon" alt="vscode" />
         <span class="text-white ml-3">{{ t('home.ideSupport.SupportedInVSCode') }}</span>
       </div>
       <div class="vscode-container flex items-center justify-center">
-        <img :src="jetbrainsIcon" />
+        <img :src="jetbrainsIcon" alt="jetbrains" />
         <span class="text-white ml-3">{{
           t('home.ideSupport.SupportedInJetBrains') }}</span>
       </div>

@@ -13,28 +13,16 @@
     </div>
     <div class="contract flex items-center mt-7">
       <div class="flex flex-col items-center">
-        <img class="w-25 h-25" src="../../assets/qrcode/official_account.png" alt="" />
+        <img class="w-25 h-25" src="../../assets/qrcode/official_account.png" alt="CoStrict Official Account" />
         <span class="mt-3 text-white text-center">{{ t('footer.officialAccount') }}</span>
       </div>
 
       <div class="flex flex-col ml-10 xl:ml-20 items-center">
-        <img class="w-25 h-25" src="../../assets/qrcode/communication_group.png" alt="" />
+        <img class="w-25 h-25" src="../../assets/qrcode/communication_group.png" alt="CoStrict Communication Group" />
         <span class="mt-3 text-white text-center">{{ t('footer.joinGroup') }}</span>
       </div>
     </div>
     <div class="flex items-center text-[#a1a7b3] mt-3.75 sm:mt-7.5 md:mt-11 lg:mt-15 xl:mt-18.5 copyright-content">
-      <!-- <span class="mx-3">{{ t('footer.copyright.company') }}</span>
-      <template v-if="locale === 'zh'">
-        <div class="flex items-center mx-3">
-          <img class="w-4 h-4" src="@/assets/copyright_btn.png" />
-          <span>{{ t('footer.copyright.icp') }}</span>
-        </div>
-        <div class="flex items-center mx-3">
-          <img class="w-4 h-4" src="@/assets/copyright_btn.png" />
-          <span>{{ t('footer.copyright.gongan') }}</span>
-        </div>
-        <span class="mx-3">{{ t('footer.copyright.license') }}</span>
-      </template> -->
     </div>
   </div>
 </template>

@@ -9,7 +9,7 @@
         </div>
         <div class="item-card__img">
             <slot name="img">
-                <img :src="img" alt="">
+                <img :src="img" alt="card img">
             </slot>
         </div>
     </div>
