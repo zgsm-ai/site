@@ -9,11 +9,12 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
-    <img src="../../assets/home/left_port.webp" class="absolute left-0 top-[1538px]">
-    <img src="../../assets/home/right_port.webp" class="absolute right-0 top-[1347px]">
+    <img src="../../assets/home/left_port.webp" class="absolute left-0 top-[1538px]" alt="left port">
+    <img src="../../assets/home/right_port.webp" class="absolute right-0 top-[1347px]" alt="right port">
     <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
     <img src="../../assets/home/competition.webp"
-      class="absolute right-[-15px] top-[98px] cursor-pointer z-1000 competition-icon" alt="" @click="toCompetition" v-if="!isEnglish">
+      class="absolute right-[-15px] top-[98px] cursor-pointer z-1000 competition-icon" alt="CoStrict Competition"
+      @click="toCompetition" v-if="!isEnglish">
   </div>
 </template>
 <script lang="ts" setup>
@@ -70,11 +71,11 @@ const toCompetition = () => {
   .competition-icon:hover {
     transform: none !important;
   }
-  
+
   .competition-icon:active {
     transform: none !important;
   }
-  
+
   .competition-icon {
     transition: none !important;
     cursor: pointer;

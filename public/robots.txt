@@ -1,0 +1,41 @@
+User-agent: *
+Allow: /
+
+# 禁止爬取资源文件目录
+Disallow: /src/assets/
+Disallow: /assets/
+Disallow: /chunks/
+Disallow: /js/
+Disallow: /css/
+Disallow: /video/
+
+# 禁止爬取开发相关文件
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /.vscode/
+Disallow: /dist/
+Disallow: /build/
+Disallow: /.DS_Store
+Disallow: /Thumbs.db
+
+# 禁止爬取配置文件
+Disallow: /*.config.js
+Disallow: /*.config.ts
+Disallow: /*.lock.yaml
+Disallow: /package.json
+Disallow: /tsconfig*.json
+Disallow: /vite.config.ts
+Disallow: /eslint.config.ts
+Disallow: /Dockerfile
+Disallow: /nginx.conf
+
+# 允许主要页面
+Allow: /
+Allow: /download
+Allow: /resource
+Allow: /operation
+Allow: /pricing
+
+# 爬取延迟 (秒)
+Crawl-delay: 1

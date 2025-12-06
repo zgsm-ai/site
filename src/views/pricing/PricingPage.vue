@@ -1,10 +1,11 @@
 <template>
   <div class="pricing-page pt-39.5 pb-23 relative">
-    <img src="../../assets/price/bg_1.png" alt="" class="absolute left-[-10px] top-85 w-55 h-58 priceing-page__bg">
-    <img src="../../assets/price/bg_2.png" alt="" class="absolute left-124 top-104 w-55 pricing-page__bg">
-    <img src="../../assets/price/bg_3.png" alt="" class="absolute left-155 top-81 w-28.5 pricing-page__bg">
-    <img src="../../assets/price/bg_4.png" alt="" class="absolute left-233.5 top-104 w-55 pricing-page__bg">
-    <img src="../../assets/price/bg_5.png" alt="" class="absolute left-265 top-81 w-28.5 pricing-page__bg">
+    <img src="../../assets/price/bg_1.png" alt="background"
+      class="absolute left-[-10px] top-85 w-55 h-58 priceing-page__bg">
+    <img src="../../assets/price/bg_2.png" alt="background" class="absolute left-124 top-104 w-55 pricing-page__bg">
+    <img src="../../assets/price/bg_3.png" alt="background" class="absolute left-155 top-81 w-28.5 pricing-page__bg">
+    <img src="../../assets/price/bg_4.png" alt="background" class="absolute left-233.5 top-104 w-55 pricing-page__bg">
+    <img src="../../assets/price/bg_5.png" alt="background" class="absolute left-265 top-81 w-28.5 pricing-page__bg">
     <div class="pricing-page__title text-3xl text-center">{{ t('pricing.title') }}</div>
     <div class="pricing-page__subTitle text-center mt-7.5 opacity-70 text-base">{{ t('pricing.subtitle') }}</div>
     <div class="text-center mt-2 text-base">🎯<span class="pricing-page__tips">{{ t('pricing.tips') }}</span></div>
@@ -12,7 +13,7 @@
       <div class="content-version grid grid-cols-4 gap-5">
         <div v-for="(plan, index) in pricingPlans" :key="index" class="content-version__item min-88 px-5 py-6 relative">
           <div v-if="plan.showTrafficLabel" class="absolute right-0 top-[-4px]">
-            <img src="../../assets/label-bg.webp" alt="">
+            <img src="../../assets/label-bg.webp" alt="label">
             <span class="absolute top-1 left-7 label-text">{{ t('pricing.tag.trafficPackage') }}</span>
           </div>
           <div class="content-version__item-title text-base font-semibold">{{
@@ -173,8 +174,7 @@ const toDetail = () => {
             #00FFB7 16%,
             rgba(247, 255, 253, 0.51) 51%,
             rgba(0, 94, 255, 0.3) 85%,
-            rgba(0, 94, 255, 0.6) 100%
-          );
+            rgba(0, 94, 255, 0.6) 100%);
         -webkit-mask:
           linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
