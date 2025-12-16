@@ -165,7 +165,7 @@
         "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
         "features": {
-          "credits": "4000+额外赠送 200Credits（等于4200次请求）",
+          "credits": "4000+额外赠送 200Credits（约等于4200次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
           "freeCodeReview": "免费代码审查，无限使用",
           "advancedModels": "高级模型可用"
@@ -176,7 +176,7 @@
         "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
         "features": {
-          "credits": "10000+额外赠送 800Credits（等于10800次请求）",
+          "credits": "10000+额外赠送 800Credits（约等于10800次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
           "freeCodeReview": "免费代码审查，无限使用",
           "advancedModels": "高级模型可用"
