@@ -59,7 +59,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
         },
       ],
       clickEvent() {
-        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=1')
+        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=4')
       },
     },
     {
@@ -89,7 +89,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
         },
       ],
       clickEvent() {
-        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=2')
+        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=5')
       },
     },
     {
@@ -119,7 +119,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
         },
       ],
       clickEvent() {
-        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=3')
+        window.open('https://zgsm.sangfor.com/credit/manager/subscribe?type=6')
       },
     },
   ]
