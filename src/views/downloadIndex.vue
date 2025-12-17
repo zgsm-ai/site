@@ -506,7 +506,7 @@ const downloadJetbrainsPlugin2 = () => {
   }
 }
 
-/deep/.jetbrains-content {
+:deep(.jetbrains-content) {
   .download-link {
     @media (max-width: 1024px) {
       margin-left: 0;
