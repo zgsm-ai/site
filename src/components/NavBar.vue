@@ -3,7 +3,7 @@
     :class="{ 'not-homepage': notHomePage, 'bg-black': isMobile }">
     <!-- Logo 和应用名称 -->
     <div class="flex items-center h-[68px] cursor-pointer" @click="toHome">
-      <img class="w-[28px] mr-3" src="@/assets/logo.png" alt="CoStrict Logo"/>
+      <img class="w-[28px] mr-3" src="@/assets/logo.webp" alt="CoStrict Logo"/>
       <div class="text-[#F4F8FF] text-base">{{ t('header.appName') }}</div>
     </div>
     <!-- 桌面端导航菜单 -->

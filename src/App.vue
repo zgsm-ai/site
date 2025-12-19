@@ -6,6 +6,8 @@ import navbar from './components/NavBar.vue'
 <template>
   <navbar />
   <n-message-provider>
-    <router-view />
+    <main>
+      <router-view />
+    </main>
   </n-message-provider>
 </template>
