@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM node:18.19.0 AS builder
+FROM --platform=$BUILDPLATFORM node:20.19.2 AS builder
 
 WORKDIR /workshop
 
@@ -16,7 +16,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # 构建前端
-RUN NODE_OPTIONS="--max-old-space-size=4096" pnpm run build
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build
 
 
 # ----------------------------
