@@ -247,7 +247,7 @@ const downloadPlugin = () => {
 }
 
 const downloadJetbrainsPlugin = () => {
-  window.open('https://costrict.ai/plugin/jetbrain/', '_blank')
+  window.open('https://zgsm.sangfor.com/costrict/jebrains-plugin/index.html', '_blank')
 }
 
 const downloadJetbrainsPlugin2 = () => {
