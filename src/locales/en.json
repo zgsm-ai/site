@@ -38,9 +38,11 @@
       "feature01Title": "Understanding the Business",
       "feature02Title": "Structured Workflow & Task Breakdown",
       "feature03Title": "Test-Driven Development",
+      "feature04Title": "Plan Mode",
       "feature01Content": "The project documentation function supports organizing information such as the structure, interfaces, and specifications of historical code, ensuring that subsequently generated code maintains consistency with the existing architectural style, achieves seamless integration, and remains high-quality.",
       "feature02Content": "CoStrict systematically deconstructs user requirements into multiple modules, including requirement clarification, design, and task breakdown. Each module is customizable, ensuring highly controllable and superior quality outcomes.",
-      "feature03Content": "Code Quality, Built-In from the Start.CoStrict creates tests before writing any code. Its automated test-first cycle ensures every line must meet strict quality checks, guaranteeing solid and reliable code from the ground up."
+      "feature03Content": "Code Quality, Built-In from the Start.CoStrict creates tests before writing any code. Its automated test-first cycle ensures every line must meet strict quality checks, guaranteeing solid and reliable code from the ground up.",
+      "feature04Content": "CoStrict Plan Mode follows a \"Planning → Step-by-Step Implementation\" workflow. Ideal for progressive development and task management, ensuring orderly project advancement."
     },
     "completion": {
       "title": "Code Completion",

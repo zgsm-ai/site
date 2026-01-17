@@ -34,9 +34,12 @@ import StrictModeEnPoster from '@/assets/strictMode/strict_mode_en_buffer.webp'
 import ZhStrictModeFeature1 from '@/assets/strictMode/zh/strictMode_feature01.webp';
 import ZhStrictModeFeature2 from '@/assets/strictMode/zh/strictMode_feature02.webp';
 import ZhStrictModeFeature3 from '@/assets/strictMode/zh/strictMode_feature03.webp';
+import ZhStrictModeFeature4 from '@/assets/strictMode/zh/strictMode_feature04.webp';
 import EnStrictModeFeature1 from '@/assets/strictMode/en/strictMode_feature01.webp';
 import EnStrictModeFeature2 from '@/assets/strictMode/en/strictMode_feature02.webp';
 import EnStrictModeFeature3 from '@/assets/strictMode/en/strictMode_feature03.webp';
+import EnStrictModeFeature4 from '@/assets/strictMode/en/strictMode_feature04.webp';
+
 import EnStrictModeTitle from '@/assets/strictMode/en/strictMode_title.webp';
 import ZhStrictModeTitle from '@/assets/strictMode/zh/strictMode_title.webp';
 
@@ -59,6 +62,11 @@ const featureList = computed(() => [
         title: t('home.strictMode.feature03Title'),
         content: t('home.strictMode.feature03Content'),
         img: isZh.value ? ZhStrictModeFeature3 : EnStrictModeFeature3,
+    },
+    {
+        title: t('home.strictMode.feature04Title'),
+        content: t('home.strictMode.feature04Content'),
+        img: isZh.value ? ZhStrictModeFeature4 : EnStrictModeFeature4,
     },
 ])
 

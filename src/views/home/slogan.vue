@@ -20,11 +20,11 @@
             :class="['text-white', isEn ? '' : 'slogan-title']">
             {{ t('home.slogan.title') }}
           </div>
-          <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-base sm:text-2xl ml-[12px]">
+          <!-- <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-base sm:text-2xl ml-[12px]">
             <template #iTag>
               <span class="italic text-xs mx-1 ">{{ t('home.slogan.original') }}</span>
             </template>
-          </i18n-t>
+          </i18n-t> -->
         </div>
       </div>
     </div>
