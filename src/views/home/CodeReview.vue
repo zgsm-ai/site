@@ -124,7 +124,11 @@ const video = computed(() => isZh.value ? CodeReviewZhVideo : CodeReviewEnVideo)
 
 .code-review__item {
   flex: 0 1 calc(50% - 12px);
-  height: 400px;
+  height: 600px;
+
+  @media (max-width: 1920px) {
+    height: 400px;
+  }
 
   @media (max-width: 1024px) {
     flex: 0 1 calc(50% - 12px);
@@ -140,7 +144,11 @@ const video = computed(() => isZh.value ? CodeReviewZhVideo : CodeReviewEnVideo)
 }
 
 .code-review__item-en {
-  height: 440px;
+  height: 640px;
+
+  @media (max-width: 1920px) {
+    height: 440px;
+  }
 
   @media (max-width: 480px) {
     height: auto;
