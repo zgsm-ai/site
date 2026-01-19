@@ -7,7 +7,7 @@
             </div>
             <span class="mt-4 text-base font-normal leading-6 text-center text-white/70 max-w-270 strict-mode__desc">{{
                 t('home.strictMode.subTitle')
-            }}</span>
+                }}</span>
         </div>
         <div class="w-full rounded-[20px] mt-10 gradient-border">
             <video class="rounded-[20px] w-full" :src="video" preload="none" loop muted autoplay playsinline
@@ -101,7 +101,11 @@ const poster = computed(() => isZh.value ? StrictModeZhPoster : StrictModeEnPost
 
 .strict-mode__item {
     flex: 0 1 calc(50% - 12px);
-    height: 400px;
+    height: 600px;
+
+    @media (max-width: 1920px) {
+        height: 400px;
+    }
 
     @media (max-width: 1024px) {
         flex: 0 1 calc(50% - 12px);
@@ -117,7 +121,11 @@ const poster = computed(() => isZh.value ? StrictModeZhPoster : StrictModeEnPost
 }
 
 .strict-mode__item-en {
-    height: 440px;
+    height: 640px;
+
+    @media (max-width: 1920px) {
+        height: 440px;
+    }
 
     @media (max-width: 480px) {
         height: auto;
