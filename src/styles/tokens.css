@@ -1,0 +1,101 @@
+:root {
+  /* ============================================
+     Design Tokens - CoStrict Website
+     ============================================ */
+
+  /* Breakpoints */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1920px;
+
+  /* Spacing Scale (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Colors - Brand */
+  --color-primary: #0066ff;
+  --color-primary-light: #197dff;
+  --color-accent: #00ffb7;
+
+  /* Colors - Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-muted: rgba(255, 255, 255, 0.5);
+  --color-text-link: #c3defa;
+
+  /* Colors - Background */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: rgba(0, 0, 0, 0.3);
+  --color-bg-tertiary: rgba(0, 0, 0, 0.95);
+  --color-bg-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Colors - UI Elements */
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-border-light: rgba(255, 255, 255, 0.3);
+  --color-menu-bg: #004093;
+  --color-menu-hover: #197dff;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
+  --radius-xl: 40px;
+  --radius-full: 9999px;
+
+  /* Font Sizes */
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 22px;
+  --font-2xl: 24px;
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* Z-Index Scale */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-toast: 700;
+  --z-navbar: 1000;
+  --z-overlay: 1001;
+  --z-drawer: 1002;
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease-in-out;
+  --transition-slow: 300ms ease;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Backdrop Blur */
+  --blur-sm: blur(5px);
+  --blur-md: blur(10px);
+  --blur-lg: blur(50px);
+}

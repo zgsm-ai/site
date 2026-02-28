@@ -9,8 +9,13 @@
       </div>
       <div class="container-main">
         <div class="tab-list">
-          <div class="tab-item" :class="{ active: activeTab === tab.key }" v-for="tab in tabList" :key="tab.key"
-            @click="handleTabClick(tab.key)">
+          <div
+            class="tab-item"
+            :class="{ active: activeTab === tab.key }"
+            v-for="tab in tabList"
+            :key="tab.key"
+            @click="handleTabClick(tab.key)"
+          >
             <img :src="tab.imgUrl" :alt="tab.key" />
           </div>
         </div>
@@ -20,12 +25,18 @@
             <span class="text-white mr-4">{{ headerTitle }}</span>
             <div class="flex cursor-pointer" @click="download">
               <span style="color: #4083e8">{{ t('download.manualPluginDownload') }}</span>
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
-                width="18" color="#fff">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 20 20"
+                width="18"
+                color="#fff"
+              >
                 <g fill="none">
                   <path
                     d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-                    fill="currentColor"></path>
+                    fill="currentColor"
+                  ></path>
                 </g>
               </svg>
             </div>
@@ -49,8 +60,13 @@
             <p class="tips">{{ t('download.installSteps') }}</p>
             <div class="download-methods">
               <n-timeline :icon-size="20">
-                <n-timeline-item v-for="(step, index) in stepList" :key="index" :title="t(`download.step${index + 1}`)"
-                  line-type="dashed" color="#4083E8">
+                <n-timeline-item
+                  v-for="(step, index) in stepList"
+                  :key="index"
+                  :title="t(`download.step${index + 1}`)"
+                  line-type="dashed"
+                  color="#4083E8"
+                >
                   <template #icon>
                     <div class="timeline-icon">{{ index + 1 }}</div>
                   </template>
@@ -150,7 +166,7 @@ const copyToClipboard = async () => {
     await navigator.clipboard.writeText(cliCommand)
     message.success(t('download.copySuccess'))
     return
-  } catch (err) {
+  } catch {
     // 降级方案：使用传统复制方法
     const textArea = document.createElement('textarea')
     textArea.value = cliCommand
@@ -161,7 +177,7 @@ const copyToClipboard = async () => {
     try {
       document.execCommand('copy')
       message.success(t('download.copySuccess'))
-    } catch (e) {
+    } catch {
       message.error(t('download.copyFailed'))
     }
     document.body.removeChild(textArea)
@@ -264,30 +280,38 @@ const stepList = computed<StepItem[]>(() => {
               h('div', { class: 'cli-code-block' }, [
                 h('span', { class: 'cli-prompt' }, '$ '),
                 h('span', { class: 'cli-command-text' }, cliCommand),
-                h('button', {
-                  class: 'cli-copy-icon',
-                  onClick: copyToClipboard,
-                  'aria-label': t('download.copyCommand')
-                }, [
-                  h('svg', {
-                    xmlns: 'http://www.w3.org/2000/svg',
-                    width: '20',
-                    height: '20',
-                    viewBox: '0 0 24 24',
-                    fill: 'none',
-                    stroke: 'currentColor',
-                    'stroke-width': '2',
-                    'stroke-linecap': 'round',
-                    'stroke-linejoin': 'round'
-                  }, [
-                    h('rect', { x: '9', y: '9', width: '13', height: '13', rx: '2', ry: '2' }),
-                    h('path', { d: 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' })
-                  ])
-                ])
-              ])
-            ])
-          ])
-      }
+                h(
+                  'button',
+                  {
+                    class: 'cli-copy-icon',
+                    onClick: copyToClipboard,
+                    'aria-label': t('download.copyCommand'),
+                  },
+                  [
+                    h(
+                      'svg',
+                      {
+                        xmlns: 'http://www.w3.org/2000/svg',
+                        width: '20',
+                        height: '20',
+                        viewBox: '0 0 24 24',
+                        fill: 'none',
+                        stroke: 'currentColor',
+                        'stroke-width': '2',
+                        'stroke-linecap': 'round',
+                        'stroke-linejoin': 'round',
+                      },
+                      [
+                        h('rect', { x: '9', y: '9', width: '13', height: '13', rx: '2', ry: '2' }),
+                        h('path', { d: 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' }),
+                      ],
+                    ),
+                  ],
+                ),
+              ]),
+            ]),
+          ]),
+      },
     ]
   }
   return []
@@ -412,22 +436,26 @@ const downloadJetbrainsPlugin2 = () => {
           padding: 16px 16px 16px 32px;
           box-sizing: border-box;
           border: 2px solid transparent;
-          background-image: linear-gradient(103deg,
-              rgba(32, 204, 148, 0.24) 4%,
-              #20cc94 20%,
-              #a8a8a8 36%,
-              #d4d4d4 50%,
-              #1c6eff 67%,
-              rgba(149, 149, 149, 0.55) 99%);
+          background-image: linear-gradient(
+            103deg,
+            rgba(32, 204, 148, 0.24) 4%,
+            #20cc94 20%,
+            #a8a8a8 36%,
+            #d4d4d4 50%,
+            #1c6eff 67%,
+            rgba(149, 149, 149, 0.55) 99%
+          );
           background-image:
             linear-gradient(black, black),
-            linear-gradient(103deg,
+            linear-gradient(
+              103deg,
               rgba(32, 204, 148, 0.24) 4%,
               #20cc94 20%,
               #a8a8a8 36%,
               #d4d4d4 50%,
               #1c6eff 67%,
-              rgba(149, 149, 149, 0.55) 99%);
+              rgba(149, 149, 149, 0.55) 99%
+            );
           background-origin: border-box;
           background-clip: padding-box, border-box;
           border-radius: 12px;

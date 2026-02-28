@@ -2,62 +2,63 @@
   <div class="w-full relative z-50">
     <div class="slogan-container flex w-full h-72 sm:h-92 md:h-102 xl:h-108 justify-center">
       <div class="w-full flex flex-col items-center">
-        <div class="mt-48 xl:mt-68 lg:mt-68 md:mt-68 sm:mt-62 text-xl sm:text-2xl" :class="[
-          'oss-btn',
-          `oss-btn-${locale}`,
-          'flex',
-          'items-center',
-          'justify-center',
-          'text-white',
-          'h-10',
-          'w-36',
-          ossButtonWidth,
-        ]">
+        <div
+          class="mt-48 xl:mt-68 lg:mt-68 md:mt-68 sm:mt-62 text-xl sm:text-2xl"
+          :class="[
+            'oss-btn',
+            `oss-btn-${locale}`,
+            'flex',
+            'items-center',
+            'justify-center',
+            'text-white',
+            'h-10',
+            'w-36',
+            ossButtonWidth,
+          ]"
+        >
           {{ t('home.slogan.ossButton') }}
         </div>
         <div class="flex items-center mt-5 sm:mt-8">
-          <div class="text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl"
-            :class="['text-white', isEn ? '' : 'slogan-title']">
+          <div
+            class="text-xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl"
+            :class="['text-white', isEn ? '' : 'slogan-title']"
+          >
             {{ t('home.slogan.title') }}
           </div>
-          <!-- <i18n-t keypath="home.slogan.zhugeCode" tag="span" class="text-gray-400 text-base sm:text-2xl ml-[12px]">
-            <template #iTag>
-              <span class="italic text-xs mx-1 ">{{ t('home.slogan.original') }}</span>
-            </template>
-          </i18n-t> -->
         </div>
       </div>
     </div>
     <div class="flex flex-col items-center pb-7.5 sm:pb-10 md:pb-12 lg:pb-16 xl:pb-37.5">
-      <div class="text-xl lg:text-6xl md:text-5xl sm:text-4xl"
-        :class="['text-white', isEn ? 'max-w-[90%]' : 'slogan-subTitle']">
+      <div
+        class="text-xl lg:text-6xl md:text-5xl sm:text-4xl"
+        :class="['text-white', isEn ? 'max-w-[90%]' : 'slogan-subTitle']"
+      >
         {{ t('home.slogan.subTitle') }}
       </div>
       <div
         class="button-group flex gap-4 mt-5 sm:mt-7.5 text-xs xl:text-2xl lg:text-xl md:text-base sm:text-sm text-white"
-        :class="{ 'button-group-en': isEn }">
-        <div v-for="(button, index) in buttons" :key="index"
+        :class="{ 'button-group-en': isEn }"
+      >
+        <div
+          v-for="(button, index) in buttons"
+          :key="index"
           class="flex items-center justify-center cursor-pointer h-8 md:h-10 lg:h-12 px-3"
-          :class="button.specificClasses" @click="button.action">
+          :class="button.specificClasses"
+          @click="button.action"
+        >
           {{ t(button.textKey) }}
         </div>
       </div>
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'sloganView',
-})
-</script>
+
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 
 const { t, locale } = useI18n()
-
 const router = useRouter()
 
 const isEn = computed(() => locale.value === 'en')
@@ -66,37 +67,30 @@ const ossButtonWidth = computed(() => {
   return isEn.value ? 'w-[280px]' : 'w-[143px]'
 })
 
-// const subTitleFontSize = computed(() => {
-//   return isEn.value ? 'text-5xl' : 'text-6xl'
-// })
-
 const buttons = computed(() => [
   {
-    specificClasses: [
-      'enterprise-button',
-      `enterprise-button-${locale.value}`
-    ],
+    specificClasses: ['enterprise-button', `enterprise-button-${locale.value}`],
     textKey: 'home.slogan.enterpriseButton',
-    action: toDeployment
+    action: toDeployment,
   },
   {
-    specificClasses: [
-      'personal-button',
-      `personal-button-${locale.value}`,
-    ],
+    specificClasses: ['personal-button', `personal-button-${locale.value}`],
     textKey: 'home.slogan.personalButton',
-    action: toDownload
-  }
+    action: toDownload,
+  },
 ])
 
 const toDownload = () => {
-  // window.open('https://docs.costrict.ai/guide/installation')
   router.push('/download')
 }
 
 const toDeployment = () => {
   window.open('https://docs.costrict.ai/deployment/introduction/')
 }
+
+defineOptions({
+  name: 'SloganSection',
+})
 </script>
 
 <style lang="less" scoped>
@@ -104,11 +98,17 @@ const toDeployment = () => {
   box-sizing: border-box;
   text-align: center;
   letter-spacing: normal;
-  background: linear-gradient(99deg, #00FFB7 2%, #FFFFFF 68%, #C5DBFF 101%);
+  background: linear-gradient(99deg, #00ffb7 2%, #ffffff 68%, #c5dbff 101%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  border-image: linear-gradient(93deg, rgba(0, 102, 254, 0) 0%, #FFFFFF 50%, rgba(0, 102, 254, 0) 90%) 2 0 2 0;
+  border-image: linear-gradient(
+      93deg,
+      rgba(0, 102, 254, 0) 0%,
+      #ffffff 50%,
+      rgba(0, 102, 254, 0) 90%
+    )
+    2 0 2 0;
   border-width: 2px 0px 2px 0px;
   border-style: solid;
 
