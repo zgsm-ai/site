@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import i18n from '@/locales'
 
-// 创建基础路由
-const baseRoutes = [
+// 静态路由配置 - 不再动态增删
+const routes = [
   {
     path: '/',
     name: 'home',
@@ -11,7 +11,7 @@ const baseRoutes = [
   {
     path: '/download',
     name: 'download',
-    component: () => import('@/views/downloadIndex.vue'),
+    component: () => import('@/views/DownloadPage.vue'),
   },
   {
     path: '/resource',
@@ -23,36 +23,20 @@ const baseRoutes = [
     name: 'operation',
     component: () => import('@/views/operation/OperationPage.vue'),
   },
+  {
+    path: '/pricing',
+    name: 'pricing',
+    component: () => import('@/views/pricing/PricingPage.vue'),
+    meta: {
+      // 标记此路由仅在中文环境显示
+      localeVisible: ['zh'],
+    },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
+  },
 ]
-
-// 语言特定路由配置
-const languageSpecificRoutes = {
-  zh: [
-    {
-      path: '/pricing',
-      name: 'pricing',
-      component: () => import('@/views/pricing/PricingPage.vue'),
-    }
-  ],
-  en: [] // 英文版本没有特定路由
-}
-
-// 动态获取当前路由配置
-const getCurrentRoutes = (locale?: string) => {
-  const currentLocale = locale || i18n.global.locale.value
-  return [
-    ...baseRoutes,
-    ...(languageSpecificRoutes[currentLocale as 'zh' | 'en'] || []),
-    // 添加捕获所有路由的规则，不匹配的路由重定向到首页
-    {
-      path: '/:pathMatch(.*)*',
-      redirect: '/'
-    }
-  ]
-}
-
-// 初始化路由配置
-const routes = getCurrentRoutes()
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,22 +46,17 @@ const router = createRouter({
   },
 })
 
-// 监听语言变化，动态更新路由
-export const updateRoutesForLanguage = (locale: string) => {
-  // 获取新的路由配置
-  const newRoutes = getCurrentRoutes(locale)
-  
-  // 移除所有现有路由
-  router.getRoutes().forEach(route => {
-    if (route.name) {
-      router.removeRoute(route.name)
-    }
-  })
-  
-  // 添加新的路由
-  newRoutes.forEach(route => {
-    router.addRoute(route)
-  })
-}
+// 导航守卫：检查路由的语言可见性
+router.beforeEach((to, from, next) => {
+  const currentLocale = i18n.global.locale.value
+  const allowedLocales = to.meta.localeVisible as string[] | undefined
+
+  // 如果路由有 localeVisible 限制，且当前语言不在允许列表中
+  if (allowedLocales && !allowedLocales.includes(currentLocale)) {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
+})
 
 export default router
