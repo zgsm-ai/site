@@ -1,11 +1,11 @@
 <template>
   <FeatureSection
-    :zh-title="ZhStrictModeTitle"
-    :en-title="EnStrictModeTitle"
+    :zh-title="resources.zh.title"
+    :en-title="resources.en.title"
     alt-text="strict mode"
     :sub-title="t('home.strictMode.subTitle')"
-    :video="video"
-    :poster="poster"
+    :video="currentResources.video"
+    :poster="currentResources.poster"
     :feature-list="featureList"
   />
 </template>
@@ -31,31 +31,48 @@ import ZhStrictModeTitle from '@/assets/strictMode/zh/strictMode_title.webp'
 
 const { t, locale } = useI18n()
 
-const isZh = computed(() => locale.value === 'zh')
+// 资源映射表 - 更清晰、易维护
+const resources = {
+  zh: {
+    title: ZhStrictModeTitle,
+    video: StrictModeZhVideo,
+    poster: StrictModeZhPoster,
+  },
+  en: {
+    title: EnStrictModeTitle,
+    video: StrictModeEnVideo,
+    poster: StrictModeEnPoster,
+  },
+}
+
+const featureImages = {
+  zh: [ZhStrictModeFeature1, ZhStrictModeFeature2, ZhStrictModeFeature3, ZhStrictModeFeature4],
+  en: [EnStrictModeFeature1, EnStrictModeFeature2, EnStrictModeFeature3, EnStrictModeFeature4],
+}
+
+const currentResources = computed(() => resources[locale.value as 'zh' | 'en'])
+const currentFeatureImages = computed(() => featureImages[locale.value as 'zh' | 'en'])
 
 const featureList = computed(() => [
   {
     title: t('home.strictMode.feature01Title'),
     content: t('home.strictMode.feature01Content'),
-    img: isZh.value ? ZhStrictModeFeature1 : EnStrictModeFeature1,
+    img: currentFeatureImages.value[0],
   },
   {
     title: t('home.strictMode.feature02Title'),
     content: t('home.strictMode.feature02Content'),
-    img: isZh.value ? ZhStrictModeFeature2 : EnStrictModeFeature2,
+    img: currentFeatureImages.value[1],
   },
   {
     title: t('home.strictMode.feature03Title'),
     content: t('home.strictMode.feature03Content'),
-    img: isZh.value ? ZhStrictModeFeature3 : EnStrictModeFeature3,
+    img: currentFeatureImages.value[2],
   },
   {
     title: t('home.strictMode.feature04Title'),
     content: t('home.strictMode.feature04Content'),
-    img: isZh.value ? ZhStrictModeFeature4 : EnStrictModeFeature4,
+    img: currentFeatureImages.value[3],
   },
 ])
-
-const video = computed(() => (isZh.value ? StrictModeZhVideo : StrictModeEnVideo))
-const poster = computed(() => (isZh.value ? StrictModeZhPoster : StrictModeEnPoster))
 </script>

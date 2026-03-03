@@ -12,12 +12,12 @@ export default defineConfig({
     port: 9001,
   },
   plugins: [
-    vue(), 
-    vueDevTools(), 
-    tailwindcss(), 
+    vue(),
+    vueDevTools(),
+    tailwindcss(),
     compression({ algorithm: 'gzip' }),
-    compression({ algorithm: 'brotliCompress' })
-],
+    compression({ algorithm: 'brotliCompress' }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -35,7 +35,7 @@ export default defineConfig({
           if (id.includes('naive-ui')) {
             return 'naive-ui'
           }
-          
+
           // 其他 node_modules 依赖分离到 vendor chunk
           if (id.includes('node_modules')) {
             return 'vendor'
