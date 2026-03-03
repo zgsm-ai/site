@@ -1,4 +1,5 @@
 import './index.css'
+import './styles/tokens.css'
 
 import { createApp } from 'vue'
 
