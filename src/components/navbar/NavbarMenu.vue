@@ -1,14 +1,16 @@
 <template>
   <div class="navbar-menu">
-    <div
+    <a
       v-for="item in menuOptions"
       :key="item.key"
       class="menu-item"
       :class="{ 'menu-active': isActive(item.key) }"
-      @click="handleClick(item.key)"
+      :href="getHref(item.key)"
+      :target="getTarget(item.key)"
+      @click="handleClick(item.key, $event)"
     >
       {{ item.label }}
-    </div>
+    </a>
   </div>
 </template>
 
@@ -39,19 +41,27 @@ const menuOptions = computed<MenuOption[]>(() => [
 
 const isActive = (key: string) => currentRouteName.value === key
 
-const handleClick = (key: string) => {
-  if (key === 'oss') {
-    window.open('https://github.com/zgsm-ai/costrict')
-    return
-  } else if (key === 'docs') {
-    const url = `https://docs.costrict.ai${isEn.value ? '/en' : ''}`
-    window.open(url)
-    return
+const getHref = (key: string) => {
+  if (key === 'docs') {
+    return `https://docs.costrict.ai${isEn.value ? '/en' : ''}`
   } else if (key === 'install') {
-    const url = `https://docs.costrict.ai${isEn.value ? '/en' : ''}/deployment/introduction/`
-    window.open(url)
+    return `https://docs.costrict.ai${isEn.value ? '/en' : ''}/deployment/introduction/`
+  }
+  return '#'
+}
+
+const getTarget = (key: string) => {
+  if (key === 'docs' || key === 'install') {
+    return '_blank'
+  }
+  return undefined
+}
+
+const handleClick = (key: string, event: MouseEvent) => {
+  if (key === 'docs' || key === 'install') {
     return
   }
+  event.preventDefault()
   router.push({ name: key })
 }
 </script>
