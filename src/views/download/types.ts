@@ -1,4 +1,6 @@
 export type TabType = 'vscode' | 'jetbrains' | 'cli'
+export type InstallMethod = 'curl' | 'npm'
+export type CurlShellType = 'bash' | 'powershell'
 
 export interface PermissionOption {
   title: string
@@ -62,7 +64,14 @@ export interface CliStepLists {
 }
 
 export interface CliEnvRequirements {
-  system: string
-  terminal: string
-  note: string
+  osTitle: string
+  osWindows: string
+  osLinux: string
+  osMacOS: string
+  osContainer: string
+  terminalTitle: string
+  terminalWindows: string
+  terminalUnix: string
+  webModeTitle: string
+  webModeContent: string
 }
