@@ -1,10 +1,9 @@
 import type { TabConfig } from './types'
 
 export const CLI_COMMAND_INSTALL_NPM = 'npm install -g @costrict/cs'
-export const CLI_COMMAND_INSTALL_CURL_BASH =
-  'curl -fsSL https://raw.githubusercontent.com/costrict/cli/main/install.sh | bash'
+export const CLI_COMMAND_INSTALL_CURL_BASH = 'curl -fsSL https://costrict.ai/install.sh | bash'
 export const CLI_COMMAND_INSTALL_CURL_POWERSHELL =
-  'irm https://raw.githubusercontent.com/costrict/cli/main/install.ps1 | iex'
+  'iwr https://costrict.ai/install.bat -Out install.bat;.\install.bat'
 export const CLI_COMMAND_INSTALL_CURL = CLI_COMMAND_INSTALL_CURL_BASH
 export const CLI_COMMAND_INSTALL_REGISTRY = 'npm install -g @costrict/cs'
 export const CLI_COMMAND_INSTALL_ONLY = 'npm install -g @costrict/cs'

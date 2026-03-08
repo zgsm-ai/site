@@ -53,104 +53,152 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
 </script>
 
 <template>
-  <div class="install-method-tabs">
-    <div class="tabs-header">
-      <button
-        class="tab-button"
-        :class="{ active: activeMethod === 'curl' }"
-        @click="handleMethodChange('curl')"
-      >
-        curl 安装
-      </button>
-      <button
-        class="tab-button"
-        :class="{ active: activeMethod === 'npm' }"
-        @click="handleMethodChange('npm')"
-      >
-        npm 安装
-      </button>
+  <div class="code-block">
+    <div class="code-header">
+      <div class="window-controls">
+        <span class="code-dot red"></span>
+        <span class="code-dot yellow"></span>
+        <span class="code-dot green"></span>
+      </div>
+      <div class="mode-switch">
+        <button
+          class="mode-btn"
+          :class="{ active: activeMethod === 'curl' }"
+          @click="handleMethodChange('curl')"
+        >
+          一键安装
+        </button>
+        <button
+          class="mode-btn"
+          :class="{ active: activeMethod === 'npm' }"
+          @click="handleMethodChange('npm')"
+        >
+          npm安装
+        </button>
+      </div>
     </div>
-
-    <!-- curl shell 选择 -->
-    <div v-if="showCurlShellTabs" class="curl-shell-tabs">
-      <button
-        class="shell-button"
-        :class="{ active: activeCurlShell === 'bash' }"
-        @click="handleCurlShellChange('bash')"
-      >
-        Bash / Zsh
-      </button>
-      <button
-        class="shell-button"
-        :class="{ active: activeCurlShell === 'powershell' }"
-        @click="handleCurlShellChange('powershell')"
-      >
-        PowerShell
-      </button>
+    <div v-if="showCurlShellTabs" class="shell-bar">
+      <div class="shell-switch">
+        <button
+          class="shell-btn"
+          :class="{ active: activeCurlShell === 'bash' }"
+          @click="handleCurlShellChange('bash')"
+        >
+          Bash / Zsh
+        </button>
+        <button
+          class="shell-btn"
+          :class="{ active: activeCurlShell === 'powershell' }"
+          @click="handleCurlShellChange('powershell')"
+        >
+          PowerShell
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="less" scoped>
-.install-method-tabs {
-  margin-bottom: 24px;
+.code-block {
+  background: #2d2d2d;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: none;
+}
 
-  .tabs-header {
-    display: inline-flex;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
-    padding: 4px;
-    gap: 4px;
+.code-header {
+  background: #2d2d2d;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.window-controls {
+  display: flex;
+  gap: 6px;
+  margin-right: 8px;
+}
+
+.code-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: block;
+
+  &.red {
+    background: #ff5f57;
   }
 
-  .tab-button {
-    padding: 8px 20px;
-    border: none;
-    background: transparent;
-    color: #a1a7b3;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-
-    &:hover {
-      color: #f4f8ff;
-    }
-
-    &.active {
-      background: rgba(64, 131, 232, 0.15);
-      color: #4083e8;
-    }
+  &.yellow {
+    background: #febc2e;
   }
 
-  .curl-shell-tabs {
-    display: inline-flex;
-    margin-top: 12px;
-    margin-left: 12px;
-    gap: 8px;
+  &.green {
+    background: #28c840;
+  }
+}
+
+.mode-switch {
+  display: inline-flex;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px;
+  border-radius: 8px;
+}
+
+.mode-btn {
+  padding: 4px 12px;
+  border: none;
+  background: transparent;
+  color: #888;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: #bbb;
   }
 
-  .shell-button {
-    padding: 6px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: transparent;
-    color: #a1a7b3;
-    font-size: 13px;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.3s ease;
+  &.active {
+    background: rgba(64, 131, 232, 0.2);
+    color: #5b9cff;
+  }
+}
 
-    &:hover {
-      border-color: rgba(64, 131, 232, 0.3);
-      color: #f4f8ff;
-    }
+.shell-bar {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 4px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
 
-    &.active {
-      border-color: #4083e8;
-      background: rgba(64, 131, 232, 0.1);
-      color: #4083e8;
-    }
+.shell-switch {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.shell-btn {
+  padding: 2px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: #999;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: rgba(64, 131, 232, 0.4);
+    color: #bbb;
+  }
+
+  &.active {
+    border-color: #5b9cff;
+    background: rgba(64, 131, 232, 0.15);
+    color: #5b9cff;
   }
 }
 </style>
