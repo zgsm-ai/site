@@ -113,12 +113,26 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
   display: flex;
   align-items: center;
   gap: 12px;
+
+  @media (max-width: 640px) {
+    padding: 6px 12px;
+    gap: 8px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 6px 8px;
+    gap: 6px;
+  }
 }
 
 .window-controls {
   display: flex;
   gap: 6px;
   margin-right: 8px;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 }
 
 .code-dot {
@@ -158,6 +172,7 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
   cursor: pointer;
   border-radius: 6px;
   transition: all 0.2s ease;
+  white-space: nowrap;
 
   &:hover {
     color: #bbb;
@@ -167,12 +182,30 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
     background: rgba(64, 131, 232, 0.2);
     color: #5b9cff;
   }
+
+  @media (max-width: 640px) {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3px 8px;
+    font-size: 10px;
+  }
 }
 
 .shell-bar {
   background: rgba(0, 0, 0, 0.15);
   padding: 4px 16px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+  @media (max-width: 640px) {
+    padding: 4px 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding: 3px 8px;
+  }
 }
 
 .shell-switch {
@@ -189,6 +222,7 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.2s ease;
+  white-space: nowrap;
 
   &:hover {
     border-color: rgba(64, 131, 232, 0.4);
@@ -199,6 +233,11 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
     border-color: #5b9cff;
     background: rgba(64, 131, 232, 0.15);
     color: #5b9cff;
+  }
+
+  @media (max-width: 480px) {
+    padding: 2px 6px;
+    font-size: 9px;
   }
 }
 </style>

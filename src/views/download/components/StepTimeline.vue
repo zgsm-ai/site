@@ -833,6 +833,14 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   border-radius: 0 0 12px 12px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-top: none;
+
+  @media (max-width: 768px) {
+    border-radius: 0 0 8px 8px;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 0 0 6px 6px;
+  }
 }
 
 // 代码块样式
@@ -849,8 +857,12 @@ const handleCopyCommand = async (cmd: string, index: number) => {
     border-bottom: none;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     font-size: 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 11px;
   }
 }
 
@@ -875,10 +887,20 @@ const handleCopyCommand = async (cmd: string, index: number) => {
     padding-right: 12px;
   }
 
+  @media (max-width: 480px) {
+    padding-left: 8px;
+    padding-right: 8px;
+    gap: 6px;
+  }
+
   .comment-text {
     color: #6a9955;
     font-size: 12px;
     font-style: italic;
+
+    @media (max-width: 480px) {
+      font-size: 11px;
+    }
   }
 
   .cli-prompt {
@@ -897,6 +919,10 @@ const handleCopyCommand = async (cmd: string, index: number) => {
       white-space: pre-wrap;
       word-break: break-all;
       font-size: 12px;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 11px;
     }
   }
 
@@ -955,6 +981,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   line-height: 1.6;
   text-align: center;
   margin-bottom: 12px;
+  padding: 0 16px;
 
   a {
     color: #5b8def;
@@ -966,14 +993,34 @@ const handleCopyCommand = async (cmd: string, index: number) => {
       text-decoration: underline;
     }
   }
+
+  @media (max-width: 640px) {
+    font-size: 13px;
+    padding: 0 12px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
+    padding: 0 8px;
+    margin-bottom: 8px;
+  }
 }
 
 .cli-install-container {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 600px;
+  width: 100%;
   max-width: 720px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 480px) {
+    border-radius: 6px;
+  }
 }
 
 // 移动端特殊适配
