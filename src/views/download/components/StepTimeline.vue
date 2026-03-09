@@ -208,8 +208,10 @@ const handleCopyCommand = async (cmd: string, index: number) => {
           class="cli-install-below-image"
         >
           <p class="cli-install-desc">
-            在终端中运行以下命令安装 CoStrict CLI 工具，如遇问题请参考
-            <a href="https://docs.costrict.ai/cli/guide/installation" target="_blank">安装文档</a>
+            {{ $t('download.cliStep2SubContent', { link: '' })
+            }}<a href="https://docs.costrict.ai/cli/guide/installation" target="_blank">{{
+              $t('download.cliStep2DocLink')
+            }}</a>
           </p>
           <div class="cli-install-container">
             <InstallMethodTabs
@@ -228,7 +230,11 @@ const handleCopyCommand = async (cmd: string, index: number) => {
               >
                 <div class="cli-code-line comment">
                   <span class="comment-text"
-                    ># {{ cmdIndex === 0 ? '安装 CoStrict CLI' : '验证安装' }}</span
+                    ># {{
+                      cmdIndex === 0
+                        ? $t('download.cliStep2CommentInstall')
+                        : $t('download.cliStep2CommentVerify')
+                    }}</span
                   >
                 </div>
                 <div class="cli-code-line cmd">
@@ -891,7 +897,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
     color: #d4d4d4;
     flex: 1;
     overflow-x: auto;
-    white-space: nowrap;
+    white-space: wrap;
 
     @media (max-width: 640px) {
       white-space: pre-wrap;
@@ -972,7 +978,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  min-width: 600px;
+  // min-width: 600px;
   max-width: 720px;
 }
 

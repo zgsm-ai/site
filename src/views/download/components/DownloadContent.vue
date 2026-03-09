@@ -91,7 +91,7 @@ const handleCurlShellChange = (shell: CurlShellType) => {
             <li><strong>Windows：</strong>{{ cliEnvRequirements.osWindows }}</li>
             <li><strong>Linux：</strong>{{ cliEnvRequirements.osLinux }}</li>
             <li><strong>macOS：</strong>{{ cliEnvRequirements.osMacOS }}</li>
-            <li><strong>容器环境：</strong>{{ cliEnvRequirements.osContainer }}</li>
+            <li><strong>{{ t('download.cliStep1OsContainerLabel') }}</strong>{{ cliEnvRequirements.osContainer }}</li>
           </ul>
         </div>
 
