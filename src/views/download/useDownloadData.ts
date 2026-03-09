@@ -1,10 +1,10 @@
 import { computed, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { TabType, StepItem, CliStepLists, CliEnvRequirements, CurlShellType } from './types'
+import type { TabType, StepItem, CliStepLists, CliEnvRequirements, InstallMethod } from './types'
 import {
-  CLI_COMMAND_INSTALL_CURL_BASH,
-  CLI_COMMAND_INSTALL_CURL_POWERSHELL,
   CLI_COMMAND_INSTALL_NPM,
+  CLI_COMMAND_INSTALL_BASH,
+  CLI_COMMAND_INSTALL_POWERSHELL,
 } from './constants'
 
 // 导入图片资源
@@ -25,11 +25,7 @@ import ZhCliInstall from '@/assets/download/zh/cli_install.webp'
 import EnCliInstall from '@/assets/download/en/cli_install.webp'
 import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
-export function useDownloadData(
-  activeTab: Ref<TabType>,
-  installMethod: Ref<'curl' | 'npm'>,
-  curlShell: Ref<CurlShellType>,
-) {
+export function useDownloadData(activeTab: Ref<TabType>, installMethod: Ref<InstallMethod>) {
   const { t, locale } = useI18n()
 
   const images = {
@@ -141,23 +137,18 @@ export function useDownloadData(
 
   // CLI 专用的两个步骤列表
   const cliStepLists = computed<CliStepLists>(() => {
-    const cliImg = currentImages.value[0] || ''
+    const commandMap: Record<InstallMethod, string> = {
+      npm: CLI_COMMAND_INSTALL_NPM,
+      bash: CLI_COMMAND_INSTALL_BASH,
+      powershell: CLI_COMMAND_INSTALL_POWERSHELL,
+    }
 
-    const installCommand =
-      installMethod.value === 'curl'
-        ? curlShell.value === 'bash'
-          ? CLI_COMMAND_INSTALL_CURL_BASH
-          : CLI_COMMAND_INSTALL_CURL_POWERSHELL
-        : CLI_COMMAND_INSTALL_NPM
-
-    const installDescription =
-      installMethod.value === 'curl'
-        ? t('download.cliStep2ContentCurl')
-        : t('download.cliStep2Content')
+    const installCommand = commandMap[installMethod.value]
+    const installDescription = t('download.cliStep2Content')
 
     const installSteps: StepItem[] = [
       {
-        imgUrl: cliImg,
+        imgUrl: '',
         title: t('download.cliStep2Title'),
         content: installDescription,
         cliContent: {

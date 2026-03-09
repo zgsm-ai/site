@@ -9,20 +9,20 @@ defineOptions({
   name: 'StepTimeline',
 })
 
+import type { InstallMethod } from '../types'
+
 defineProps<{
   steps: StepItem[]
   activeTab: string
   isPermissionSteps?: boolean
-  installMethod?: 'curl' | 'npm'
-  curlShell?: 'bash' | 'powershell'
+  installMethod?: InstallMethod
 }>()
 
 defineEmits<{
   (e: 'downloadJetbrainsPrimary'): void
   (e: 'downloadJetbrainsSecondary'): void
   (e: 'copyCliCommand'): void
-  (e: 'installMethodChange', method: 'curl' | 'npm'): void
-  (e: 'curlShellChange', shell: 'bash' | 'powershell'): void
+  (e: 'installMethodChange', method: InstallMethod): void
 }>()
 
 const { t } = useI18n()
@@ -217,9 +217,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
             <InstallMethodTabs
               v-if="installMethod"
               :active-method="installMethod"
-              :curl-shell="curlShell"
               @change="(method) => $emit('installMethodChange', method)"
-              @curl-shell-change="(shell) => $emit('curlShellChange', shell)"
             />
 
             <div class="cli-code-wrapper">
@@ -230,7 +228,8 @@ const handleCopyCommand = async (cmd: string, index: number) => {
               >
                 <div class="cli-code-line comment">
                   <span class="comment-text"
-                    ># {{
+                    >#
+                    {{
                       cmdIndex === 0
                         ? $t('download.cliStep2CommentInstall')
                         : $t('download.cliStep2CommentVerify')
@@ -978,7 +977,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  // min-width: 600px;
+  width: 100%;
   max-width: 720px;
 }
 

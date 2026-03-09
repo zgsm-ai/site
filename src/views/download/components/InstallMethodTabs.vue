@@ -1,21 +1,17 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { ref, watch } from 'vue'
 
 defineOptions({
   name: 'InstallMethodTabs',
 })
 
-export type InstallMethod = 'curl' | 'npm'
-export type CurlShellType = 'bash' | 'powershell'
+export type InstallMethod = 'npm' | 'bash' | 'powershell'
 
 const props = defineProps<{
   activeMethod?: InstallMethod
-  curlShell?: CurlShellType
 }>()
 
-const activeMethod = ref<InstallMethod>(props.activeMethod || 'curl')
-const activeCurlShell = ref<CurlShellType>(props.curlShell || 'bash')
+const activeMethod = ref<InstallMethod>(props.activeMethod || 'npm')
 
 watch(
   () => props.activeMethod,
@@ -26,18 +22,8 @@ watch(
   },
 )
 
-watch(
-  () => props.curlShell,
-  (newShell) => {
-    if (newShell) {
-      activeCurlShell.value = newShell
-    }
-  },
-)
-
 const emit = defineEmits<{
   (e: 'change', method: InstallMethod): void
-  (e: 'curlShellChange', shell: CurlShellType): void
 }>()
 
 const handleMethodChange = (method: InstallMethod) => {
@@ -45,163 +31,89 @@ const handleMethodChange = (method: InstallMethod) => {
   emit('change', method)
 }
 
-const handleCurlShellChange = (shell: CurlShellType) => {
-  activeCurlShell.value = shell
-  emit('curlShellChange', shell)
-}
-
-const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
-
-const { t } = useI18n()
+const methods: { key: InstallMethod; label: string }[] = [
+  { key: 'npm', label: 'npm' },
+  { key: 'bash', label: 'Bash / Zsh' },
+  { key: 'powershell', label: 'PowerShell' },
+]
 </script>
 
 <template>
-  <div class="code-block">
-    <div class="code-header">
-      <div class="window-controls">
-        <span class="code-dot red"></span>
-        <span class="code-dot yellow"></span>
-        <span class="code-dot green"></span>
-      </div>
-      <div class="mode-switch">
-        <button
-          class="mode-btn"
-          :class="{ active: activeMethod === 'curl' }"
-          @click="handleMethodChange('curl')"
-        >
-          {{ t('download.installMethodCurl') }}
-        </button>
-        <button
-          class="mode-btn"
-          :class="{ active: activeMethod === 'npm' }"
-          @click="handleMethodChange('npm')"
-        >
-          {{ t('download.installMethodNpm') }}
-        </button>
-      </div>
-    </div>
-    <div v-if="showCurlShellTabs" class="shell-bar">
-      <div class="shell-switch">
-        <button
-          class="shell-btn"
-          :class="{ active: activeCurlShell === 'bash' }"
-          @click="handleCurlShellChange('bash')"
-        >
-          Bash / Zsh
-        </button>
-        <button
-          class="shell-btn"
-          :class="{ active: activeCurlShell === 'powershell' }"
-          @click="handleCurlShellChange('powershell')"
-        >
-          PowerShell
-        </button>
-      </div>
-    </div>
+  <div class="install-tabs">
+    <button
+      v-for="method in methods"
+      :key="method.key"
+      class="tab-btn"
+      :class="{ active: activeMethod === method.key }"
+      @click="handleMethodChange(method.key)"
+    >
+      {{ method.label }}
+    </button>
   </div>
 </template>
 
 <style lang="less" scoped>
-.code-block {
+.install-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 24px 0;
+  width: 100%;
   background: #2d2d2d;
   border-radius: 12px 12px 0 0;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: none;
-}
 
-.code-header {
-  background: #2d2d2d;
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.window-controls {
-  display: flex;
-  gap: 6px;
-  margin-right: 8px;
-}
-
-.code-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: block;
-
-  &.red {
-    background: #ff5f57;
+  @media (max-width: 640px) {
+    padding: 12px 16px 0;
   }
 
-  &.yellow {
-    background: #febc2e;
-  }
-
-  &.green {
-    background: #28c840;
+  @media (max-width: 480px) {
+    padding: 10px 12px 0;
   }
 }
 
-.mode-switch {
-  display: inline-flex;
-  gap: 2px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 3px;
-  border-radius: 8px;
-}
-
-.mode-btn {
-  padding: 4px 12px;
+.tab-btn {
+  flex: 1;
+  min-width: 80px;
+  padding: 12px 16px;
   border: none;
   background: transparent;
   color: #888;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 6px;
+  border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
 
   &:hover {
     color: #bbb;
   }
 
   &.active {
-    background: rgba(64, 131, 232, 0.2);
-    color: #5b9cff;
-  }
-}
-
-.shell-bar {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 4px 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.shell-switch {
-  display: inline-flex;
-  gap: 4px;
-}
-
-.shell-btn {
-  padding: 2px 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: transparent;
-  color: #999;
-  font-size: 10px;
-  cursor: pointer;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: rgba(64, 131, 232, 0.4);
-    color: #bbb;
+    color: #fff;
+    border-bottom-color: #5b9cff;
   }
 
-  &.active {
-    border-color: #5b9cff;
-    background: rgba(64, 131, 232, 0.15);
-    color: #5b9cff;
+  @media (max-width: 768px) {
+    min-width: 70px;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  @media (max-width: 640px) {
+    min-width: 60px;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 0;
+    padding: 8px 6px;
+    font-size: 11px;
+    white-space: normal;
+    line-height: 1.3;
   }
 }
 </style>
