@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 defineOptions({
   name: 'InstallMethodTabs',
@@ -50,6 +51,8 @@ const handleCurlShellChange = (shell: CurlShellType) => {
 }
 
 const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
+
+const { t } = useI18n()
 </script>
 
 <template>
@@ -66,14 +69,14 @@ const showCurlShellTabs = computed(() => activeMethod.value === 'curl')
           :class="{ active: activeMethod === 'curl' }"
           @click="handleMethodChange('curl')"
         >
-          一键安装
+          {{ t('download.installMethodCurl') }}
         </button>
         <button
           class="mode-btn"
           :class="{ active: activeMethod === 'npm' }"
           @click="handleMethodChange('npm')"
         >
-          npm安装
+          {{ t('download.installMethodNpm') }}
         </button>
       </div>
     </div>
