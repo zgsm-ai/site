@@ -1,6 +1,5 @@
 export type TabType = 'vscode' | 'jetbrains' | 'cli'
-export type InstallMethod = 'curl' | 'npm'
-export type CurlShellType = 'bash' | 'powershell'
+export type InstallMethod = 'npm' | 'bash' | 'powershell'
 
 export interface PermissionOption {
   title: string

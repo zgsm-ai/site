@@ -7,10 +7,10 @@ import { useDownloadData } from './useDownloadData'
 import { useDownloadActions } from './useDownloadActions'
 import {
   CLI_COMMAND_INSTALL_NPM,
-  CLI_COMMAND_INSTALL_CURL_BASH,
-  CLI_COMMAND_INSTALL_CURL_POWERSHELL,
+  CLI_COMMAND_INSTALL_BASH,
+  CLI_COMMAND_INSTALL_POWERSHELL,
 } from './constants'
-import type { TabType, CurlShellType } from './types'
+import type { TabType, InstallMethod } from './types'
 
 defineOptions({
   name: 'DownloadPage',
@@ -18,11 +18,10 @@ defineOptions({
 
 const { t } = useI18n()
 const activeTab = ref<TabType>('vscode')
-const installMethod = ref<'curl' | 'npm'>('curl')
-const curlShell = ref<CurlShellType>('bash')
+const installMethod = ref<InstallMethod>('npm')
 
 const { tabList, headerTitle, headerIcon, stepList, cliStepLists, cliEnvRequirements } =
-  useDownloadData(activeTab, installMethod, curlShell)
+  useDownloadData(activeTab, installMethod)
 const { download, downloadJetbrainsPrimary, downloadJetbrainsSecondary, copyToClipboard } =
   useDownloadActions(activeTab)
 
@@ -30,25 +29,17 @@ const handleTabSelect = (tab: TabType) => {
   activeTab.value = tab
 }
 
-const handleInstallMethodChange = (method: 'curl' | 'npm') => {
+const handleInstallMethodChange = (method: InstallMethod) => {
   installMethod.value = method
 }
 
-const handleCurlShellChange = (shell: CurlShellType) => {
-  curlShell.value = shell
-}
-
 const handleCopyCliCommand = () => {
-  let command: string
-  if (installMethod.value === 'curl') {
-    command =
-      curlShell.value === 'bash'
-        ? CLI_COMMAND_INSTALL_CURL_BASH
-        : CLI_COMMAND_INSTALL_CURL_POWERSHELL
-  } else {
-    command = CLI_COMMAND_INSTALL_NPM
+  const commandMap: Record<InstallMethod, string> = {
+    npm: CLI_COMMAND_INSTALL_NPM,
+    bash: CLI_COMMAND_INSTALL_BASH,
+    powershell: CLI_COMMAND_INSTALL_POWERSHELL,
   }
-  copyToClipboard(command)
+  copyToClipboard(commandMap[installMethod.value])
 }
 </script>
 
@@ -75,13 +66,11 @@ const handleCopyCliCommand = () => {
           :cli-step-lists="cliStepLists"
           :cli-env-requirements="cliEnvRequirements"
           :install-method="installMethod"
-          :curl-shell="curlShell"
           @download="download"
           @download-jetbrains-primary="downloadJetbrainsPrimary"
           @download-jetbrains-secondary="downloadJetbrainsSecondary"
           @copy-cli-command="handleCopyCliCommand"
           @install-method-change="handleInstallMethodChange"
-          @curl-shell-change="handleCurlShellChange"
         />
       </div>
     </div>
