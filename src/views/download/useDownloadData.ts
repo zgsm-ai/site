@@ -1,7 +1,11 @@
 import { computed, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { TabType, StepItem, CliStepLists, CliEnvRequirements } from './types'
-import { CLI_COMMAND_INSTALL_REGISTRY, CLI_COMMAND_INSTALL_ONLY } from './constants'
+import type { TabType, StepItem, CliStepLists, CliEnvRequirements, CurlShellType } from './types'
+import {
+  CLI_COMMAND_INSTALL_CURL_BASH,
+  CLI_COMMAND_INSTALL_CURL_POWERSHELL,
+  CLI_COMMAND_INSTALL_NPM,
+} from './constants'
 
 // 导入图片资源
 import vscodeImg from '@/assets/download/vscode.webp'
@@ -21,7 +25,11 @@ import ZhCliInstall from '@/assets/download/zh/cli_install.webp'
 import EnCliInstall from '@/assets/download/en/cli_install.webp'
 import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
-export function useDownloadData(activeTab: Ref<TabType>) {
+export function useDownloadData(
+  activeTab: Ref<TabType>,
+  installMethod: Ref<'curl' | 'npm'>,
+  curlShell: Ref<CurlShellType>,
+) {
   const { t, locale } = useI18n()
 
   const images = {
@@ -119,24 +127,42 @@ export function useDownloadData(activeTab: Ref<TabType>) {
 
   // CLI 环境要求
   const cliEnvRequirements = computed<CliEnvRequirements>(() => ({
-    system: t('download.cliStep1Content1'),
-    terminal: t('download.cliStep1Content2'),
-    note: t('download.cliStep1Note'),
+    osTitle: t('download.cliStep1OsTitle'),
+    osWindows: t('download.cliStep1OsWindows'),
+    osLinux: t('download.cliStep1OsLinux'),
+    osMacOS: t('download.cliStep1OsMacOS'),
+    osContainer: t('download.cliStep1OsContainer'),
+    terminalTitle: t('download.cliStep1TerminalTitle'),
+    terminalWindows: t('download.cliStep1TerminalWindows'),
+    terminalUnix: t('download.cliStep1TerminalUnix'),
+    webModeTitle: t('download.cliStep1WebModeTitle'),
+    webModeContent: t('download.cliStep1WebModeContent'),
   }))
 
   // CLI 专用的两个步骤列表
   const cliStepLists = computed<CliStepLists>(() => {
     const cliImg = currentImages.value[0] || ''
 
-    // 安装步骤：安装和验证（合并为一步）
+    const installCommand =
+      installMethod.value === 'curl'
+        ? curlShell.value === 'bash'
+          ? CLI_COMMAND_INSTALL_CURL_BASH
+          : CLI_COMMAND_INSTALL_CURL_POWERSHELL
+        : CLI_COMMAND_INSTALL_NPM
+
+    const installDescription =
+      installMethod.value === 'curl'
+        ? t('download.cliStep2ContentCurl')
+        : t('download.cliStep2Content')
+
     const installSteps: StepItem[] = [
       {
         imgUrl: cliImg,
         title: t('download.cliStep2Title'),
-        content: t('download.cliStep2Content'),
+        content: installDescription,
         cliContent: {
-          description: t('download.cliStep2Content'),
-          commands: [CLI_COMMAND_INSTALL_REGISTRY],
+          description: installDescription,
+          commands: [installCommand],
         },
       },
     ]

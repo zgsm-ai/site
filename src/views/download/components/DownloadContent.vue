@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { TabType, CliStepLists, CliEnvRequirements } from '../types'
+import type { TabType, CliStepLists, CliEnvRequirements, CurlShellType, StepItem } from '../types'
 import { JETBRAINS_IDES } from '../constants'
 import StepTimeline from './StepTimeline.vue'
-import type { StepItem } from '../types'
 
 defineOptions({
   name: 'DownloadContent',
@@ -16,6 +16,8 @@ defineProps<{
   steps: StepItem[]
   cliStepLists?: CliStepLists
   cliEnvRequirements?: CliEnvRequirements
+  installMethod?: 'curl' | 'npm'
+  curlShell?: CurlShellType
 }>()
 
 const emit = defineEmits<{
@@ -23,11 +25,24 @@ const emit = defineEmits<{
   (e: 'downloadJetbrainsPrimary'): void
   (e: 'downloadJetbrainsSecondary'): void
   (e: 'copyCliCommand'): void
+  (e: 'installMethodChange', method: 'curl' | 'npm'): void
+  (e: 'curlShellChange', shell: CurlShellType): void
 }>()
 
 const { t } = useI18n()
+const currentInstallMethod = ref<'curl' | 'npm'>('curl')
+const currentCurlShell = ref<CurlShellType>('bash')
 
 const handleDownload = () => emit('download')
+const handleInstallMethodChange = (method: 'curl' | 'npm') => {
+  currentInstallMethod.value = method
+  emit('installMethodChange', method)
+}
+
+const handleCurlShellChange = (shell: CurlShellType) => {
+  currentCurlShell.value = shell
+  emit('curlShellChange', shell)
+}
 </script>
 
 <template>
@@ -68,24 +83,46 @@ const handleDownload = () => emit('download')
       <!-- 环境要求 -->
       <div class="cli-env-section">
         <h3 class="env-title">{{ t('download.cliStep1Title') }}</h3>
-        <div class="env-content">
-          <p class="env-item">{{ cliEnvRequirements.system }}</p>
-          <p class="env-item">{{ cliEnvRequirements.terminal }}</p>
+
+        <!-- 操作系统 -->
+        <div class="env-group">
+          <h4 class="env-group-title">{{ cliEnvRequirements.osTitle }}</h4>
+          <ul class="env-list">
+            <li><strong>Windows：</strong>{{ cliEnvRequirements.osWindows }}</li>
+            <li><strong>Linux：</strong>{{ cliEnvRequirements.osLinux }}</li>
+            <li><strong>macOS：</strong>{{ cliEnvRequirements.osMacOS }}</li>
+            <li><strong>容器环境：</strong>{{ cliEnvRequirements.osContainer }}</li>
+          </ul>
         </div>
-        <div class="env-note">
-          <p>{{ cliEnvRequirements.note }}</p>
+
+        <!-- 终端 -->
+        <div class="env-group">
+          <h4 class="env-group-title">{{ cliEnvRequirements.terminalTitle }}</h4>
+          <ul class="env-list">
+            <li><strong>Windows：</strong>{{ cliEnvRequirements.terminalWindows }}</li>
+            <li><strong>Linux /macOS：</strong>{{ cliEnvRequirements.terminalUnix }}</li>
+          </ul>
+        </div>
+
+        <!-- 备用方案 -->
+        <div class="env-group env-group-web">
+          <h4 class="env-group-title">{{ cliEnvRequirements.webModeTitle }}</h4>
+          <p class="env-web-content">{{ cliEnvRequirements.webModeContent }}</p>
         </div>
       </div>
 
       <!-- 安装步骤 -->
       <div class="manual-methods download-methods">
-        <p class="tips">{{ t('download.installSteps') }}</p>
         <div class="download-methods">
           <StepTimeline
             :steps="cliStepLists.installSteps"
             :active-tab="activeTab"
             :is-permission-steps="false"
+            :install-method="currentInstallMethod"
+            :curl-shell="currentCurlShell"
             @copy-cli-command="$emit('copyCliCommand')"
+            @install-method-change="handleInstallMethodChange"
+            @curl-shell-change="handleCurlShellChange"
           />
         </div>
       </div>
@@ -95,10 +132,12 @@ const handleDownload = () => emit('download')
         <p class="tips">{{ t('download.cliPermissionStepsTitle') }}</p>
         <div class="download-methods">
           <StepTimeline
-            :steps="cliStepLists.permissionSteps"
+            :steps="cliStepLists.installSteps"
             :active-tab="activeTab"
-            :is-permission-steps="true"
+            :is-permission-steps="false"
+            :install-method="currentInstallMethod"
             @copy-cli-command="$emit('copyCliCommand')"
+            @install-method-change="handleInstallMethodChange"
           />
         </div>
       </div> -->
@@ -122,15 +161,6 @@ const handleDownload = () => emit('download')
 
 <style lang="less" scoped>
 .content-header {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-
-  .download-icon {
-    width: 32px;
-    margin-right: 12px;
-  }
-
   @media (max-width: 968px) {
     flex-wrap: wrap;
 
@@ -192,7 +222,7 @@ const handleDownload = () => emit('download')
 // CLI 环境要求样式
 .cli-env-section {
   margin-bottom: 32px;
-  padding: 20px;
+  padding: 24px;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
@@ -201,34 +231,52 @@ const handleDownload = () => emit('download')
     font-size: 16px;
     font-weight: 600;
     color: #f4f8ff;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
-  .env-content {
+  .env-group {
     margin-bottom: 16px;
 
-    .env-item {
-      color: #a1a7b3;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
-      &:last-child {
-        margin-bottom: 0;
+  .env-group-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #c2c7d1;
+    margin-bottom: 8px;
+  }
+
+  .env-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0;
+
+    li {
+      margin-bottom: 6px;
+      color: #a1a7b3;
+      font-size: 13px;
+      line-height: 1.6;
+
+      strong {
+        color: #f4f8ff;
+        font-weight: 500;
       }
     }
   }
 
-  .env-note {
-    background: rgba(255, 193, 7, 0.1);
+  .env-group-web {
+    background: rgba(255, 193, 7, 0.08);
     border-left: 3px solid #ffc107;
     padding: 12px 16px;
-    border-radius: 4px;
+    border-radius: 6px;
 
-    p {
-      color: #ffc107;
+    .env-web-content {
+      color: #c2c7d1;
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.6;
       margin: 0;
     }
   }

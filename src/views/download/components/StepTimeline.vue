@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { NTimeline, NTimelineItem, useMessage } from 'naive-ui'
 import type { StepItem } from '../types'
+import InstallMethodTabs from './InstallMethodTabs.vue'
 
 defineOptions({
   name: 'StepTimeline',
@@ -12,15 +13,19 @@ defineProps<{
   steps: StepItem[]
   activeTab: string
   isPermissionSteps?: boolean
+  installMethod?: 'curl' | 'npm'
+  curlShell?: 'bash' | 'powershell'
 }>()
 
 defineEmits<{
   (e: 'downloadJetbrainsPrimary'): void
   (e: 'downloadJetbrainsSecondary'): void
   (e: 'copyCliCommand'): void
+  (e: 'installMethodChange', method: 'curl' | 'npm'): void
+  (e: 'curlShellChange', shell: 'bash' | 'powershell'): void
 }>()
 
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const message = useMessage()
 const copiedIndex = ref<number | null>(null)
 
@@ -39,16 +44,33 @@ const handleCopyCommand = async (cmd: string, index: number) => {
 </script>
 
 <template>
-  <n-timeline :icon-size="20">
-    <n-timeline-item v-for="(step, index) in steps" :key="index" :title="isPermissionSteps
-      ? $t(`download.cliPermissionStep${index + 1}Title`)
-      : $t(`download.step${index + 1}`)
-      " line-type="dashed" color="#4083E8">
+  <n-timeline :icon-size="20" :class="{ 'cli-mode': activeTab === 'cli' && !isPermissionSteps }">
+    <n-timeline-item
+      v-for="(step, index) in steps"
+      :key="index"
+      :title="
+        activeTab === 'cli' && !isPermissionSteps
+          ? ''
+          : isPermissionSteps
+            ? $t(`download.cliPermissionStep${index + 1}Title`)
+            : $t(`download.step${index + 1}`)
+      "
+      line-type="dashed"
+      color="#4083E8"
+    >
       <template #icon>
-        <div class="timeline-icon">{{ index + 1 }}</div>
+        <div v-if="activeTab !== 'cli' || isPermissionSteps" class="timeline-icon">
+          {{ index + 1 }}
+        </div>
       </template>
-      <div class="flex step-wrapper">
-        <div class="step-left mr-10">
+      <div
+        class="flex step-wrapper"
+        :class="{
+          'cli-install-mode':
+            activeTab === 'cli' && !isPermissionSteps && step.cliContent?.commands,
+        }"
+      >
+        <div v-if="activeTab !== 'cli' || isPermissionSteps || step.tips" class="step-left mr-10">
           <div class="step-title" v-if="activeTab !== 'cli' || isPermissionSteps">
             {{ step.title }}
           </div>
@@ -62,27 +84,43 @@ const handleCopyCommand = async (cmd: string, index: number) => {
             <template v-else-if="activeTab === 'jetbrains'">
               <div class="jetbrains-content">
                 <p class="content-text">{{ $t('download.jetbrainsStep1Content1') }}</p>
-                <div class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
-                  @click="$emit('downloadJetbrainsPrimary')">
+                <div
+                  class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
+                  @click="$emit('downloadJetbrainsPrimary')"
+                >
                   <span style="color: #4083e8">{{ $t('download.manualPluginDownload') }}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
-                    width="18" color="#fff">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 20 20"
+                    width="18"
+                    color="#fff"
+                  >
                     <g fill="none">
                       <path
                         d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-                        fill="currentColor"></path>
+                        fill="currentColor"
+                      ></path>
                     </g>
                   </svg>
                 </div>
-                <div class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
-                  @click="$emit('downloadJetbrainsSecondary')">
+                <div
+                  class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
+                  @click="$emit('downloadJetbrainsSecondary')"
+                >
                   <span style="color: #4083e8">{{ $t('download.manualPluginDownload2') }}</span>
-                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
-                    width="18" color="#fff">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                    viewBox="0 0 20 20"
+                    width="18"
+                    color="#fff"
+                  >
                     <g fill="none">
                       <path
                         d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-                        fill="currentColor"></path>
+                        fill="currentColor"
+                      ></path>
                     </g>
                   </svg>
                 </div>
@@ -95,38 +133,7 @@ const handleCopyCommand = async (cmd: string, index: number) => {
               <div class="cli-content">
                 <!-- 安装步骤：安装 + 验证（合并为一步）-->
                 <template v-if="!isPermissionSteps && step.cliContent">
-                  <!-- 安装命令 -->
-                  <div v-if="step.cliContent.commands" class="cli-command-section">
-                    <p class="section-label">{{ $t('download.cliStep2Content') }}</p>
-                    <p class="section-sub-label">
-                      <i18n-t keypath="download.cliStep2SubContent">
-                        <template #link>
-                          <a :href="locale === 'zh'
-                            ? 'https://docs.costrict.ai/cli/guide/installation'
-                            : 'https://docs.costrict.ai/en/cli/guide/installation/'
-                            " target="_blank">
-                            {{ locale === 'zh' ? '安装文档' : 'Installation Guide' }}
-                          </a>
-                        </template>
-                      </i18n-t>
-                    </p>
-                    <div class="cli-code-wrapper">
-                      <div v-for="(cmd, cmdIndex) in step.cliContent.commands" :key="cmdIndex" class="cli-code-block">
-                        <div class="code-content">
-                          <span class="cli-prompt">$ </span>
-                          <span class="cli-command-text">{{ cmd }}</span>
-                        </div>
-                        <button class="cli-copy-icon" @click="handleCopyCommand(cmd, index * 10 + cmdIndex)"
-                          :aria-label="$t('download.copyCommand')">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  <!-- 安装命令移到图片下方 -->
                 </template>
 
                 <!-- 权限方案步骤 -->
@@ -136,19 +143,36 @@ const handleCopyCommand = async (cmd: string, index: number) => {
 
                     <!-- 命令列表 -->
                     <div v-if="step.cliContent.commands" class="commands-list">
-                      <div v-for="(cmd, cmdIndex) in step.cliContent.commands" :key="cmdIndex" class="command-item">
+                      <div
+                        v-for="(cmd, cmdIndex) in step.cliContent.commands"
+                        :key="cmdIndex"
+                        class="command-item"
+                      >
                         <div class="cli-code-block">
                           <div class="code-content">
                             <span class="cli-prompt">$ </span>
                             <span class="cli-command-text">{{ cmd }}</span>
                           </div>
-                          <button class="cli-copy-icon" @click="handleCopyCommand(cmd, index * 10 + cmdIndex)"
-                            :aria-label="$t('download.copyCommand')">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round">
+                          <button
+                            class="cli-copy-icon"
+                            @click="handleCopyCommand(cmd, index * 10 + cmdIndex)"
+                            :aria-label="$t('download.copyCommand')"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                            >
                               <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                              <path
+                                d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                              ></path>
                             </svg>
                           </button>
                         </div>
@@ -175,7 +199,66 @@ const handleCopyCommand = async (cmd: string, index: number) => {
           </div>
           <div v-if="step.tips" class="step-tips">{{ step.tips }}</div>
         </div>
-        <img v-if="step.imgUrl" :src="step.imgUrl" alt="CoStrict Download" class="w-150" />
+        <img v-if="step.imgUrl" :src="step.imgUrl" alt="CoStrict Download" class="step-image" />
+        <!-- CLI 安装命令块放在图片下方 -->
+        <div
+          v-if="
+            activeTab === 'cli' && !isPermissionSteps && step.cliContent && step.cliContent.commands
+          "
+          class="cli-install-below-image"
+        >
+          <p class="cli-install-desc">
+            在终端中运行以下命令安装 CoStrict CLI 工具，如遇问题请参考
+            <a href="https://docs.costrict.ai/cli/guide/installation" target="_blank">安装文档</a>
+          </p>
+          <div class="cli-install-container">
+            <InstallMethodTabs
+              v-if="installMethod"
+              :active-method="installMethod"
+              :curl-shell="curlShell"
+              @change="(method) => $emit('installMethodChange', method)"
+              @curl-shell-change="(shell) => $emit('curlShellChange', shell)"
+            />
+
+            <div class="cli-code-wrapper">
+              <div
+                v-for="(cmd, cmdIndex) in step.cliContent.commands"
+                :key="cmdIndex"
+                class="cli-code-block"
+              >
+                <div class="cli-code-line comment">
+                  <span class="comment-text"
+                    ># {{ cmdIndex === 0 ? '安装 CoStrict CLI' : '验证安装' }}</span
+                  >
+                </div>
+                <div class="cli-code-line cmd">
+                  <span class="cli-prompt">$</span>
+                  <span class="cli-command-text">{{ cmd }}</span>
+                  <button
+                    class="cli-copy-icon"
+                    @click="handleCopyCommand(cmd, index * 10 + cmdIndex)"
+                    :aria-label="$t('download.copyCommand')"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </n-timeline-item>
   </n-timeline>
@@ -198,26 +281,31 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   padding: 16px 16px 16px 32px;
   box-sizing: border-box;
   border: 2px solid transparent;
-  background-image: linear-gradient(103deg,
-      rgba(32, 204, 148, 0.24) 4%,
-      #20cc94 20%,
-      #a8a8a8 36%,
-      #d4d4d4 50%,
-      #1c6eff 67%,
-      rgba(149, 149, 149, 0.55) 99%);
+  background-image: linear-gradient(
+    103deg,
+    rgba(32, 204, 148, 0.24) 4%,
+    #20cc94 20%,
+    #a8a8a8 36%,
+    #d4d4d4 50%,
+    #1c6eff 67%,
+    rgba(149, 149, 149, 0.55) 99%
+  );
   background-image:
     linear-gradient(black, black),
-    linear-gradient(103deg,
+    linear-gradient(
+      103deg,
       rgba(32, 204, 148, 0.24) 4%,
       #20cc94 20%,
       #a8a8a8 36%,
       #d4d4d4 50%,
       #1c6eff 67%,
-      rgba(149, 149, 149, 0.55) 99%);
+      rgba(149, 149, 149, 0.55) 99%
+    );
   background-origin: border-box;
   background-clip: padding-box, border-box;
   border-radius: 12px;
   display: flex;
+  flex-wrap: nowrap;
 
   @media (max-width: 1024px) {
     flex-direction: column;
@@ -229,110 +317,117 @@ const handleCopyCommand = async (cmd: string, index: number) => {
       align-self: flex-start;
     }
   }
+}
 
-  // CLI 权限步骤：左侧内容占满宽度
-  .permission-section .step-left {
+// CLI 安装模式下 step-wrapper 使用 flex-wrap
+.step-wrapper.cli-install-mode {
+  flex-wrap: wrap;
+}
+
+// CLI 权限步骤：左侧内容占满宽度
+.permission-section .step-left {
+  width: 100%;
+  flex: 1;
+}
+
+// CLI 权限步骤：step-wrapper 内容区域最大化
+.permission-section .step-wrapper {
+  width: 100%;
+  max-width: 100%;
+
+  .step-left {
     width: 100%;
-    flex: 1;
   }
+}
 
-  // CLI 权限步骤：step-wrapper 内容区域最大化
-  .permission-section .step-wrapper {
-    width: 100%;
-    max-width: 100%;
+.step-title {
+  margin-top: 28px;
+  font-size: 16px;
+  color: #f4f8ff;
+  line-height: 24px;
+  max-width: 400px;
 
-    .step-left {
-      width: 100%;
-    }
-  }
-
-  .step-title {
-    margin-top: 28px;
-    font-size: 16px;
-    color: #f4f8ff;
-    line-height: 24px;
-    max-width: 400px;
-
-    @media (max-width: 1024px) {
-      margin-top: 0;
-      max-width: 100%;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 14px;
-    }
-  }
-
-  // CLI 权限步骤标题宽度调整
-  .permission-section .step-title {
+  @media (max-width: 1024px) {
+    margin-top: 0;
     max-width: 100%;
   }
 
-  .step-content {
-    margin-top: 28px;
+  @media (max-width: 480px) {
     font-size: 14px;
-    line-height: 20px;
-    color: #a1a7b3;
-    max-width: 400px;
-
-    @media (max-width: 1024px) {
-      max-width: 100%;
-    }
-
-    @media (max-width: 640px) {
-      font-size: 13px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 12px;
-    }
   }
+}
 
-  // CLI 权限步骤内容宽度调整
-  .permission-section .step-content {
+// CLI 权限步骤标题宽度调整
+.permission-section .step-title {
+  max-width: 100%;
+}
+
+.step-content {
+  margin-top: 28px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #a1a7b3;
+  max-width: 400px;
+
+  @media (max-width: 1024px) {
     max-width: 100%;
   }
 
-  .step-tips {
-    margin-top: 12px;
-    font-size: 14px;
-    line-height: 20px;
-    color: #a1a7b3;
-    max-width: 400px;
-
-    @media (max-width: 1024px) {
-      max-width: 100%;
-    }
-
-    @media (max-width: 640px) {
-      font-size: 13px;
-    }
-
-    @media (max-width: 480px) {
-      font-size: 12px;
-    }
+  @media (max-width: 640px) {
+    font-size: 13px;
   }
 
-  // CLI 权限步骤提示宽度调整
-  .permission-section .step-tips {
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+// CLI 权限步骤内容宽度调整
+.permission-section .step-content {
+  max-width: 100%;
+}
+
+.step-tips {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #a1a7b3;
+  max-width: 400px;
+
+  @media (max-width: 1024px) {
     max-width: 100%;
   }
 
-  .step-tips::before {
-    content: '* ';
-    color: #ff0000;
+  @media (max-width: 640px) {
+    font-size: 13px;
   }
 
-  img {
-    margin-left: auto;
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+// CLI 权限步骤提示宽度调整
+.permission-section .step-tips {
+  max-width: 100%;
+}
+
+.step-tips::before {
+  content: '* ';
+  color: #ff0000;
+}
+
+.step-wrapper img,
+.step-image {
+  margin: auto;
+  height: auto;
+  object-fit: contain;
+  max-width: 600px;
+  width: 100%;
+
+  @media (max-width: 1024px) {
     height: auto;
-    object-fit: contain;
-
-    @media (max-width: 1024px) {
-      height: auto;
-      margin-top: 10px;
-      margin-left: 0;
-    }
+    margin-top: 10px;
   }
 }
 
@@ -353,6 +448,22 @@ const handleCopyCommand = async (cmd: string, index: number) => {
 
 :deep(.n-timeline-item-timeline__circle) {
   background: #4083e8;
+}
+
+// CLI 安装步骤：隐藏 timeline 节点和线条
+.cli-mode {
+  &:deep(.n-timeline-item-timeline) {
+    display: none;
+  }
+
+  &:deep(.n-timeline-item-content) {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+
+  &:deep(.n-timeline-item) {
+    padding-left: 0 !important;
+  }
 }
 
 // CLI 权限步骤：步骤条宽度充分利用
@@ -405,41 +516,6 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   // 安装命令区块样式
   .cli-command-section {
     margin-bottom: 24px;
-
-    .section-label {
-      color: #c2c7d1;
-      font-size: 16px;
-      margin-bottom: 12px;
-      font-weight: 500;
-
-      a {
-        color: #5b8def;
-        text-decoration: none;
-        transition: color 0.2s;
-
-        &:hover {
-          color: #7aa3f5;
-          text-decoration: underline;
-        }
-      }
-    }
-
-    .section-sub-label {
-      color: #a8a8a8;
-      font-size: 14px;
-      margin-bottom: 12px;
-
-      a {
-        color: #5b8def;
-        text-decoration: none;
-        transition: color 0.2s;
-
-        &:hover {
-          color: #7aa3f5;
-          text-decoration: underline;
-        }
-      }
-    }
 
     &.verify-section {
       margin-top: 20px;
@@ -612,13 +688,6 @@ const handleCopyCommand = async (cmd: string, index: number) => {
 .cli-command-section {
   margin-bottom: 24px;
 
-  .section-label {
-    color: #c2c7d1;
-    font-size: 14px;
-    margin-bottom: 12px;
-    font-weight: 500;
-  }
-
   &.verify-section {
     margin-top: 20px;
     padding-top: 20px;
@@ -758,66 +827,71 @@ const handleCopyCommand = async (cmd: string, index: number) => {
 // }
 
 :deep(.cli-code-wrapper) {
-  margin-top: 12px;
   overflow: hidden;
   max-width: 100%;
+  background: #1e1e1e;
+  border-radius: 0 0 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: none;
 }
 
 // 代码块样式
 .cli-code-block {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  background: #1e1e1e;
+  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 13px;
-  transition: all 0.3s ease;
   overflow: hidden;
   max-width: 100%;
   box-sizing: border-box;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 
-  @media (max-width: 640px) {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-    padding: 10px 12px;
+  &:last-child {
+    border-bottom: none;
   }
 
   @media (max-width: 480px) {
     font-size: 12px;
-    padding: 8px 10px;
+  }
+}
+
+.cli-code-line {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  &.comment {
+    padding-top: 12px;
+    padding-bottom: 4px;
   }
 
-  .code-content {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    min-width: 0;
-    overflow-x: auto;
-    max-width: 100%;
+  &.cmd {
+    padding-top: 4px;
+    padding-bottom: 12px;
+  }
 
-    @media (max-width: 640px) {
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
+  @media (max-width: 640px) {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .comment-text {
+    color: #6a9955;
+    font-size: 12px;
+    font-style: italic;
   }
 
   .cli-prompt {
-    color: #888;
-    margin-right: 6px;
+    color: #569cd6;
     flex-shrink: 0;
+    font-weight: 500;
   }
 
   .cli-command-text {
-    color: #e8e8e8;
-    white-space: nowrap;
+    color: #d4d4d4;
+    flex: 1;
     overflow-x: auto;
-    // text-overflow: ellipsis;
-    max-width: 100%;
+    white-space: nowrap;
 
     @media (max-width: 640px) {
       white-space: pre-wrap;
@@ -826,61 +900,85 @@ const handleCopyCommand = async (cmd: string, index: number) => {
     }
   }
 
-  // CLI 权限步骤：命令文本允许换行
-  .permission-section .cli-command-text {
-    white-space: normal;
-    word-break: break-all;
-  }
-
-  // 复制按钮样式 - 简单图标样式
   .cli-copy-icon {
     background: transparent;
     border: none;
-    color: #888;
+    color: #6e6e6e;
     cursor: pointer;
-    padding: 8px;
+    padding: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
     flex-shrink: 0;
     border-radius: 4px;
+    opacity: 1;
+    margin-left: auto;
 
     &:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.08);
     }
 
     @media (max-width: 640px) {
-      padding: 10px;
-      align-self: flex-end;
+      padding: 8px;
     }
 
     svg {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
 
       @media (max-width: 480px) {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
       }
     }
   }
 }
 
 .cli-code-block:nth-of-type(1) {
-  margin-bottom: 16px;
+  // margin-bottom: 16px;
+}
+
+.cli-install-below-image {
+  width: 100%;
+  flex: 0 0 100%;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cli-install-desc {
+  color: #a8a8a8;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 12px;
+
+  a {
+    color: #5b8def;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #7aa3f5;
+      text-decoration: underline;
+    }
+  }
+}
+
+.cli-install-container {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 600px;
+  max-width: 720px;
 }
 
 // 移动端特殊适配
 @media (max-width: 480px) {
   .cli-content {
-    .cli-command-section {
-      .section-label {
-        font-size: 13px;
-      }
-    }
-
     .permission-solution-card {
       padding: 12px;
 
