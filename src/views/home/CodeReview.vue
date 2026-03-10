@@ -5,7 +5,7 @@
     alt-text="code review"
     :sub-title="t('home.codeReview.subTitle')"
     :video="currentResources.video"
-    poster="@/assets/codeReview/codereview_buffer.webp"
+    :poster="CodeReviewPoster"
     :feature-list="featureList"
     margin-top="mt-9 sm:mt-18 md:mt-26 lg:mt-36 xl:mt-45"
   />
@@ -17,6 +17,7 @@ import { useI18n } from 'vue-i18n'
 import FeatureSection from '@/components/FeatureSection.vue'
 import CodeReviewZhVideo from '@/assets/video/code_review_zh.mp4'
 import CodeReviewEnVideo from '@/assets/video/code_review_en.mp4'
+import CodeReviewPoster from '@/assets/codeReview/codereview_buffer.webp'
 import ZhCodeReviewFeature1 from '@/assets/codeReview/zh/codereview_feature01.webp'
 import ZhCodeReviewFeature2 from '@/assets/codeReview/zh/codereview_feature02.webp'
 import ZhCodeReviewFeature3 from '@/assets/codeReview/zh/codereview_feature03.webp'
