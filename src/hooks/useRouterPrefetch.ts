@@ -11,7 +11,11 @@ export function useRouterPrefetch() {
   let hoverTimer: number | null = null
 
   const handleMouseEnter = (event: MouseEvent) => {
-    const target = event.target as HTMLElement
+    const target = event.target
+    
+    // 检查 target 是否是 HTMLElement
+    if (!(target instanceof HTMLElement)) return
+    
     const link = target.closest('a[href]') as HTMLAnchorElement
 
     if (!link) return
@@ -61,14 +65,14 @@ export function useRouterPrefetch() {
   }
 
   onMounted(() => {
-    // 监听整个文档的鼠标移动事件
-    document.addEventListener('mouseenter', handleMouseEnter, true)
-    document.addEventListener('mouseleave', handleMouseLeave, true)
+    // 监听整个文档的鼠标移动事件（使用 mouseover 以支持事件冒泡）
+    document.addEventListener('mouseover', handleMouseEnter, true)
+    document.addEventListener('mouseout', handleMouseLeave, true)
   })
 
   onUnmounted(() => {
-    document.removeEventListener('mouseenter', handleMouseEnter, true)
-    document.removeEventListener('mouseleave', handleMouseLeave, true)
+    document.removeEventListener('mouseover', handleMouseEnter, true)
+    document.removeEventListener('mouseout', handleMouseLeave, true)
 
     if (hoverTimer) {
       clearTimeout(hoverTimer)

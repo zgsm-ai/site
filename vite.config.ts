@@ -36,6 +36,30 @@ export default defineConfig({
             return 'naive-ui'
           }
 
+          // Vue 核心库
+          if (id.includes('node_modules/vue') || id.includes('node_modules/@vue')) {
+            return 'vue'
+          }
+
+          // Vue Router 和 I18n
+          if (id.includes('vue-router') || id.includes('vue-i18n')) {
+            return 'vue-libs'
+          }
+
+          // 按页面分包 - 关键页面独立打包
+          if (id.includes('/views/home/')) {
+            return 'page-home'
+          }
+          if (id.includes('/views/download/')) {
+            return 'page-download'
+          }
+          if (id.includes('/views/pricing/')) {
+            return 'page-pricing'
+          }
+          if (id.includes('/views/operation/')) {
+            return 'page-operation'
+          }
+
           // 其他 node_modules 依赖分离到 vendor chunk
           if (id.includes('node_modules')) {
             return 'vendor'
