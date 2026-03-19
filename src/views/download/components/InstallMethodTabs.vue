@@ -11,13 +11,13 @@ const props = defineProps<{
   activeMethod?: InstallMethod
 }>()
 
-const activeMethod = ref<InstallMethod>(props.activeMethod || 'npm')
+const currentMethod = ref<InstallMethod>(props.activeMethod || 'bash')
 
 watch(
   () => props.activeMethod,
   (newMethod) => {
     if (newMethod) {
-      activeMethod.value = newMethod
+      currentMethod.value = newMethod
     }
   },
 )
@@ -27,13 +27,13 @@ const emit = defineEmits<{
 }>()
 
 const handleMethodChange = (method: InstallMethod) => {
-  activeMethod.value = method
+  currentMethod.value = method
   emit('change', method)
 }
 
 const methods: { key: InstallMethod; label: string }[] = [
-  { key: 'npm', label: 'npm' },
   { key: 'bash', label: 'Bash / Zsh' },
+  { key: 'npm', label: 'npm' },
   { key: 'powershell', label: 'PowerShell' },
 ]
 </script>
@@ -44,7 +44,7 @@ const methods: { key: InstallMethod; label: string }[] = [
       v-for="method in methods"
       :key="method.key"
       class="tab-btn"
-      :class="{ active: activeMethod === method.key }"
+      :class="{ active: currentMethod === method.key }"
       @click="handleMethodChange(method.key)"
     >
       {{ method.label }}
