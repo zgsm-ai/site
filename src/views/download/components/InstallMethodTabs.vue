@@ -11,7 +11,7 @@ const props = defineProps<{
   activeMethod?: InstallMethod
 }>()
 
-const activeMethod = ref<InstallMethod>(props.activeMethod || 'npm')
+const activeMethod = ref<InstallMethod>(props.activeMethod || 'bash')
 
 watch(
   () => props.activeMethod,
@@ -32,8 +32,8 @@ const handleMethodChange = (method: InstallMethod) => {
 }
 
 const methods: { key: InstallMethod; label: string }[] = [
-  { key: 'npm', label: 'npm' },
   { key: 'bash', label: 'Bash / Zsh' },
+  { key: 'npm', label: 'npm' },
   { key: 'powershell', label: 'PowerShell' },
 ]
 </script>

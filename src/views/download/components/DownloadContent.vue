@@ -29,7 +29,7 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
-const currentInstallMethod = ref<InstallMethod>('npm')
+const currentInstallMethod = ref<InstallMethod>('bash')
 
 const handleDownload = () => emit('download')
 const handleInstallMethodChange = (method: InstallMethod) => {
