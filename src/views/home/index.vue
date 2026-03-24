@@ -20,16 +20,16 @@
       alt="right port"
     />
     <div class="absolute left-0 top-0 h-80 sm:h-112 md:h-120 lg:h-124 w-full top-bg"></div>
-    <img
+    <!-- <img
       src="../../assets/home/summary_icon.webp"
       class="absolute right-[30px] top-[80px] cursor-pointer z-1000 summary-icon"
       alt="Summary Icon"
       @click="toSummary"
       v-if="!isEnglish"
-    />
+    /> -->
     <img
       src="../../assets/home/competition.webp"
-      class="absolute right-[-15px] top-[260px] cursor-pointer z-1000 competition-icon"
+      class="absolute right-[-15px] top-[80px] cursor-pointer z-1000 competition-icon"
       alt="CoStrict Competition"
       @click="toCompetition"
       v-if="!isEnglish"
@@ -56,9 +56,9 @@ const { locale } = useI18n()
 
 const isEnglish = computed(() => locale.value === 'en')
 
-const toSummary = () => {
-  window.open('https://zgsm.sangfor.com/credit/manager/annual-summary')
-}
+// const toSummary = () => {
+//   window.open('https://zgsm.sangfor.com/credit/manager/annual-summary')
+// }
 
 const toCompetition = () => {
   window.open('https://competition.costrict.ai/')
@@ -90,11 +90,11 @@ const toCompetition = () => {
 
 /* 在移动设备上禁用动画 */
 @media (max-width: 768px) {
-  .summary-icon {
-    width: 90px;
-    top: 68px;
-    right: 0;
-  }
+  // .summary-icon {
+  //   width: 90px;
+  //   top: 68px;
+  //   right: 0;
+  // }
 
   .competition-icon:hover {
     transform: none !important;
@@ -108,7 +108,7 @@ const toCompetition = () => {
     transition: none !important;
     cursor: pointer;
     width: 140px;
-    top: 168px;
+    top: 88px;
     right: 0;
   }
 }

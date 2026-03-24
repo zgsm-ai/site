@@ -18,7 +18,7 @@ defineOptions({
 
 const { t } = useI18n()
 const activeTab = ref<TabType>('vscode')
-const installMethod = ref<InstallMethod>('npm')
+const installMethod = ref<InstallMethod>('bash')
 
 const { tabList, headerTitle, headerIcon, stepList, cliStepLists, cliEnvRequirements } =
   useDownloadData(activeTab, installMethod)

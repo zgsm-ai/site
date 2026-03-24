@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import type { TabType, CliStepLists, CliEnvRequirements, InstallMethod, StepItem } from '../types'
 import { JETBRAINS_IDES } from '../constants'
@@ -10,7 +10,7 @@ defineOptions({
   name: 'DownloadContent',
 })
 
-defineProps<{
+const props = defineProps<{
   activeTab: TabType
   headerIcon: string
   headerTitle: string
@@ -29,7 +29,17 @@ const emit = defineEmits<{
 }>()
 
 const { t } = useI18n()
-const currentInstallMethod = ref<InstallMethod>('bash')
+const currentInstallMethod = ref<InstallMethod>(props.installMethod || 'bash')
+
+// 监听父组件传入的 installMethod 变化
+watch(
+  () => props.installMethod,
+  (newMethod) => {
+    if (newMethod) {
+      currentInstallMethod.value = newMethod
+    }
+  },
+)
 
 const handleDownload = () => emit('download')
 const handleInstallMethodChange = (method: InstallMethod) => {
