@@ -172,6 +172,10 @@
     "inviteNewUser": "邀请新用户",
     "inviteNewUserDesc": "邀请新用户注册，邀请者获400 Credits，新用户获500 Credits。",
     "goInvite": "去邀请 >",
+    "pastEvents": "往期活动",
+    "pastEventsEnded": "已结束",
+    "pastEventsDesc": "CoStrict 校园挑战赛，面向全国高校学生的 AI 编程挑战赛，活动已圆满结束，点击查看往期详情与获奖作品。",
+    "viewPastEvents": "查看详情 >",
     "inviteRules": {
       "rule1": "每邀请1位新用户注册 CoStrict 账号，新用户立得200 Credits，邀请者可获100 Credits；",
       "rule2": "新用户下载 CoStrict 插件，并通过GitHub Star一下：",

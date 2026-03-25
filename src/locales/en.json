@@ -171,6 +171,10 @@
     "inviteNewUser": "Invite New User",
     "inviteNewUserDesc": "Invite new users to register, inviter gets 400 Credits, new user gets 500 Credits.",
     "goInvite": "Go Invite >",
+    "pastEvents": "Past Events",
+    "pastEventsEnded": "Ended",
+    "pastEventsDesc": "CoStrict Campus Challenge, an AI programming competition for university students nationwide. The event has concluded. Click to view past details and winning projects.",
+    "viewPastEvents": "View Details >",
     "inviteRules": {
       "rule1": "For each new user invited to register CoStrict account, new user immediately gets 200 Credits, inviter gets 100 Credits;",
       "rule2": "New user downloads CoStrict plugin and stars on GitHub:",

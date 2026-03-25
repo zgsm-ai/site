@@ -27,17 +27,16 @@
       @click="toSummary"
       v-if="!isEnglish"
     /> -->
-    <img
+    <!-- <img
       src="../../assets/home/competition.webp"
       class="absolute right-[-15px] top-[80px] cursor-pointer z-1000 competition-icon"
       alt="CoStrict Competition"
       @click="toCompetition"
       v-if="!isEnglish"
-    />
+    /> -->
   </div>
 </template>
 <script lang="ts" setup>
-import { useI18n } from 'vue-i18n'
 import SloganSection from './SloganSection.vue'
 import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'
@@ -45,24 +44,11 @@ import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
 import FooterCopyright from './FooterCopyright.vue'
-import { computed } from 'vue'
 
 // 组件名称通过文件名定义为 HomeIndex
 defineOptions({
   name: 'HomeIndex',
 })
-
-const { locale } = useI18n()
-
-const isEnglish = computed(() => locale.value === 'en')
-
-// const toSummary = () => {
-//   window.open('https://zgsm.sangfor.com/credit/manager/annual-summary')
-// }
-
-const toCompetition = () => {
-  window.open('https://competition.costrict.ai/')
-}
 </script>
 <style scoped lang="less">
 .top-bg {
