@@ -7,9 +7,7 @@ const homeRoute = createPrefetchableRoute(() => import('@/views/home/index.vue')
 const downloadRoute = createPrefetchableRoute(() => import('@/views/download/index.vue'))
 const pricingRoute = createPrefetchableRoute(() => import('@/views/pricing/PricingPage.vue'))
 const operationRoute = createPrefetchableRoute(() => import('@/views/operation/OperationPage.vue'))
-const resourceRoute = createPrefetchableRoute(
-  () => import('@/views/resourceCalculator/index.vue')
-)
+const resourceRoute = createPrefetchableRoute(() => import('@/views/resourceCalculator/index.vue'))
 
 // 静态路由配置 - 不再动态增删
 const routes = [
