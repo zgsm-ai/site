@@ -5,7 +5,6 @@ import vue from '@vitejs/plugin-vue'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import tailwindcss from '@tailwindcss/vite'
 import compression from 'vite-plugin-compression'
-
 // https://vite.dev/config/
 export default defineConfig({
   server: {

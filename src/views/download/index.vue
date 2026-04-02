@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useHead } from '@unhead/vue'
 import TabList from './components/TabList.vue'
 import DownloadContent from './components/DownloadContent.vue'
 import { useDownloadData } from './useDownloadData'
@@ -14,6 +15,30 @@ import type { TabType, InstallMethod } from './types'
 
 defineOptions({
   name: 'DownloadPage',
+})
+
+useHead({
+  title: '下载 CoStrict - VSCode & JetBrains 插件 | CLI工具',
+  meta: [
+    {
+      name: 'description',
+      content:
+        '免费下载 CoStrict AI 编程助手，支持 VSCode、JetBrains 全系列 IDE 插件及 CLI 工具，一键安装，即刻提升开发效率。',
+    },
+    { property: 'og:title', content: '下载 CoStrict - VSCode & JetBrains 插件 | CLI工具' },
+    {
+      property: 'og:description',
+      content:
+        '免费下载 CoStrict AI 编程助手，支持 VSCode、JetBrains 全系列 IDE 插件及 CLI 工具，一键安装，即刻提升开发效率。',
+    },
+    { property: 'og:url', content: 'https://costrict.ai/download' },
+    { name: 'twitter:title', content: '下载 CoStrict - VSCode & JetBrains 插件 | CLI工具' },
+    {
+      name: 'twitter:description',
+      content: '免费下载 CoStrict AI 编程助手，支持 VSCode、JetBrains 全系列 IDE 插件及 CLI 工具。',
+    },
+  ],
+  link: [{ rel: 'canonical', href: 'https://costrict.ai/download' }],
 })
 
 const { t } = useI18n()

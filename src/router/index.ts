@@ -10,7 +10,7 @@ const operationRoute = createPrefetchableRoute(() => import('@/views/operation/O
 const resourceRoute = createPrefetchableRoute(() => import('@/views/resourceCalculator/index.vue'))
 
 // 静态路由配置 - 不再动态增删
-const routes = [
+export const routes = [
   {
     path: '/',
     name: 'home',
@@ -54,16 +54,29 @@ const router = createRouter({
   },
 })
 
+// 导航守卫：检查路由的语言可见性
+router.beforeEach((to, from, next) => {
+  const currentLocale = i18n.global.locale.value
+  const allowedLocales = to.meta.localeVisible as string[] | undefined
+
+  if (allowedLocales && !allowedLocales.includes(currentLocale)) {
+    next({ name: 'home' })
+  } else {
+    next()
+  }
+})
+
 // 初始化时预加载关键路由（在浏览器空闲时）
 if (typeof window !== 'undefined') {
-  // 首次加载后，预取常访问的页面
   router.isReady().then(() => {
     const currentLocale = i18n.global.locale.value
     const criticalRoutes = [
       downloadRoute.prefetch,
       operationRoute.prefetch,
-      // 仅在中文环境预加载价格页面
-      ...(currentLocale === 'zh' ? [pricingRoute.prefetch] : []),
+      // 仅在中文环境预加载价格页面和博客页面
+      ...(currentLocale === 'zh'
+        ? [pricingRoute.prefetch]
+        : []),
     ]
 
     // 延迟 1 秒后开始预加载，确保首屏已完成
@@ -72,18 +85,5 @@ if (typeof window !== 'undefined') {
     }, 1000)
   })
 }
-
-// 导航守卫：检查路由的语言可见性
-router.beforeEach((to, from, next) => {
-  const currentLocale = i18n.global.locale.value
-  const allowedLocales = to.meta.localeVisible as string[] | undefined
-
-  // 如果路由有 localeVisible 限制，且当前语言不在允许列表中
-  if (allowedLocales && !allowedLocales.includes(currentLocale)) {
-    next({ name: 'home' })
-  } else {
-    next()
-  }
-})
 
 export default router

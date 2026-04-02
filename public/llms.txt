@@ -1,0 +1,24 @@
+# CoStrict AI Programming Assistant
+title: CoStrict
+description: Free and open-source AI-assisted programming tool with enterprise private deployment support
+version: 1.0.0
+author: CoStrict Team
+url: https://costrict.ai
+license: MIT
+language: zh-CN, en
+
+# Key Features
+features:
+  - AI code completion and generation
+  - Enterprise private deployment
+  - Code review and optimization
+  - Multi-language support
+  - VS Code and JetBrains integration
+  - Strict mode for serious programming
+
+# Documentation
+docs: https://docs.costrict.ai
+github: https://github.com/costrict
+
+# Contact
+contact: support@costrict.ai
