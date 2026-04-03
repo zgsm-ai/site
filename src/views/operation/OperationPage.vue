@@ -86,8 +86,41 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useHead } from '@unhead/vue'
+
+defineOptions({ name: 'OperationPage' })
 
 const { t } = useI18n()
+
+useHead({
+  title: 'CoStrict 活动中心 - GitHub Star 奖励 | 邀请用户 | 历史活动',
+  meta: [
+    {
+      name: 'description',
+      content:
+        '参与 CoStrict 社区活动，通过 GitHub Star 和邀请用户获取奖励，查看历史活动记录，共同建设开源 AI 编程工具生态。',
+    },
+    {
+      property: 'og:title',
+      content: 'CoStrict 活动中心 - GitHub Star 奖励 | 邀请用户 | 历史活动',
+    },
+    {
+      property: 'og:description',
+      content:
+        '参与 CoStrict 社区活动，通过 GitHub Star 和邀请用户获取奖励，共同建设开源 AI 编程工具生态。',
+    },
+    { property: 'og:url', content: 'https://costrict.ai/operation' },
+    {
+      name: 'twitter:title',
+      content: 'CoStrict 活动中心 - GitHub Star 奖励 | 邀请用户 | 历史活动',
+    },
+    {
+      name: 'twitter:description',
+      content: '参与 CoStrict 社区活动，通过 GitHub Star 和邀请用户获取奖励。',
+    },
+  ],
+  link: [{ rel: 'canonical', href: 'https://costrict.ai/operation' }],
+})
 
 const inviteRules = computed(() => [
   {

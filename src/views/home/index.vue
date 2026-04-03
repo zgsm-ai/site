@@ -9,6 +9,29 @@
       <LanguageSupport />
     </div>
     <FooterCopyright />
+    <StructuredData
+      schemaType="Organization"
+      :data="{
+        name: 'CoStrict',
+        url: 'https://costrict.ai/',
+        logo: 'https://costrict.ai/favicon.png',
+        description: 'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署',
+        sameAs: ['https://github.com/zgsm-ai/costrict'],
+      }"
+    />
+    <StructuredData
+      schemaType="SoftwareApplication"
+      :data="{
+        name: 'CoStrict',
+        operatingSystem: 'Windows, macOS, Linux',
+        applicationCategory: 'DeveloperApplication',
+        offers: {
+          '@type': 'Offer',
+          price: '0',
+          priceCurrency: 'CNY',
+        },
+      }"
+    />
     <img
       src="../../assets/home/left_port.webp"
       class="absolute left-0 top-[1538px]"
@@ -37,6 +60,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useHead } from '@unhead/vue'
 import SloganSection from './SloganSection.vue'
 import StrictMode from './StrictMode.vue'
 import CodeReview from './CodeReview.vue'
@@ -44,10 +68,37 @@ import MoreTool from './MoreTool.vue'
 import EnterpriseDeployment from './EnterpriseDeployment.vue'
 import LanguageSupport from './LanguageSupport.vue'
 import FooterCopyright from './FooterCopyright.vue'
+import StructuredData from '@/components/StructuredData.vue'
 
 // 组件名称通过文件名定义为 HomeIndex
 defineOptions({
   name: 'HomeIndex',
+})
+
+useHead({
+  title: 'CoStrict - 企业级AI编程工具 | 开源免费 | 私有化部署',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署，提升团队开发效率，是企业严肃编程的最佳选择。',
+    },
+    { property: 'og:title', content: 'CoStrict - 企业级AI编程工具 | 开源免费 | 私有化部署' },
+    {
+      property: 'og:description',
+      content:
+        'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署，提升团队开发效率，是企业严肃编程的最佳选择。',
+    },
+    { property: 'og:url', content: 'https://costrict.ai/' },
+    { property: 'og:image', content: 'https://costrict.ai/favicon.png' },
+    { name: 'twitter:title', content: 'CoStrict - 企业级AI编程工具 | 开源免费 | 私有化部署' },
+    {
+      name: 'twitter:description',
+      content: 'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署，提升团队开发效率。',
+    },
+    { name: 'twitter:image', content: 'https://costrict.ai/favicon.png' },
+  ],
+  link: [{ rel: 'canonical', href: 'https://costrict.ai/' }],
 })
 </script>
 <style scoped lang="less">

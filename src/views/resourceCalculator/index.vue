@@ -10,8 +10,12 @@
 
           <!-- 资源需求预估结果 -->
           <div class="result-section">
-            <ResourceResult :form-data="formData" :results="results" :total-resources="totalResources"
-              :get-gpu-cost-breakdown="calculateGpuCostsAndBreakdown" />
+            <ResourceResult
+              :form-data="formData"
+              :results="results"
+              :total-resources="totalResources"
+              :get-gpu-cost-breakdown="calculateGpuCostsAndBreakdown"
+            />
           </div>
         </div>
 
@@ -33,6 +37,7 @@
 import { reactive, onMounted, watch, computed } from 'vue'
 import { NLayout, NCard } from 'naive-ui'
 import { useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import type { FormData } from './types'
 import { useResourceCalculator } from './hooks/useResourceCalculator'
 import ModelTable from './components/ModelTable.vue'
@@ -46,19 +51,39 @@ defineOptions({
   name: 'ResourceCalculator',
 })
 
+useHead({
+  title: 'CoStrict 资源计算器 - 私有化部署资源评估工具',
+  meta: [
+    {
+      name: 'description',
+      content:
+        '使用 CoStrict 资源计算器，快速评估企业私有化部署所需的服务器资源配置，为 AI 编程工具部署提供精准的资源规划建议。',
+    },
+    { property: 'og:title', content: 'CoStrict 资源计算器 - 私有化部署资源评估工具' },
+    {
+      property: 'og:description',
+      content:
+        '使用 CoStrict 资源计算器，快速评估企业私有化部署所需的服务器资源配置，为 AI 编程工具部署提供精准的资源规划建议。',
+    },
+    { property: 'og:url', content: 'https://costrict.ai/resource' },
+    { name: 'twitter:title', content: 'CoStrict 资源计算器 - 私有化部署资源评估工具' },
+    {
+      name: 'twitter:description',
+      content: '使用 CoStrict 资源计算器，快速评估企业私有化部署所需的服务器资源配置。',
+    },
+  ],
+  link: [{ rel: 'canonical', href: 'https://costrict.ai/resource' }],
+})
+
 // 使用资源计算器 hooks
-const {
-  results,
-  totalResources,
-  calculateResources,
-  calculateGpuCostsAndBreakdown,
-} = useResourceCalculator()
+const { results, totalResources, calculateResources, calculateGpuCostsAndBreakdown } =
+  useResourceCalculator()
 
 // 获取路由实例
 const route = useRoute()
 
 // 检测URL参数是否包含type=Aicp
-const showAicpModule = computed(() => /aicp/i.test((route.query.type as string)))
+const showAicpModule = computed(() => /aicp/i.test(route.query.type as string))
 
 // localStorage存储键名
 const STORAGE_KEY = 'resource_calculator_form_data'
@@ -154,10 +179,10 @@ onMounted(() => {
   // 确保AI Agent模型有选择
   if (!formData.selectedAIModels || Object.keys(formData.selectedAIModels).length === 0) {
     formData.selectedAIModels = {
-      'GLM-4.5-FP8': true
+      'GLM-4.5-FP8': true,
     }
     formData.modelRatios = {
-      'GLM-4.5-FP8': 100
+      'GLM-4.5-FP8': 100,
     }
   }
 
@@ -265,7 +290,6 @@ watch(
     overflow-y: auto;
   }
 }
-
 
 /* 自定义滚动条样式 */
 .parameter-section::-webkit-scrollbar,
