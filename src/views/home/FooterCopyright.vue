@@ -43,7 +43,7 @@
             <div class="qrcode-wrap">
               <img
                 class="qrcode-img"
-                src="../../assets/qrcode/official_account.png"
+                src="../../assets/qrcode/official_account.webp"
                 alt="CoStrict Official Account"
               />
               <span class="qrcode-label">CoStrict {{ t('footer.officialAccountLabel') }}</span>
@@ -71,7 +71,7 @@
             <div class="qrcode-wrap">
               <img
                 class="qrcode-img"
-                src="../../assets/qrcode/communication_group.png"
+                src="../../assets/qrcode/communication_group.webp"
                 alt="CoStrict Communication Group"
               />
               <span class="qrcode-label">CoStrict {{ t('footer.joinGroupLabel') }}</span>
