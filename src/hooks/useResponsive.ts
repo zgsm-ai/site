@@ -4,12 +4,15 @@ import { useI18n } from 'vue-i18n'
 export function useResponsive() {
   const { locale } = useI18n()
   const isMobile = ref(false)
+  const isTablet = ref(false)
 
   const isEn = computed(() => locale.value === 'en')
   const mobileBreakpoint = computed(() => (isEn.value ? 1280 : 968))
 
   const checkMobile = () => {
-    isMobile.value = window.innerWidth < mobileBreakpoint.value
+    const width = window.innerWidth
+    isMobile.value = width < 769
+    isTablet.value = width >= 769 && width <= 968
   }
 
   const handleResize = () => {
@@ -27,6 +30,7 @@ export function useResponsive() {
 
   return {
     isMobile,
+    isTablet,
     isEn,
     mobileBreakpoint,
   }

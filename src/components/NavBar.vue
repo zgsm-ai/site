@@ -15,7 +15,7 @@
       :is-mobile="isMobile"
       :is-menu-open="isMenuOpen"
       :is-lang-menu-open="isLangMenuOpen"
-      :is-pricing-page="isPricingPage"
+      :is-pricing-page="isPricingPage || isBlogPage"
       @toggle-menu="toggleMenu"
       @close-menu="closeMenu"
       @toggle-lang-menu="toggleLangMenu"
@@ -24,7 +24,10 @@
     <!-- 桌面端右侧操作区 -->
     <div v-if="!isMobile" class="flex items-center ml-auto">
       <GithubStars />
-      <LanguageSwitcher v-model:is-open="isPopoverOpen" :is-pricing-page="isPricingPage" />
+      <LanguageSwitcher
+        v-model:is-open="isPopoverOpen"
+        :is-pricing-page="isPricingPage || isBlogPage"
+      />
     </div>
   </div>
 </template>
@@ -52,6 +55,9 @@ const isPopoverOpen = ref(false)
 
 const notHomePage = computed(() => router.currentRoute.value.name !== 'home')
 const isPricingPage = computed(() => router.currentRoute.value.name === 'pricing')
+const isBlogPage = computed(() =>
+  ['blog', 'blogDetail'].includes(router.currentRoute.value.name as string),
+)
 </script>
 
 <style lang="less" scoped>
