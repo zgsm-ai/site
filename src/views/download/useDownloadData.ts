@@ -1,6 +1,14 @@
 import { computed, type Ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { TabType, StepItem, CliStepLists, CliEnvRequirements, InstallMethod } from './types'
+import type {
+  TabType,
+  StepItem,
+  CliStepLists,
+  CliEnvRequirements,
+  InstallMethod,
+  Platform,
+  PlatformConfig,
+} from './types'
 import {
   CLI_COMMAND_INSTALL_NPM,
   CLI_COMMAND_INSTALL_BASH,
@@ -25,7 +33,11 @@ import ZhCliInstall from '@/assets/download/zh/cli_install.webp'
 import EnCliInstall from '@/assets/download/en/cli_install.webp'
 import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
-export function useDownloadData(activeTab: Ref<TabType>, installMethod: Ref<InstallMethod>) {
+export function useDownloadData(
+  activeTab: Ref<TabType>,
+  installMethod: Ref<InstallMethod>,
+  activePlatform: Ref<Platform>,
+) {
   const { t, locale } = useI18n()
 
   const images = {
@@ -214,6 +226,71 @@ export function useDownloadData(activeTab: Ref<TabType>, installMethod: Ref<Inst
     return { installSteps, permissionSteps }
   })
 
+  // Platform-based install configs
+  const platformCommandsMap = computed<Record<Platform, PlatformConfig>>(() => ({
+    macos: {
+      platform: 'macos',
+      labelKey: 'download.platformMacOS',
+      commands: [
+        {
+          label: t('download.installMethodCurl'),
+          command: CLI_COMMAND_INSTALL_BASH,
+          prompt: '$',
+          method: 'bash',
+        },
+        {
+          label: t('download.installMethodNpm'),
+          command: CLI_COMMAND_INSTALL_NPM,
+          prompt: '$',
+          method: 'npm',
+        },
+      ],
+      noteKey: 'download.platformMacOSNote',
+    },
+    linux: {
+      platform: 'linux',
+      labelKey: 'download.platformLinux',
+      commands: [
+        {
+          label: t('download.installMethodCurl'),
+          command: CLI_COMMAND_INSTALL_BASH,
+          prompt: '$',
+          method: 'bash',
+        },
+        {
+          label: t('download.installMethodNpm'),
+          command: CLI_COMMAND_INSTALL_NPM,
+          prompt: '$',
+          method: 'npm',
+        },
+      ],
+      noteKey: 'download.platformLinuxNote',
+    },
+    windows: {
+      platform: 'windows',
+      labelKey: 'download.platformWindows',
+      commands: [
+        {
+          label: t('download.installMethodPowershell'),
+          command: CLI_COMMAND_INSTALL_POWERSHELL,
+          prompt: '>',
+          method: 'powershell',
+        },
+        {
+          label: t('download.installMethodNpm'),
+          command: CLI_COMMAND_INSTALL_NPM,
+          prompt: '$',
+          method: 'npm',
+        },
+      ],
+      noteKey: 'download.platformWindowsNote',
+    },
+  }))
+
+  const activePlatformConfig = computed<PlatformConfig>(
+    () => platformCommandsMap.value[activePlatform.value],
+  )
+
   return {
     t,
     locale,
@@ -224,5 +301,7 @@ export function useDownloadData(activeTab: Ref<TabType>, installMethod: Ref<Inst
     stepList,
     cliStepLists,
     cliEnvRequirements,
+    platformCommandsMap,
+    activePlatformConfig,
   }
 }
