@@ -1,17 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
 import TabList from './components/TabList.vue'
 import DownloadContent from './components/DownloadContent.vue'
 import { useDownloadData } from './useDownloadData'
 import { useDownloadActions } from './useDownloadActions'
-import {
-  CLI_COMMAND_INSTALL_NPM,
-  CLI_COMMAND_INSTALL_BASH,
-  CLI_COMMAND_INSTALL_POWERSHELL,
-} from './constants'
-import type { TabType, InstallMethod } from './types'
+import { useDetectPlatform } from './useDetectPlatform'
+import type { TabType, InstallMethod, Platform } from './types'
 
 defineOptions({
   name: 'DownloadPage',
@@ -44,9 +40,22 @@ useHead({
 const { t } = useI18n()
 const activeTab = ref<TabType>('vscode')
 const installMethod = ref<InstallMethod>('bash')
+const activePlatform = ref<Platform>('macos')
 
-const { tabList, headerTitle, headerIcon, stepList, cliStepLists, cliEnvRequirements } =
-  useDownloadData(activeTab, installMethod)
+const { detectedPlatform } = useDetectPlatform()
+watch(detectedPlatform, (val) => {
+  activePlatform.value = val
+})
+
+const {
+  tabList,
+  headerTitle,
+  headerIcon,
+  stepList,
+  cliStepLists,
+  cliEnvRequirements,
+  activePlatformConfig,
+} = useDownloadData(activeTab, installMethod, activePlatform)
 const { download, downloadJetbrainsPrimary, downloadJetbrainsSecondary, copyToClipboard } =
   useDownloadActions(activeTab)
 
@@ -58,13 +67,12 @@ const handleInstallMethodChange = (method: InstallMethod) => {
   installMethod.value = method
 }
 
-const handleCopyCliCommand = () => {
-  const commandMap: Record<InstallMethod, string> = {
-    npm: CLI_COMMAND_INSTALL_NPM,
-    bash: CLI_COMMAND_INSTALL_BASH,
-    powershell: CLI_COMMAND_INSTALL_POWERSHELL,
-  }
-  copyToClipboard(commandMap[installMethod.value])
+const handlePlatformChange = (platform: Platform) => {
+  activePlatform.value = platform
+}
+
+const handleCopyCliCommand = (command: string) => {
+  copyToClipboard(command)
 }
 </script>
 
@@ -90,12 +98,13 @@ const handleCopyCliCommand = () => {
           :steps="stepList"
           :cli-step-lists="cliStepLists"
           :cli-env-requirements="cliEnvRequirements"
-          :install-method="installMethod"
+          :active-platform="activePlatform"
+          :active-platform-config="activePlatformConfig"
           @download="download"
           @download-jetbrains-primary="downloadJetbrainsPrimary"
           @download-jetbrains-secondary="downloadJetbrainsSecondary"
           @copy-cli-command="handleCopyCliCommand"
-          @install-method-change="handleInstallMethodChange"
+          @platform-change="handlePlatformChange"
         />
       </div>
     </div>

@@ -1,5 +1,20 @@
 export type TabType = 'vscode' | 'jetbrains' | 'cli'
 export type InstallMethod = 'npm' | 'bash' | 'powershell'
+export type Platform = 'macos' | 'linux' | 'windows'
+
+export interface PlatformCommand {
+  label: string
+  command: string
+  prompt: string
+  method: InstallMethod
+}
+
+export interface PlatformConfig {
+  platform: Platform
+  labelKey: string
+  commands: PlatformCommand[]
+  noteKey: string
+}
 
 export interface PermissionOption {
   title: string

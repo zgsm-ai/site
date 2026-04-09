@@ -1,10 +1,17 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { TabType, CliStepLists, CliEnvRequirements, InstallMethod, StepItem } from '../types'
+import type {
+  TabType,
+  StepItem,
+  CliStepLists,
+  CliEnvRequirements,
+  Platform,
+  PlatformConfig,
+} from '../types'
 import { JETBRAINS_IDES } from '../constants'
 import StepTimeline from './StepTimeline.vue'
-import InstallMethodTabs from './InstallMethodTabs.vue'
+import PlatformTabs from './PlatformTabs.vue'
+import PlatformInstallPanel from './PlatformInstallPanel.vue'
 
 defineOptions({
   name: 'DownloadContent',
@@ -17,34 +24,26 @@ const props = defineProps<{
   steps: StepItem[]
   cliStepLists?: CliStepLists
   cliEnvRequirements?: CliEnvRequirements
-  installMethod?: InstallMethod
+  activePlatform?: Platform
+  activePlatformConfig?: PlatformConfig
 }>()
 
 const emit = defineEmits<{
   (e: 'download'): void
   (e: 'downloadJetbrainsPrimary'): void
   (e: 'downloadJetbrainsSecondary'): void
-  (e: 'copyCliCommand'): void
-  (e: 'installMethodChange', method: InstallMethod): void
+  (e: 'copyCliCommand', command: string): void
+  (e: 'platformChange', platform: Platform): void
 }>()
 
 const { t } = useI18n()
-const currentInstallMethod = ref<InstallMethod>(props.installMethod || 'bash')
-
-// 监听父组件传入的 installMethod 变化
-watch(
-  () => props.installMethod,
-  (newMethod) => {
-    if (newMethod) {
-      currentInstallMethod.value = newMethod
-    }
-  },
-)
 
 const handleDownload = () => emit('download')
-const handleInstallMethodChange = (method: InstallMethod) => {
-  currentInstallMethod.value = method
-  emit('installMethodChange', method)
+const handlePlatformChange = (platform: Platform) => {
+  emit('platformChange', platform)
+}
+const handleCopyCommand = (command: string) => {
+  emit('copyCliCommand', command)
 }
 </script>
 
@@ -76,41 +75,24 @@ const handleInstallMethodChange = (method: InstallMethod) => {
     </div>
 
     <!-- Installation Steps for CLI -->
-    <template v-if="activeTab === 'cli' && cliStepLists && cliEnvRequirements">
+    <template v-if="activeTab === 'cli' && cliEnvRequirements">
       <!-- 安装步骤 -->
       <div class="cli-install-section">
         <p class="cli-desc">
           {{ $t('download.cliStep2SubContent', { link: '' })
           }}<a href="https://docs.costrict.ai/cli/guide/installation" target="_blank">{{
             $t('download.cliStep2DocLink')
-            }}</a>
+          }}</a>
         </p>
 
-        <!-- 安装方式选择器 -->
+        <!-- 按平台分组的安装命令 -->
         <div class="cli-install-container">
-          <InstallMethodTabs :active-method="currentInstallMethod" @change="handleInstallMethodChange" />
-
-          <!-- 安装命令 -->
-          <div class="cli-code-wrapper">
-            <div v-for="(step, index) in cliStepLists.installSteps" :key="index" class="cli-code-block">
-              <div v-if="step.cliContent?.commands" class="cli-code-content">
-                <div class="cli-code-lines">
-                  <div v-for="(cmd, cmdIndex) in step.cliContent.commands" :key="cmdIndex" class="cli-code-line">
-                    <span class="cli-prompt">$</span>
-                    <span class="cli-command-text">{{ cmd }}</span>
-                    <button v-if="cmdIndex === step.cliContent.commands!.length - 1" class="cli-copy-icon-fixed"
-                      @click="$emit('copyCliCommand')" :aria-label="$t('download.copyCommand')">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                      </svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <PlatformTabs :active-platform="activePlatform" @change="handlePlatformChange" />
+          <PlatformInstallPanel
+            v-if="activePlatformConfig"
+            :config="activePlatformConfig"
+            @copy="handleCopyCommand"
+          />
         </div>
       </div>
 
@@ -155,7 +137,7 @@ const handleInstallMethodChange = (method: InstallMethod) => {
         <StepTimeline :steps="steps" :active-tab="activeTab"
           @download-jetbrains-primary="$emit('downloadJetbrainsPrimary')"
           @download-jetbrains-secondary="$emit('downloadJetbrainsSecondary')"
-          @copy-cli-command="$emit('copyCliCommand')" />
+          @copy-cli-command="() => $emit('copyCliCommand', '')" />
       </div>
     </div>
   </div>
@@ -255,7 +237,7 @@ const handleInstallMethodChange = (method: InstallMethod) => {
 
 .cli-install-container {
   width: 100%;
-  max-width: 620px;
+  max-width: 720px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -263,158 +245,6 @@ const handleInstallMethodChange = (method: InstallMethod) => {
 
   @media (max-width: 768px) {
     max-width: 100%;
-  }
-}
-
-.cli-code-wrapper {
-  background: #1e1e1e;
-  padding: 16px;
-
-  @media (max-width: 640px) {
-    padding: 12px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px;
-  }
-}
-
-.cli-code-block {
-  position: relative;
-  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-  overflow: hidden;
-  max-width: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: 480px) {
-    font-size: 11px;
-  }
-}
-
-.cli-code-content {
-  position: relative;
-  padding: 40px 0 12px;
-}
-
-.cli-code-content:last-child {
-  padding-bottom: 16px;
-}
-
-.cli-code-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  .cli-code-line .cli-copy-icon-fixed {
-    margin-left: auto;
-  }
-}
-
-.cli-code-line:last-child {
-  padding-bottom: 0;
-}
-
-.cli-prompt {
-  color: #569cd6;
-  flex-shrink: 0;
-  font-weight: 500;
-  line-height: 1.6;
-  margin-right: 4px;
-
-  @media (max-width: 640px) {
-    line-height: 1.5;
-  }
-}
-
-.cli-command-text {
-  color: #d4d4d4;
-  flex: 1;
-  word-break: break-all;
-  white-space: normal;
-  line-height: 1.6;
-
-  @media (max-width: 640px) {
-    font-size: 11px;
-    line-height: 1.5;
-  }
-}
-
-.cli-code-block {
-  position: relative;
-  font-family: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-  overflow: hidden;
-  max-width: 100%;
-  box-sizing: border-box;
-
-  @media (max-width: 480px) {
-    font-size: 11px;
-  }
-}
-
-.cli-code-content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 8px;
-}
-
-.cli-code-lines {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cli-code-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 24px;
-}
-
-.cli-prompt {
-  color: #569cd6;
-  flex-shrink: 0;
-  font-weight: 500;
-
-  @media (max-width: 640px) {
-    line-height: 1.5;
-  }
-}
-
-.cli-command-text {
-  color: #d4d4d4;
-  flex: 1;
-  word-break: break-all;
-
-  @media (max-width: 640px) {
-    font-size: 12px;
-  }
-}
-
-.cli-copy-icon-fixed {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #a0a0a0;
-  cursor: pointer;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  border-radius: 4px;
-  flex-shrink: 0;
-
-  &:hover {
-    color: #fff;
-    background: rgba(64, 131, 232, 0.2);
-    border-color: rgba(64, 131, 232, 0.4);
-  }
-
-  svg {
-    width: 14px;
-    height: 14px;
   }
 }
 
