@@ -3,7 +3,7 @@ import { categories, articles } from './blogData'
 import type { BlogArticle } from './blogData'
 
 export type { BlogArticle, BlogCategory } from './blogData'
-export { tagClassMap, tagNameMap, coverImageMap, blogImageMap } from './blogData'
+export { tagClassMap, tagNameMap, coverImageMap, blogImageMap, blogVideoMap } from './blogData'
 
 export function useBlogData() {
   const selectedCategory = ref<string>('all')
