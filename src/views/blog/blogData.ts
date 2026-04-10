@@ -38,10 +38,18 @@ export const coverImageMap: Record<string, string> = {
 }
 
 const blogImageModules = import.meta.glob('@/assets/blog/**/*.webp', { eager: true, as: 'url' })
+const blogVideoModules = import.meta.glob('@/assets/video/*.mp4', { eager: true, as: 'url' })
 
 export const blogImageMap: Record<string, string> = Object.fromEntries(
   Object.entries(blogImageModules).map(([path, url]) => {
     const key = path.replace('/src/assets/blog/', '/blog-images/').replace('.webp', '.png')
+    return [key, url as string]
+  }),
+)
+
+export const blogVideoMap: Record<string, string> = Object.fromEntries(
+  Object.entries(blogVideoModules).map(([path, url]) => {
+    const key = path.replace('/src/assets/video/', '/blog-videos/')
     return [key, url as string]
   }),
 )
@@ -669,7 +677,7 @@ CoStrict CodeReview系统设计的第一原则是：**不打断你的工作流**
 
 3. 在文件浏览器中右键点击文件，选择 CoStrict > Code Review 即可对整个文件进行代码审查；你也可以选中函数/代码块/多文件，右键 > CoStrict > Code Review。
 
-[codereview-1.23.mp4](https://drive.weixin.qq.com/s?k=AI4AagdpABEgZpME4XAT8AbgZsAOM)
+[codereview-1.23.mp4](/blog-videos/codereview-1.23.mp4)
 
 **方式二：CI/CD期间，合并前自动守护代码质量**
 

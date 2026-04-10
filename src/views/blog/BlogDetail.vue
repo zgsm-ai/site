@@ -2,7 +2,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useBlogData } from './useBlogData'
-import { coverImageMap, blogImageMap } from './useBlogData'
+import { coverImageMap, blogImageMap, blogVideoMap } from './useBlogData'
 import FooterCopyright from '@/views/home/FooterCopyright.vue'
 
 defineOptions({ name: 'BlogDetailPage' })
@@ -61,6 +61,10 @@ const renderMarkdown = (md: string): string => {
   html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_: string, alt: string, src: string) => {
     const resolved = blogImageMap[src] ?? src
     return `<img src="${resolved}" alt="${alt}" class="article-image" />`
+  })
+  html = html.replace(/\[([^\]]*\.mp4)\]\(([^)]+)\)/g, (_: string, _label: string, src: string) => {
+    const resolved = blogVideoMap[src] ?? src
+    return `<video src="${resolved}" class="article-video" controls preload="metadata"></video>`
   })
   html = html.replace(
     /\[([^\]]+)\]\(([^)]*(?:\([^)]*\)[^)]*)*)\)/g,
@@ -562,6 +566,15 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
     &:hover {
       opacity: 0.88;
     }
+  }
+
+  :deep(.article-video) {
+    width: 680px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 16px 0;
+    display: block;
   }
 }
 
