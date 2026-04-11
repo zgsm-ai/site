@@ -90,13 +90,13 @@ useHead({
         'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署，提升团队开发效率，是企业严肃编程的最佳选择。',
     },
     { property: 'og:url', content: 'https://costrict.ai/' },
-    { property: 'og:image', content: 'https://costrict.ai/favicon.png' },
+    { property: 'og:image', content: 'https://costrict.ai/og-image.png' },
     { name: 'twitter:title', content: 'CoStrict - 企业级AI编程工具 | 开源免费 | 私有化部署' },
     {
       name: 'twitter:description',
       content: 'CoStrict 是一款免费开源的AI辅助编程工具，支持企业私有化部署，提升团队开发效率。',
     },
-    { name: 'twitter:image', content: 'https://costrict.ai/favicon.png' },
+    { name: 'twitter:image', content: 'https://costrict.ai/og-image.png' },
   ],
   link: [{ rel: 'canonical', href: 'https://costrict.ai/' }],
 })

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useHead } from '@unhead/vue'
 import { useBlogData } from './useBlogData'
 import { coverImageMap, blogImageMap, blogVideoMap } from './useBlogData'
 import FooterCopyright from '@/views/home/FooterCopyright.vue'
@@ -12,6 +13,31 @@ const { getArticleById, getRelatedArticles, formatDate } = useBlogData()
 
 const articleId = computed(() => Number(route.params.id))
 const article = computed(() => getArticleById(articleId.value))
+
+const coverImageUrl = computed(() => {
+  if (!article.value) return ''
+  return coverImageMap[article.value.cover] || ''
+})
+
+useHead(
+  computed(() => ({
+    title: article.value ? `${article.value.title} | CoStrict` : '文章不存在 | CoStrict',
+    meta: [
+      { name: 'description', content: article.value?.excerpt || '' },
+      { property: 'og:title', content: article.value?.title || '' },
+      { property: 'og:description', content: article.value?.excerpt || '' },
+      { property: 'og:type', content: 'article' },
+      { property: 'og:image', content: coverImageUrl.value },
+      { property: 'og:url', content: `https://costrict.ai/blog/${articleId.value}` },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:title', content: article.value?.title || '' },
+      { name: 'twitter:description', content: article.value?.excerpt || '' },
+      { name: 'twitter:image', content: coverImageUrl.value },
+    ],
+    link: [{ rel: 'canonical', href: `https://costrict.ai/blog/${articleId.value}` }],
+  })),
+)
+
 const relatedArticles = computed(() => getRelatedArticles(articleId.value, 3))
 
 const goBack = (): void => {
