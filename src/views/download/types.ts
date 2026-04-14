@@ -36,8 +36,8 @@ export interface CliStepContent {
 }
 
 export interface StepItem {
-  imgUrl: string
-  title: string
+  imgUrl?: string
+  title?: string
   content?: string
   cliContent?: CliStepContent
   tips?: string

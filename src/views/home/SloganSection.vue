@@ -36,6 +36,12 @@
         {{ t('home.slogan.subTitle') }}
       </div>
       <div
+        class="description text-white/80 text-sm sm:text-base md:text-lg mt-2 sm:mt-4 text-center px-4"
+        :class="{ 'description-en': isEn }"
+      >
+        {{ t('home.slogan.description') }}
+      </div>
+      <div
         class="button-group flex gap-4 mt-5 sm:mt-7.5 text-xs xl:text-2xl lg:text-xl md:text-base sm:text-sm text-white"
         :class="{ 'button-group-en': isEn }"
       >
@@ -69,14 +75,14 @@ const ossButtonWidth = computed(() => {
 
 const buttons = computed(() => [
   {
-    specificClasses: ['enterprise-button', `enterprise-button-${locale.value}`],
-    textKey: 'home.slogan.enterpriseButton',
-    action: toDeployment,
-  },
-  {
     specificClasses: ['personal-button', `personal-button-${locale.value}`],
     textKey: 'home.slogan.personalButton',
     action: toDownload,
+  },
+  {
+    specificClasses: ['enterprise-button', `enterprise-button-${locale.value}`],
+    textKey: 'home.slogan.enterpriseButton',
+    action: toDeployment,
   },
 ])
 

@@ -19,6 +19,7 @@ defineProps<{
 }>()
 
 defineEmits<{
+  (e: 'download'): void
   (e: 'downloadJetbrainsPrimary'): void
   (e: 'downloadJetbrainsSecondary'): void
   (e: 'copyCliCommand'): void
@@ -28,6 +29,10 @@ defineEmits<{
 const { t } = useI18n()
 const message = useMessage()
 const copiedIndex = ref<number | null>(null)
+
+const isOnlyContent = (step: StepItem) => {
+  return !!step.content && !step.title && !step.cliContent && !step.tips && !step.imgUrl
+}
 
 const handleCopyCommand = async (cmd: string, index: number) => {
   try {
@@ -71,22 +76,19 @@ const handleCopyCommand = async (cmd: string, index: number) => {
         }"
       >
         <div v-if="activeTab !== 'cli' || isPermissionSteps || step.tips" class="step-left mr-10">
-          <div class="step-title" v-if="activeTab !== 'cli' || isPermissionSteps">
+          <div class="step-title" v-if="(activeTab !== 'cli' || isPermissionSteps) && step.title">
             {{ step.title }}
           </div>
-          <div class="step-content">
+          <div class="step-content" :class="{ 'content-only': isOnlyContent(step) }">
             <!-- VSCode: 普通文本内容 -->
             <template v-if="activeTab === 'vscode'">
-              {{ step.content }}
-            </template>
-
-            <!-- JetBrains: 自定义下载链接 -->
-            <template v-else-if="activeTab === 'jetbrains'">
-              <div class="jetbrains-content">
-                <p class="content-text">{{ $t('download.jetbrainsStep1Content1') }}</p>
+              <div class="vscode-content">
+                <p class="content-text">{{ step.content }}</p>
+                <!-- 步骤1：添加手动下载链接 -->
                 <div
-                  class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
-                  @click="$emit('downloadJetbrainsPrimary')"
+                  v-if="index === 0"
+                  class="flex cursor-pointer mt-2 mb-2 download-link"
+                  @click="$emit('download')"
                 >
                   <span style="color: #4083e8">{{ $t('download.manualPluginDownload') }}</span>
                   <svg
@@ -104,27 +106,61 @@ const handleCopyCommand = async (cmd: string, index: number) => {
                     </g>
                   </svg>
                 </div>
-                <div
-                  class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
-                  @click="$emit('downloadJetbrainsSecondary')"
-                >
-                  <span style="color: #4083e8">{{ $t('download.manualPluginDownload2') }}</span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                    viewBox="0 0 20 20"
-                    width="18"
-                    color="#fff"
+              </div>
+            </template>
+
+            <!-- JetBrains: 自定义下载链接 -->
+            <template v-else-if="activeTab === 'jetbrains'">
+              <div class="jetbrains-content">
+                <template v-if="step.imgUrl">
+                  <p class="content-text">{{ $t('download.jetbrainsStep1Content1') }}</p>
+                  <div
+                    class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
+                    @click="$emit('downloadJetbrainsPrimary')"
                   >
-                    <g fill="none">
-                      <path
-                        d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-                        fill="currentColor"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-                <p class="content-text">{{ $t('download.jetbrainsStep1Content2') }}</p>
+                    <span style="color: #4083e8">{{ $t('download.manualPluginDownload') }}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 20 20"
+                      width="18"
+                      color="#fff"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg>
+                  </div>
+                  <div
+                    class="flex cursor-pointer ml-4 mt-2 mb-2 download-link"
+                    @click="$emit('downloadJetbrainsSecondary')"
+                  >
+                    <span style="color: #4083e8">{{ $t('download.manualPluginDownload2') }}</span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      viewBox="0 0 20 20"
+                      width="18"
+                      color="#fff"
+                    >
+                      <g fill="none">
+                        <path
+                          d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
+                          fill="currentColor"
+                        ></path>
+                      </g>
+                    </svg>
+                  </div>
+                  <p class="content-text">{{ $t('download.jetbrainsStep1Content2') }}</p>
+                </template>
+                <template v-else>
+                  <div class="vscode-content">
+                    <p class="content-text">{{ step.content }}</p>
+                  </div>
+                </template>
               </div>
             </template>
 
@@ -373,6 +409,11 @@ const handleCopyCommand = async (cmd: string, index: number) => {
   line-height: 20px;
   color: #a1a7b3;
   max-width: 400px;
+
+  &.content-only {
+    max-width: none;
+    margin-top: 0;
+  }
 
   @media (max-width: 1024px) {
     max-width: 100%;
