@@ -17,7 +17,7 @@ defineOptions({
   name: 'DownloadContent',
 })
 
-const props = defineProps<{
+defineProps<{
   activeTab: TabType
   headerIcon: string
   headerTitle: string
@@ -53,16 +53,23 @@ const handleCopyCommand = (command: string) => {
     <div v-if="activeTab !== 'cli'" class="content-header flex flex-wrap">
       <img class="download-icon w-6 h-6 mr-1" :src="headerIcon" alt="CoStrict Download" />
       <span class="text-white mr-4">{{ headerTitle }}</span>
-      <div class="flex cursor-pointer" @click="handleDownload">
-        <span style="color: #4083e8">{{ t('download.manualPluginDownload') }}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 20 20"
-          width="18" color="#fff">
-          <g fill="none">
-            <path
-              d="M15.245 16.498a.75.75 0 0 1 .101 1.493l-.101.007H4.75a.75.75 0 0 1-.102-1.493l.102-.007h10.495zM10.004 2a.75.75 0 0 1 .743.648l.007.102l-.001 10.193l2.966-2.97a.75.75 0 0 1 .977-.074l.084.072a.75.75 0 0 1 .073.977l-.072.084l-4.243 4.25l-.07.063l-.092.059l-.036.021l-.091.038l-.12.03l-.07.008l-.06.002a.726.726 0 0 1-.15-.016l-.082-.023a.735.735 0 0 1-.257-.146l-4.29-4.285a.75.75 0 0 1 .976-1.134l.084.073l2.973 2.967V2.75a.75.75 0 0 1 .75-.75z"
-              fill="currentColor"></path>
-          </g>
-        </svg>
+      <!-- VSCode: IDE 下载链接 -->
+      <div v-if="activeTab === 'vscode'" class="ide-download-wrapper">
+        <span>(</span>
+        <span class="link-prefix">{{ t('download.vscodeDownloadPrefix') }}</span>
+        <a href="https://code.visualstudio.com/Download" target="_blank" class="ide-download-link">
+          <span class="link-text">{{ t('download.ideDownloadLinkText') }}</span>
+        </a>
+        <span>)</span>
+      </div>
+      <!-- JetBrains: IDE 下载链接 -->
+      <div v-if="activeTab === 'jetbrains'" class="ide-download-wrapper">
+        <span>(</span>
+        <span class="link-prefix">{{ t('download.jetbrainsDownloadPrefix') }}</span>
+        <a href="https://www.jetbrains.com.cn/" target="_blank" class="ide-download-link">
+          <span class="link-text">{{ t('download.ideDownloadLinkText') }}</span>
+        </a>
+        <span>)</span>
       </div>
     </div>
 
@@ -108,7 +115,8 @@ const handleCopyCommand = (command: string) => {
             <li><strong>Linux：</strong>{{ cliEnvRequirements?.osLinux }}</li>
             <li><strong>macOS：</strong>{{ cliEnvRequirements?.osMacOS }}</li>
             <li>
-              <strong>{{ t('download.cliStep1OsContainerLabel') }}</strong>{{ cliEnvRequirements?.osContainer }}
+              <strong>{{ t('download.cliStep1OsContainerLabel') }}</strong
+              >{{ cliEnvRequirements?.osContainer }}
             </li>
           </ul>
         </div>
@@ -134,10 +142,14 @@ const handleCopyCommand = (command: string) => {
     <div v-else class="manual-methods download-methods">
       <p class="tips">{{ t('download.installSteps') }}</p>
       <div class="download-methods">
-        <StepTimeline :steps="steps" :active-tab="activeTab"
+        <StepTimeline
+          :steps="steps"
+          :active-tab="activeTab"
+          @download="handleDownload"
           @download-jetbrains-primary="$emit('downloadJetbrainsPrimary')"
           @download-jetbrains-secondary="$emit('downloadJetbrainsSecondary')"
-          @copy-cli-command="() => $emit('copyCliCommand', '')" />
+          @copy-cli-command="() => $emit('copyCliCommand', '')"
+        />
       </div>
     </div>
   </div>
@@ -248,7 +260,38 @@ const handleCopyCommand = (command: string) => {
   }
 }
 
-// CLI 环境要求样式
+// IDE 下载链接样式（在 header 中使用）
+.ide-download-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  font-size: 14px;
+  color: #a1a7b3;
+
+  .link-prefix {
+    color: #a1a7b3;
+  }
+
+  svg {
+    color: #fff;
+    margin-left: 4px;
+  }
+}
+
+.ide-download-link {
+  color: #4083e8;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  .link-text {
+    color: #4083e8;
+  }
+}
+
 .cli-env-section {
   margin-top: 48px;
   margin-bottom: 32px;

@@ -63,10 +63,6 @@ const handleTabSelect = (tab: TabType) => {
   activeTab.value = tab
 }
 
-const handleInstallMethodChange = (method: InstallMethod) => {
-  installMethod.value = method
-}
-
 const handlePlatformChange = (platform: Platform) => {
   activePlatform.value = platform
 }

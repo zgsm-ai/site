@@ -15,9 +15,10 @@
   "home": {
     "slogan": {
       "title": "CoStrict",
-      "subTitle": "企业严肃开发的AI智能伙伴",
+      "subTitle": "企业严肃开发的 AI 编程平台",
+      "description": "从个人开发者到企业研发团队，统一的 AI Coding 工作流",
       "enterpriseButton": "企业私有化部署",
-      "personalButton": "个人免费使用",
+      "personalButton": "立即下载",
       "ossButton": "开源免费",
       "zhugeCode": "({iTag}诸葛神码)",
       "original": "原"
@@ -79,9 +80,10 @@
       "enterprisePrivateDeployment": "企业方案查看 >"
     },
     "ideSupport": {
-      "title": "多编程语言支持，VSCode编辑器支持 ",
+      "title": "多编程语言支持，无缝融入你的开发工作流",
       "SupportedInVSCode": "Visual Studio Code 已支持",
       "SupportedInJetBrains": "JetBrains IDEs 已支持",
+      "SupportedInCLI": "CLI 命令行 已支持",
       "allLanguages": "全部开发语言"
     }
   },
@@ -108,17 +110,24 @@
     "installSteps": "安装步骤如下：",
     "step1": "步骤1",
     "step2": "步骤2",
+    "step3": "步骤3",
     "step1Title": "打开插件市场, 搜索\"CoStrict\"并安装",
     "step1Content": "已安装 Visual Studio Code 的情况下，左侧导航上点击扩展，搜索\"CoStrict\"后点击安装",
-    "step2Title": "登录 CoStrict",
-    "step2Content": "重启 Visual Studio Code 后，单击 CoStrict 图标，使用默认Base Url 点击\"登录 CoStrict\" 若为本地化部署则需要填写Url 后再点击登录按钮",
-    "step2Tips": "Url填写若不清楚请联系公司管理员",
+    "step2Content": "重启 Visual Studio Code，重启成功后登录帐号，即可体验 AI 助力编码。",
+    "step3Title": "登录 CoStrict",
+    "step3Content": "重启 Visual Studio Code 后，单击 CoStrict 图标，使用默认Base Url 点击\"登录 CoStrict\" 若为本地化部署则需要填写Url 后再点击登录按钮",
+    "step3Tips": "Url填写若不清楚请联系公司管理员",
     "jetbrainsStep1Title": "下载离线包安装",
     "jetbrainsStep1Content1": "1. 下载 JetBrains IDEs 的 zip 安装包；",
     "jetbrainsStep1Content2": "2. 点击导航-插件，点击设置图标，下拉菜单中单击从本地安装插件，选择下载的 zip 文件后安装",
+    "jetbrainsStep2Title": "启用插件",
+    "jetbrainsStep2Content": "重启 IntelliJ IDE，重启成功后登录帐号，即可体验 AI 助力编码。",
     "manualPluginDownload": "手动获取插件",
     "manualPluginDownload2": "插件下载速度慢？切换至更快的下载源",
     "jetbrainsSupportIdes": "支持的 JetBrains 系列 IDEs：",
+    "vscodeDownloadPrefix": "还没有 VSCode？",
+    "jetbrainsDownloadPrefix": "还没有 JetBrains IDE？",
+    "ideDownloadLinkText": "前往下载",
     "cliTitle": "CLI",
     "cliStep1Title": "环境要求",
     "cliStep1OsTitle": "操作系统",

@@ -112,10 +112,13 @@ export function useDownloadData(
           content: t('download.step1Content'),
         },
         {
-          imgUrl: currentImages.value[1] || '',
-          title: t('download.step2Title'),
           content: t('download.step2Content'),
-          tips: t('download.step2Tips'),
+        },
+        {
+          imgUrl: currentImages.value[1] || '',
+          title: t('download.step3Title'),
+          content: t('download.step3Content'),
+          tips: t('download.step3Tips'),
         },
       ]
     }
@@ -126,6 +129,9 @@ export function useDownloadData(
           imgUrl: jetbrainsContent,
           title: t('download.jetbrainsStep1Title'),
           content: `${t('download.jetbrainsStep1Content1')} ${t('download.jetbrainsStep1Content2')}`,
+        },
+        {
+          content: t('download.jetbrainsStep2Content'),
         },
       ]
     }
