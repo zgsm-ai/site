@@ -29,8 +29,6 @@ import cliIcon from '@/assets/download/cli_icon.webp'
 import ZhDownloadStep1 from '@/assets/download/zh/download_step1.webp'
 import ZhDownloadStep2 from '@/assets/download/zh/download_step2.webp'
 import EnDownloadStep1 from '@/assets/download/en/download_step1.webp'
-import ZhCliInstall from '@/assets/download/zh/cli_install.webp'
-import EnCliInstall from '@/assets/download/en/cli_install.webp'
 import EnDownloadStep2 from '@/assets/download/en/download_step2.webp'
 
 export function useDownloadData(
@@ -57,10 +55,6 @@ export function useDownloadData(
     vscode: {
       zh: [ZhDownloadStep1, ZhDownloadStep2],
       en: [EnDownloadStep1, EnDownloadStep2],
-    },
-    cli: {
-      zh: [ZhCliInstall],
-      en: [EnCliInstall],
     },
   }
 

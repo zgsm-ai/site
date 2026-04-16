@@ -13,6 +13,7 @@ export interface PricingPlan {
   buttonText: string
   buttonType: 'download' | 'purchase'
   showTrafficLabel?: boolean
+  totalQuota?: string
   features: Feature[]
   clickEvent: () => void
 }

@@ -220,6 +220,7 @@
         "title": "Personal Free Edition",
         "description": "Officially gifted Credits, validity period depends on situation",
         "buttonText": "Download and Use",
+        "totalQuota": "200 Credits for Free",
         "features": {
           "newUserCredits": "New users get 400 Credits (approximately 400 requests)",
           "freeCodeCompletion": "Free code completion with limited usage",
@@ -231,6 +232,7 @@
         "title": "Traffic Package 1",
         "description": "Deduct Credits based on actual usage, valid for 1 month",
         "buttonText": "Buy Now",
+        "totalQuota": "1000 Credits",
         "features": {
           "credits": "1000 Credits (approximately 1000 requests)",
           "freeCodeCompletion": "Free code completion with limited usage",
@@ -242,6 +244,7 @@
         "title": "Traffic Package 2",
         "description": "Deduct Credits based on actual usage, valid for 1 month",
         "buttonText": "Buy Now",
+        "totalQuota": "4200 Credits",
         "features": {
           "credits": "4000+ additional 200 Credits (equals 4200 requests)",
           "freeCodeCompletion": "Free code completion with unlimited usage",
@@ -253,11 +256,13 @@
         "title": "Traffic Package 3",
         "description": "Deduct Credits based on actual usage, valid for 1 month",
         "buttonText": "Buy Now",
+        "totalQuota": "10800 Credits",
         "features": {
           "credits": "10000+ additional 800 Credits (equals 10800 requests)",
           "freeCodeCompletion": "Free code completion with unlimited usage",
           "freeCodeReview": "Free code review with unlimited usage",
-          "advancedModels": "Advanced models available"
+          "advancedModels": "Advanced models available",
+          "moreStableService": "More stable advanced model service"
         }
       }
     },
@@ -266,6 +271,7 @@
     },
     "firstRechargeDiscount": "First recharge discount",
     "learnMore": "Learn more about package details",
-    "billingDescription": "Package & Billing Description"
+    "billingDescription": "Package & Billing Description",
+    "activityLink": "Participate in activities to get more Credits"
   }
 }
