@@ -1,6 +1,6 @@
 <template>
   <div class="w-full flex flex-col items-center mt-9 sm:mt-18 md:mt-26 lg:mt-36 xl:mt-45">
-    <div class="icon-lock w-full"></div>
+    <img src="@/assets/enterprise/enterprise_lock.webp" class="object-contain max-h-[400px] scale-200" alt="Enterprise Lock" />
     <PageTitle :title="t('home.enterprise.title')" :subtitle="t('home.enterprise.subTitle')" />
     <div
       class="scroll-animation-wrapper wrapper icon-check mt-6 sm:mt-8 xl:mt-10 h-10 md:h-12 lg:h-15 px-3"
@@ -69,17 +69,6 @@ const toDeployment = () => {
 }
 </script>
 <style lang="less" scoped>
-.icon-lock {
-  background-image: url('@/assets/enterprise/enterprise_lock.webp');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  height: 420px;
-
-  @media (max-width: 1024px) {
-    height: 224px;
-  }
-}
 
 .icon-check {
   // width: 226px;

@@ -10,11 +10,12 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
       buttonText: t('pricing.plans.free.buttonText'),
       buttonType: 'download',
       showTrafficLabel: false,
+      totalQuota: t('pricing.plans.free.totalQuota'),
       features: [
-        {
-          text: t('pricing.plans.free.features.newUserCredits'),
-          available: true,
-        },
+        // {
+        //   text: t('pricing.plans.free.features.newUserCredits'),
+        //   available: true,
+        // },
         {
           text: t('pricing.plans.free.features.freeCodeCompletion'),
           available: true,
@@ -40,6 +41,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
       buttonText: t('pricing.plans.package1.buttonText'),
       buttonType: 'purchase',
       showTrafficLabel: true,
+      totalQuota: t('pricing.plans.package1.totalQuota'),
       features: [
         {
           text: t('pricing.plans.package1.features.credits'),
@@ -70,6 +72,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
       buttonText: t('pricing.plans.package2.buttonText'),
       buttonType: 'purchase',
       showTrafficLabel: true,
+      totalQuota: t('pricing.plans.package2.totalQuota'),
       features: [
         {
           text: t('pricing.plans.package2.features.credits'),
@@ -100,6 +103,7 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
       buttonText: t('pricing.plans.package3.buttonText'),
       buttonType: 'purchase',
       showTrafficLabel: true,
+      totalQuota: t('pricing.plans.package3.totalQuota'),
       features: [
         {
           text: t('pricing.plans.package3.features.credits'),
@@ -115,6 +119,10 @@ export function createPricingPlans(t: (key: string) => string): PricingPlan[] {
         },
         {
           text: t('pricing.plans.package3.features.advancedModels'),
+          available: true,
+        },
+        {
+          text: t('pricing.plans.package3.features.moreStableService'),
           available: true,
         },
       ],

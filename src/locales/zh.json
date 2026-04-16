@@ -15,7 +15,7 @@
   "home": {
     "slogan": {
       "title": "CoStrict",
-      "subTitle": "企业严肃开发的 AI 编程平台",
+      "subTitle": "企业严肃开发的AI编程平台",
       "description": "从个人开发者到企业研发团队，统一的 AI Coding 工作流",
       "enterpriseButton": "企业私有化部署",
       "personalButton": "立即下载",
@@ -218,9 +218,10 @@
     "tips": " 部分模型夜间（每日 20:00 - 次日 09:00）和周末全天半价，可以和auto模式九折叠加",
     "plans": {
       "free": {
-        "title": "个人免费版",
+        "title": "免费版",
         "description": "官方赠送的 Credit，有效期视情况而定",
         "buttonText": "下载使用",
+        "totalQuota": "免费额度200 Credits起",
         "features": {
           "newUserCredits": "新用户获赠 400 Credits（约等于400次请求）",
           "freeCodeCompletion": "免费代码补全，有限使用次数",
@@ -229,9 +230,10 @@
         }
       },
       "package1": {
-        "title": "流量套餐1",
+        "title": "探索版",
         "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
+        "totalQuota": "1000 Credits",
         "features": {
           "credits": "1000 Credits（约等于1000次请求）",
           "freeCodeCompletion": "免费代码补全，有限使用",
@@ -240,9 +242,10 @@
         }
       },
       "package2": {
-        "title": "流量套餐2",
+        "title": "专业版",
         "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
+        "totalQuota": "4200 Credits",
         "features": {
           "credits": "4000+额外赠送 200Credits（约等于4200次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
@@ -251,14 +254,16 @@
         }
       },
       "package3": {
-        "title": "流量套餐3",
+        "title": "旗舰版",
         "description": "按实际使用用量扣除 Credit，有效期1个月",
         "buttonText": "立即购买",
+        "totalQuota": "10800 Credits",
         "features": {
           "credits": "10000+额外赠送 800Credits（约等于10800次请求）",
           "freeCodeCompletion": "免费代码补全，无限使用",
           "freeCodeReview": "免费代码审查，无限使用",
-          "advancedModels": "高级模型可用"
+          "advancedModels": "高级模型可用",
+          "moreStableService": "更稳定的高级模型服务"
         }
       }
     },
@@ -267,7 +272,8 @@
     },
     "firstRechargeDiscount": "首次充值优惠",
     "learnMore": "了解更多套餐详情可查看",
-    "billingDescription": "套餐&计费说明"
+    "billingDescription": "套餐&计费说明",
+    "activityLink": "参与活动可获取更多Credits"
   },
   "blog": {
     "sidebarTitle": "栏目分类",

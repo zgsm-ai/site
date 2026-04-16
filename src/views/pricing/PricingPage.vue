@@ -63,8 +63,11 @@
           <div class="content-version__item-desc mt-2.5 text-sm text-[#EFEFEF]">
             {{ plan.description }}
           </div>
+          <div v-if="plan.totalQuota" class="content-version__item-quota mt-2 text-sm font-medium">
+            <span class="quota-value">{{ plan.totalQuota }}</span>
+          </div>
           <div
-            class="content-version__item-btn h-10 text-center leading-10 mt-6 rounded-sm"
+            class="content-version__item-btn h-10 text-center leading-10 mt-5 rounded-sm"
             :class="{
               'btn-purchase': plan.buttonType === 'purchase',
               'btn-download': plan.buttonType !== 'purchase',
@@ -89,6 +92,14 @@
               <p class="ml-2">{{ feature.text }}</p>
             </li>
           </ul>
+          <div v-if="index === 0" class="content-version__item-activity mt-4">
+            <span
+              class="text-xs text-[#2A7FFF] cursor-pointer hover:underline"
+              @click="toOperation"
+            >
+              {{ t('pricing.activityLink') }}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -104,10 +115,12 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { useHead } from '@unhead/vue'
+import { useRouter } from 'vue-router'
 import { createPricingPlans } from './const'
 import { computed } from 'vue'
 
 const { t } = useI18n()
+const router = useRouter()
 
 // 使用国际化函数创建价格套餐和指南步骤
 const pricingPlans = computed(() => createPricingPlans(t))
@@ -142,6 +155,10 @@ useHead({
 
 const toDetail = () => {
   window.open('https://docs.costrict.ai/billing/purchase/')
+}
+
+const toOperation = () => {
+  router.push('/operation')
 }
 </script>
 
@@ -237,6 +254,13 @@ const toDetail = () => {
 
         .label-text {
           background: linear-gradient(185deg, #005eff 35%, #00ffb7 93%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .quota-value {
+          background: linear-gradient(91deg, #00ffb7 0%, #ffffff 101%, #c5dbff 150%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
