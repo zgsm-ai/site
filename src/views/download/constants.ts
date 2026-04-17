@@ -28,5 +28,5 @@ export const JETBRAINS_IDES = [
 export const DOWNLOAD_URLS = {
   vscode: 'https://costrict.ai/plugin/download/',
   jetbrainsPrimary: 'https://costrict.ai/plugin/jetbrain/',
-  jetbrainsSecondary: 'https://zgsm.sangfor.com/costrict/jebrains-plugin/index.html',
+  jetbrainsSecondary: 'https://zgsm.sangfor.com/costrict-static/jetbrains-plugin',
 } as const
