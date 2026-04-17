@@ -105,7 +105,7 @@
   "download": {
     "title": "CoStrict",
     "desc": "CoStrict is an open source and practical AI programmer that implements functions such as code completion, intelligent Q&A, code review, code optimization, single test writing, and comment generation based on the open source big model.",
-    "vscodeTitle": "Install CoStrict Code in Visual Studio Code, requiring the latest version or version 1.86.3 or above",
+    "vscodeTitle": "Install CoStrict Code in Visual Studio Code, requiring the latest version or version 1.93.0 or above",
     "jetbrainsTitle": "For best compatibility, JetBrains IDE version 2023.3 or higher is required",
     "installSteps": "The installation steps are as follows:",
     "step1": "Step 1",
