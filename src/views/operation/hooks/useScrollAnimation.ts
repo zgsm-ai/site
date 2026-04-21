@@ -1,0 +1,33 @@
+import { onMounted, onUnmounted, ref, type Ref } from 'vue'
+
+/**
+ * 管理多个卡片元素的滚动淡入动效
+ * 当元素进入视口时，为其添加 `is-visible` class 触发 CSS 动画
+ */
+export const useScrollAnimation = (count: number): Ref<HTMLElement | null>[] => {
+  const refs = Array.from({ length: count }, () => ref<HTMLElement | null>(null))
+
+  let observer: IntersectionObserver | null = null
+
+  onMounted(() => {
+    observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer?.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    refs.forEach((r) => {
+      if (r.value) observer!.observe(r.value)
+    })
+  })
+
+  onUnmounted(() => observer?.disconnect())
+
+  return refs
+}
