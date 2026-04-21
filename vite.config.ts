@@ -8,7 +8,7 @@ import compression from 'vite-plugin-compression'
 // https://vite.dev/config/
 export default defineConfig({
   server: {
-    port: 9001,
+    port: 9002,
   },
   plugins: [
     vue(),
