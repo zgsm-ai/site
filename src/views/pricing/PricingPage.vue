@@ -59,12 +59,10 @@
             >
               ￥{{ plan.originalPrice }}
             </span>
+            <span v-if="plan.totalQuota" class="quota-value ml-auto text-base font-medium self-end mb-1">{{ plan.totalQuota }}</span>
           </div>
           <div class="content-version__item-desc mt-2.5 text-sm text-[#EFEFEF]">
             {{ plan.description }}
-          </div>
-          <div v-if="plan.totalQuota" class="content-version__item-quota mt-2 text-sm font-medium">
-            <span class="quota-value">{{ plan.totalQuota }}</span>
           </div>
           <div
             class="content-version__item-btn h-10 text-center leading-10 mt-5 rounded-sm"
