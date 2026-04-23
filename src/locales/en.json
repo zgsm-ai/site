@@ -254,7 +254,7 @@
         "title": "Personal Free Edition",
         "description": "Officially gifted Credits, validity period depends on situation",
         "buttonText": "Download and Use",
-        "totalQuota": "200 Credits for Free",
+        "totalQuota": "500 Credits for Free",
         "features": {
           "newUserCredits": "New users get 400 Credits (approximately 400 requests)",
           "freeCodeCompletion": "Free code completion with limited usage",

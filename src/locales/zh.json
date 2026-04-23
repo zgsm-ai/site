@@ -255,7 +255,7 @@
         "title": "免费版",
         "description": "官方赠送的 Credit，有效期视情况而定",
         "buttonText": "下载使用",
-        "totalQuota": "免费额度200 Credits起",
+        "totalQuota": "免费额度 500 Credits起",
         "features": {
           "newUserCredits": "新用户获赠 400 Credits（约等于400次请求）",
           "freeCodeCompletion": "免费代码补全，有限使用次数",
@@ -304,7 +304,7 @@
     "tag": {
       "trafficPackage": "流量包"
     },
-    "firstRechargeDiscount": "首次充值优惠",
+    "firstRechargeDiscount": "首充优惠",
     "learnMore": "了解更多套餐详情可查看",
     "billingDescription": "套餐&计费说明",
     "activityLink": "参与活动可获取更多Credits"
