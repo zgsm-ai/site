@@ -5,6 +5,33 @@ import type { BlogArticle } from './blogData'
 export type { BlogArticle, BlogCategory } from './blogData'
 export { tagClassMap, tagNameMap, coverImageMap, blogImageMap, blogVideoMap } from './blogData'
 
+function calculateReadTime(content: string): number {
+  if (!content) return 3
+  let text = content
+  // Remove markdown images
+  text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, '')
+  // Remove markdown links, keep link text
+  text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+  // Remove code blocks
+  text = text.replace(/```[\s\S]*?```/g, '')
+  // Remove inline code
+  text = text.replace(/`[^`]+`/g, '')
+  // Remove markdown syntax chars
+  text = text.replace(/[#*|>\-_=\[\]!`]/g, '')
+  // Remove whitespace
+  text = text.replace(/\s+/g, '')
+  const charCount = text.length
+  // ~1000 chars = 3 minutes, round up, minimum 3 minutes
+  return Math.max(3, Math.ceil((charCount / 1000) * 3))
+}
+
+const articlesWithReadTime = computed<BlogArticle[]>(() =>
+  articles.map((article) => ({
+    ...article,
+    readTime: article.readTime ?? calculateReadTime(article.content || article.excerpt || ''),
+  })),
+)
+
 export function useBlogData() {
   const selectedCategory = ref<string>('all')
   const currentPage = ref<number>(1)
@@ -12,9 +39,11 @@ export function useBlogData() {
 
   const filteredArticles = computed(() => {
     if (selectedCategory.value === 'all') {
-      return articles
+      return articlesWithReadTime.value
     }
-    return articles.filter((article) => article.category === selectedCategory.value)
+    return articlesWithReadTime.value.filter(
+      (article) => article.category === selectedCategory.value,
+    )
   })
 
   const totalPages = computed(() => {
@@ -39,9 +68,9 @@ export function useBlogData() {
 
   const getCategoryCount = (categoryId: string): number => {
     if (categoryId === 'all') {
-      return articles.length
+      return articlesWithReadTime.value.length
     }
-    return articles.filter((a) => a.category === categoryId).length
+    return articlesWithReadTime.value.filter((a) => a.category === categoryId).length
   }
 
   const changeCategory = (categoryId: string): void => {
@@ -64,17 +93,19 @@ export function useBlogData() {
   }
 
   const getArticleById = (id: number): BlogArticle | undefined => {
-    return articles.find((a) => a.id === id)
+    return articlesWithReadTime.value.find((a) => a.id === id)
   }
 
   const getRelatedArticles = (id: number, limit = 3): BlogArticle[] => {
-    const current = articles.find((a) => a.id === id)
+    const current = articlesWithReadTime.value.find((a) => a.id === id)
     if (!current) return []
-    return articles.filter((a) => a.id !== id && a.category === current.category).slice(0, limit)
+    return articlesWithReadTime.value
+      .filter((a) => a.id !== id && a.category === current.category)
+      .slice(0, limit)
   }
 
   return {
-    articles,
+    articles: articlesWithReadTime,
     categories,
     currentPage,
     selectedCategory,
