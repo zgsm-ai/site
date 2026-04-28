@@ -95,7 +95,7 @@ const categoryCounts = computed(() => {
 })
 
 const featuredArticle = computed(() => {
-  return articles.find((a) => a.id === 1) ?? null
+  return articles.value.find((a) => a.id === 1) ?? null
 })
 </script>
 
@@ -439,6 +439,24 @@ const featuredArticle = computed(() => {
 .featured-readtime {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.45);
+}
+
+.card-readmore {
+  font-size: 12px;
+  color: #197dff;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.15s ease;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.featured-card:hover .card-readmore {
+  color: #4d9fff;
 }
 
 .cards-grid {
