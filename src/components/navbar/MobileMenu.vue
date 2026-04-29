@@ -27,13 +27,13 @@
         </div>
 
         <!-- 语言切换选项 -->
-        <div v-if="!isPricingPage" class="mobile-menu-item lang-item" @click="toggleLangMenu">
+        <div v-if="!isPricingPage && !isCcfCompetitionPage" class="mobile-menu-item lang-item" @click="toggleLangMenu">
           {{ currentLangLabel }}
           <span class="lang-arrow" :class="{ 'lang-arrow-up': isLangMenuOpen }">▼</span>
         </div>
 
         <!-- 语言切换子菜单 -->
-        <div v-if="isLangMenuOpen && !isPricingPage" class="mobile-lang-submenu">
+        <div v-if="isLangMenuOpen && !isPricingPage && !isCcfCompetitionPage" class="mobile-lang-submenu">
           <div
             v-for="option in languageOptions"
             :key="option.key"
@@ -74,6 +74,7 @@ interface Props {
   isMenuOpen: boolean
   isLangMenuOpen: boolean
   isPricingPage: boolean
+  isCcfCompetitionPage: boolean
 }
 
 defineProps<Props>()
@@ -113,6 +114,9 @@ const menuOptions = computed<MenuOption[]>(() => [
 const isActive = (key: string) => {
   if (key === 'blog') {
     return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
+  }
+  if (key === 'operation') {
+    return currentRouteName.value === 'operation' || currentRouteName.value === 'ccfCompetition'
   }
   return currentRouteName.value === key
 }

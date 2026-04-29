@@ -44,6 +44,9 @@ const isActive = (key: string) => {
   if (key === 'blog') {
     return currentRouteName.value === 'blog' || currentRouteName.value === 'blogDetail'
   }
+  if (key === 'operation') {
+    return currentRouteName.value === 'operation' || currentRouteName.value === 'ccfCompetition'
+  }
   return currentRouteName.value === key
 }
 
