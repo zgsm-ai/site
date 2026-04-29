@@ -10,6 +10,9 @@ export const CARD3_URL = 'https://github.com/zgsm-ai/costrict'
 /** 历史活动 1 - 校园挑战赛：详情链接 */
 export const HISTORY1_URL = 'https://competition.costrict.ai/'
 
+/** CCF × CoStrict AI 原生创新大赛：内部路由 */
+export const CCF_COMPETITION_PATH = '/operation/ccf-competition'
+
 /** Card 2 引导步骤序号列表 */
 export const CARD2_HINT_STEPS = [1, 2, 3] as const
 
@@ -28,7 +31,11 @@ export const CONTRIB_STAR_CLASS = 'contrib-star'
 export const CONTRIB_ACTION_NORMAL_CLASS = 'text-white/70'
 
 /** 贡献行 credits 列基础 class 列表 */
-export const CONTRIB_CREDITS_BASE_CLASSES = ['font-bold', 'text-[#00ffb7]', 'whitespace-nowrap'] as const
+export const CONTRIB_CREDITS_BASE_CLASSES = [
+  'font-bold',
+  'text-[#00ffb7]',
+  'whitespace-nowrap',
+] as const
 
 /** 贡献行 credits 列高亮发光 class */
 export const CONTRIB_CREDITS_GLOW_CLASS = 'credits-glow'

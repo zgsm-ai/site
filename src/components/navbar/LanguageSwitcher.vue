@@ -1,6 +1,6 @@
 <template>
   <n-popover
-    v-if="!isPricingPage"
+    v-if="!isPricingPage && !isCcfCompetitionPage"
     trigger="click"
     :show="isOpen"
     @update:show="$emit('update:isOpen', $event)"
@@ -38,6 +38,7 @@ import { setStoredLanguage } from '@/utils/language'
 interface Props {
   isOpen: boolean
   isPricingPage: boolean
+  isCcfCompetitionPage: boolean
 }
 
 defineProps<Props>()

@@ -23,7 +23,15 @@ export const useScrollAnimation = (count: number): Ref<HTMLElement | null>[] => 
     )
 
     refs.forEach((r) => {
-      if (r.value) observer!.observe(r.value)
+      if (r.value) {
+        observer!.observe(r.value)
+        // 立即检查元素是否已在视口内（某些场景下 IntersectionObserver 初始回调可能不触发）
+        const rect = r.value.getBoundingClientRect()
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          r.value.classList.add('is-visible')
+          observer!.unobserve(r.value)
+        }
+      }
     })
   })
 

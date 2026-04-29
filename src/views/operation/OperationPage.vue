@@ -5,11 +5,13 @@ import { useHead } from '@unhead/vue'
 import { NDataTable } from 'naive-ui'
 import type { DataTableColumns } from 'naive-ui'
 import { useScrollAnimation } from './hooks/useScrollAnimation'
+import CcfLogo from '@/assets/home/ccf_logo.webp'
 import {
   CARD1_URL,
   CARD2_URL,
   CARD3_URL,
   HISTORY1_URL,
+  CCF_COMPETITION_PATH,
   CARD2_HINT_STEPS,
   CONTRIB_ROW_HIGHLIGHT_CLASS,
   CONTRIB_ACTION_HIGHLIGHT_CLASS,
@@ -22,7 +24,9 @@ import {
 
 defineOptions({ name: 'OperationPage' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+
+const isEnglish = computed(() => locale.value === 'en')
 
 useHead({
   title: 'CoStrict 运营活动 - 免费领取 Credits，加速你的 AI 编程体验',
@@ -89,12 +93,20 @@ const rowClassName = (row: ContribRow) =>
   row.highlight ? CONTRIB_ROW_HIGHLIGHT_CLASS : ''
 
 // Scroll fade-up animation
-const [card1Ref, card2Ref, card3Ref, history1Ref] = useScrollAnimation(4)
+const [card1Ref, card2Ref, card3Ref, card4Ref, history1Ref] = useScrollAnimation(5)
 </script>
 
 <template>
   <div class="min-h-screen pt-16 bg-black text-white text-sm leading-relaxed">
 
+    <!-- CCF 大赛浮动入口 -->
+    <router-link
+      v-if="!isEnglish"
+      :to="CCF_COMPETITION_PATH"
+      class="absolute right-0 top-[88px] z-[1000] block cursor-pointer md:right-[-15px] md:top-20 md:transition-transform md:duration-300 md:ease-in md:hover:-translate-x-[15px]"
+    >
+      <img :src="CcfLogo" alt="CCF 大赛" class="w-[120px] md:w-[198px] h-auto pointer-events-none select-none" />
+    </router-link>
     <!-- Active Activities -->
     <section class="max-w-[960px] mx-auto px-6 py-12 flex flex-col gap-4">
 
@@ -174,6 +186,21 @@ const [card1Ref, card2Ref, card3Ref, history1Ref] = useScrollAnimation(4)
           :row-class-name="rowClassName" :bordered="false" size="small" />
         <p class="text-xs text-white/50 mt-3 leading-relaxed">{{ t('operation.contribNote') }}</p>
       </div>
+
+      <!-- Card 4: CCF × CoStrict AI 原生创新大赛 -->
+      <div class="scroll-animation-wrapper card-base" ref="card4Ref">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+          <div class="flex items-center gap-2.5 min-w-0 flex-1">
+            <span
+              class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(0,102,255,0.2)] border border-[rgba(0,102,255,0.4)] text-[13px] font-bold text-[#197dff] shrink-0">4</span>
+            <div class="font-bold text-[18px] text-white/85 break-words">{{ t('operation.card4Title') }}</div>
+          </div>
+          <a :href="CCF_COMPETITION_PATH" class="cta-btn" target="_blank" rel="noopener">
+            {{ t('operation.card4Btn') }}<span class="arrow">></span>
+          </a>
+        </div>
+        <p class="text-sm text-white/70 leading-[1.7]">{{ t('operation.card4Desc') }}</p>
+      </div>
     </section>
 
     <!-- History Activities -->
@@ -183,8 +210,8 @@ const [card1Ref, card2Ref, card3Ref, history1Ref] = useScrollAnimation(4)
 
         <!-- History Card 1: 校园挑战赛 -->
         <div class="scroll-animation-wrapper card-history" ref="history1Ref">
-          <div class="flex items-center justify-between gap-3 flex-wrap mb-2">
-            <div class="flex items-center gap-2.5 shrink-0">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-2">
+            <div class="flex items-center gap-2.5 min-w-0 flex-1">
               <span
                 class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[rgba(255,255,255,0.06)] border border-[rgba(255,255,255,0.12)] text-[13px] font-bold text-white/50 shrink-0">1</span>
               <div class="flex items-center flex-wrap gap-2.5 text-[15px] font-semibold text-white/50">
@@ -392,6 +419,18 @@ const [card1Ref, card2Ref, card3Ref, history1Ref] = useScrollAnimation(4)
   // 覆盖 card-base 的 ::before 发光效果
   &::before {
     display: none;
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .4;
   }
 }
 

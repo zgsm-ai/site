@@ -7,6 +7,9 @@ const homeRoute = createPrefetchableRoute(() => import('@/views/home/index.vue')
 const downloadRoute = createPrefetchableRoute(() => import('@/views/download/index.vue'))
 const pricingRoute = createPrefetchableRoute(() => import('@/views/pricing/PricingPage.vue'))
 const operationRoute = createPrefetchableRoute(() => import('@/views/operation/OperationPage.vue'))
+const ccfCompetitionRoute = createPrefetchableRoute(
+  () => import('@/views/operation/CcfCompetition.vue'),
+)
 const resourceRoute = createPrefetchableRoute(() => import('@/views/resourceCalculator/index.vue'))
 const blogRoute = createPrefetchableRoute(() => import('@/views/blog/index.vue'))
 const blogDetailRoute = createPrefetchableRoute(() => import('@/views/blog/BlogDetail.vue'))
@@ -41,6 +44,14 @@ export const routes = [
     path: '/operation',
     name: 'operation',
     component: operationRoute.load,
+  },
+  {
+    path: '/operation/ccf-competition',
+    name: 'ccfCompetition',
+    component: ccfCompetitionRoute.load,
+    meta: {
+      localeVisible: ['zh'],
+    },
   },
   {
     path: '/pricing',
@@ -92,9 +103,14 @@ if (typeof window !== 'undefined') {
     const criticalRoutes = [
       downloadRoute.prefetch,
       operationRoute.prefetch,
-      // 仅在中文环境预加载价格页面和博客页面
+      // 仅在中文环境预加载价格页面、博客页面和CCF大赛页面
       ...(currentLocale === 'zh'
-        ? [pricingRoute.prefetch, blogRoute.prefetch, blogDetailRoute.prefetch]
+        ? [
+            pricingRoute.prefetch,
+            blogRoute.prefetch,
+            blogDetailRoute.prefetch,
+            ccfCompetitionRoute.prefetch,
+          ]
         : []),
     ]
 

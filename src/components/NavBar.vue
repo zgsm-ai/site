@@ -16,6 +16,7 @@
       :is-menu-open="isMenuOpen"
       :is-lang-menu-open="isLangMenuOpen"
       :is-pricing-page="isPricingPage || isBlogPage"
+      :is-ccf-competition-page="isCcfCompetitionPage"
       @toggle-menu="toggleMenu"
       @close-menu="closeMenu"
       @toggle-lang-menu="toggleLangMenu"
@@ -27,6 +28,7 @@
       <LanguageSwitcher
         v-model:is-open="isPopoverOpen"
         :is-pricing-page="isPricingPage || isBlogPage"
+        :is-ccf-competition-page="isCcfCompetitionPage"
       />
     </div>
   </div>
@@ -58,6 +60,7 @@ const isPricingPage = computed(() => router.currentRoute.value.name === 'pricing
 const isBlogPage = computed(() =>
   ['blog', 'blogDetail'].includes(router.currentRoute.value.name as string),
 )
+const isCcfCompetitionPage = computed(() => router.currentRoute.value.name === 'ccfCompetition')
 </script>
 
 <style lang="less" scoped>
