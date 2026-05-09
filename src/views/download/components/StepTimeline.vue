@@ -4,12 +4,11 @@ import { useI18n } from 'vue-i18n'
 import { NTimeline, NTimelineItem, useMessage } from 'naive-ui'
 import type { StepItem } from '../types'
 import InstallMethodTabs from './InstallMethodTabs.vue'
+import type { InstallMethod } from '../types'
 
 defineOptions({
   name: 'StepTimeline',
 })
-
-import type { InstallMethod } from '../types'
 
 defineProps<{
   steps: StepItem[]

@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
+import type { InstallMethod } from '../types'
 
 defineOptions({
   name: 'InstallMethodTabs',
 })
-
-export type InstallMethod = 'npm' | 'bash' | 'powershell'
 
 const props = defineProps<{
   activeMethod?: InstallMethod
