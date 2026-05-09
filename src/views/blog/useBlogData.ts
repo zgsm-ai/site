@@ -5,7 +5,7 @@ import type { BlogArticle, BlogCategory } from '@/services/blogApi'
 export type { BlogArticle, BlogCategory } from '@/services/blogApi'
 export { tagClassMap, tagNameMap } from '@/services/blogApi'
 
-function calculateReadTime(content: string): number {
+export function calculateReadTime(content: string): number {
   if (!content) return 3
   let text = content
   text = text.replace(/!\[[^\]]*\]\([^)]+\)/g, '')
@@ -16,6 +16,14 @@ function calculateReadTime(content: string): number {
   text = text.replace(/\s+/g, '')
   const charCount = text.length
   return Math.max(3, Math.ceil((charCount / 1000) * 3))
+}
+
+export function formatDate(dateStr: string): string {
+  const d = new Date(dateStr)
+  const y = d.getFullYear()
+  const m = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${y} 年 ${m} 月 ${day} 日`
 }
 
 export function useBlogData() {
@@ -87,14 +95,6 @@ export function useBlogData() {
     }
   }
 
-  function formatDate(dateStr: string): string {
-    const d = new Date(dateStr)
-    const y = d.getFullYear()
-    const m = String(d.getMonth() + 1).padStart(2, '0')
-    const day = String(d.getDate()).padStart(2, '0')
-    return `${y} 年 ${m} 月 ${day} 日`
-  }
-
   function getArticleById(id: number): BlogArticle | undefined {
     return articles.value.find((a) => a.id === id)
   }
@@ -124,7 +124,6 @@ export function useBlogData() {
     getCategoryName,
     getCategoryDesc,
     getCategoryCount,
-    formatDate,
     getArticleById,
     getRelatedArticles,
   }

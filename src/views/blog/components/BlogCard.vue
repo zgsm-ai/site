@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { BlogArticle } from '../useBlogData'
-import { tagNameMap, tagClassMap } from '../useBlogData'
+import { tagNameMap, tagClassMap, formatDate } from '../useBlogData'
 
 // Props
 interface Props {
@@ -35,7 +35,7 @@ const handleClick = (): void => {
       />
     </div>
     <div class="card-body">
-      <div class="card-date">{{ article.date }}</div>
+      <div class="card-date">{{ formatDate(article.date) }}</div>
       <h3 class="card-title">{{ article.title }}</h3>
       <p class="card-excerpt">{{ article.excerpt }}</p>
       <div class="card-footer">

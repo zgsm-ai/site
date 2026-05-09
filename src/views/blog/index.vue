@@ -6,6 +6,7 @@ import { useHead } from '@unhead/vue'
 import { useBlogData } from './useBlogData'
 import { useResponsive } from '@/hooks/useResponsive'
 import { tagNameMap, tagClassMap } from './useBlogData'
+import { formatDate } from './useBlogData'
 import BlogCard from './components/BlogCard.vue'
 import BlogSidebar from './components/BlogSidebar.vue'
 // import BlogPagination from './components/BlogPagination.vue'
@@ -194,7 +195,7 @@ const featuredArticle = computed(() => {
               <span class="card-tag" :class="tagClassMap[featuredArticle.cover]">
                 {{ tagNameMap[featuredArticle.cover] }}
               </span>
-              <span class="featured-date">{{ featuredArticle.date }}</span>
+              <span class="featured-date">{{ formatDate(featuredArticle.date) }}</span>
             </div>
             <h2 class="featured-title">{{ featuredArticle.title }}</h2>
             <p class="featured-excerpt">{{ featuredArticle.excerpt }}</p>

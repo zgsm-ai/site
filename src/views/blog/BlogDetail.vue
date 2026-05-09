@@ -3,14 +3,14 @@ import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { fetchArticleById, getCoverImageUrl } from '@/services/blogApi'
-import { useBlogData } from './useBlogData'
+import { useBlogData, formatDate, calculateReadTime } from './useBlogData'
 import type { BlogArticle } from '@/services/blogApi'
 import FooterCopyright from '@/views/home/FooterCopyright.vue'
 
 defineOptions({ name: 'BlogDetailPage' })
 const router = useRouter()
 const route = useRoute()
-const { getRelatedArticles, formatDate } = useBlogData()
+const { getRelatedArticles } = useBlogData()
 
 const articleId = computed(() => Number(route.params.id))
 const article = ref<BlogArticle | null>(null)
@@ -23,10 +23,11 @@ async function loadArticle() {
   error.value = null
   try {
     const data = await fetchArticleById(articleId.value)
-    article.value = data
     if (data) {
+      data.readTime = data.readTime ?? calculateReadTime(data.content || data.excerpt || '')
       coverImageUrl.value = await getCoverImageUrl(data.cover)
     }
+    article.value = data
   } catch (err) {
     error.value = err instanceof Error ? err.message : 'Failed to load article'
   } finally {
@@ -261,7 +262,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
                 />
               </div>
               <div class="related-info">
-                <div class="related-date">{{ related.date }}</div>
+                <div class="related-date">{{ formatDate(related.date) }}</div>
                 <div class="related-item-title">{{ related.title }}</div>
               </div>
             </div>
@@ -288,7 +289,7 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
               />
             </div>
             <div class="related-info">
-              <div class="related-date">{{ related.date }}</div>
+              <div class="related-date">{{ formatDate(related.date) }}</div>
               <div class="related-item-title">{{ related.title }}</div>
             </div>
           </div>
