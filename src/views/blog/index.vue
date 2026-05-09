@@ -5,7 +5,8 @@ import { useRouter } from 'vue-router'
 import { useHead } from '@unhead/vue'
 import { useBlogData } from './useBlogData'
 import { useResponsive } from '@/hooks/useResponsive'
-import { coverImageMap, tagNameMap, tagClassMap } from './useBlogData'
+import { tagNameMap, tagClassMap } from './useBlogData'
+import { formatDate } from './useBlogData'
 import BlogCard from './components/BlogCard.vue'
 import BlogSidebar from './components/BlogSidebar.vue'
 // import BlogPagination from './components/BlogPagination.vue'
@@ -45,14 +46,14 @@ const { t } = useI18n()
 const { isMobile, isTablet } = useResponsive()
 const {
   articles,
+  paginatedArticles,
   categories,
   currentPage,
   selectedCategory,
-  paginatedArticles,
-  // totalPages,
-  // totalArticles,
+  loading,
+  error,
+  loadData,
   changeCategory,
-  // changePage,
   getCategoryName,
   getCategoryDesc,
   getCategoryCount,
@@ -88,7 +89,7 @@ const handleCategoryChange = (categoryId: string): void => {
 // Compute category counts for sidebar
 const categoryCounts = computed(() => {
   const counts: Record<string, number> = {}
-  categories.forEach((category) => {
+  categories.value.forEach((category) => {
     counts[category.id] = getCategoryCount(category.id)
   })
   return counts
@@ -145,6 +146,23 @@ const featuredArticle = computed(() => {
 
       <!-- Main Content -->
       <main class="main-content">
+        <div v-if="loading" class="loading-grid">
+          <div v-for="n in 3" :key="n" class="skeleton-card">
+            <div class="skeleton-cover"></div>
+            <div class="skeleton-card-body">
+              <div class="skeleton-tag"></div>
+              <div class="skeleton-card-title"></div>
+              <div class="skeleton-card-excerpt"></div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="error && !loading" class="load-error">
+          <p>加载失败：{{ error }}</p>
+          <button @click="loadData" class="retry-btn">重试</button>
+        </div>
+
+        <template v-if="!loading && !error">
         <div class="main-header">
           <h1>{{ getCategoryName(selectedCategory) }}</h1>
           <p>{{ getCategoryDesc(selectedCategory) }}</p>
@@ -166,8 +184,8 @@ const featuredArticle = computed(() => {
           </div>
           <div class="featured-cover">
             <img
-              v-if="coverImageMap[featuredArticle.cover]"
-              :src="coverImageMap[featuredArticle.cover]"
+              v-if="featuredArticle.coverImage"
+              :src="featuredArticle.coverImage"
               :alt="featuredArticle.title"
               class="featured-cover-img"
             />
@@ -177,7 +195,7 @@ const featuredArticle = computed(() => {
               <span class="card-tag" :class="tagClassMap[featuredArticle.cover]">
                 {{ tagNameMap[featuredArticle.cover] }}
               </span>
-              <span class="featured-date">{{ featuredArticle.date }}</span>
+              <span class="featured-date">{{ formatDate(featuredArticle.date) }}</span>
             </div>
             <h2 class="featured-title">{{ featuredArticle.title }}</h2>
             <p class="featured-excerpt">{{ featuredArticle.excerpt }}</p>
@@ -218,9 +236,11 @@ const featuredArticle = computed(() => {
         </div>
 
         <!-- Empty state -->
-        <div v-if="paginatedArticles.length === 0" class="empty-state">
+        <div v-if="!loading && !error && paginatedArticles.length === 0" class="empty-state">
           {{ t('blog.noArticles') }}
         </div>
+
+        </template>
 
         <!-- Pagination -->
         <!-- <BlogPagination
@@ -470,6 +490,73 @@ const featuredArticle = computed(() => {
   text-align: center;
   padding: 60px 0;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.loading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  padding: 24px 0;
+}
+
+.skeleton-card {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.skeleton-cover {
+  height: 200px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.skeleton-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-tag {
+  width: 64px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+}
+
+.skeleton-card-title {
+  width: 90%;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.skeleton-card-excerpt {
+  width: 100%;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.load-error {
+  text-align: center;
+  padding: 48px 0;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.retry-btn {
+  margin-top: 16px;
+  padding: 8px 24px;
+  background: rgba(0, 102, 255, 0.2);
+  border: 1px solid rgba(0, 102, 255, 0.3);
+  border-radius: 8px;
+  color: #6ab0ff;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(0, 102, 255, 0.3);
+  }
 }
 
 // Tab category nav (769px~968px)

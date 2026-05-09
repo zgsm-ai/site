@@ -58,6 +58,9 @@ export default defineConfig({
           if (id.includes('/views/operation/')) {
             return 'page-operation'
           }
+          if (id.includes('/views/blog/')) {
+            return 'page-blog'
+          }
 
           // 其他 node_modules 依赖分离到 vendor chunk
           if (id.includes('node_modules')) {
