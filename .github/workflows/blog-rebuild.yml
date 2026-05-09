@@ -1,0 +1,71 @@
+name: Blog Content Rebuild
+
+on:
+  repository_dispatch:
+    types: [blog-content-updated]
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Fetch blog content
+        run: node scripts/fetch-blog-data.js
+        env:
+          BLOG_CONTENT_REPO_URL: https://github.com/xiaojingming/costrict-blog-content.git
+
+      - name: Build
+        run: pnpm build
+
+      - name: Compress dist
+        run: tar -czvf dist.tar.gz -C dist .
+
+      - name: Upload to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          source: dist.tar.gz
+          target: /tmp/
+
+      - name: Deploy on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          script: |
+            set -e
+            REMOTE_DIR="/home/zhuge/zhuge_web/dist@latest"
+            REMOTE_DIST="/home/zhuge/zhuge_web/dist"
+            REMOTE_BAK="/home/zhuge/zhuge_web/dist_bak"
+
+            mkdir -p "$REMOTE_DIR"
+            rm -rf "$REMOTE_DIR"/*
+            tar -xzvf /tmp/dist.tar.gz -C "$REMOTE_DIR"
+            rm /tmp/dist.tar.gz
+
+            rm -rf "$REMOTE_BAK"
+            cp -r "$REMOTE_DIST" "$REMOTE_BAK"
+            rm -rf "$REMOTE_DIST"
+            mv "$REMOTE_DIR" "$REMOTE_DIST"
+            mkdir -p "$REMOTE_DIR"
+
+            echo "Blog rebuild deployed successfully!"
