@@ -1,23 +1,41 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@unhead/vue'
+import { fetchArticleById, getCoverImageUrl } from '@/services/blogApi'
 import { useBlogData } from './useBlogData'
-import { coverImageMap, blogImageMap, blogVideoMap } from './useBlogData'
+import type { BlogArticle } from '@/services/blogApi'
 import FooterCopyright from '@/views/home/FooterCopyright.vue'
 
 defineOptions({ name: 'BlogDetailPage' })
 const router = useRouter()
 const route = useRoute()
-const { getArticleById, getRelatedArticles, formatDate } = useBlogData()
+const { getRelatedArticles, formatDate } = useBlogData()
 
 const articleId = computed(() => Number(route.params.id))
-const article = computed(() => getArticleById(articleId.value))
+const article = ref<BlogArticle | null>(null)
+const loading = ref(false)
+const error = ref<string | null>(null)
+const coverImageUrl = ref('')
 
-const coverImageUrl = computed(() => {
-  if (!article.value) return ''
-  return coverImageMap[article.value.cover] || ''
-})
+async function loadArticle() {
+  loading.value = true
+  error.value = null
+  try {
+    const data = await fetchArticleById(articleId.value)
+    article.value = data
+    if (data) {
+      coverImageUrl.value = await getCoverImageUrl(data.cover)
+    }
+  } catch (err) {
+    error.value = err instanceof Error ? err.message : 'Failed to load article'
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(loadArticle)
+watch(articleId, loadArticle)
 
 useHead(
   computed(() => ({
@@ -84,14 +102,14 @@ const renderMarkdown = (md: string): string => {
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>')
   html = html.replace(/`([^`]+)`/g, '<code class="inline-code">$1</code>')
-  html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_: string, alt: string, src: string) => {
-    const resolved = blogImageMap[src] ?? src
-    return `<img src="${resolved}" alt="${alt}" class="article-image" />`
-  })
-  html = html.replace(/\[([^\]]*\.mp4)\]\(([^)]+)\)/g, (_: string, _label: string, src: string) => {
-    const resolved = blogVideoMap[src] ?? src
-    return `<video src="${resolved}" class="article-video" controls preload="metadata"></video>`
-  })
+  html = html.replace(
+    /!\[([^\]]*)\]\(([^)]+)\)/g,
+    '<img src="$2" alt="$1" class="article-image" />',
+  )
+  html = html.replace(
+    /\[([^\]]*\.mp4)\]\(([^)]+)\)/g,
+    '<video src="$2" class="article-video" controls preload="metadata"></video>',
+  )
   html = html.replace(
     /\[([^\]]+)\]\(([^)]*(?:\([^)]*\)[^)]*)*)\)/g,
     '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>',
@@ -172,12 +190,28 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 
 <template>
   <div class="detail-page">
-    <div v-if="!article" class="not-found">
+    <div v-if="loading" class="loading-state">
+      <div class="skeleton-title"></div>
+      <div class="skeleton-body">
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line short"></div>
+        <div class="skeleton-line medium"></div>
+      </div>
+    </div>
+
+    <div v-if="error && !loading" class="error-state">
+      <p>{{ error }}</p>
+      <button class="back-btn" @click="loadArticle">重试</button>
+    </div>
+
+    <div v-if="!article && !loading && !error" class="not-found">
       <p>文章不存在</p>
       <button class="back-btn" @click="goBack">返回博客列表</button>
     </div>
 
-    <template v-else>
+    <template v-if="article && !loading">
       <!-- Cover Banner -->
       <div class="cover-banner" :class="article.cover">
         <div class="cover-inner">
@@ -220,8 +254,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
             >
               <div class="related-cover" :class="related.cover">
                 <img
-                  v-if="coverImageMap[related.cover]"
-                  :src="coverImageMap[related.cover]"
+                  v-if="related.coverImage"
+                  :src="related.coverImage"
                   :alt="related.title"
                   class="related-cover-img"
                 />
@@ -247,8 +281,8 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
           >
             <div class="related-cover" :class="related.cover">
               <img
-                v-if="coverImageMap[related.cover]"
-                :src="coverImageMap[related.cover]"
+                v-if="related.coverImage"
+                :src="related.coverImage"
                 :alt="related.title"
                 class="related-cover-img"
               />
@@ -292,6 +326,52 @@ onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 .detail-page {
   padding-top: 64px;
   min-height: 100vh;
+}
+
+// ===== Loading Skeleton =====
+.loading-state {
+  max-width: 900px;
+  margin: 120px auto 0;
+  padding: 0 24px;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.skeleton-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-line {
+  width: 100%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+
+  &.short {
+    width: 60%;
+  }
+  &.medium {
+    width: 80%;
+  }
+}
+
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 16px;
 }
 
 // ===== Cover Banner =====

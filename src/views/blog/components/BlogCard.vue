@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import type { BlogArticle } from '../useBlogData'
-import { coverImageMap, tagNameMap, tagClassMap } from '../useBlogData'
+import { tagNameMap, tagClassMap } from '../useBlogData'
 
 // Props
 interface Props {
@@ -28,8 +28,8 @@ const handleClick = (): void => {
   <article class="blog-card" @click="handleClick">
     <div class="card-cover" :class="article.cover">
       <img
-        v-if="coverImageMap[article.cover]"
-        :src="coverImageMap[article.cover]"
+        v-if="article.coverImage"
+        :src="article.coverImage"
         :alt="article.title"
         class="cover-img"
       />

@@ -1,0 +1,33 @@
+name: Test SCP Upload
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create test file
+        run: |
+          echo "SCP upload test at $(date -u)" > test-upload.txt
+
+      - name: SCP upload test
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          source: test-upload.txt
+          target: /tmp/
+
+      - name: Verify on server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          script: |
+            echo "=== Test upload result ==="
+            cat /tmp/test-upload.txt
+            rm /tmp/test-upload.txt
+            echo "=== SCP upload test passed ==="

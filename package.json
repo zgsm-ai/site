@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/fetch-blog-data.js",
+    "prebuild": "node scripts/fetch-blog-data.js",
     "dev": "vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
@@ -31,6 +33,7 @@
     "@vue/tsconfig": "^0.7.0",
     "eslint": "^9.22.0",
     "eslint-plugin-vue": "~10.0.0",
+    "gray-matter": "^4.0.3",
     "happy-dom": "^20.7.0",
     "less": "^4.3.0",
     "naive-ui": "^2.41.0",
