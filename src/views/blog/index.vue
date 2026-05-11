@@ -96,7 +96,7 @@ const categoryCounts = computed(() => {
 })
 
 const featuredArticle = computed(() => {
-  return articles.value.find((a) => a.id === 1) ?? null
+  return articles.value.find((a) => a.featured === true) ?? null
 })
 </script>
 
