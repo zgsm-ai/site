@@ -55,7 +55,7 @@ function syncContentRepo() {
 
   if (fs.existsSync(path.join(CONTENT_DIR, '.git'))) {
     log('Pulling latest content...')
-    run('git pull origin master', { cwd: CONTENT_DIR })
+    run('git pull origin main', { cwd: CONTENT_DIR })
   } else {
     log('Cloning content repo...')
     fs.mkdirSync(path.dirname(CONTENT_DIR), { recursive: true })
