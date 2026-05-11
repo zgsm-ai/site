@@ -10,6 +10,7 @@ export interface BlogArticle {
   readTime?: number
   content?: string
   coverImage?: string
+  featured?: boolean
 }
 
 export interface BlogCategory {
