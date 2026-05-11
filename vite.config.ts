@@ -26,10 +26,17 @@ export default defineConfig({
     include: ['naive-ui'],
   },
   build: {
+    minify: false,
     assetsDir: 'assets',
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // @vitejs/plugin-vue 的 _export_sfc 辅助虚拟模块统一归入 vue chunk，
+          // 防止被 Rollup 分散到某个页面 chunk 中，导致其他页面 chunk 导入时触发 TDZ 错误
+          if (id.includes('plugin-vue:export-helper') || id.includes('plugin-vue/export-helper')) {
+            return 'vue'
+          }
+
           // 将 Naive UI 相关代码分离到单独的 chunk
           if (id.includes('naive-ui')) {
             return 'naive-ui'
