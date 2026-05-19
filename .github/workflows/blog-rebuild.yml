@@ -53,19 +53,24 @@ jobs:
           password: ${{ secrets.REMOTE_PASSWORD }}
           script: |
             set -e
-            REMOTE_DIR="/home/zhuge/zhuge_web/dist@latest"
             REMOTE_DIST="/home/zhuge/zhuge_web/dist"
             REMOTE_BAK="/home/zhuge/zhuge_web/dist_bak"
 
-            mkdir -p "$REMOTE_DIR"
-            rm -rf "$REMOTE_DIR"/*
-            tar -xzvf /tmp/dist.tar.gz -C "$REMOTE_DIR"
-            rm /tmp/dist.tar.gz
-
+            # 1. 备份旧版本（复制内容，不是移动！）
             rm -rf "$REMOTE_BAK"
             cp -r "$REMOTE_DIST" "$REMOTE_BAK"
-            rm -rf "$REMOTE_DIST"
-            mv "$REMOTE_DIR" "$REMOTE_DIST"
-            mkdir -p "$REMOTE_DIR"
+
+            # 2. 清空旧 dist 内容（★ 保留 dist 目录本身的 inode！)
+            rm -rf "$REMOTE_DIST"/*
+
+            # 3. 直接解压到现有 dist 目录内
+            tar -xzvf /tmp/dist.tar.gz -C "$REMOTE_DIST"
+            rm -f /tmp/dist.tar.gz
+
+            # 4. 修复权限（★ 关键！确保 Nginx 可读）
+            chmod -R 755 "$REMOTE_DIST"
+
+            # 5. 通知 Nginx 重载（清除文件缓存）
+            docker exec costrict-ai nginx -s reload || true
 
             echo "Blog rebuild deployed successfully!"
